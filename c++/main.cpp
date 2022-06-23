@@ -4,6 +4,11 @@
 #include "replacespace/ReplaceSpace.h"
 #include "clockprintarray/ClockPrintArray.h"
 #include "findfirstcharinstring/FindFirstCharInString.h"
+#include "stacktoqueue/StackToQueue.h"
+#include "minstack/MinStack.h"
+#include "poppushorder/PopPushOrder.h"
+#include "findnumberswithsum/FindNumbersWithSum.h"
+#include "findsequencewithsum/FindSequenceWithSum.h"
 
 using namespace std;
 
@@ -74,6 +79,67 @@ void findFirstCharInString() {
     }
 }
 
+void stackToQueue() {
+    StackToQueue stackToQueue;
+    stackToQueue.push(1);
+    stackToQueue.push(2);
+    stackToQueue.push(3);
+    stackToQueue.push(4);
+    while (stackToQueue.size() != 0) {
+        cout << "元素：" << stackToQueue.pop() << endl;
+    }
+}
+
+void minStack() {
+    MinStack minStack;
+    minStack.push(3);
+    minStack.push(4);
+    minStack.push(2);
+    minStack.push(1);
+    minStack.printString();
+    cout << "min value:" << minStack.stack_min() << endl;
+    minStack.pop();
+    minStack.pop();
+    minStack.push(0);
+    cout << "min value:" << minStack.stack_min() << endl;
+    minStack.printString();
+}
+
+void poppushOrder() {
+    int pushSequence[5] = {1, 2, 3, 4, 5};
+    int popSequence[5] = {4, 3, 5, 1, 2};
+    PopPushOrder popPushOrder;
+    bool ok = popPushOrder.isPopOrder(pushSequence, 5, popSequence);
+    cout << ok << endl;
+}
+
+void findNumbersWithSum() {
+    int nums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    FindNumbersWithSum findNumbersWithSum;
+    int leftNum = 0;
+    int rightNum = 0;
+    int result = findNumbersWithSum.findNumbersWithSum(nums, 9, 11, leftNum, rightNum);
+    if (result == 0) {
+        cout << "找到了:[" << leftNum << "," << rightNum << "]" << endl;
+    } else {
+        cout << "没找到" << endl;
+    }
+}
+
+void findSequenceWithSum() {
+    FindSequenceWithSum findSequenceWithSum;
+    vector<vector<int>> result = findSequenceWithSum.findSequenceWithSum(100);
+    cout << "[";
+    for (int i = 0; i < result.size(); ++i) {
+        vector<int> tempResult = result[i];
+        cout << "[";
+        for (int j = 0; j < tempResult.size(); ++j) {
+            cout << tempResult[j] << ",";
+        }
+        cout << "]";
+    }
+    cout << "]" << endl;
+}
 
 int main() {
     cout << "Hello, World!" << std::endl;
@@ -83,5 +149,10 @@ int main() {
     replaceSpace();
     clockPrintArray();
     findFirstCharInString();
+    stackToQueue();
+    minStack();
+    poppushOrder();
+    findNumbersWithSum();
+    findSequenceWithSum();
     return 0;
 }
