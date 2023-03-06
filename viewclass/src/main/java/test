@@ -1,0 +1,173 @@
+Classfile /Users/guolei/Documents/studyspace/Leetcode/viewclass/src/main/java/ViewClassCode.class
+  Last modified 2021-3-30; size 807 bytes
+  MD5 checksum 51f4d8e1550312697f95f91f6128cc21
+  Compiled from "ViewClassCode.java"
+public class ViewClassCode
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #10.#27        // java/lang/Object."<init>":()V
+   #2 = Methodref          #9.#28         // ViewClassCode.add:(I)I
+   #3 = Methodref          #9.#29         // ViewClassCode.test01:()V
+   #4 = Methodref          #9.#30         // ViewClassCode.test02:()V
+   #5 = String             #31            // hahah
+   #6 = Methodref          #32.#33        // java/lang/String.equals:(Ljava/lang/Object;)Z
+   #7 = Methodref          #9.#34         // ViewClassCode.isOk:()Z
+   #8 = Methodref          #9.#35         // ViewClassCode.isError:()Z
+   #9 = Class              #36            // ViewClassCode
+  #10 = Class              #37            // java/lang/Object
+  #11 = Utf8               <init>
+  #12 = Utf8               ()V
+  #13 = Utf8               Code
+  #14 = Utf8               LineNumberTable
+  #15 = Utf8               main
+  #16 = Utf8               ([Ljava/lang/String;)V
+  #17 = Utf8               add
+  #18 = Utf8               (I)I
+  #19 = Utf8               test01
+  #20 = Utf8               StackMapTable
+  #21 = Utf8               test02
+  #22 = Utf8               isOk
+  #23 = Utf8               ()Z
+  #24 = Utf8               isError
+  #25 = Utf8               SourceFile
+  #26 = Utf8               ViewClassCode.java
+  #27 = NameAndType        #11:#12        // "<init>":()V
+  #28 = NameAndType        #17:#18        // add:(I)I
+  #29 = NameAndType        #19:#12        // test01:()V
+  #30 = NameAndType        #21:#12        // test02:()V
+  #31 = Utf8               hahah
+  #32 = Class              #38            // java/lang/String
+  #33 = NameAndType        #39:#40        // equals:(Ljava/lang/Object;)Z
+  #34 = NameAndType        #22:#23        // isOk:()Z
+  #35 = NameAndType        #24:#23        // isError:()Z
+  #36 = Utf8               ViewClassCode
+  #37 = Utf8               java/lang/Object
+  #38 = Utf8               java/lang/String
+  #39 = Utf8               equals
+  #40 = Utf8               (Ljava/lang/Object;)Z
+{
+  public ViewClassCode();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 1: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: iconst_1
+         1: invokestatic  #2                  // Method add:(I)I
+         4: pop
+         5: invokestatic  #3                  // Method test01:()V
+         8: invokestatic  #4                  // Method test02:()V
+        11: return
+      LineNumberTable:
+        line 3: 0
+        line 4: 5
+        line 5: 8
+        line 6: 11
+
+  public static int add(int);
+    descriptor: (I)I
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: bipush        10
+         2: istore_1
+         3: bipush        9
+         5: istore_2
+         6: iload_1
+         7: iload_2
+         8: iadd
+         9: iload_0
+        10: iadd
+        11: ireturn
+      LineNumberTable:
+        line 9: 0
+        line 10: 3
+        line 11: 6
+
+  public static void test01();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: ldc           #5                  // String hahah
+         2: ldc           #5                  // String hahah
+         4: invokevirtual #6                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         7: ifeq          17
+        10: invokestatic  #7                  // Method isOk:()Z
+        13: ifeq          17
+        16: return
+        17: ldc           #5                  // String hahah
+        19: ldc           #5                  // String hahah
+        21: invokevirtual #6                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        24: ifeq          34
+        27: invokestatic  #8                  // Method isError:()Z
+        30: ifeq          34
+        33: return
+        34: return
+      LineNumberTable:
+        line 15: 0
+        line 16: 16
+        line 18: 17
+        line 19: 33
+        line 21: 34
+      StackMapTable: number_of_entries = 2
+        frame_type = 17 /* same */
+        frame_type = 16 /* same */
+
+  public static void test02();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: ldc           #5                  // String hahah
+         2: ldc           #5                  // String hahah
+         4: invokevirtual #6                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         7: ifeq          23
+        10: invokestatic  #7                  // Method isOk:()Z
+        13: ifne          22
+        16: invokestatic  #8                  // Method isError:()Z
+        19: ifeq          23
+        22: return
+        23: return
+      LineNumberTable:
+        line 25: 0
+        line 26: 22
+        line 28: 23
+      StackMapTable: number_of_entries = 2
+        frame_type = 22 /* same */
+        frame_type = 0 /* same */
+
+  public static boolean isOk();
+    descriptor: ()Z
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: iconst_1
+         1: ireturn
+      LineNumberTable:
+        line 31: 0
+
+  public static boolean isError();
+    descriptor: ()Z
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: iconst_0
+         1: ireturn
+      LineNumberTable:
+        line 35: 0
+}
+SourceFile: "ViewClassCode.java"
+➜  java git:(master) ✗

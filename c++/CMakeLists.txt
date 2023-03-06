@@ -3,4 +3,4 @@ project(c_leetcode)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(c_leetcode main.cpp repeatnum/RepeatNumber.cpp repeatnum/RepeatNumber.h)
+add_executable(c_leetcode main.cpp repeatnum/RepeatNumber.cpp repeatnum/RepeatNumber.h findinarray/FindNumInEWArray.cpp findinarray/FindNumInEWArray.h replacespace/ReplaceSpace.cpp replacespace/ReplaceSpace.h clockprintarray/ClockPrintArray.cpp clockprintarray/ClockPrintArray.h findfirstcharinstring/FindFirstCharInString.cpp findfirstcharinstring/FindFirstCharInString.h stacktoqueue/StackToQueue.cpp stacktoqueue/StackToQueue.h minstack/MinStack.cpp minstack/MinStack.h poppushorder/PopPushOrder.cpp poppushorder/PopPushOrder.h findnumberswithsum/FindNumbersWithSum.cpp findnumberswithsum/FindNumbersWithSum.h findsequencewithsum/FindSequenceWithSum.cpp findsequencewithsum/FindSequenceWithSum.h)
