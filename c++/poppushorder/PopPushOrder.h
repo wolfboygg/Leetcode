@@ -10,6 +10,11 @@
 using namespace std;
 
 class PopPushOrder {
+public:
+    PopPushOrder(int aaa);
+
+public:
+    int aaa;
 
 public:
     bool isPopOrder(int *pushSequence, int length, int *popSequence);
