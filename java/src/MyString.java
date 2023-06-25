@@ -1,10 +1,65 @@
+import javafx.geometry.Pos;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 public class MyString {
 
+    public static class Validate<T> {
+        public T value = null;
+        
+    }
+
     public static void main(String[] args) {
-        String s1 = "ABCDEFG";
-        String s2 = "ABADEFKG";
-        System.out.println("最长公共子串长度：" + getLCS(s1, s2));
-        String[] strings = new String[]{"12", "12", "12"};
+//        String s1 = "ABCDEFG";
+//        String s2 = "ABADEFKG";
+//        System.out.println("最长公共子串长度：" + getLCS(s1, s2));
+//        String[] strings = new String[]{"12", "12", "12"};
+        ThreadLocal<Integer> threadLocal1 = new ThreadLocal<Integer>() {
+            @Override
+            protected Integer initialValue() {
+                return super.initialValue();
+            }
+        };
+        ThreadLocal<Double> threadLocal2 = new ThreadLocal<Double>() {
+            @Override
+            protected Double initialValue() {
+                return super.initialValue();
+            }
+        };
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Integer integer = threadLocal1.get();
+                threadLocal1.set(5);
+                threadLocal2.set(4.5);
+            }
+        });
+//        LinkedHashMap
+        Position position1 = new Position(6);
+        Position position2 = new Position(38);
+
+        HashMap<Position, String> hash = new HashMap<>(16);
+        hash.put(position1, "aaa");
+        hash.put(position2, "bbb");
+
+        HashMap<Position, String> hash2 = new HashMap<>(32);
+        hash2.put(position1, "aaa");
+        hash2.put(position2, "bbb");
+        System.out.println(hash2);
+    }
+
+    public static class Position  {
+        public int value;
+
+        public Position(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public int hashCode() {
+            return value;
+        }
     }
 
     public static int getLCS(String s1, String s2) {
