@@ -27,8 +27,8 @@ public class ArrayRepeatNumber {
     }
 
     public int findRepeatNumber02(int[] array) {
-        for (int i = 0; i < array.length -1; i++) {
-            while(array[i] != i) {
+        for (int i = 0; i < array.length - 1; i++) {
+            while (array[i] != i) {
                 if (array[i] == array[array[i]]) {
                     return array[i];
                 } else {
@@ -42,10 +42,26 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+
+    public int findRepeatNumber3(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            while (arr[i] != i) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[arr[i]];
+                    arr[arr[i]] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber02(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber3(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

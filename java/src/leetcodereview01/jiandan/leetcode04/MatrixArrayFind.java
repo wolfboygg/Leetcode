@@ -7,8 +7,8 @@ public class MatrixArrayFind {
         int column = matrix[0].length;
 
         int findRow = 0;
-        int findColumn = column -1;
-        while(findRow < row && findColumn >=0) {
+        int findColumn = column - 1;
+        while (findRow < row && findColumn >= 0) {
             if (matrix[findRow][findColumn] > target) {
                 findColumn--;
             } else if (matrix[findRow][findColumn] < target) {
@@ -27,8 +27,8 @@ public class MatrixArrayFind {
         int column = matrix[0].length;
 
         int r = 0;
-        int c = column -1;
-        while(r < row && c >= 0) {
+        int c = column - 1;
+        while (r < row && c >= 0) {
             if (matrix[r][c] > target) {
                 c--;
             } else if (matrix[r][c] < target) {
@@ -36,7 +36,26 @@ public class MatrixArrayFind {
             } else {
                 return true;
             }
-         }
+        }
+
+        return false;
+    }
+
+    public boolean findDestNumber2(int[][] matrix, int target) {
+        int row = matrix.length;
+        int column = matrix[0].length;
+
+        int r = 0;
+        int c = column - 1;
+        while (r < row && c >= 0) {
+            if (matrix[r][c] > target) {
+                c--;
+            } else if (matrix[r][c] < target) {
+                r++;
+            } else {
+                return true;
+            }
+        }
 
         return false;
     }
@@ -50,7 +69,7 @@ public class MatrixArrayFind {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean destNumberExit = matrixArrayFind.findTargetNum(arr, 20);
+        boolean destNumberExit = matrixArrayFind.findDestNumber2(arr, 5);
         if (destNumberExit) {
             System.out.println("存在");
         } else {

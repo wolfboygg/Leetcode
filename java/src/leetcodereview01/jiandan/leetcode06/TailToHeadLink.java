@@ -36,6 +36,29 @@ public class TailToHeadLink {
         }
     }
 
+    public void printLinkByDG2(Node node) {
+        if (node == null) {
+            return;
+        }
+        printLinkByDG(node.next);
+        System.out.print(node.value);
+    }
+
+    public void printLinkByHead(Node node) {
+        Node newNode = new Node(-1);
+        while (node != null) {
+            Node tempNode = node.next;
+            node.next = newNode.next;
+            newNode.next = node;
+            node = tempNode;
+        }
+        Node next = newNode.next;
+        while (next != null) {
+            System.out.print(next.value);
+            next = next.next;
+        }
+    }
+
 
     public static void main(String[] args) {
         TailToHeadLink tailToHeadLink = new TailToHeadLink();
@@ -48,6 +71,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByNode(node01);
+        tailToHeadLink.printLinkByHead(node01);
     }
 }
