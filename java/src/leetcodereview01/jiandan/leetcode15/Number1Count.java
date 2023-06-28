@@ -13,9 +13,18 @@ public class Number1Count {
         return count;
     }
 
+    public int getNumberOf1Count(int n) {
+        int count = 0;
+        while(n > 0) {
+            count++;
+            n &= (n-1);
+        }
+        return count;
+    }
+
 
     public static void main(String[] args) {
-        NumIn1Count numIn1Count = new NumIn1Count();
-        System.out.println(numIn1Count.getNumIn1Count(15));
+        Number1Count numIn1Count = new Number1Count();
+        System.out.println(numIn1Count.getNumberOf1Count(15));
     }
 }

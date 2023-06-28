@@ -49,12 +49,37 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode02(Node head, Node deleteNode) {
+        // 判断是否为中间节点
+        if (deleteNode.next != null) {
+            // 进行覆盖处理
+            Node next = deleteNode.next;
+            deleteNode.value = next.value;
+            deleteNode.next = next.next;
+        } else {
+            if (head == deleteNode) {
+                head = null;
+            } else { // 删除的末尾的节点
+                Node cur = head;
+                while(cur.next != deleteNode) {
+                    cur = cur.next;
+                    System.out.println(cur.value);
+                    System.out.println(cur == deleteNode);
+                }
+                System.out.println(cur.value);
+                cur.next = null;
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
-        Node tobeDelete = head.next.next;
-        deleteNode.deleteNode(head, tobeDelete);
+        Node tobeDelete = head.next.next.next.next.next;
+        System.out.println(tobeDelete.value);
+        deleteNode.deleteNode02(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;
