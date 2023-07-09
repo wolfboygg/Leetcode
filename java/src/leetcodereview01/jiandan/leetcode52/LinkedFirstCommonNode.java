@@ -36,6 +36,7 @@ public class LinkedFirstCommonNode {
         node013.next = node03;
 
         linkedFirstCommonNode.findCommonNode(node01, node011);
+        linkedFirstCommonNode.findCommonNode02(node01, node011);
 
     }
 
@@ -45,6 +46,16 @@ public class LinkedFirstCommonNode {
         while (P1 != P2) {
             P1 = P1 == null ? head11 : P1.next;
             P2 = P2 == null ? head1 : P2.next;
+        }
+        System.out.println(P1.value);
+    }
+
+    private void findCommonNode02(Node head1, Node head2) {
+        Node P1 = head1;
+        Node P2 = head2;
+        while(P1 != P2) {
+            P1 = P1.next== null ? head2 : P1.next;
+            P2 = P2.next == null ? head1: P2.next;
         }
         System.out.println(P1.value);
     }

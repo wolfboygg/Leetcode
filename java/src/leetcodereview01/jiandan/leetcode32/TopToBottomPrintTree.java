@@ -99,10 +99,31 @@ public class TopToBottomPrintTree {
         System.out.println(moreLine.toString());
     }
 
+    public void print02(TreeNode node) {
+        // 使用栈进行辅助
+        if (node == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<Integer> list = new ArrayList<>();
+        queue.offer(node);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            list.add(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+        System.out.println(list.toString());
+    }
+
 
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.zPrintTree(tree);
+        topToBottomPrintTree.print02(tree);
     }
 }

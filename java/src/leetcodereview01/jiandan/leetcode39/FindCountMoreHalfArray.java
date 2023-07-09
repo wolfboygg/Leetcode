@@ -7,7 +7,29 @@ public class FindCountMoreHalfArray {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         FindCountMoreHalfArray findCountMoreHalfArray = new FindCountMoreHalfArray();
-        findCountMoreHalfArray.findByHashMap(arr);
+        findCountMoreHalfArray.findByHashMap02(arr);
+    }
+
+    public void findByHashMap02(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Set<Map.Entry<Integer, Integer>> entries = map.entrySet();
+        Map.Entry<Integer, Integer> temp = null;
+        for (Map.Entry<Integer, Integer> entry : entries) {
+            if (temp == null) {
+                temp = entry;
+            } else {
+                temp = temp.getValue() > entry.getValue() ? temp : entry;
+            }
+        }
+        System.out.println(temp.getKey());
+
     }
 
     private void find(int[] arr) {

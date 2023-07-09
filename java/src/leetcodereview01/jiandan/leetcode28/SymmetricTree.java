@@ -34,7 +34,7 @@ public class SymmetricTree {
 
     public boolean isSymmetric(TreeNode head) {
         // 两个指针都指向了head
-        return check(head, head);
+        return check02(head, head);
     }
 
     public boolean check(TreeNode head1, TreeNode head2) {
@@ -45,6 +45,18 @@ public class SymmetricTree {
             return false;
         }
         return head1.value == head2.value && check(head1.left, head2.right) && check(head1.right, head2.left);
+    }
+
+
+    public boolean check02(TreeNode head1, TreeNode head2) {
+        // 需要递归进行遍历
+        if (head1 == null && head2 == null) {
+            return true;
+        }
+        if (head1 == null || head2 == null) {
+            return false;
+        }
+        return head1.value == head2.value && check02(head1.left, head2.right) && check02(head1.right, head2.left);
     }
 
 

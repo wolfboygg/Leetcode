@@ -60,6 +60,23 @@ public class MatrixArrayFind {
         return false;
     }
 
+    public boolean findTargetNumber03(int[][] matrix, int target) {
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int r = 0;
+        int c = column -1;
+        while(r < row && c >=0) {
+            if (matrix[r][c] > target) {
+               c--;
+            } else if (matrix[r][c] < target) {
+                r++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         MatrixArrayFind matrixArrayFind = new MatrixArrayFind();
         int[][] arr = {
@@ -69,7 +86,7 @@ public class MatrixArrayFind {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean destNumberExit = matrixArrayFind.findDestNumber2(arr, 5);
+        boolean destNumberExit = matrixArrayFind.findTargetNumber03(arr, 20);
         if (destNumberExit) {
             System.out.println("存在");
         } else {

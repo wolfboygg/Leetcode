@@ -6,6 +6,18 @@ public class MaxSubArray {
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
+        maxSubArray.findSum02(arr);
+    }
+
+    public void findSum02(int[] arr) {
+        // 使用动态规划求解
+        int curSum = arr[0];
+        int pre = 0;
+        for (int i = 0; i< arr.length; i++) {
+            pre = Math.max(arr[i], pre + arr[i]); // 如果加完之后还要比这个值小，那么重新开始统计
+            curSum = Math.max(pre, curSum);
+        }
+        System.out.println(curSum);
     }
 
     private void findSum(int[] arr) {
