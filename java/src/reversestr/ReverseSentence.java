@@ -31,7 +31,7 @@ public class ReverseSentence {
 
     public static void reverse(char[] c, int i, int j) {
         while (i < j) {
-            swap(c, i, j);
+            swap(c, i++, j--);
         }
     }
 
