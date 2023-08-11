@@ -39,9 +39,46 @@ public class WayNumber {
 
     }
 
+    public int getWayNumber03(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n ==2) {
+            return 2;
+        }
+        int temp01 = 1;
+        int temp02 = 2;
+        for (int i = 3; i <=n; i++) {
+            int result = temp01 +temp02;
+            temp01 = temp02;
+            temp02 = result;
+        }
+        return temp02;
+    }
+
+    public int getWayNumber04(int n) {
+        // 上台阶
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int temp01 = 1;
+        int temp02 = 2;
+        int way = 0;
+        for (int i = 3; i <= n; i++) {
+            way = temp01 + temp02;
+            temp01 = temp02;
+            temp02 = way;
+        }
+        return way;
+    }
+
+
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
-        int wayNumber1 = wayNumber.getWayNumber02(7);
+        int wayNumber1 = wayNumber.getWayNumber04(7);
         System.out.println(wayNumber1);
     }
 }

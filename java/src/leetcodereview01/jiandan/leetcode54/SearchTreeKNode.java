@@ -31,11 +31,27 @@ public class SearchTreeKNode {
     public int result = -1;
     public int k = -1;
 
+    // 二搜索树的第K大节点那么就是找到二叉搜索树的中序遍历的的倒数低k个节点
+    private void dfs01(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        if (k == 0) {
+            return;
+        }
+        // 中序列遍历反着来
+        dfs01(node.right);
+        if (--k == 0) {
+            result = node.value;
+        }
+        dfs01(node.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs(tree);
+        searchTreeKNode.dfs01(tree);
         System.out.println(searchTreeKNode.result);
     }
 

@@ -18,7 +18,7 @@ public class RebuildTree {
         for (int i = 0; i < inOrder.length; i++) {
             indexOrder.put(inOrder[i], i);
         }
-        return rebuild04(preOrder, inOrder, 0, preOrder.length - 1, 0, inOrder.length - 1);
+        return rebuild05(preOrder, inOrder, 0, preOrder.length - 1, 0, inOrder.length - 1);
     }
 
     public TreeNode reBuildTree(int[] preOrder, int[] inOrder, int preLeft, int preRight, int inLeft, int inRight) {
@@ -79,6 +79,23 @@ public class RebuildTree {
         node.value = root;
         node.left = rebuild04(preOrder, inOrder, preLeft + 1, preLeft + childSize, inLeft, index - 1);
         node.right = rebuild04(preOrder, inOrder, preLeft + childSize + 1, preRight, index + 1, inRight);
+        return node;
+    }
+
+    public TreeNode rebuild05(int[] preOrder, int[] inOrder, int preLeft, int preRight, int inLeft, int inRight) {
+        // 重建的方式就是找到左右子树，依次进行重建 递归进行构建
+        if (preLeft > preRight) {
+            return null;
+        }
+        int root = preOrder[preLeft];
+        // 找到对应的位置
+        int inOrderPosition = indexOrder.get(root);
+        // 找到左孩子的数量
+        int childSize = inOrderPosition - inLeft;
+        TreeNode node = new TreeNode();
+        node.value = root;
+        node.left = rebuild05(preOrder, inOrder, preLeft + 1, preLeft + childSize, inLeft, inOrderPosition -1);
+        node.right = rebuild05(preOrder, inOrder, preLeft + childSize + 1, preRight , inOrderPosition + 1, inRight);
         return node;
     }
 

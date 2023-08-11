@@ -27,9 +27,31 @@ public class PrintMinNumber {
         System.out.println(ret);
     }
 
+    public void printMin01(int[] arr) {
+        // 先转换为数组
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        String[] num = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+              num[i] = arr[i] + "";
+        }
+        Arrays.sort(num, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o1 + o2).compareTo(o2 + o1);
+            }
+        });
+        String ret = "";
+        for (String s : num) {
+            ret += s;
+        }
+        System.out.println(ret);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {3, 32, 321};
-        new PrintMinNumber().printMin(arr);
+        new PrintMinNumber().printMin01(arr);
     }
 }

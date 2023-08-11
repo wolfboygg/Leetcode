@@ -31,6 +31,46 @@ public class MergeLink {
         return preNode.next;
     }
 
+    public Node merge03(Node head1, Node head2) {
+        // 需要使用两个节点记录当前节点和头节点。这个不要省略，否则找不到了
+        // 判断那个链表完结了
+        Node preNode = new Node(-1);
+        Node cur = preNode;
+        while(head1 != null && head2 != null) {
+            if (head1.value > head2.value) {
+                cur.next = head2;
+                cur = head2;
+                head2 = head2.next;
+            } else {
+                cur.next = head1;
+                cur = head1;
+                head1 = head1.next;
+            }
+        }
+        cur.next = head1 == null ? head2 : head1;
+        return preNode.next;
+    }
+
+    public Node merge04(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value < node2.value) {
+                temp.next = node1;
+                node1 = node1.next;
+            } else {
+                temp.next = node2;
+                node2 = node2.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(3);
@@ -46,7 +86,7 @@ public class MergeLink {
         node5.next = node6;
 
         MergeLink mergeLink = new MergeLink();
-        Node node = mergeLink.merge02(node1, node4);
+        Node node = mergeLink.merge04(node1, node4);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

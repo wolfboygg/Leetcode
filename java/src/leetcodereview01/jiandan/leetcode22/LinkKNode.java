@@ -36,6 +36,35 @@ public class LinkKNode {
         return head;
     }
 
+    public Node getTailKNode03(Node head, int k) {
+        // k= n-(n-k)
+        Node P1 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            head = head.next;
+            P1 = P1.next;
+        }
+        return head;
+    }
+
+    /** 倒数第k个节点 */
+    public Node getTailKNode04(Node head, int k) {
+        // 先走k
+        Node P1 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        // 然后在走
+        Node P2 = head;
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        return P2;
+    }
+
     public static void main(String[] args) {
         LinkKNode linkKNode = new LinkKNode();
         Node node01 = new Node(1);
@@ -47,7 +76,7 @@ public class LinkKNode {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        Node node = linkKNode.getTailKNode02(node01, 4);
+        Node node = linkKNode.getTailKNode04(node01, 4);
         System.out.println(node.value);
     }
 }

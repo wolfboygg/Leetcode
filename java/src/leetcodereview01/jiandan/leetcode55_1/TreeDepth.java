@@ -40,10 +40,20 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getTreeDepth03(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        // 看左右子树的深度 去最大值
+        int leftDepth = getTreeDepth03(node.left);
+        int rightDepth = getTreeDepth03(node.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();
         TreeNode tree = treeDepth.createTree();
-        int depth = treeDepth.getTreeDepth02(tree);
+        int depth = treeDepth.getTreeDepth03(tree);
         System.out.println(depth);
     }
 

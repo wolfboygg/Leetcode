@@ -42,11 +42,37 @@ public class TreeToDoubleList {
         pre = node;
         dfs(node.right);
     }
+    // 二叉树转换为一个循环列表
+    public TreeNode treeToDoubleList01(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        // 通过中序遍历进行转换
+        dfs01(root);
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+
+    public void dfs01(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        dfs01(node.left); // 找到最左孩子
+        if (pre != null) {
+            pre.right = node;
+        } else {
+            head = node;
+        }
+        node.left = pre;
+        pre = node;
+        dfs01(node.right);
+    }
 
     public static void main(String[] args) {
         TreeToDoubleList treeToDoubleList = new TreeToDoubleList();
         TreeNode root = treeToDoubleList.buildTree();
-        TreeNode head = treeToDoubleList.treeToDoubleList(root);
+        TreeNode head = treeToDoubleList.treeToDoubleList01(root);
         TreeNode cur = head;
         while(cur != null) {
 

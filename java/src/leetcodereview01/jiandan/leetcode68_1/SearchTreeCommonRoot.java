@@ -40,10 +40,25 @@ public class SearchTreeCommonRoot {
 
     }
 
+    public TreeNode findComRoot01(TreeNode tree, TreeNode left, TreeNode right) {
+        // 二叉搜索树左子树一定大于右子树
+        while (tree != null) {
+            if (tree.value > left.value && tree.value > right.value) {
+                // 左边
+                tree = tree.left;
+            } else if (tree.value < left.value && tree.value < right.value) {
+                tree = tree.right;
+            } else {
+                return tree;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot01(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

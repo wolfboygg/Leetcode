@@ -11,6 +11,36 @@ public class LinkedFirstCommonNode {
         }
     }
 
+    public void findCommonNode03(Node head1, Node head2) {
+        Node P1 = head1;
+        Node P2 = head2;
+        while(P1 != P2) {
+            // 三元表达式
+            P1 = P1.next == null ? head2: P1.next;
+            P2 = P2.next == null ? head1: P2.next;
+//            if (P1.next == null) {
+//                P1 = head2;
+//            }
+//            if (P2.next == null) {
+//                P2 = head1;
+//            }
+//            P1 = P1.next;
+//            P2 = P2.next;
+        }
+        System.out.println(P1.value);
+    }
+
+    public void findCommonNode04(Node node1, Node node2) {
+        // 交换指针方案
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1.next == null ? node2 : P1.next;
+            P2 = P2.next == null ? node1 : P2.next;
+        }
+        System.out.println(P1.value);
+    }
+
 
     public static void main(String[] args) {
         LinkedFirstCommonNode linkedFirstCommonNode = new LinkedFirstCommonNode();
@@ -36,7 +66,7 @@ public class LinkedFirstCommonNode {
         node013.next = node03;
 
         linkedFirstCommonNode.findCommonNode(node01, node011);
-        linkedFirstCommonNode.findCommonNode02(node01, node011);
+        linkedFirstCommonNode.findCommonNode04(node01, node011);
 
     }
 

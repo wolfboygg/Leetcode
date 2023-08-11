@@ -72,14 +72,57 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode03(Node head, Node delete) {
+        // 判断是否是中间节点或者是头尾节点
+        if (delete.next != null) {
+            // 表示删除的是中间节点，进行覆盖处理
+            Node next = delete.next.next;
+            delete.value = delete.next.value;
+            delete.next = next;
+        } else {
+            if (delete == head) { // 删除的是头
+                head = null; // 已经没了
+            } else {
+                Node temp = head;
+                while (temp.next != delete) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+    }
+
+    public void deleteNode04(Node head, Node delete) {
+
+        if (delete == null ||  head == null) {
+            return;
+        }
+        if (delete.next != null) {
+            Node temp = delete.next;
+            delete.value = temp.value;
+            delete.next = temp.next;
+        } else {
+            if (head == delete) {
+                head = null;
+            } else {
+                // 找到前一个
+                Node temp = head;
+                while(temp.next != delete) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
-        Node tobeDelete = head.next.next.next.next.next;
+        Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode02(head, tobeDelete);
+        deleteNode.deleteNode04(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

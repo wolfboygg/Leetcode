@@ -53,6 +53,18 @@ public class MirrorTree {
         return head;
     }
 
+    public TreeNode mirrorTree03(TreeNode head) {
+        // 通过递归的方式进行左右交换
+        if (head == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree03(head.left);
+        TreeNode right = mirrorTree03(head.right);
+        head.left = right;
+        head.right = left;
+        return head;
+    }
+
     public void traversalTree(TreeNode node) {
         if (node == null) {
             return;
@@ -62,12 +74,23 @@ public class MirrorTree {
         traversalTree(node.right);
     }
 
+    public TreeNode mirrorTree04(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode leftChild = mirrorTree04(root.left);
+        TreeNode rightChild = mirrorTree04(root.right);
+        root.left = rightChild;
+        root.right = leftChild;
+        return root;
+    }
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree(tree);
+        mirrorTree.mirrorTree04(tree);
         mirrorTree.traversalTree(tree);
     }
 
