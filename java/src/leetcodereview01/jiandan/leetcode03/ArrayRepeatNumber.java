@@ -7,6 +7,26 @@ import java.lang.reflect.Array;
  */
 public class ArrayRepeatNumber {
 
+    /** 找到任意一个重复的即可 */
+    public int findRepeatNumber03(int[] arr) {
+        int n = arr.length;
+        if (n == 0) {
+            return -1;
+        }
+        for (int i = 0; i < n; i++) {
+            while(arr[i] != i) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                }
+                int temp = arr[i];
+                arr[i] = arr[temp];
+                arr[temp] = temp;
+            }
+        }
+
+        return -1;
+    }
+
     public int findRepeatNumber(int[] array) {
         // 通过循环，挨个进行判断，相等则重复，否则进行交换
         int length = array.length;
@@ -58,10 +78,26 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber04(int[] arr) {
+        // 找到是否有重复的数字，就是0～n-1,把对应的数字放到对应的位置
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber3(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber04(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

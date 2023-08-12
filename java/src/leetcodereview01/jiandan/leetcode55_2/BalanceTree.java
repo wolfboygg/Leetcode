@@ -25,6 +25,7 @@ public class BalanceTree {
         node01.right = node03;
         node02.left = node04;
         node02.right = node05;
+        node04.left = node06;
 
         return node01;
     }
@@ -43,11 +44,24 @@ public class BalanceTree {
         }
         return Math.max(leftHeight, rightHeight) + 1;
     }
+
+    // 平衡二叉树指的是左右子树的深度差不超过1
+    public int isBalanceTree02(TreeNode node) {
+        if (node == null || !isBalance) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree02(node.left);
+        int rightDepth = isBalanceTree02(node.right);
+        if (Math.abs(rightDepth - leftDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree(tree);
+        balanceTree.isBalanceTree02(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

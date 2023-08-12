@@ -120,10 +120,66 @@ public class TopToBottomPrintTree {
         System.out.println(list.toString());
     }
 
+    public void print03(TreeNode node) {
+        // 二叉树的广序遍历 使用队列辅助
+        if (node == null) {
+            return;
+        }
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(node);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            list.add(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+        System.out.println(list.toString());
+    }
+
+    public void print04(TreeNode node) {
+        // 层次遍历，需要队列辅助
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(node);
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            list.add(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+        System.out.println(list.toString());
+    }
+
+    public void print05(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            list.add(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+        System.out.println(list.toString());
+    }
+
 
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.print02(tree);
+        topToBottomPrintTree.print05(tree);
     }
 }

@@ -55,6 +55,29 @@ public class TreeFindSumTargetPath {
         arr.remove(arr.size() - 1);
     }
 
+    public boolean findPath01(TreeNode node, int target) {
+        if (node == null) {
+            return false;
+        }
+        backTracking01(node, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    private void backTracking01(TreeNode node, int target, ArrayList<Integer> integers) {
+        // 记得回溯
+        if (node == null) {
+            return;
+        }
+        target -= node.value;
+        integers.add(node.value);
+        if (target == 0 && node.left == null && node.right == null) { // 路径，必须到跟节点
+            ret.add(new ArrayList<>(integers));
+        } else {
+            backTracking(node.left, target, integers);
+            backTracking(node.right, target, integers);
+        }
+        integers.remove(integers.size() - 1);
+    }
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();

@@ -44,8 +44,38 @@ public class Permutation {
         }
     }
 
+    public ArrayList<String> permutation01(String str) {
+        // 使用回溯法进行处理
+        if (str == null || str.length() == 0) {
+            return ret;
+        }
+        char[] arr = str.toCharArray();
+        backTracking01(arr, new boolean[arr.length], new StringBuilder());
+        return ret;
+    }
+
+    public void backTracking01(char[] arr, boolean[] mark, StringBuilder sb) {
+        if (sb.length() == arr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (mark[i]) { // 记住这个要跳过，打过标记的就不要再走了
+                continue;
+            }
+            if (i != 0 && !mark[i-1] && arr[i] == arr[i-1]) {
+                continue;
+            }
+            mark[i] = true;
+            sb.append(arr[i]);
+            backTracking01(arr, mark, sb);
+            mark[i] = false;
+            sb.deleteCharAt(sb.length() -1);
+        }
+    }
+
     public static void main(String[] args) {
         Permutation permutation = new Permutation();
-        System.out.println(permutation.permutation("abc").toString());
+        System.out.println(permutation.permutation01("abc").toString());
     }
 }

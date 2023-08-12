@@ -62,10 +62,42 @@ public class LinkedClone {
         return res;
     }
 
+    public RandomListNode clone01(RandomListNode node) {
+        // 复杂链表的复制，先进行挨个复制，然后在拆分
+        if (node == null) {
+            return null;
+        }
+        RandomListNode head = node;
+        while(head != null) {
+            RandomListNode temp = new RandomListNode(head.label);
+            temp.next = head.next;
+            head.next = temp;
+            head = temp.next;
+        }
+        // 进行随机节点链接
+        head = node;
+        while(head != null) {
+            RandomListNode next = head.next;
+            if (head.random != null) {
+                next.random = head.random.next;
+            }
+            head = next.next;
+        }
+        // 进行拆分
+        head = node.next;
+        RandomListNode res = head;
+        while(head.next != null) {
+            RandomListNode next = head.next;
+            head.next = next.next;
+            head = head.next;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         LinkedClone linkedClone = new LinkedClone();
         RandomListNode linked = linkedClone.createLinked();
-        RandomListNode randomNode1 = linkedClone.clone(linked);
+        RandomListNode randomNode1 = linkedClone.clone01(linked);
         while (randomNode1 != null) {
             String value1 = randomNode1.next == null ? "null" : randomNode1.next.label + " ";
             String value2 = randomNode1.random == null ? "null" : randomNode1.random.label + " ";

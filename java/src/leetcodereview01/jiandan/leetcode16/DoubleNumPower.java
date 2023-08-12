@@ -25,9 +25,29 @@ public class DoubleNumPower {
         return res;
     }
 
+    public double power01(double base, int target) {
+        boolean isNegative = target < 0;
+        double result = pow01(base, Math.abs(target));
+        return isNegative ? 1/result: result;
+    }
+    public double pow01(double base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double res = pow01(base, target / 2);
+        res *= res;
+        if (target % 2 !=0) {
+            res = res* base;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power(2, 3));
+        System.out.println(doubleNumPower.power01(2, 3));
         ;
     }
 }

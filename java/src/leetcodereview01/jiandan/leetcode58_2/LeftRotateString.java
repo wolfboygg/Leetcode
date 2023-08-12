@@ -1,5 +1,6 @@
 package leetcodereview01.jiandan.leetcode58_2;
 
+
 public class LeftRotateString {
 
     public void rotate(String str, int n) {
@@ -20,9 +21,18 @@ public class LeftRotateString {
         }
     }
 
+    public void rotate02(String str, int n) {
+        char[] chars = str.toCharArray();
+        reverse(chars, 0, n-1);
+        reverse(chars, n, chars.length -1);
+        reverse(chars, 0, chars.length -1);
+        System.out.println(new String(chars));
+    }
+
+
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate(str, 2);
+        leftRotateString.rotate02(str, 2);
     }
 }

@@ -19,10 +19,28 @@ public class TowSumInArray {
         return new int[-1];
     }
 
+    public int[] getTargetSum(int[] arr, int sum) {
+        int[] result = new int[2];
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            if (arr[left] + arr[right] > sum) {
+                right--;
+            } else if (arr[left] + arr[right] < sum) {
+                left++;
+            } else {
+                result[0] = arr[left];
+                result[1] = arr[right];
+                break;
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] arr = {2, 7, 11, 15};
         TowSumInArray towSumInArray = new TowSumInArray();
-        int[] targetValue = towSumInArray.getTargetValue(arr, 9);
+        int[] targetValue = towSumInArray.getTargetSum(arr, 9);
         System.out.println(Arrays.toString(targetValue));
     }
 }

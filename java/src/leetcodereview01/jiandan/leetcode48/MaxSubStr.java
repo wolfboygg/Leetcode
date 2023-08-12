@@ -30,9 +30,22 @@ public class MaxSubStr {
         return res;
     }
 
+    public int findMaxLength01(String str) {
+        int temp = 0;
+        int res = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            int j = map.getOrDefault(str.charAt(i), -1);
+            map.put(str.charAt(i), i);
+            temp = temp < i - j ? temp + 1 : j - i;
+            res = Math.max(res, temp);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength(str));
+        System.out.println(maxSubStr.findMaxLength01(str));
     }
 }

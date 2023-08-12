@@ -10,10 +10,16 @@ public class PrintMaxN {
         }
     }
 
+    public void print02(int n) {
+        int number = (int) (Math.pow(10, n) -1);
+        for (int i = 0; i < number; i++) {
+            System.out.println(i);
+        }
+    }
 
     public static void main(String[] args) {
         PrintMaxN printMaxN = new PrintMaxN();
-        printMaxN.print(3);
+        printMaxN.print02(3);
     }
 
     private void printAllNumber(int n) {

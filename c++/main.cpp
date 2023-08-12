@@ -108,7 +108,7 @@ void minStack() {
 void poppushOrder() {
     int pushSequence[5] = {1, 2, 3, 4, 5};
     int popSequence[5] = {4, 3, 5, 1, 2};
-    PopPushOrder popPushOrder;
+    PopPushOrder popPushOrder(1212);
     bool ok = popPushOrder.isPopOrder(pushSequence, 5, popSequence);
     cout << ok << endl;
 }

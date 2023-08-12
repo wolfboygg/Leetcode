@@ -32,6 +32,27 @@ public class TreeSub {
         return isSubTreeWithRoot(root.left, node.left) && isSubTreeWithRoot(root.right, node.right);
     }
 
+
+    public boolean isSub01(TreeNode root, TreeNode node) {
+        if (root == null || node == null) {
+            return false;
+        }
+        return isSubTreeWithRoot01(root, node) || isSub01(root.left, node) || isSub01(root.right, node);
+    }
+
+    private boolean isSubTreeWithRoot01(TreeNode root, TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        if (node.value != root.value) {
+            return false;
+        }
+        return node.value == root.value && isSubTreeWithRoot01(root.left, node.left) && isSubTreeWithRoot01(root.right, node.right);
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
         TreeNode node2 = new TreeNode(8);
@@ -50,12 +71,12 @@ public class TreeSub {
 
         TreeNode node8 = new TreeNode(8);
         TreeNode node9 = new TreeNode(9);
-        TreeNode node10 = new TreeNode(2);
+        TreeNode node10 = new TreeNode(3);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub(node1, node8));
+        System.out.println(new TreeSub().isSub01(node1, node8));
 
     }
 }
