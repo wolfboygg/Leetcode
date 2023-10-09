@@ -55,10 +55,37 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot02(TreeNode node, TreeNode left, TreeNode right) {
+        while(node != null) {
+            // 判断左右
+            if (left.value > node.value && right.value > node.value) {
+                node = node.right;
+            } else if (left.value < node.value && right.value < node.value) {
+                node = node.left;
+            } else {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    public TreeNode findComRoot03(TreeNode node, TreeNode left, TreeNode right) {
+        while(node != null) {
+            if (node.value > left.value && node.value > right.value) {
+                node = node.left;
+            } else if (node.value < left.value && node.value < right.value) {
+                node = node.right;
+            } else {
+                return node;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot01(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot03(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

@@ -46,12 +46,26 @@ public class FindFirstCharInString {
         }
     }
 
+    public void findFirstChar04(String str) {
+        char[] chars = str.toCharArray();
+        int[] valueArr = new int[128];
+        for (int i = 0; i < chars.length; i++) {
+            valueArr[chars[i]]++;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (valueArr[chars[i]] == 1) {
+                System.out.println(chars[i]);
+                break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
         char c = findFirstCharInString.find(str);
         System.out.println(c);
-        findFirstCharInString.findFirstChar03(str);
+        findFirstCharInString.findFirstChar04(str);
     }
 
     private char find(String str) {

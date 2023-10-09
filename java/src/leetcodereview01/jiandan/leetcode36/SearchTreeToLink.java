@@ -24,7 +24,7 @@ public class SearchTreeToLink {
     TreeNode pre = null;
 
     public TreeNode convert(TreeNode root) {
-        inOrder02(root);
+        inOrder05(root);
         return head;
     }
 
@@ -60,6 +60,53 @@ public class SearchTreeToLink {
         inOrder(root.right);
     }
 
+    public void inOrder03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder03(root.left);
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        if (head == null) {
+            head = root;
+        }
+        inOrder03(root.right);
+    }
+
+    public void inOrder04(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        inOrder04(node.left);
+        node.left = pre;
+        if (pre != null) {
+            pre.right = node;
+        }
+        pre = node;
+        if (head == null) {
+            head = node;
+        }
+        inOrder04(node.right);
+    }
+
+    public void inOrder05(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder05(root.left);
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        if (head == null) {
+            head = root;
+        }
+        inOrder05(root.right);
+    }
 
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();

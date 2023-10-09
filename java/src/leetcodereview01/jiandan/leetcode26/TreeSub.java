@@ -53,6 +53,58 @@ public class TreeSub {
         return node.value == root.value && isSubTreeWithRoot01(root.left, node.left) && isSubTreeWithRoot01(root.right, node.right);
     }
 
+    public boolean isSub002(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubTreeWithRoot02(root, childRoot);
+    }
+
+    private boolean isSubTreeWithRoot02(TreeNode root, TreeNode childRoot) {
+        if (childRoot == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        return root.value == childRoot.value && isSubTreeWithRoot02(root.left, childRoot.left) && isSubTreeWithRoot02(root.right, childRoot.right);
+    }
+
+    public boolean isSub03(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubtreeWithRoot03(root, childRoot);
+    }
+
+    private boolean isSubtreeWithRoot03(TreeNode root, TreeNode childRoot) {
+        if (root == null) {
+            return false;
+        }
+        if (childRoot == null) {
+            return true;
+        }
+        return root.value == childRoot.value && isSubtreeWithRoot03(root.left, childRoot.left) && isSubtreeWithRoot03(root.right, childRoot.right);
+    }
+
+    public boolean isSub04(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubtreeWithRoot04(root, childRoot);
+    }
+
+    private boolean isSubtreeWithRoot04(TreeNode root, TreeNode childRoot) {
+        if (root == null) {
+            return false;
+        }
+        if (childRoot == null) {
+            return true;
+        }
+        return root.value == childRoot.value && isSubtreeWithRoot04(root.left, childRoot.left) && isSubtreeWithRoot04(root.right, childRoot.right);
+    }
+
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
         TreeNode node2 = new TreeNode(8);
@@ -70,13 +122,13 @@ public class TreeSub {
         node3.right = node7;
 
         TreeNode node8 = new TreeNode(8);
-        TreeNode node9 = new TreeNode(9);
-        TreeNode node10 = new TreeNode(3);
+        TreeNode node9 = new TreeNode(8);
+        TreeNode node10 = new TreeNode(7);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub01(node1, node8));
+        System.out.println(new TreeSub().isSub04(node1, node8));
 
     }
 }

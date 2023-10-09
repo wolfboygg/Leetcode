@@ -18,7 +18,7 @@ public class RebuildTree {
         for (int i = 0; i < inOrder.length; i++) {
             indexOrder.put(inOrder[i], i);
         }
-        return rebuild05(preOrder, inOrder, 0, preOrder.length - 1, 0, inOrder.length - 1);
+        return rebuildTree06(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
     }
 
     public TreeNode reBuildTree(int[] preOrder, int[] inOrder, int preLeft, int preRight, int inLeft, int inRight) {
@@ -97,6 +97,21 @@ public class RebuildTree {
         node.left = rebuild05(preOrder, inOrder, preLeft + 1, preLeft + childSize, inLeft, inOrderPosition -1);
         node.right = rebuild05(preOrder, inOrder, preLeft + childSize + 1, preRight , inOrderPosition + 1, inRight);
         return node;
+    }
+
+    public TreeNode rebuildTree06(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        // 前序和中序重建
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int indexOrderRootPosition = indexOrder.get(rootValue);// 在中序遍历里面的数据，氛围左右子树
+        int leftChildSize = indexOrderRootPosition - inLeft;
+        TreeNode root = new TreeNode();
+        root.value = rootValue;
+        root.left = rebuildTree06(preOrder, preLeft + 1, preLeft + leftChildSize, inOrder, inLeft, indexOrderRootPosition -1);
+        root.right = rebuildTree06(preOrder, preLeft + leftChildSize + 1, preRight, inOrder, indexOrderRootPosition + 1, inRight);
+        return root;
     }
 
     public void preOrderTraversal(TreeNode node) {

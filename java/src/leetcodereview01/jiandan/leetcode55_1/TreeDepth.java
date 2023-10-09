@@ -50,10 +50,31 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getTreeDepth04(TreeNode node) {
+        // 二叉树的深度就是通过比较左右子树的最大深度
+        if (node == null) {
+            return 0;
+        }
+        int leftDepth = getTreeDepth04(node.left);
+        int rightDepth = getTreeDepth04(node.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    public int getTreeDepth05(TreeNode root) {
+        // 求二叉树的深度就是通过求左右子树的深度的最大值
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getTreeDepth05(root.left);
+        int rightDepth = getTreeDepth05(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();
         TreeNode tree = treeDepth.createTree();
-        int depth = treeDepth.getTreeDepth03(tree);
+        int depth = treeDepth.getTreeDepth04(tree);
         System.out.println(depth);
     }
 

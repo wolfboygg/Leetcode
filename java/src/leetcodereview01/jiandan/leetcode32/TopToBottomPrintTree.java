@@ -176,10 +176,27 @@ public class TopToBottomPrintTree {
         System.out.println(list.toString());
     }
 
+    public void print06(TreeNode root) {
+        // 使用队列进行辅助
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            list.add(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+        System.out.println(list.toString());
+    }
 
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.print05(tree);
+        topToBottomPrintTree.print06(tree);
     }
 }

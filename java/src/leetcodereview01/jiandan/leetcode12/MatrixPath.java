@@ -2,14 +2,52 @@ package leetcodereview01.jiandan.leetcode12;
 
 public class MatrixPath {
 
+    public boolean findPath02(char[][] matrix, String path) {
+        char[] pathArr = path.toCharArray();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int[][] next = new int[][] {
+                {-1, 0}, // 左
+                {0, -1}, // 上
+                {1, 0}, // 右
+                {0, 1} // 下
+        };
+        boolean[][] marked = new boolean[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                return backTracking02(matrix, pathArr, 0, next, marked, i, j);
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking02(char[][] matrix, char[] pathArr, int pathLength, int[][] next, boolean[][] marked, int i, int j) {
+        if (pathArr.length == pathLength) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != pathArr[pathLength]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking02(matrix, pathArr, pathLength + 1, next, marked, i + ints[0], j+ints[1])) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCED";
+        String str = "ABCCEF";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath01(charMatrix, str);
+        boolean isExit = matrixPath.findPath02(charMatrix, str);
         System.out.println(isExit);
     }
 

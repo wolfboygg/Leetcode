@@ -57,11 +57,37 @@ public class BalanceTree {
         }
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    public int isBalanceTree03(TreeNode node) {
+        // 判断是否是一颗平衡二叉树就是看左右子树的差距是否大于1，大于1表示不是一个平衡二叉树
+        if (node == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree03(node.left);
+        int rightDepth = isBalanceTree03(node.right);
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    // 判断是否是平衡二叉树就是通过判断左右子树的深度是否大于1
+    public int isBalanceTree04(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree04(root.left);
+        int rightDepth = isBalanceTree04(root.right);
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree02(tree);
+        balanceTree.isBalanceTree03(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

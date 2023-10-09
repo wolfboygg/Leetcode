@@ -1,5 +1,6 @@
 package leetcodereview01.jiandan.leetcode57_2;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +35,68 @@ public class FindSequenceWithSum {
         }
         return result;
     }
+
+    public List<List<Integer>> findSequence02(int target) {
+        // 这种解决办法就是双指针移动，找到记录然后在走
+        int P1 = 1;
+        int P2 = 2;
+        int sum = 3;
+        List<List<Integer>> result = new ArrayList<>();
+        while(P2 <= target) {
+            // 进行判断
+            if (sum < target) {
+                P2++;
+                sum += P2;
+            } else if (sum > target) { // 比目标数值大就要往后走了，重新再找序列
+                sum -= P1;
+                P1++;
+            } else {
+                List<Integer> list = new ArrayList<>();
+                for (int i = P1; i <= P2; i++) {
+                    list.add(i);
+                }
+                result.add(list);
+                sum -= P1;
+                P1++;
+                P2++;
+                sum += P2;
+            }
+        }
+        return result;
+    }
+
+    public List<List<Integer>> findSequence03(int target) {
+        // 那么就是从1 到 100 采用前后两个指针进行移动进行处理
+        int P1 = 1;
+        int P2 = 2;
+        List<List<Integer>> list = new ArrayList<>();
+        int curSum = P1 + P2;
+        while(P2 <= target) {
+            if (curSum < target) {
+                P2++;
+                curSum += P2;
+            } else if (curSum > target) {
+                curSum-=P1;
+                P1++;
+            } else {
+                // 进行加入
+                List<Integer> tempList = new ArrayList<>();
+                for(int i = P1; i <= P2; i++) {
+                    tempList.add(i);
+                }
+                list.add(tempList);
+                curSum -= P1;
+                P1++;
+                P2++;
+                curSum += P2;
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence01(100);
         System.out.println(sequence);
     }
 

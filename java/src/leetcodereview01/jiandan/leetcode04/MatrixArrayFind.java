@@ -113,6 +113,40 @@ public class MatrixArrayFind {
         return false;
     }
 
+    public boolean findDestNumber06(int[][] arr, int target) {
+        int row = arr.length;
+        int column = arr[0].length;
+        int i = 0;
+        int j = column - 1;
+        while(i < row && j >=0) {
+            if (arr[i][j] > target) {
+               j--;
+            } else if (arr[i][j] < target) {
+                i++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean findDestNumber07(int[][] matrix, int target) {
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int i = 0;
+        int j = column -1;
+        while(i < row && j >=0) {
+            if (matrix[i][j] > target) {
+                j--;
+            } else if (matrix[i][j] < target) {
+                i++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         MatrixArrayFind matrixArrayFind = new MatrixArrayFind();
         int[][] arr = {
@@ -122,7 +156,7 @@ public class MatrixArrayFind {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean destNumberExit = matrixArrayFind.findDestNumber05(arr, 20);
+        boolean destNumberExit = matrixArrayFind.findDestNumber07(arr, 20);
         if (destNumberExit) {
             System.out.println("存在");
         } else {

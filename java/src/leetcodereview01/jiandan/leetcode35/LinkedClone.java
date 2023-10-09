@@ -94,10 +94,40 @@ public class LinkedClone {
         return res;
     }
 
+    public RandomListNode clone02(RandomListNode node) {
+        // 先复制后续，在复制随机，然后再进行拆分
+        RandomListNode cur = node;
+        while(cur != null) {
+            RandomListNode next = cur.next;
+            RandomListNode temp = new RandomListNode(cur.label);
+            temp.next = next;
+            cur.next = temp;
+            cur = next;
+        }
+
+        // 进行随机复制
+        cur = node;
+        while(cur != null) {
+            RandomListNode next = cur.next;
+            next.random = cur.random;
+            cur = next.next;
+        }
+
+        // 进行拆分
+        cur = node.next;
+        RandomListNode root = cur;
+        while (cur.next != null) { // 这里要判断下一个是否为null
+            RandomListNode next = cur.next.next;
+            cur.next = next;
+            cur = next;
+        }
+        return root;
+    }
+
     public static void main(String[] args) {
         LinkedClone linkedClone = new LinkedClone();
         RandomListNode linked = linkedClone.createLinked();
-        RandomListNode randomNode1 = linkedClone.clone01(linked);
+        RandomListNode randomNode1 = linkedClone.clone02(linked);
         while (randomNode1 != null) {
             String value1 = randomNode1.next == null ? "null" : randomNode1.next.label + " ";
             String value2 = randomNode1.random == null ? "null" : randomNode1.random.label + " ";

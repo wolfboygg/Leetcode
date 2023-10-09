@@ -45,9 +45,30 @@ public class DoubleNumPower {
         return res;
     }
 
+    public double power02(int base, int target) {
+        // 求base的的target次方
+        boolean isNegative = target < 0;
+        double result = pow02(base, Math.abs(target));
+        return isNegative ? 1/ result : result;
+    }
+    public double pow02(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = pow02(base, target / 2);
+        value *= value;
+        if (target / 2 != 0) {
+            value = value * base;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power01(2, 3));
+        System.out.println(doubleNumPower.power02(2, 3));
         ;
     }
 }
