@@ -124,6 +124,35 @@ public class LinkedClone {
         return root;
     }
 
+    // 复杂链表的复制
+    public RandomListNode clone03(RandomListNode root) {
+        // 复制方案就是先挨个在每一个连标的后面clone一个相同的节点，然后在链接随机节点，最后断开
+        RandomListNode temp = root;
+        while(temp != null) {
+            RandomListNode node = new RandomListNode(temp.label);
+            RandomListNode next = temp.next;
+            node.next = next;
+            temp.next = node;
+            temp = next;
+        }
+        temp = root;
+        // 连接随机节点
+        while(temp != null) {
+            RandomListNode next = temp.next;
+            next.random = temp.random;
+            temp = next.next;
+        }
+        // 拆分
+        temp = root.next;
+        RandomListNode cur = temp;
+        while(temp.next != null) {
+            RandomListNode node = temp.next.next;
+            temp.next = node;
+            temp = node;
+        }
+        return cur;
+    }
+
     public static void main(String[] args) {
         LinkedClone linkedClone = new LinkedClone();
         RandomListNode linked = linkedClone.createLinked();

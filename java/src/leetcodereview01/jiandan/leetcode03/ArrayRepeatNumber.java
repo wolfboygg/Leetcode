@@ -128,11 +128,27 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber07(int[] arr) {
+        // 找到重复的数字就是将对应的数字放到index位置
+        for (int i = 0; i < arr.length; i++) {
+            while(i != arr[i]) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber06(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber07(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

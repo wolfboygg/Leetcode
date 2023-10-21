@@ -225,11 +225,44 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble08(int[] arr, int startIndex, int endIndex) {
+        if (startIndex >= endIndex) {
+            return;
+        }
+        int pivot = partitionByDouble08(arr, startIndex, endIndex);
+        sortByDouble08(arr, startIndex, pivot - 1);
+        sortByDouble08(arr, pivot + 1, endIndex);
+    }
+
+    private int partitionByDouble08(int[] arr, int startIndex, int endIndex) {
+        // 基本思路就是通过左右两个指针进行处理 选定一个base
+        int base = arr[startIndex];
+        int left = startIndex + 1;
+        int right = endIndex;
+        while(left != right) {
+            while(left < right && arr[right] > base) {// 右边开始
+                right--;
+            }
+            while(left < right && arr[left] < base) {
+                left++;
+            }
+            if (left < right) {
+                // 交换
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        arr[startIndex] = arr[left];
+        arr[left] = base;
+        return left;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble07(arr, 0, arr.length - 1);
+        quickSort.sortByDouble08(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

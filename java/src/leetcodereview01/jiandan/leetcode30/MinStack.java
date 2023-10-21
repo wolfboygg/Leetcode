@@ -65,13 +65,33 @@ public class MinStack {
         return minorStack.peek();
     }
 
+    // 最小的栈 就是用另一个栈辅助实现 如果比当前值小就存小的，
+    // 比当前值大就存当前值，注意如果当前栈出栈要把辅助栈也要出栈
+    public void push04(int value) {
+        majorStack.push(value);
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            minorStack.push(minorStack.peek() > value ? value : minorStack.peek());
+        }
+    }
+
+    public int pop04() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int min04() {
+        return minorStack.peek();
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push03(-2);
-        minStack.push03(0);
-        minStack.push03(-3);
-        System.out.println(minStack.min03());
-        minStack.pop03();
-        System.out.println(minStack.min03());
+        minStack.push04(-2);
+        minStack.push04(0);
+        minStack.push04(-3);
+        System.out.println(minStack.min04());
+        minStack.pop04();
+        System.out.println(minStack.min04());
     }
 }

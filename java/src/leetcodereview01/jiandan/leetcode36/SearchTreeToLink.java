@@ -108,10 +108,79 @@ public class SearchTreeToLink {
         inOrder05(root.right);
     }
 
+    // 二叉搜索树转换了排序的双向链表
+    public TreeNode convert06(TreeNode root) {
+        // 注意这里要找到head头
+        inOrder06(root); // 通过中序遍历来进行转换
+        return head;
+    }
+    public void inOrder06(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder06(root.left);
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre; // 这是用来处理右子树
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder06(root.right);
+    }
+
+    public TreeNode convert07(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        inOrder07(root);
+        return head;
+    }
+    public void inOrder07(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder07(root.left);
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root; // 这里要重制pre的位置
+        inOrder07(root.right);
+    }
+
+    public TreeNode convert08(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        inOrder08(root);
+        return head;
+    }
+
+    public void inOrder08(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder08(root.left);
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder08(root.right);
+    }
+
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert(searchTree);
+        TreeNode convert = searchTreeToLink.convert08(searchTree);
         TreeNode right = null;
         while (convert != null) {
             right = convert;

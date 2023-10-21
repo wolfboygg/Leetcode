@@ -75,14 +75,41 @@ public class StackPushPopList {
         return stack.isEmpty();
     }
 
+    public boolean isPopSequence05(int[] pushList, int[] popList) {
+        // 就是通过一个辅助栈，来将元素不停的入栈和出栈，来判断是否为空
+        Stack<Integer> stack = new Stack<>();
+        int index = 0;
+        for (int value : pushList) {
+            stack.push(value);
+            while (index < popList.length && !stack.isEmpty() && stack.peek() == popList[index]) {
+                stack.pop();
+                index++;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public boolean isPopSequence06(int[] pushList, int[] popList) {
+        Stack<Integer> stack = new Stack<>();
+        int popIndex = 0;
+        for (int i : pushList) {
+            stack.push(i);
+            while(popIndex < popList.length && !stack.isEmpty() && stack.peek() == popList[popIndex]) {
+                stack.pop();
+                popIndex++; // +1处理
+            }
+        }
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args) {
         int[] pushList = {1, 2, 3, 4, 5};
         int[] popList = {4, 5, 3, 2, 1};
         int[] popList02 = {4, 3, 5, 1, 2};
         StackPushPopList stackPushPopList = new StackPushPopList();
-        System.out.println(stackPushPopList.isPopSequence04(pushList, popList));
-        System.out.println(stackPushPopList.isPopSequence04(pushList, popList02));
-        System.out.println(stackPushPopList.isPopSequence04(pushList, popList));
+        System.out.println(stackPushPopList.isPopSequence06(pushList, popList));
+        System.out.println(stackPushPopList.isPopSequence06(pushList, popList02));
+        System.out.println(stackPushPopList.isPopSequence06(pushList, popList));
     }
 
     private boolean isPopSquence(int[] pushList, int[] popList) {

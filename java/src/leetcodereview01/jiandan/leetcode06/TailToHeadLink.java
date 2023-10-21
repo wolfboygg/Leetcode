@@ -106,6 +106,22 @@ public class TailToHeadLink {
         }
     }
 
+    public void printLinkByHead05(Node node) {
+        // 添加头指针
+        Node head = new Node(-1);
+        while(node != null) {
+            Node temp = node.next;
+            node.next = head.next;
+            head.next = node;
+            node = temp;
+        }
+        head = head.next;
+        while (head != null) {
+            System.out.println(head.value);
+            head = head.next;
+        }
+    }
+
 
     public static void main(String[] args) {
         TailToHeadLink tailToHeadLink = new TailToHeadLink();
@@ -118,6 +134,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByHead04(node01);
+        tailToHeadLink.printLinkByHead05(node01);
     }
 }

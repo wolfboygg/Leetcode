@@ -92,12 +92,27 @@ public class MaxGold {
         return matrix[ores.length][maxNum];
     }
 
+    public int getGold07(int[] golds, int[] ores, int maxNum) {
+        // 使用动态规划进行处理，需要注意
+        int[][] matrix = new int[ores.length + 1][maxNum + 1];
+        for (int i = 1; i < ores.length + 1; i++) {
+              for(int j = 1; j < maxNum + 1; j++) {
+                  if (j < ores[i -1]) {
+                      matrix[i][j] = matrix[i - 1][j];
+                  } else {
+                      matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i-1][j - ores[i-1]] + golds[i-1]);
+                  }
+              }
+        }
+        return matrix[ores.length][maxNum];
+    }
+
     public static void main(String[] args) {
         int[] golds = {200, 300, 350, 400, 500};
         int[] ores = {3, 4, 3, 5, 5};
         int manNum = 10;
         MaxGold maxGold = new MaxGold();
-        int result = maxGold.getGold06(golds, ores, manNum);
+        int result = maxGold.getGold07(golds, ores, manNum);
         System.out.println(result);
     }
 }

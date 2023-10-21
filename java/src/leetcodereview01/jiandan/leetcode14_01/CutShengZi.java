@@ -86,9 +86,30 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCut) * Math.pow(2, towCut));
     }
 
+    // 凑三取二法
+    public int cut05(int target) {
+        if (target <= 1) {
+            return 0;
+        }
+        if (target == 2) {
+            return 1;
+        }
+        if (target == 3) {
+            return 2;
+        }
+        int threeCut = 0;
+        int twoCut = 0;
+        threeCut = target / 3;
+        if (target - threeCut * 3 == 1) {
+            threeCut--;
+        }
+        twoCut = (target - threeCut * 3) / 2;
+        return (int) (Math.pow(3, threeCut) * Math.pow(2, twoCut));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut03(8));
+        System.out.println(cutShengZi.cut05(8));
     }
 
     private int cut(int target) {

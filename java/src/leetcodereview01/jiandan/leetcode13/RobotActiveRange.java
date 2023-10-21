@@ -215,6 +215,43 @@ public class RobotActiveRange {
         }
     }
 
+    public void findPath05(int m, int n, int target) {
+        // 还是要左右移动进行走 先算大小
+        int maxValue = Math.max(m, n);
+        this.target = target;
+        this.row = m;
+        this.column = n;
+        int[] value = new int[maxValue];
+        for (int i = 0; i < maxValue; i++) {
+            int temp = i;
+            while(temp != 0) {
+                value[i] += temp % 10;
+                temp = temp / 10;
+            }
+        }
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                  matrix[i][j] = value[i] + value[j];
+            }
+        }
+        int[][] next = {{-1, 0}, {0 , -1}, {1, 0}, {0, 1}};
+        boolean[][] marked = new boolean[m][n];
+        backtracking05(matrix, next, marked, 0, 0);
+        System.out.println(count);
+    }
+
+    private void backtracking05(int[][] matrix, int[][] next, boolean[][] marked, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] > target ) {
+            return;
+        }
+        marked[i][j] = true;
+        count++;
+        for (int[] ints : next) {
+            backtracking05(matrix, next, marked, i + ints[0], j + ints[1]);
+        }
+    }
+
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
         robotActiveRange.findPath04(3, 2, 2);

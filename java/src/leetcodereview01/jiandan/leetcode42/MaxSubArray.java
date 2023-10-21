@@ -49,12 +49,25 @@ public class MaxSubArray {
         System.out.println(maxValue);
     }
 
+
+    public int findSum07(int[] arr) {
+        // 找到连续数组的最大和 通过遍历记录当前的最大值和总的最大值
+        int maxValue = arr[0];
+        int preValue = 0;
+        for (int i = 0; i < arr.length; i++) {
+            preValue = Math.max(preValue + arr[i], arr[i]);
+            maxValue = Math.max(maxValue, preValue);
+        }
+        System.out.println(maxValue);
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum06(arr);
+        maxSubArray.findSum07(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);

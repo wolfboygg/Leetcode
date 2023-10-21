@@ -79,11 +79,23 @@ public class SearchTreeKNode {
         dfs03(root.left);
     }
 
+    // 二叉搜索树第K大的节点 可以等同于后续遍历的k个节点
+    public void dfs04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs04(root.right);
+        if (--k == 0) {
+            result = root.value;
+        }
+        dfs04(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs03(tree);
+        searchTreeKNode.dfs04(tree);
         System.out.println(searchTreeKNode.result);
     }
 

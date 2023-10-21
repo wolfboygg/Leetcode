@@ -82,10 +82,24 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot04(TreeNode node, TreeNode left, TreeNode right) {
+        // 二叉搜索树的最近公共祖先
+        while(node != null) {
+            if (node.value > left.value && node.value > right.value) {
+                node = node.left;
+            } else if (node.value < left.value && node.value < right.value) {
+                node = node.right;
+            } else {
+                return node;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot03(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot04(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

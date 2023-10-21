@@ -123,11 +123,35 @@ public class RebuildTree {
         preOrderTraversal(node.right);
     }
 
+    public TreeNode rebuildTree07(int[] preOrder, int[] inOrder) {
+        // 遍历存储inOrder的index
+        for (int i = 0; i < inOrder.length; i++) {
+            indexOrder.put(inOrder[i], i);
+        }
+        return rebuildTree07(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+    }
+
+    public TreeNode rebuildTree07(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        // 通过递归的方式进行处理
+        int root = preOrder[preLeft];
+        int rootIndexInOrder = indexOrder.get(root);
+        int leftChildSize = rootIndexInOrder - inLeft; // 这里有一个算对的问题，其实size数量会多1为了下面的位置好算
+        // 算出当前的位置，然后进行重建
+        TreeNode node = new TreeNode();
+        node.value = root;
+        node.left = rebuildTree07(preOrder, preLeft + 1, preLeft + leftChildSize, inOrder, inLeft, rootIndexInOrder - 1);
+        node.right = rebuildTree07(preOrder, preLeft + leftChildSize + 1, preRight, inOrder, rootIndexInOrder + 1, inRight);
+        return node;
+    }
+
     public static void main(String[] args) {
         int[] preOrder = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         RebuildTree rebuildTree = new RebuildTree();
-        TreeNode treeNode = rebuildTree.rebuildTree(preOrder, inOrder);
+        TreeNode treeNode = rebuildTree.rebuildTree07(preOrder, inOrder);
         rebuildTree.preOrderTraversal(treeNode);
     }
 }

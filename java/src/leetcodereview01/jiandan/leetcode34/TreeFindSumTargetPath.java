@@ -175,11 +175,58 @@ public class TreeFindSumTargetPath {
 
     }
 
+    public boolean findPath06(TreeNode root, int target) {
+        // 找到路径 就需要不停的回溯
+        if (root ==  null) {
+            return false;
+        }
+        backTracking06(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void backTracking06(TreeNode root, int target, ArrayList<Integer> treeNodes) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        treeNodes.add(root.value);
+        if (target == 0 && root.right == null && root.left == null) {// 到达叶子节点
+            ret.add(new ArrayList<>(treeNodes)); // 这里要重新new一个集合
+        } else {
+            backTracking06(root.left, target, treeNodes);
+            backTracking06(root.right, target, treeNodes);
+        }
+        treeNodes.remove(treeNodes.size() - 1);
+    }
+
+    public boolean findPath07(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        backTracking07(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void backTracking07(TreeNode root, int target, ArrayList<Integer> arr) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        arr.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(arr));
+        } else {
+            backTracking07(root.left, target, arr);
+            backTracking07(root.right, target, arr);
+        }
+        arr.remove(arr.size() - 1);
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath05(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath07(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

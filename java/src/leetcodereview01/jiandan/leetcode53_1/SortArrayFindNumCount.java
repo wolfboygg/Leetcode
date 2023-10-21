@@ -31,10 +31,39 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    // 在排序的数组中进行查找就是找到左和右进行相减
+    public void count02(int[] arr, int target) {
+        if (arr.length == 0) {
+            return;
+        }
+        int leftIndex = binaryFind02(arr, target, true);
+        int rightIndex = binaryFind02(arr, target, false) - 1;
+        if (leftIndex >= 0 && leftIndex < arr.length && rightIndex >= 0 && rightIndex < arr.length && arr[leftIndex] == target && arr[rightIndex] == target) {
+            System.out.println((rightIndex - leftIndex) + 1) ;
+        }
+    }
+
+    private int binaryFind02(int[] arr, int target, boolean low) {
+        // 通过二分查找来处理
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = -1;
+        while(left <= right) { // 这里必须要相等就是要找到左和右，为了进入下一次循环middle-1
+            int middle = (right + left) / 2;
+            if (arr[middle] > target || (low && arr[middle] >= target)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+               left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count01(arr, 8);
+        sortArrayFindNumCount.count02(arr, 8);
     }
 
     private void count(int[] arr, int target) {

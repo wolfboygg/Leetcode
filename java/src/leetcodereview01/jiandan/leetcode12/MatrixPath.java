@@ -39,15 +39,51 @@ public class MatrixPath {
         marked[i][j] = false;
         return false;
     }
+    public boolean findPath03(char[][] matrix, String str) {
+        // 怎么遍历就是通过挨个进行查找
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        char[] arr = str.toCharArray();
+        int[][] next = {{-1, 0},{0, -1},{1, 0},{0, 1}};
+        boolean[][] marked = new boolean[row][column];
+        // 通过每一个元素进行遍历找到路径
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking03(matrix, arr, next, marked, 0, i, j)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking03(char[][] matrix, char[] arr, int[][] next, boolean[][] marked, int pathLength, int i, int j) {
+        if (pathLength == arr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >=column || marked[i][j] || matrix[i][j] != arr[pathLength]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking03(matrix, arr, next, marked, pathLength + 1, i + ints[0], j + ints[1])) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
 
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCEF";
+        String str = "ABCCED";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath02(charMatrix, str);
+        boolean isExit = matrixPath.findPath03(charMatrix, str);
         System.out.println(isExit);
     }
 

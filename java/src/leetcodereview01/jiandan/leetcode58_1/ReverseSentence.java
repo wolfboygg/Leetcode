@@ -122,9 +122,41 @@ public class ReverseSentence {
         }
     }
 
+    // 翻转字符串
+    public void reverse05(String str) {
+        // 按空格翻转，最后再整体翻转
+        char[] chars = str.toCharArray();
+        System.out.println(chars.length);
+        System.out.println(Arrays.toString(chars));
+        int P1 = 0;
+        int P2 = 0;
+        for (int i = 0; i <= chars.length; i++) {
+            if (P2 == chars.length || chars[P2] == ' ' ) {
+               // 这个时候需要翻转
+                reverseWork05(chars, P1, P2-1);
+                P1 = P2;
+            }
+            P2++;
+        }
+        // 整体进行翻转
+        reverseWork05(chars, 0, chars.length - 1);
+        System.out.println(chars.length);
+        System.out.println(Arrays.toString(chars));
+    }
+
+    public void reverseWork05(char[] arr, int start, int end) {
+        while(start < end) {
+            char temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse04(str);
+        reverseSentence.reverse05(str);
     }
 }

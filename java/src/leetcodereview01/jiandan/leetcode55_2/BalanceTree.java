@@ -83,11 +83,24 @@ public class BalanceTree {
         }
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    public int isBalanceTree05(TreeNode root) {
+        // 是否是平衡二叉树，就是左右子树的差是否小于= 1
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree05(root.left);
+        int rightDepth = isBalanceTree05(root.right);
+        if (Math.abs(rightDepth - leftDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree03(tree);
+        balanceTree.isBalanceTree05(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

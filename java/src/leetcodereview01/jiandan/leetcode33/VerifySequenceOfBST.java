@@ -149,8 +149,66 @@ public class VerifySequenceOfBST {
         return realVerify04(arr, start, rightIndex - 1) && realVerify04(arr, rightIndex, end - 1);
     }
 
+    // 验证是否是一个二叉搜索的结果，那么就使用二叉搜索树的特性来判断 后续 左右根 根一定是最后一个的，然后在判断左右子树
+    // 使用递归进行处理判断
+    public boolean verify05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        return realVerify05(arr, 0, arr.length - 1); // 因为要递归处理，所以这里要使用第二个方法传入当前的start end
+    }
+
+    public boolean realVerify05(int[] arr, int start, int end) {
+        if (end - start < 1) { // 如果当前已经是最后了 那么就肯定是一个后续遍历
+            return true;
+        }
+        int root = arr[end];
+        int rightStartIndex = 0;
+        for (int i = start; i <= end; i++) {
+              if (arr[i] > root) {
+                  rightStartIndex = i;
+                  break;
+              }
+        }
+        for (int i = rightStartIndex; i <= end; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+        }
+        return realVerify05(arr, start, rightStartIndex - 1) && realVerify05(arr, rightStartIndex, end - 1);
+    }
+
+    public boolean verify06(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        return realVerify06(arr, 0, arr.length - 1);
+    }
+
+    public boolean realVerify06(int[] arr, int start, int end) {
+        if (end - start < 1) {
+            return true;
+        }
+        int root = arr[end];
+        int rightIndex = 0;
+        for (int i = start; i <= end; i++) {
+            if (arr[i] > root) {
+                rightIndex = i;
+                break;
+            }
+        }
+
+        for(int i = rightIndex; i <= end; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+        }
+
+        return realVerify06(arr, start, rightIndex - 1) && realVerify06(arr, rightIndex, end-1);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 2};
-        System.out.println(new VerifySequenceOfBST().verify04(arr));
+        System.out.println(new VerifySequenceOfBST().verify06(arr));
     }
 }

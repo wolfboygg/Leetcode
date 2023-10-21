@@ -100,11 +100,26 @@ public class RotateArray {
         return arr[low];
     }
 
+    public int getMinValueByTX05(int[] arr) {
+        // 通过二分查找去处理
+        int low = 0;
+        int height = arr.length -1;
+        while(low < height) {
+            int middle = low + (height - low) / 2;
+            if (arr[middle] < arr[height]) {
+                height = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return arr[low];
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2, 3};
         int[] arr2 = {3, 4, 5, 1, 2};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTX04(arr2);
+        int i = rotateArray.getMinValueByTX05(arr2);
         System.out.println("最小值为:" + i);
     }
 }

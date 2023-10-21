@@ -66,9 +66,30 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power03(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = pow03(base, Math.abs(target));
+        return isNegative ? 1 / value : value;
+    }
+
+    public double pow03(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = pow03(base, target / 2);
+        value *= value;
+        if (target / 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power02(2, 3));
+        System.out.println(doubleNumPower.power03(2, 3));
         ;
     }
 }

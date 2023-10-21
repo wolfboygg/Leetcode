@@ -1,8 +1,10 @@
 package leetcodereview01.jiandan.leetcode38;
 
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StringAllSequence {
 
@@ -65,11 +67,60 @@ public class StringAllSequence {
         }
     }
 
+    public void getAllSequence03(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] arr = str.toCharArray();
+        boolean[] mark = new boolean[arr.length];
+        backTracking03(arr, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    private void backTracking03(char[] arr, boolean[] marked, StringBuilder sb) {
+        if (arr.length == sb.length()) {
+            ret.add(new String(sb.toString()));
+        }
+        for(int i = 0; i < arr.length; i++) {
+            if (marked[i]) {
+                continue;
+            }
+            marked[i] = true;
+            sb.append(arr[i]);
+            backTracking03(arr, marked, sb);
+            marked[i] = false;
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+    public void getAllSequence04(String str) {
+        char[] arr = str.toCharArray();
+        boolean[] marked = new boolean[arr.length];
+        backTracking04(arr, marked, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking04(char[] arr, boolean[] marked, StringBuilder sb) {
+        if (sb.length() == arr.length) {
+            ret.add(new String(sb.toString()));
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (marked[i]) {
+                continue; // 这里不能return只能是continue
+            }
+            marked[i] = true;
+            sb.append(arr[i]);
+            backTracking04(arr, marked, sb);
+            sb.deleteCharAt(sb.length() -1);
+            marked[i] = false;
+        }
+    }
+
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence02(str);
+        stringAllSequence.getAllSequence04(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

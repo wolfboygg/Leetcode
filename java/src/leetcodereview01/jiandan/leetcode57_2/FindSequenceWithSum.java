@@ -94,9 +94,37 @@ public class FindSequenceWithSum {
         return list;
     }
 
+    public List<List<Integer>> findSequence04(int sum) {
+        int start = 1;
+        int end = 2;
+        int curSum = start + end;
+        List<List<Integer>> ret = new ArrayList<>();
+        while(end <= sum) {
+            if (curSum < sum) {
+                end++;
+                curSum += end;
+            } else if (curSum > sum) {
+                curSum -= start;
+                start++;
+            } else {
+                // 表示等于了那么就搞一下
+                List<Integer> temp = new ArrayList<>();
+                for(int i = start; i <= end; i++) {
+                  temp.add(i);
+                }
+                ret.add(temp);
+                curSum -= start;
+                start++;
+                end++;
+                curSum += end;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence01(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence04(100);
         System.out.println(sequence);
     }
 

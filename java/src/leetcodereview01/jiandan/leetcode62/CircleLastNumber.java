@@ -30,10 +30,20 @@ public class CircleLastNumber {
         return x;
     }
 
+    public int lastNumberByGH05(int n, int m) {
+        // 圆圈中最后的数字
+        // 最后的一定是0好位置
+        int x = 0;
+        for (int i = 2; i < n + 1; i++) {
+            x = (x + m) % i;
+        }
+        return x;
+    }
+
     public static void main(String[] args) {
         // 通过递归的方式进行求解
         CircleLastNumber circleLastNumber = new CircleLastNumber();
-        System.out.println(circleLastNumber.lastNumberByGH04(6, 2));
+        System.out.println(circleLastNumber.lastNumberByGH05(6, 2));
     }
     // 5, 3
     private int lastNumber(int n, int m) {
