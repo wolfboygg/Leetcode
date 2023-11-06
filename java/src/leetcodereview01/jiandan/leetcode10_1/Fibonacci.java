@@ -107,9 +107,27 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH06(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int temp1 = 0;
+        int temp2 = 1;
+        int value = 0;
+        for (int i = 2; i <= n; i++) {
+            value = temp1 + temp2;
+            temp1 = temp2;
+            temp2 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH05(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH06(6);
         System.out.println(fibonacciValue);
     }
 }

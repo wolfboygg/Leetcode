@@ -87,9 +87,31 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power04(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = realPower04(base, target);
+        return isNegative ? 1.0 / value : value;
+    }
+
+    public double realPower04(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower04(base, target / 2);
+        value *= value;
+        if (target % 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power03(2, 3));
+        System.out.println(doubleNumPower.power04(2, 3));
         ;
     }
 }

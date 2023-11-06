@@ -252,8 +252,46 @@ public class RobotActiveRange {
         }
     }
 
+    public void findPath06(int m, int n, int target) {
+        // 比当前值大的不能进入，只能左右上下走
+        int max = Math.max(m, n);
+        int[] value = new int[max];
+        this.row = m;
+        this.column = n;
+        for (int i = 0; i < max; i++) {
+              int temp = i;
+              while(temp != 0) {
+                  value[i] += temp  % 10;
+                  temp = temp / 10;
+              }
+        }
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                  matrix[i][j] = value[i] + value[j];
+            }
+        }
+        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+        boolean[][] marked = new boolean[m][n];
+        backtracking06(matrix, next, marked, 0, 0, target);
+        System.out.println(count);
+    }
+
+    public void backtracking06(int[][] matrix, int[][] next, boolean[][] marked, int i, int j, int target) {
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] > target) {
+            return;
+        }
+        System.out.println("1111");
+        count++;
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            backtracking06(matrix, next, marked, i + ints[0], j + ints[1], target);
+        }
+    }
+
+
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath04(3, 2, 2);
+        robotActiveRange.findPath06(3, 2, 2);
     }
 }

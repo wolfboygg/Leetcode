@@ -76,14 +76,50 @@ public class MatrixPath {
         return false;
     }
 
+    public boolean findPath04(char[][] matrix, String str) {
+        // 排查矩阵中是否存在string
+        char[] chars = str.toCharArray();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int[][] next = {{-1, 0},{0, -1},{1, 0},{0, 1}};
+        boolean[][] marked = new boolean[row][column];
+        for (int i = 0; i < row; i++) {
+            for(int j = 0; j < column; j++) {
+                if (backTracking04(matrix, next, marked, chars, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking04(char[][] matrix, int[][] next, boolean[][] marked, char[] arr, int i, int j, int index) {
+        if (index == arr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != arr[index]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking04(matrix, next, marked, arr, i + ints[0], j + ints[1], index + 1)) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCED";
+        String str = "ABCCEF";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath03(charMatrix, str);
+        boolean isExit = matrixPath.findPath04(charMatrix, str);
         System.out.println(isExit);
     }
 

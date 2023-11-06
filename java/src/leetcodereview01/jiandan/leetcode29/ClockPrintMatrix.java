@@ -199,14 +199,51 @@ public class ClockPrintMatrix {
         return ret;
     }
 
+    public List<Integer> printMatrix06(int[][] matrix) {
+        List<Integer> ret = new ArrayList<>();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int left = 0;
+        int top = 0;
+        int right = column - 1;
+        int bottom = row -1;
+        while(left <= right && top <= bottom) {
+            // 上
+            for(int i = left; i <= right; i++) {
+                ret.add(matrix[top][i]);
+            }
+            // 右
+            for(int i = top + 1; i <= bottom; i++) {
+                ret.add(matrix[i][right]);
+            }
+            // 下  避免相等的时候再打印一遍
+            if (left < right) {
+                for(int i = right - 1; i >= left; i--) {
+                    ret.add(matrix[bottom][i]);
+                }
+            }
+            // 左
+            if (top < bottom) {
+                for(int i = bottom - 1; i > top; i--) {
+                    ret.add(matrix[i][left]);
+                }
+            }
+            top++;
+            bottom--;
+            left++;
+            right--;
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = {
                 {1, 2, 3, 4},
-                {5, 6, 7, 8},
+//                {5, 6, 7, 8},
                 {9, 10, 11, 12},
                 {13, 14, 15, 16},
         };
         ClockPrintMatrix clockPrintMatrix = new ClockPrintMatrix();
-        System.out.println(clockPrintMatrix.printMatrix05(matrix));
+        System.out.println(clockPrintMatrix.printMatrix06(matrix));
     }
 }

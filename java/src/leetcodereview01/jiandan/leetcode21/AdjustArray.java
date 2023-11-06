@@ -107,11 +107,33 @@ public class AdjustArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void adjustByPointer07(int[] arr) {
+        // 进行奇偶顺序的调整
+        int P1 = 0;
+        int P2 = arr.length -1;
+        while(P1 < P2) {
+            // 使用一个while循环处理
+            while (P1 < P2 && arr[P1] % 2 != 0) {
+                P1++;
+            }
+            while (P1 < P2 && arr[P2] % 2 == 0) {
+                P2--;
+            }
+            if (P1 != P2) {
+                // 进行交换
+                int temp = arr[P1];
+                arr[P1] = arr[P2];
+                arr[P2] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
 
     public static void main(String[] args) {
         AdjustArray adjustArray = new AdjustArray();
         int[] arr = {1, 5, 8, 3, 2, 4, 5};
-        adjustArray.adjustByPointer05(arr);
+        adjustArray.adjustByPointer07(arr);
     }
 
     public void adjustByFor(int[] arr) {

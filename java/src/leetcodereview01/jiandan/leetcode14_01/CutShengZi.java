@@ -107,9 +107,29 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCut) * Math.pow(2, twoCut));
     }
 
+    public int cut06(int target) {
+        if (target <= 1) {
+            return 0;
+        }
+        if (target == 2) {
+            return 1;
+        }
+        if (target == 3) {
+            return 2;
+        }
+        int threeCount = 0;
+        int towCount = 0;
+        threeCount = target / 3;
+        if (target - threeCount * 3 == 1) {
+            threeCount--;
+        }
+        towCount = (target - threeCount * 3) / 2;
+        return (int) (Math.pow(3, threeCount) * Math.pow(2, towCount));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut05(8));
+        System.out.println(cutShengZi.cut06(8));
     }
 
     private int cut(int target) {

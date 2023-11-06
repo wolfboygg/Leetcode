@@ -227,9 +227,28 @@ public class TopToBottomPrintTree {
         }
     }
 
+    private void print09(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        // 从上到下打印二叉树
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(node);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+            System.out.print(poll.value + " ");
+        }
+    }
+
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.print08(tree);
+        topToBottomPrintTree.print09(tree);
     }
 }

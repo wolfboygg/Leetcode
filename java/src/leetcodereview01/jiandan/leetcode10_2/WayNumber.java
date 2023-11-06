@@ -93,10 +93,28 @@ public class WayNumber {
         return value;
     }
 
+    public int getWayNumber06(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int temp1 = 1;
+        int temp2 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = temp1 + temp2;
+            temp1 = temp2;
+            temp2 = value;
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
-        int wayNumber1 = wayNumber.getWayNumber05(7);
+        int wayNumber1 = wayNumber.getWayNumber06(7);
         System.out.println(wayNumber1);
     }
 }
