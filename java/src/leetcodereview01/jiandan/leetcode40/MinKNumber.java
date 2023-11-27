@@ -1,5 +1,7 @@
 package leetcodereview01.jiandan.leetcode40;
 
+import jdk.nashorn.internal.IntDeque;
+
 import java.util.*;
 
 public class MinKNumber {
@@ -143,12 +145,35 @@ public class MinKNumber {
         }
         return list;
     }
+
+    // 找出最小的k个数
+    public List<Integer> findMinKNumByDump07(int[] arr, int target) {
+        // 最小的k个数，使用大头堆进行实现
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for(int i = 0; i < target; i++) {
+          queue.offer(arr[i]);
+        }
+        for (int i = target; i < arr.length; i++) {
+            Integer peek = queue.peek();
+            if (peek > arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            Integer poll = queue.poll();
+            list.add(poll);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 1, 6, 2, 7, 3, 8};
         MinKNumber minKNumber = new MinKNumber();
         int[] num = minKNumber.findMinKNum(arr, 4);
         System.out.println(Arrays.toString(num));
-        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump06(arr, 4);
+        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump07(arr, 4);
         System.out.println(minKNumByDump.toString());
 //        minKNumber.findMinKNumberByDump03(arr, 4);
     }

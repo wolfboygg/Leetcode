@@ -116,11 +116,37 @@ public class StringAllSequence {
         }
     }
 
+    public void getAllSequence05(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] arr = str.toCharArray();
+        boolean[] marked = new boolean[arr.length];
+        backTracking05(arr, marked, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    private void backTracking05(char[] arr, boolean[] marked, StringBuilder sb) {
+        if (sb.length() == arr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (marked[i]) {
+                continue;
+            }
+            marked[i] = true;
+            sb.append(arr[i]);
+            backTracking05(arr, marked, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            marked[i] = false;
+        }
+    }
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence04(str);
+        stringAllSequence.getAllSequence05(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

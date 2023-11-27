@@ -62,12 +62,23 @@ public class MaxSubArray {
         return maxValue;
     }
 
+    public void findSum08(int[] arr) {
+        // 最大子数组的和，一次进行相加判断是否大于最大值和当前值进行比较
+        int max = 0;
+        int curSum = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            curSum = Math.max(arr[i], curSum + arr[i]);
+            max = Math.max(max, curSum);
+        }
+        System.out.println(max);
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum07(arr);
+        maxSubArray.findSum08(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);

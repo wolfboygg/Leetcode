@@ -153,10 +153,38 @@ public class LinkedClone {
         return cur;
     }
 
+    public RandomListNode clone04(RandomListNode head) {
+        // 复杂列表的复制
+        RandomListNode temp = head;
+        while(temp != null) {
+            RandomListNode next = temp.next;
+            RandomListNode node = new RandomListNode(temp.label);
+            temp.next = node;
+            node.next = next;
+            temp = next;
+        }
+        // 链接对应的随机节点
+        temp = head;
+        while(temp != null) {
+            RandomListNode next = temp.next;
+            next.random = temp.random;
+            temp = next.next;
+        }
+        // 进行拆分
+        RandomListNode preHead = head.next;
+        RandomListNode cur = preHead;
+        while(cur.next != null) {
+            RandomListNode next = cur.next.next;
+            cur.next = next;
+            cur = next;
+        }
+        return preHead;
+    }
+
     public static void main(String[] args) {
         LinkedClone linkedClone = new LinkedClone();
         RandomListNode linked = linkedClone.createLinked();
-        RandomListNode randomNode1 = linkedClone.clone02(linked);
+        RandomListNode randomNode1 = linkedClone.clone04(linked);
         while (randomNode1 != null) {
             String value1 = randomNode1.next == null ? "null" : randomNode1.next.label + " ";
             String value2 = randomNode1.random == null ? "null" : randomNode1.random.label + " ";

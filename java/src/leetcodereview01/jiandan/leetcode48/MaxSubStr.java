@@ -59,9 +59,30 @@ public class MaxSubStr {
         return res;
     }
 
+    public int findMaxLength03(String str) {
+        // 最长的子串 使用动态规划实现
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int index = -1;
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (map.containsKey(ch)) {
+                index = Math.max(index, map.getOrDefault(ch, -1)); // 拿到最新的index
+            }
+            map.put(ch, i);
+            max = Math.max(max, i - index);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength01(str));
+        System.out.println(maxSubStr.findMaxLength03(str));
+
+
+        String str2 = "https://mdp-credit-api-overseas.immomo.com";
+        System.out.println(str2.contains("api.meowapp.world/v1/session"));
+
     }
 }

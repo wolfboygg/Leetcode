@@ -177,10 +177,36 @@ public class SearchTreeToLink {
         inOrder08(root.right);
     }
 
+    public TreeNode convert09(TreeNode root) {
+        // 转换为双向列表
+        if (root == null) {
+            return null;
+        }
+        // 双向列表 有序的，需要排序好的双向列表 // 所以要中序遍历一下
+        inOrder09(root);
+        return head;
+    }
+
+    public void inOrder09(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder09(root.left);
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder09(root.right);
+    }
+
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert08(searchTree);
+        TreeNode convert = searchTreeToLink.convert09(searchTree);
         TreeNode right = null;
         while (convert != null) {
             right = convert;

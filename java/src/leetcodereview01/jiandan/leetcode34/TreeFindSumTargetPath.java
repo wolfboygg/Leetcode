@@ -222,11 +222,34 @@ public class TreeFindSumTargetPath {
         arr.remove(arr.size() - 1);
     }
 
+    public boolean findPath08(TreeNode node, int target) {
+        if (node == null) {
+            return false;
+        }
+        backTracking08(node, target, new ArrayList<>());
+        return ret.size() != 0;
+    }
+
+    public void backTracking08(TreeNode node, int target, List<Integer> arr) {
+        if (node == null) {
+            return ;
+        }
+        target -= node.value;
+        arr.add(node.value);
+        if (node.left == null && node.right == null && target == 0) {
+            ret.add(new ArrayList<>(arr));
+        } else {
+            backTracking08(node.left, target, arr);
+            backTracking08(node.right, target, arr);
+        }
+        arr.remove(arr.size() -1);
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath07(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath08(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

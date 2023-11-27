@@ -207,8 +207,37 @@ public class VerifySequenceOfBST {
         return realVerify06(arr, start, rightIndex - 1) && realVerify06(arr, rightIndex, end-1);
     }
 
+    public boolean verify07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        // 进行拆分进行处理
+        return realVerify07(arr, 0, arr.length - 1);
+    }
+
+    public boolean realVerify07(int[] arr, int start, int end) {
+        // 左右子树进行检测
+        if (start >= end) {
+            return true;
+        }
+        int root = arr[end];
+        int rightIndex = 0;
+        for(int i = start; i < end; i++) {
+          if (arr[i] > root) {
+              rightIndex = i;
+              break;
+          }
+        }
+        for(int i = rightIndex; i <= end; i++) {
+          if (arr[i] < root) {
+              return false;
+          }
+        }
+        return realVerify07(arr, start, rightIndex - 1) && realVerify07(arr, rightIndex, end - 1);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 2};
-        System.out.println(new VerifySequenceOfBST().verify06(arr));
+        System.out.println(new VerifySequenceOfBST().verify07(arr));
     }
 }

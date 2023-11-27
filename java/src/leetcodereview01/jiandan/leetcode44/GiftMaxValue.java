@@ -129,6 +129,37 @@ public class GiftMaxValue {
         return help[row-1][column-1];
     }
 
+    // 礼物的最大价值 通过辅助的数组进行实现
+    public int getMaxValue07(int[][] arr) {
+        int colum = arr.length;
+        int row = arr[0].length; // 列
+        int[][] help = new int[colum][row];
+        for (int i = 0; i < colum; i++) {
+            for(int j = 0; j < row; j++) {
+                if (i > 0) help[i][j] = Math.max(help[i-1][j], help[i][j]);
+                if (j > 0) help[i][j] = Math.max(help[i][j-1], help[i][j]);
+                help[i][j] += arr[i][j];
+            }
+        }
+        return help[colum -1][row -1];
+    }
+
+    // 注意的是，这里需要处理和原来的数组的比较，因为都是正数，所以只要保证当前的是最大值，那么+上当前价值一定是最大值
+    public int getMaxValue08(int[][] arr) {
+        int column = arr.length;
+        int row = arr[0].length;
+        int[][] help = new int[column][row];
+        for (int i = 0; i < column; i++) {
+            for(int j = 0; j < row; j++) {
+              if (i > 0) help[i][j] = Math.max(help[i-1][j], help[i][j]);
+              if (j > 0) help[i][j] = Math.max(help[i][j - 1], help[i][j]);
+              help[i][j] += arr[i][j];
+            }
+        }
+        return help[column - 1][row - 1];
+    }
+
+
     public static void main(String[] args) {
         int[][] arr = {
                 {1, 3, 1},
@@ -136,7 +167,7 @@ public class GiftMaxValue {
                 {4, 2, 1}
         };
         GiftMaxValue giftMaxValue = new GiftMaxValue();
-        System.out.println(giftMaxValue.getMaxValue06(arr));
+        System.out.println(giftMaxValue.getMaxValue08(arr));
     }
 
 }
