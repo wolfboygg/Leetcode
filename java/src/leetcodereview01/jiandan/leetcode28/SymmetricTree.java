@@ -81,11 +81,42 @@ public class SymmetricTree {
         return head1.value == head2.value && check04(head1.left, head2.right) && check04(head1.right, head2.left);
     }
 
+    public boolean isSymmetric01(TreeNode node) {
+        return check05(node, node);
+    }
+
+    public boolean check05(TreeNode head1, TreeNode head2) {
+        if (head1 == null && head2 == null) {
+            return true;
+        }
+        if (head1 == null || head2 == null) {
+            return false;
+        }
+        return head1.value == head2.value && check05(head1.left, head2.right) && check05(head1.right, head2.left);
+    }
+
+    public boolean isSymmetric06(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return check06(root, root);
+    }
+
+    public boolean check06(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        return root1.value == root2.value && check06(root1.left, root2.right) && check06(root1.right, root2.left);
+    }
+
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric(tree));
+        System.out.println(symmetricTree.isSymmetric06(tree));
     }
 
 }

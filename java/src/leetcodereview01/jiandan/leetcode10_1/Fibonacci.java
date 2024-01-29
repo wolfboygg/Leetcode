@@ -88,9 +88,46 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH05(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int temp01 = 0;
+        int temp02 = 1;
+        int value = 1;
+        for (int i = 2; i <= n; i++) {
+              value = temp01 + temp02;
+              temp01 = temp02;
+              temp02 = value;
+              System.out.print(value + "  ");
+        }
+        return value;
+    }
+
+    public int getFibonacciByGH06(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int temp1 = 0;
+        int temp2 = 1;
+        int value = 0;
+        for (int i = 2; i <= n; i++) {
+            value = temp1 + temp2;
+            temp1 = temp2;
+            temp2 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH04(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH06(6);
         System.out.println(fibonacciValue);
     }
 }

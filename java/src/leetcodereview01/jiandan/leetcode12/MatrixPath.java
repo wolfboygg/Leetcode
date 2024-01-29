@@ -2,14 +2,124 @@ package leetcodereview01.jiandan.leetcode12;
 
 public class MatrixPath {
 
+    public boolean findPath02(char[][] matrix, String path) {
+        char[] pathArr = path.toCharArray();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int[][] next = new int[][] {
+                {-1, 0}, // 左
+                {0, -1}, // 上
+                {1, 0}, // 右
+                {0, 1} // 下
+        };
+        boolean[][] marked = new boolean[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                return backTracking02(matrix, pathArr, 0, next, marked, i, j);
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking02(char[][] matrix, char[] pathArr, int pathLength, int[][] next, boolean[][] marked, int i, int j) {
+        if (pathArr.length == pathLength) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != pathArr[pathLength]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking02(matrix, pathArr, pathLength + 1, next, marked, i + ints[0], j+ints[1])) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+    public boolean findPath03(char[][] matrix, String str) {
+        // 怎么遍历就是通过挨个进行查找
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        char[] arr = str.toCharArray();
+        int[][] next = {{-1, 0},{0, -1},{1, 0},{0, 1}};
+        boolean[][] marked = new boolean[row][column];
+        // 通过每一个元素进行遍历找到路径
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking03(matrix, arr, next, marked, 0, i, j)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking03(char[][] matrix, char[] arr, int[][] next, boolean[][] marked, int pathLength, int i, int j) {
+        if (pathLength == arr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >=column || marked[i][j] || matrix[i][j] != arr[pathLength]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking03(matrix, arr, next, marked, pathLength + 1, i + ints[0], j + ints[1])) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+
+    public boolean findPath04(char[][] matrix, String str) {
+        // 排查矩阵中是否存在string
+        char[] chars = str.toCharArray();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int[][] next = {{-1, 0},{0, -1},{1, 0},{0, 1}};
+        boolean[][] marked = new boolean[row][column];
+        for (int i = 0; i < row; i++) {
+            for(int j = 0; j < column; j++) {
+                if (backTracking04(matrix, next, marked, chars, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking04(char[][] matrix, int[][] next, boolean[][] marked, char[] arr, int i, int j, int index) {
+        if (index == arr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != arr[index]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking04(matrix, next, marked, arr, i + ints[0], j + ints[1], index + 1)) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCED";
+        String str = "ABCCEF";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath01(charMatrix, str);
+        boolean isExit = matrixPath.findPath04(charMatrix, str);
         System.out.println(isExit);
     }
 

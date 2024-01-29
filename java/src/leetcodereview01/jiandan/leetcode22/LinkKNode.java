@@ -65,6 +65,34 @@ public class LinkKNode {
         return P2;
     }
 
+    public Node getTailKNode05(Node head, int k) {
+        // 两个指针进行处理
+        Node P1 = head;
+        Node P2 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        return P2;
+    }
+
+    public Node getTailKNode06(Node root, int k) {
+        // 获取链表倒数第K个元素
+        Node P1 = root;
+        Node P2 = root;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        return P2;
+    }
+
     public static void main(String[] args) {
         LinkKNode linkKNode = new LinkKNode();
         Node node01 = new Node(1);
@@ -76,7 +104,7 @@ public class LinkKNode {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        Node node = linkKNode.getTailKNode04(node01, 4);
+        Node node = linkKNode.getTailKNode06(node01, 4);
         System.out.println(node.value);
     }
 }

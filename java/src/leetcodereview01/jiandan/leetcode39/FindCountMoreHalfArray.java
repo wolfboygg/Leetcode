@@ -4,10 +4,59 @@ import java.util.*;
 
 public class FindCountMoreHalfArray {
 
+    public void findByHashMap04(int[] arr) {
+        // 通过HashMap进行处理
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (countMap.containsKey(arr[i])) {
+                countMap.put(arr[i], countMap.get(arr[i]) + 1);
+            } else {
+                countMap.put(arr[i], 1);
+            }
+        }
+        // 然后遍历找到最大的即可
+        Set<Map.Entry<Integer, Integer>> entries = countMap.entrySet();
+        Iterator<Map.Entry<Integer, Integer>> iterator = entries.iterator();
+        Map.Entry<Integer, Integer> max = null;
+        while(iterator.hasNext()) {
+            Map.Entry<Integer, Integer> next = iterator.next();
+            if (max == null) {
+                max = next;
+            } else {
+                if (max.getValue() < next.getValue()) {
+                    max = next;
+                }
+            }
+        }
+        System.out.println(max.getKey());
+    }
+
+    public void findByHashMap05(int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        System.out.println(map.toString());
+        Set<Map.Entry<Integer, Integer>> entries = map.entrySet();
+        Iterator<Map.Entry<Integer, Integer>> iterator = entries.iterator();
+        Map.Entry<Integer, Integer> max = null;
+        while(iterator.hasNext()) {
+            Map.Entry<Integer, Integer> next = iterator.next();
+            if (max == null || next.getValue() > max.getValue()) {
+                max = next;
+            }
+        }
+        System.out.println(max.getKey());
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         FindCountMoreHalfArray findCountMoreHalfArray = new FindCountMoreHalfArray();
-        findCountMoreHalfArray.findByHashMap03(arr);
+        findCountMoreHalfArray.findByHashMap05(arr);
     }
 
     // 使用HashMap进行统计

@@ -45,9 +45,73 @@ public class DoubleNumPower {
         return res;
     }
 
+    public double power02(int base, int target) {
+        // 求base的的target次方
+        boolean isNegative = target < 0;
+        double result = pow02(base, Math.abs(target));
+        return isNegative ? 1/ result : result;
+    }
+    public double pow02(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = pow02(base, target / 2);
+        value *= value;
+        if (target / 2 != 0) {
+            value = value * base;
+        }
+        return value;
+    }
+
+    public double power03(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = pow03(base, Math.abs(target));
+        return isNegative ? 1 / value : value;
+    }
+
+    public double pow03(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = pow03(base, target / 2);
+        value *= value;
+        if (target / 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
+    public double power04(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = realPower04(base, target);
+        return isNegative ? 1.0 / value : value;
+    }
+
+    public double realPower04(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower04(base, target / 2);
+        value *= value;
+        if (target % 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power01(2, 3));
+        System.out.println(doubleNumPower.power04(2, 3));
         ;
     }
 }

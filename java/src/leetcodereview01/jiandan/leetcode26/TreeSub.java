@@ -1,5 +1,6 @@
 package leetcodereview01.jiandan.leetcode26;
 
+
 public class TreeSub {
 
     public static class TreeNode {
@@ -53,6 +54,92 @@ public class TreeSub {
         return node.value == root.value && isSubTreeWithRoot01(root.left, node.left) && isSubTreeWithRoot01(root.right, node.right);
     }
 
+    public boolean isSub002(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubTreeWithRoot02(root, childRoot);
+    }
+
+    private boolean isSubTreeWithRoot02(TreeNode root, TreeNode childRoot) {
+        if (childRoot == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        return root.value == childRoot.value && isSubTreeWithRoot02(root.left, childRoot.left) && isSubTreeWithRoot02(root.right, childRoot.right);
+    }
+
+    public boolean isSub03(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubtreeWithRoot03(root, childRoot);
+    }
+
+    private boolean isSubtreeWithRoot03(TreeNode root, TreeNode childRoot) {
+        if (root == null) {
+            return false;
+        }
+        if (childRoot == null) {
+            return true;
+        }
+        return root.value == childRoot.value && isSubtreeWithRoot03(root.left, childRoot.left) && isSubtreeWithRoot03(root.right, childRoot.right);
+    }
+
+    public boolean isSub04(TreeNode root, TreeNode childRoot) {
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return isSubtreeWithRoot04(root, childRoot);
+    }
+
+    private boolean isSubtreeWithRoot04(TreeNode root, TreeNode childRoot) {
+        if (root == null) {
+            return false;
+        }
+        if (childRoot == null) {
+            return true;
+        }
+        return root.value == childRoot.value && isSubtreeWithRoot04(root.left, childRoot.left) && isSubtreeWithRoot04(root.right, childRoot.right);
+    }
+
+    public boolean isSub05(TreeNode root, TreeNode node) {
+        if (root == null || node == null) {
+            return false;
+        }
+        return isSubtreeWithRoot05(root, node) || isSub05(root.left, node) || isSub05(root.right, node);
+    }
+
+    private boolean isSubtreeWithRoot05(TreeNode root, TreeNode node) {
+        if (root == null) {
+            return false;
+        }
+        if (node == null){
+            return true;
+        }
+        return root.value == node.value && isSubtreeWithRoot05(root.left, node.left) && isSubtreeWithRoot05(root.right, node.right);
+    }
+
+    public boolean isSub06(TreeNode root1, TreeNode root2) {
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        return isSubtreeWIthRoot06(root1, root2) || isSub(root1.left, root2) || isSub(root1.right, root2);
+    }
+
+    private boolean isSubtreeWIthRoot06(TreeNode root1, TreeNode root2) {
+        if (root1 == null) {
+            return false;
+        }
+        if (root2 == null) {
+            return true;
+        }
+        return root1.value == root2.value && isSubtreeWithRoot05(root1.left, root2.left) && isSubtreeWithRoot05(root1.right, root2.right);
+    }
+
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
         TreeNode node2 = new TreeNode(8);
@@ -70,13 +157,13 @@ public class TreeSub {
         node3.right = node7;
 
         TreeNode node8 = new TreeNode(8);
-        TreeNode node9 = new TreeNode(9);
-        TreeNode node10 = new TreeNode(3);
+        TreeNode node9 = new TreeNode(8);
+        TreeNode node10 = new TreeNode(7);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub01(node1, node8));
+        System.out.println(new TreeSub().isSub06(node1, node8));
 
     }
 }

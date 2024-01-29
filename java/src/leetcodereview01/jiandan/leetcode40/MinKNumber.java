@@ -1,5 +1,7 @@
 package leetcodereview01.jiandan.leetcode40;
 
+import jdk.nashorn.internal.IntDeque;
+
 import java.util.*;
 
 public class MinKNumber {
@@ -102,12 +104,76 @@ public class MinKNumber {
         return list;
     }
 
+    public List<Integer> findMinKNumByDump05(int[] arr, int k) {
+        // 找出最小的k个数，需要使用大头堆来进行处理，如果比大就出
+        // 先放入K个数
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1- o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (arr[i] < queue.peek()) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        // 最后输出
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            list.add(queue.poll());
+        }
+        return list;
+    }
+
+    public List<Integer> findMinKNumByDump06(int[] arr, int k) {
+        // 找到最小的k个数，使用大头堆进行实现，如果比头元素大就出堆
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        // 然后在遍历最后的元素 PriorityQueue
+        for (int i = k; i < arr.length; i++) {
+            if (queue.peek() > arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        // 然后输出
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            list.add(queue.poll());
+        }
+        return list;
+    }
+
+    // 找出最小的k个数
+    public List<Integer> findMinKNumByDump07(int[] arr, int target) {
+        // 最小的k个数，使用大头堆进行实现
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for(int i = 0; i < target; i++) {
+          queue.offer(arr[i]);
+        }
+        for (int i = target; i < arr.length; i++) {
+            Integer peek = queue.peek();
+            if (peek > arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            Integer poll = queue.poll();
+            list.add(poll);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 1, 6, 2, 7, 3, 8};
         MinKNumber minKNumber = new MinKNumber();
         int[] num = minKNumber.findMinKNum(arr, 4);
         System.out.println(Arrays.toString(num));
-        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump04(arr, 4);
+        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump07(arr, 4);
         System.out.println(minKNumByDump.toString());
 //        minKNumber.findMinKNumberByDump03(arr, 4);
     }

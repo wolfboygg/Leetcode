@@ -46,12 +46,40 @@ public class FindFirstCharInString {
         }
     }
 
+    public void findFirstChar04(String str) {
+        char[] chars = str.toCharArray();
+        int[] valueArr = new int[128];
+        for (int i = 0; i < chars.length; i++) {
+            valueArr[chars[i]]++;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (valueArr[chars[i]] == 1) {
+                System.out.println(chars[i]);
+                break;
+            }
+        }
+    }
+
+    public void findFirstChar05(String str) {
+        // 使用128数组进行存储
+        int[] count = new int[128];
+        for (int i = 0; i < str.length(); i++) {
+            count[str.charAt(i)]++;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (count[str.charAt(i)] == 1) {
+                System.out.println(str.charAt(i));
+                break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
         char c = findFirstCharInString.find(str);
         System.out.println(c);
-        findFirstCharInString.findFirstChar03(str);
+        findFirstCharInString.findFirstChar05(str);
     }
 
     private char find(String str) {

@@ -47,11 +47,55 @@ public class SearchTreeKNode {
         dfs01(node.left);
     }
 
+    public void dfs02(TreeNode node) {
+        // 二叉树树的第K个节点，就是二叉树中序遍历的倒数第K个节点
+        if (node == null) {
+            return;
+        }
+        if (k == 0) {
+            return;
+        }
+        dfs02(node.right); // 倒数所以要先遍历右
+        if (--k == 0) {
+            result = node.value;
+        }
+        dfs02(node.left);
+    }
+
+    // 搜索二叉树的第K大节点，那么就是中序列遍历的倒数第K大节点
+    public void dfs03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (k == 0) {
+            return;
+        }
+        // 中序遍历倒着来
+        dfs03(root.right);
+        k--;
+        if (k == 0) {
+            result = root.value;
+        }
+        dfs03(root.left);
+    }
+
+    // 二叉搜索树第K大的节点 可以等同于后续遍历的k个节点
+    public void dfs04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs04(root.right);
+        if (--k == 0) {
+            result = root.value;
+        }
+        dfs04(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs01(tree);
+        searchTreeKNode.dfs04(tree);
         System.out.println(searchTreeKNode.result);
     }
 

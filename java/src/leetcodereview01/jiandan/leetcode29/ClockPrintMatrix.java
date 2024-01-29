@@ -161,6 +161,81 @@ public class ClockPrintMatrix {
        return list;
     }
 
+    public List<Integer> printMatrix05(int[][] matrix) {
+        // 通过左上右下来控制打印完成
+        List<Integer> ret = new ArrayList<>();
+        int row = matrix.length - 1;
+        int column = matrix[0].length - 1;
+        int left = 0;
+        int top = 0;
+        int right = column;
+        int bottom = row;
+        while(left <= right && top <= bottom) {
+            // 保证打印到奇数行列
+            // 上
+            for (int i = left; i <= right; i++) {
+                  ret.add(matrix[top][i]);
+            }
+            // 右
+            for (int i = top + 1; i <= bottom; i++) {
+                ret.add(matrix[i][right]);
+            }
+            // 下
+            if (top < bottom) {
+                for(int i = right - 1; i >= left; i--) {
+                    ret.add(matrix[bottom][i]);
+                }
+            }
+            if (left < right) {
+                for(int i = bottom - 1; i > top; i--) {
+                    ret.add(matrix[i][left]);
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return ret;
+    }
+
+    public List<Integer> printMatrix06(int[][] matrix) {
+        List<Integer> ret = new ArrayList<>();
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int left = 0;
+        int top = 0;
+        int right = column - 1;
+        int bottom = row -1;
+        while(left <= right && top <= bottom) {
+            // 上
+            for(int i = left; i <= right; i++) {
+                ret.add(matrix[top][i]);
+            }
+            // 右
+            for(int i = top + 1; i <= bottom; i++) {
+                ret.add(matrix[i][right]);
+            }
+            // 下  避免相等的时候再打印一遍
+            if (left < right) {
+                for(int i = right - 1; i >= left; i--) {
+                    ret.add(matrix[bottom][i]);
+                }
+            }
+            // 左
+            if (top < bottom) {
+                for(int i = bottom - 1; i > top; i--) {
+                    ret.add(matrix[i][left]);
+                }
+            }
+            top++;
+            bottom--;
+            left++;
+            right--;
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = {
                 {1, 2, 3, 4},
@@ -169,6 +244,6 @@ public class ClockPrintMatrix {
                 {13, 14, 15, 16},
         };
         ClockPrintMatrix clockPrintMatrix = new ClockPrintMatrix();
-        System.out.println(clockPrintMatrix.printMatrix04(matrix));
+        System.out.println(clockPrintMatrix.printMatrix06(matrix));
     }
 }

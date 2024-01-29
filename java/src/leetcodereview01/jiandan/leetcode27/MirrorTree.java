@@ -85,12 +85,34 @@ public class MirrorTree {
         return root;
     }
 
+    public TreeNode mirrorTree05(TreeNode head) {
+        if (head == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree05(head.left);
+        TreeNode right =  mirrorTree05(head.right);
+        head.left = right;
+        head.right = left;
+        return head;
+    }
+
+    public TreeNode mirrorTree06(TreeNode head) {
+        if (head == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree06(head.left);
+        TreeNode right = mirrorTree06(head.right);
+        head.left = right;
+        head.right = left;
+        return head;
+    }
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree04(tree);
+        mirrorTree.mirrorTree06(tree);
         mirrorTree.traversalTree(tree);
     }
 

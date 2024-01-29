@@ -1,5 +1,6 @@
 package leetcodereview01.jiandan.leetcode45;
 
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -49,9 +50,24 @@ public class PrintMinNumber {
         System.out.println(ret);
     }
 
+    // 主要思路就是通过比较进行排序
+    public void printMin02(int[] arr) {
+        // 转换为String 数组
+        String[] num = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            num[i] = arr[i] + "";
+        }
+        Arrays.sort(num, (o1, o2) -> (o1 + o2).compareTo(o2+ o1));
+        StringBuilder sb = new StringBuilder();
+        for (String s : num) {
+            sb.append(s);
+        }
+        System.out.println(sb.toString());
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {3, 32, 321};
-        new PrintMinNumber().printMin01(arr);
+        new PrintMinNumber().printMin02(arr);
     }
 }

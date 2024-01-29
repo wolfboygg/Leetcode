@@ -115,6 +115,64 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode05(Node head, Node deleteNode) {
+        if (deleteNode.next != null) {
+            // 用后面一个覆盖掉自己
+            Node next = deleteNode.next;
+            deleteNode.next = next.next;
+            deleteNode.value = next.value;
+        } else {
+            if (head == deleteNode) {
+                head = null;
+            } else {
+                // 找到前一个节点处理
+                Node temp = head;
+                while(temp.next != deleteNode) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+    }
+
+    public void deleteNode06(Node head, Node deleteNode) {
+        if (deleteNode.next != null) {
+            // 进行覆盖处理
+            Node next = deleteNode.next;
+            deleteNode.next = next.next;
+            deleteNode.value = next.value;
+        } else {
+            if (head == deleteNode) {
+                head = null;
+            } else {
+                // 找到目标节点进行处理
+                Node temp = head;
+                while(temp.next != deleteNode) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+    }
+
+    public void deleteNode07(Node head, Node delete) {
+        if (delete.next != null) {
+            // 进行覆盖
+            Node next = delete.next;
+            delete.value = next.value;
+            delete.next = next.next;
+        } else {
+            if (head == delete) {
+                head = null;
+            } else {
+                Node temp = head;
+                while(temp.next != delete) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -122,7 +180,7 @@ public class DeleteNode {
         Node head = deleteNode.createLinked();
         Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode04(head, tobeDelete);
+        deleteNode.deleteNode07(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

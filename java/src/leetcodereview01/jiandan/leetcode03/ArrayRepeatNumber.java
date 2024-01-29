@@ -94,10 +94,76 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber05(int[] arr) {
+        // 找到数组中重复的数字，就是通过将对应的数字放到对应的位置，否则就进行交换
+        for (int i = 0; i < arr.length; i++) {
+            while(i != arr[i]) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[i];
+                    arr[i] = arr[arr[i]];
+                    arr[temp] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int findRepeatNumber06(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            while(i != arr[i]) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[arr[i]];
+                    arr[arr[i]] = arr[i];
+                    arr[i] = temp;
+//                    int temp = arr[i];
+//                    arr[i] = arr[temp];
+//                    arr[temp] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int findRepeatNumber07(int[] arr) {
+        // 找到重复的数字就是将对应的数字放到index位置
+        for (int i = 0; i < arr.length; i++) {
+            while(i != arr[i]) {
+                if (arr[i] == arr[arr[i]]) {
+                    return arr[i];
+                } else {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int findRepeatNumber08(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+              while (arr[i] != i) {
+                  if (arr[i] != arr[arr[i]]) {
+                      int temp = arr[arr[i]];
+                      arr[arr[i]] = arr[i];
+                      arr[i] = temp;
+                  } else {
+                      return arr[i];
+                  }
+              }
+        }
+        return -1;
+    }
+
+
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber04(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber08(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {
