@@ -125,9 +125,26 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH07(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        int temp01 = 1;
+        int temp02 = 1;
+        int value = 0;
+        for(int i = 3; i <= n; i++) {
+          value = temp01 + temp02;
+          temp01 = temp02;
+          temp02 = value;
+        }
+        return value;
+    }
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH06(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH07(6);
         System.out.println(fibonacciValue);
     }
 }

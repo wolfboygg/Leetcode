@@ -107,12 +107,24 @@ public class MirrorTree {
         return head;
     }
 
+    public TreeNode mirrorTree07(TreeNode root) {
+        // 镜像二叉树 就是左右进行交换
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree(root.left);
+        TreeNode right = mirrorTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree06(tree);
+        mirrorTree.mirrorTree07(tree);
         mirrorTree.traversalTree(tree);
     }
 

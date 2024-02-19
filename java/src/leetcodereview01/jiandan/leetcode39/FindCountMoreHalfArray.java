@@ -53,10 +53,32 @@ public class FindCountMoreHalfArray {
         System.out.println(max.getKey());
     }
 
+    public void findByHashMap06(int[] arr) {
+        // 统计数字出现的次数
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+        // 遍历找到最大的即可
+        Set<Integer> integers = map.keySet();
+        Iterator<Integer> iterator = integers.iterator();
+        Integer max = -1;
+        while (iterator.hasNext()) {
+            Integer next = iterator.next();
+            Integer integer = map.get(next);
+            max = max > integer ? max : next;
+        }
+        System.out.println(max);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         FindCountMoreHalfArray findCountMoreHalfArray = new FindCountMoreHalfArray();
-        findCountMoreHalfArray.findByHashMap05(arr);
+        findCountMoreHalfArray.findByHashMap06(arr);
     }
 
     // 使用HashMap进行统计

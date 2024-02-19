@@ -140,6 +140,23 @@ public class TailToHeadLink {
         }
     }
 
+    public void printLinkByHead07(Node head) {
+        // 从尾到头打印节点 使用头插法
+        Node node = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = node.next;
+            node.next = head;
+            head = next;
+        }
+        Node temp = node.next;
+        while(temp != null) {
+            System.out.println(temp.value);
+            temp = temp.next;
+        }
+
+    }
+
     public static void main(String[] args) {
         TailToHeadLink tailToHeadLink = new TailToHeadLink();
         TailToHeadLink.Node node01 = new TailToHeadLink.Node(1);
@@ -151,6 +168,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByHead06(node01);
+        tailToHeadLink.printLinkByHead07(node01);
     }
 }

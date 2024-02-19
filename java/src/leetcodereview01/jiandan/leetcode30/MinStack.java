@@ -85,13 +85,37 @@ public class MinStack {
         return minorStack.peek();
     }
 
+
+    public void push05(int value) {
+        // 包含最小数的栈 就是要和辅助栈中的头部元素进行比较
+        majorStack.push(value);
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            if (value > minorStack.peek()) {
+                minorStack.push(minorStack.peek());
+            } else {
+                minorStack.push(value);
+            }
+        }
+    }
+
+    public int pop05() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int min05() {
+        return minorStack.peek();
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push04(-2);
-        minStack.push04(0);
-        minStack.push04(-3);
-        System.out.println(minStack.min04());
-        minStack.pop04();
-        System.out.println(minStack.min04());
+        minStack.push05(-2);
+        minStack.push05(0);
+        minStack.push05(-3);
+        System.out.println(minStack.min05());
+        minStack.pop05();
+        System.out.println(minStack.min05());
     }
 }

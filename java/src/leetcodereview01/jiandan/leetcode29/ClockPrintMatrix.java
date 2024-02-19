@@ -236,14 +236,53 @@ public class ClockPrintMatrix {
         return ret;
     }
 
+    public List<Integer> printMatrix07(int[][] matrix) {
+        // 顺时针打印矩阵 判断关键是否相等  在打印下和左是需要特殊处理，防止重复打印
+        int row = matrix.length - 1;
+        int column = matrix[0].length - 1;
+        int left = 0;
+        int top = 0;
+        int right = column;
+        int bottom = row;
+        List<Integer> value = new ArrayList<>();
+        while (left <= right && top <= bottom) { // 奇数行
+            // 打印上
+            for(int i = left; i <= right; i++) {
+                value.add(matrix[top][i]);
+            }
+            // 右
+            for(int i = top + 1; i <= bottom; i++) {
+              value.add(matrix[i][right]);
+            }
+            // 下
+            if (top != bottom) {
+                for(int i = right - 1; i >= left; i--) {
+                    value.add(matrix[bottom][i]);
+                }
+            }
+            // 左
+            if (left != right) {
+                for(int i = bottom - 1; i >= top + 1; i--) {
+                  value.add(matrix[i][left]);
+                }
+            }
+
+            left++;
+            top++;
+            right--;
+            bottom--;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = {
                 {1, 2, 3, 4},
-//                {5, 6, 7, 8},
+                {5, 6, 7, 8},
                 {9, 10, 11, 12},
                 {13, 14, 15, 16},
         };
         ClockPrintMatrix clockPrintMatrix = new ClockPrintMatrix();
-        System.out.println(clockPrintMatrix.printMatrix06(matrix));
+        System.out.println(clockPrintMatrix.printMatrix07(matrix));
     }
 }

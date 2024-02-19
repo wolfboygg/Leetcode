@@ -93,6 +93,22 @@ public class LinkKNode {
         return P2;
     }
 
+    public Node getTailKNode07(Node head, int k) {
+        // 获取链表倒数第K个节点
+        // 使用双指针进行处理 一个指针先走K个步骤，第二个指针和第一个指针 同时走，最后第二个指针的停止位置就是倒数第K个位置
+        Node P1 = head;
+        Node P2 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        return P2;
+        // 1 2 3 4 5  // 倒数4
+    }
+
     public static void main(String[] args) {
         LinkKNode linkKNode = new LinkKNode();
         Node node01 = new Node(1);
@@ -104,7 +120,7 @@ public class LinkKNode {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        Node node = linkKNode.getTailKNode06(node01, 4);
+        Node node = linkKNode.getTailKNode07(node01, 2);
         System.out.println(node.value);
     }
 }

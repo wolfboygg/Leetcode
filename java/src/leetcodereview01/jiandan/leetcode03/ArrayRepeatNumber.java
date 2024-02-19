@@ -159,11 +159,28 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber09(int[] arr) {
+        // 找到重复的数字
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i) {
+                // change
+                if (arr[i] != arr[arr[i]]) {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber08(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber09(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

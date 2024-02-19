@@ -131,11 +131,28 @@ public class RotateArray {
          return arr[low];
     }
 
+    public int getMinValueByTX07(int [] arr) {
+        // [3,4,5,1,2]  这就是一个旋转数组 使用二分查找的方式寻找最小值
+        int low = 0;
+        int height = arr.length - 1;
+        while(low < height) { // 这里不能相等，相等就会进入死循环
+            int middle = low + (height - low) / 2;
+            if (arr[middle] > arr[height]) {
+                // 在右边
+                low = middle + 1;
+            } else {
+                // 在左边
+                height = middle;
+            }
+        }
+        return arr[low]; // 最小值落在low上
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2, 3};
-        int[] arr2 = {3, 4, 5, 1, 2};
+        int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTX06(arr);
+        int i = rotateArray.getMinValueByTX07(arr2);
         System.out.println("最小值为:" + i);
     }
 }

@@ -58,8 +58,19 @@ public class Number1Count {
         return count;
     }
 
+    public int getNumberOf1Count06(int n) {
+        // 1010
+        // 1001
+        int count = 0;
+        while(n > 0) {
+            n &= n-1;
+            count ++;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         Number1Count numIn1Count = new Number1Count();
-        System.out.println(numIn1Count.getNumberOf1Count05(10));
+        System.out.println(numIn1Count.getNumberOf1Count06(10));
     }
 }

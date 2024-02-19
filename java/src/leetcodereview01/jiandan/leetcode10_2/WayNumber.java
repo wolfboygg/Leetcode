@@ -111,6 +111,24 @@ public class WayNumber {
         return value;
     }
 
+    public int getWayNumber07(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int temp01 = 1;
+        int temp02 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = temp01 + temp02;
+            temp01 = temp02;
+            temp02 = value;
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();

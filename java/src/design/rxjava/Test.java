@@ -10,9 +10,9 @@ public class Test {
         class Person {}
         class Boy extends Person {}
 
-        List<? extends Person> list = new ArrayList<Object>();
+//        List<? extends Person> list = new ArrayList<Object>();
 //        list.add(new Boy());
-        Object object = list.get(0);
+//        Object object = list.get(0);
 
         List<? super Person> list2 = new ArrayList<Object>();
         list2.add(new Boy());

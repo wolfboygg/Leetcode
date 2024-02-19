@@ -184,10 +184,32 @@ public class ReplaceSpace {
         System.out.println(sb.toString());
     }
 
+    public void replaceSpace09(StringBuilder sb) {
+        int P1 = sb.length() - 1;
+        for(int i = 0; i <= P1; i++) {
+          if (sb.charAt(i) == ' ') {
+              sb.append("  "); // 只需要加两个空格，因为已经有一个空格了
+          }
+        }
+        System.out.println(sb.toString());
+        int P2 = sb.length() - 1;
+        while(P1 >= 0) {
+            if (sb.charAt(P1)== ' ') {
+                sb.setCharAt(P2--, '0');
+                sb.setCharAt(P2--, '2');
+                sb.setCharAt(P2--, '%');
+            } else {
+                sb.setCharAt(P2--, sb.charAt(P1));
+            }
+            P1--;
+        }
+        System.out.println(sb.toString());
+    }
+
 
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder("We are happy.");
         ReplaceSpace replaceSpace = new ReplaceSpace();
-        replaceSpace.replaceSpace08(sb);
+        replaceSpace.replaceSpace09(sb);
     }
 }

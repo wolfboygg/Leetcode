@@ -17,9 +17,18 @@ public class PrintMaxN {
         }
     }
 
+    public void print03(int n) {
+        // 打印 0- n最大n位数
+        // 求最大n位数的最大值 然后在进行求解
+        int maxValue = (int) (Math.pow(10, n) - 1);
+        for(int i = 0; i <= maxValue; i++) {
+          System.out.println(i);
+        }
+    }
+
     public static void main(String[] args) {
         PrintMaxN printMaxN = new PrintMaxN();
-        printMaxN.print02(3);
+        printMaxN.print03(3);
     }
 
     private void printAllNumber(int n) {

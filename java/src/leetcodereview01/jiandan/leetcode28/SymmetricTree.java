@@ -112,11 +112,30 @@ public class SymmetricTree {
         return root1.value == root2.value && check06(root1.left, root2.right) && check06(root1.right, root2.left);
     }
 
+    // 判断是否一颗对称的二叉树，就是使用两个相同的输进行左右比较
+    public boolean isSymmetric07(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return check07(root, root);
+    }
+
+    public boolean check07(TreeNode left, TreeNode right) {
+        // 判断是否对称就是递归进行比较
+        if (left == null && right == null) { // 都为null肯定对称 其中一个为null则不对称
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        return left.value == right.value && check07(left.left, right.right) && check07(left.right, right.left);
+    }
+
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric06(tree));
+        System.out.println(symmetricTree.isSymmetric07(tree));
     }
 
 }

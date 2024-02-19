@@ -174,13 +174,34 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode08(Node head, Node target) {
+        // 删除链表节点 考虑删除的位置 如果是中间，那么覆盖，如果是尾部，需要找到前一个节点
+        if (target.next != null) {
+            // 表示是中间 直接覆盖即可
+            Node next = target.next;
+            target.value = next.value;
+            target.next = next.next;
+        } else {
+            if (head == target) {
+                head = null; // 这个不好 整理到中间节点类型即可
+            } else {
+                // 表示是尾节点 需要
+                Node pre = head;
+                while(pre.next != target) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
         Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode07(head, tobeDelete);
+        deleteNode.deleteNode08(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

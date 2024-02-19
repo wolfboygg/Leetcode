@@ -182,6 +182,24 @@ public class MatrixArrayFind {
         return false;
     }
 
+    public boolean findDestNumber10(int[][] matrix, int target) {
+        // 在二维数组中进行查找
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int i = column - 1;
+        int j = 0;
+        while(i >= 0 && j < row) {
+            if (matrix[i][j] > target) {
+                i--;
+            } else if (matrix[i][j] < target) {
+                j++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         MatrixArrayFind matrixArrayFind = new MatrixArrayFind();
         int[][] arr = {
@@ -191,7 +209,7 @@ public class MatrixArrayFind {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean destNumberExit = matrixArrayFind.findDestNumber09(arr, 22);
+        boolean destNumberExit = matrixArrayFind.findDestNumber10(arr, 25);
         if (destNumberExit) {
             System.out.println("存在");
         } else {
