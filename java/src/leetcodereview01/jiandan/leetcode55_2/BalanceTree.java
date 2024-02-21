@@ -96,6 +96,19 @@ public class BalanceTree {
         }
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    // 判断是否是平衡二叉树的主要点在于左右子树的差值是否为1
+    public int isBalanceTree06(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree06(root.left);
+        int rightDepth = isBalanceTree06(root.right);
+        if (Math.abs((leftDepth - rightDepth)) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();

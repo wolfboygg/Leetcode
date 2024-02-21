@@ -60,10 +60,41 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    // 输入: nums = [5,7,7,8,8,10], target = 8 输出: 2 在排序的数组中进行查找
+    // 还是通过二分查找的方式进行处理
+    public void count3(int[] arr, int target) {
+        // 通过二分查找，找到左右个一个
+        if (arr.length == 0) {
+            return;
+        }
+        int leftIndex = binaryFind03(arr, target, true);
+        int rightIndex = binaryFind03(arr, target, false) -1;
+        if (leftIndex < arr.length && rightIndex < arr.length && leftIndex != rightIndex) {
+            System.out.println(rightIndex - leftIndex + 1);
+        }
+    }
+
+    public int binaryFind03(int[] arr, int target, boolean low) {
+        // 二分查找
+        int targetIndex = -1;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left <= right) {
+            int middle = (right + left) / 2;
+            if (arr[middle] > target || (low && arr[middle] >= target)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count02(arr, 8);
+        sortArrayFindNumCount.count3(arr, 8);
     }
 
     private void count(int[] arr, int target) {

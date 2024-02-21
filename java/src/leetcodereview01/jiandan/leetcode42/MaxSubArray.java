@@ -73,12 +73,24 @@ public class MaxSubArray {
         System.out.println(max);
     }
 
+    public int findSum09(int[] arr) {
+        // 使用动态规划进行求解
+        int maxValue = arr[0];
+        int currentValue = 0;
+        for (int i = 1; i < arr.length; i++) {
+            currentValue = Math.max(currentValue + arr[i], arr[i]); // 如果还没有当前数大，那么就从当前数重新开始
+            maxValue = Math.max(maxValue, currentValue);
+        }
+        System.out.println(maxValue);
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum08(arr);
+        maxSubArray.findSum09(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);

@@ -39,10 +39,20 @@ public class LeftRotateString {
         System.out.println(Arrays.toString(chars));
     }
 
+    public void rotate04(String str, int n) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] chars = str.toCharArray();
+        reverse(chars, 0, n - 1);
+        reverse(chars, n, chars.length - 1);
+        reverse(chars, 0, chars.length - 1);
+        System.out.println(Arrays.toString(chars));
+    }
 
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate03(str, 2);
+        leftRotateString.rotate04(str, 2);
     }
 }

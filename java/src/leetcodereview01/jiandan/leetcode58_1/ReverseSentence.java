@@ -154,9 +154,40 @@ public class ReverseSentence {
         }
     }
 
+    // 旋转字符串 先单个单词进行旋转，最后再整体旋转
+    public void reverse06(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        int P1 = 0;
+        int P2 = 0;
+        char[] chars = str.toCharArray();
+        for (int i = 0; i <= chars.length; i++) {// 让指针指向最后一个字符
+            if (P2 == chars.length || chars[i] == ' ') {
+                reverseWord06(chars, P1, P2 - 1);
+                P1 = P2;
+            }
+            P2++;
+        }
+        // 整体进行翻转
+        reverseWord06(chars, 0, chars.length - 1);
+        System.out.println(Arrays.toString(chars));
+    }
+
+    public void reverseWord06(char[] chars, int start, int end) {
+        System.out.println("start:" + start + "->end:" + end);
+        while(start < end) {
+            char temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse05(str);
+        reverseSentence.reverse06(str);
     }
 }

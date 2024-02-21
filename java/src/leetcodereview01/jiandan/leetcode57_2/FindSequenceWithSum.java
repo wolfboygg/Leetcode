@@ -122,9 +122,39 @@ public class FindSequenceWithSum {
         return ret;
     }
 
+    // 和为S的连续正整数序列 同样方式还是使用双指针进行和的叠加
+    public List<List<Integer>> findSequence05(int target) {
+        // 从1 到 100  和为100
+        List<List<Integer>> ret = new ArrayList<>();
+        int P1 = 1; int P2 = 2;
+        int sum = 3;
+        while (P2 <= target) {
+            if (sum == target) {
+                List<Integer> list = new ArrayList<>();
+                for(int j = P1; j <= P2; j++) {
+                  list.add(j);
+                }
+                ret.add(list);
+                // 后序还需要往后走
+                sum-=P1;
+                P1++;
+                P2++;
+                sum+=P2;
+            } else if (sum < target) {
+                P2++;
+                sum += P2;
+            } else {
+               // 改变一下sum看看是否与target相等
+               sum-=P1;
+               P1++;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence04(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence05(100);
         System.out.println(sequence);
     }
 

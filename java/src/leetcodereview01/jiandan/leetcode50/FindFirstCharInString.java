@@ -74,12 +74,27 @@ public class FindFirstCharInString {
         }
     }
 
+    // 只出现1次的字符
+    public void findFirstChar06(String str) {
+        // 所有的字符一个128个 搞一个数字进行统计即可
+        int[] count = new int[128];
+        for (int i = 0; i < str.length(); i++) {
+            count[str.charAt(i)]++;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (count[str.charAt(i)] == 1) {
+                System.out.println(str.charAt(i));
+                break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
-        char c = findFirstCharInString.find(str);
-        System.out.println(c);
-        findFirstCharInString.findFirstChar05(str);
+//        char c = findFirstCharInString.find(str);
+//        System.out.println(c);
+        findFirstCharInString.findFirstChar06(str);
     }
 
     private char find(String str) {

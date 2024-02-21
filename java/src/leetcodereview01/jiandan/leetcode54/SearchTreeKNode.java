@@ -91,11 +91,24 @@ public class SearchTreeKNode {
         dfs04(root.left);
     }
 
+    // 二叉搜索数的第K大节点 (左边的比跟节点小 右边的比跟节点小)  通过后续遍历找到倒数第K个节点即可
+    public void dfs05(TreeNode root) {
+        // 后序遍历第K个节点
+        if (root == null) {
+            return;
+        }
+        dfs05(root.right); // 要倒着进行遍历
+        if (--k == 0) {
+            result = root.value;
+        }
+        dfs05(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs04(tree);
+        searchTreeKNode.dfs05(tree);
         System.out.println(searchTreeKNode.result);
     }
 
