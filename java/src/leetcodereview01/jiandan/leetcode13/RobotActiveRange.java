@@ -289,9 +289,52 @@ public class RobotActiveRange {
         }
     }
 
+    // 机器人的活动范围 机器人只能在到达的位置不能大于target
+    public void findPath08(int m, int n, int target) {
+        // 需要建立一个矩阵用来存储对应的value
+        int[][] matrix = new int[m][n];
+        int max = Math.max(m, n);
+        int[] tempValue = new int[max];
+        for (int i = 0; i < tempValue.length; i++) {
+            int temp = i;
+            while(temp > 0) {
+                tempValue[i] += temp % 10;
+                temp = temp / 10;
+            }
+        }
+        // 填充对应的matrix
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = tempValue[i] + tempValue[j];
+            }
+        }
+
+        int[][] next =  {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        this.row = m;
+        this.column = n;
+        boolean[][] mark = new boolean[m][n];
+        backTracking08(matrix, next, mark, 0, 0, target);
+        System.out.println(count);
+    }
+
+    public void backTracking08(int[][] matrix, int[][] next, boolean[][] mark, int i, int j, int target) {
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] > target) {
+            return;
+        }
+        count++;
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            backTracking08(matrix, next, mark, i+ints[0], j+ints[1], target);
+        }
+    }
 
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath06(3, 2, 2);
+        robotActiveRange.findPath08(3, 2, 2);
     }
 }

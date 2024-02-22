@@ -96,10 +96,24 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot05(TreeNode root, TreeNode left, TreeNode right) {
+        // 二叉搜索树找到公共祖先 左比跟小 右比跟大 所以可以根据这个特性进行处理
+        while(root != null) {
+            if (root.value > left.value && root.value > right.value) {
+                root = root.left;
+            } else if (root.value < left.value && root.value < right.value) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot04(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot05(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

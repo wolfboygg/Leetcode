@@ -111,15 +111,58 @@ public class MatrixPath {
         marked[i][j] = false;
         return false;
     }
+    // 采用回溯算法进行找到 判断当前字符串是否在网格中存在
+    public boolean findPath05(char[][] matrix, String str) {
+        // 找到左上右下进行判断 需要matrix每一个元素都需尝试
+        char[] chars = str.toCharArray();
+        int[][] next = {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        int row = matrix.length ;
+        int column = matrix[0].length ;
+        this.row = row;
+        this.column = column;
+        boolean[][] mark = new boolean[row][column]; // 这里有问题
+        for (int i = 0; i <= row; i++) {
+            for (int j = 0; j <= column; j++) {
+                if (backTracking05(matrix, next, mark, chars, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking05(char[][] matrix, int[][] next, boolean[][] mark, char[] chars, int i, int j, int index) {
+        // 遍历完成也算完成
+        if (chars.length == index) { // 只有等于length才能说明完成了所有的遍历
+            return true;
+        }
+        System.out.println("i:" + i + "-->j:" + j + "-->index:" + index);
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != chars[index]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking05(matrix, next, mark, chars, i + ints[0], j + ints[1], index + 1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
 
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCEF";
+        String str = "ABCCEE";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath04(charMatrix, str);
+        boolean isExit = matrixPath.findPath05(charMatrix, str);
         System.out.println(isExit);
     }
 

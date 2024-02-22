@@ -108,10 +108,30 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power05(double base, int target) {
+        boolean isNegative = target < 0;
+        double value = realPower05(base, Math.abs(target));
+        return isNegative ? 1 / value : value;
+    }
+
+    public double realPower05(double base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower05(base, target / 2);
+        value *= value;
+        if (target % 2 != 0) {// 考虑除不尽的情况补一base
+            value *= base;
+        }
+        return value;
+    }
 
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power04(2, 3));
+        System.out.println(doubleNumPower.power05(2, 3));
         ;
     }
 }

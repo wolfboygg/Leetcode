@@ -127,9 +127,32 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCount) * Math.pow(2, towCount));
     }
 
+    public int cut07(int target) {
+        // 凑数
+        if (target <= 1) {
+            return 0;
+        }
+        if (target == 2) {
+            return 1;
+        }
+        if (target == 3) {
+            return 2;
+        }
+        // 贪3凑2
+        int three = target / 3;
+        int tow = 0;
+        if (target - three * 3 == 1) {
+            three --;
+        }
+        // 这里要放到判断之后
+        tow = (target -  3 * three) / 2;
+        System.out.println(tow);
+        return (int) (Math.pow(3, three) * Math.pow(2, tow));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut06(8));
+        System.out.println(cutShengZi.cut07(8));
     }
 
     private int cut(int target) {

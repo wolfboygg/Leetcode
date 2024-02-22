@@ -40,10 +40,19 @@ public class CircleLastNumber {
         return x;
     }
 
+    public int lastNumberByGH06(int n, int m) {
+        // 找到0-n-1的以m个数删除的结果
+        int x = 0;
+        for (int i = 2; i < n + 1; i++) {
+            x = (x + m) %i;
+        }
+        return x;
+    }
+
     public static void main(String[] args) {
         // 通过递归的方式进行求解
         CircleLastNumber circleLastNumber = new CircleLastNumber();
-        System.out.println(circleLastNumber.lastNumberByGH05(6, 2));
+        System.out.println(circleLastNumber.lastNumberByGH06(6, 2));
     }
     // 5, 3
     private int lastNumber(int n, int m) {

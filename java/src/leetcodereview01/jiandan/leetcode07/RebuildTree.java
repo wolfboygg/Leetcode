@@ -195,12 +195,42 @@ public class RebuildTree {
         return node;
     }
 
+    public TreeNode rebuildTree10(int[] preOrder, int[] inOrder) {
+        // 根据前序和中序还原二叉树
+        // 首先需要存一下中序列遍历的位置
+        for (int i = 0; i < inOrder.length; i++) {
+            indexOrder.put(inOrder[i], i);
+        }
+        return rebuildTree10(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+    }
+
+    public TreeNode rebuildTree10(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        TreeNode node = new TreeNode();
+        node.value = rootValue;
+
+        // 区分左右进行递归构建
+        int rootInOderIndex = indexOrder.get(rootValue);// 用来区分左右
+        // {3, 9, 20, 15, 7};
+        // {9, 3, 15, 20, 7};
+        int leftSize = rootInOderIndex - inLeft;
+        TreeNode left = rebuildTree10(preOrder, preLeft + 1, preLeft + leftSize, inOrder, inLeft, rootInOderIndex - 1);
+        TreeNode right = rebuildTree10(preOrder, preLeft + leftSize + 1, preRight, inOrder, rootInOderIndex + 1, inRight);
+
+        node.left = left;
+        node.right = right;
+        return node;
+    }
 
     public static void main(String[] args) {
         int[] preOrder = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         RebuildTree rebuildTree = new RebuildTree();
-        TreeNode treeNode = rebuildTree.rebuildTree09(preOrder, inOrder);
+        // 3920157
+        TreeNode treeNode = rebuildTree.rebuildTree10(preOrder, inOrder);
         rebuildTree.preOrderTraversal(treeNode);
     }
 }
