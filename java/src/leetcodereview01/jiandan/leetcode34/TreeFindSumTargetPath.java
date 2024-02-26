@@ -245,11 +245,36 @@ public class TreeFindSumTargetPath {
         arr.remove(arr.size() -1);
     }
 
+    public boolean findPath09(TreeNode root, int target) {
+        // 从二叉树找到一个path 每一个节点的和为target。需要注意一点就是需要从根出发，到叶子节点结束
+        // 同样思路还是通过递归进行遍历
+        if (root == null) {
+            return false;
+        }
+        backTracking09(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    private void backTracking09(TreeNode root, int target, ArrayList<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            backTracking09(root.left, target, list);
+            backTracking09(root.right, target, list);
+        }
+        list.remove(list.size()-1);
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath08(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath09(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

@@ -75,10 +75,28 @@ public class MaxSubStr {
         return max;
     }
 
+    public int findMaxLength04(String str) {
+        // 使用滑动窗口的算法进行处理 找到最大的位置进行处理
+        int max = 0;
+        int index = -1; // 从-1开始正好走一个为1
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (map.containsKey(c)) {
+                // 找到最大的index  0和index  所以还是找到最大的哪个index 这样就构成了窗口
+                index = Math.max(map.getOrDefault(c, -1), index);
+            }
+            System.out.println("index:" + index);
+            map.put(c, i);
+            max = Math.max(max, i - index);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength03(str));
+        System.out.println(maxSubStr.findMaxLength04(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

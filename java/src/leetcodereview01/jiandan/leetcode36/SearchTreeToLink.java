@@ -203,11 +203,39 @@ public class SearchTreeToLink {
         inOrder09(root.right);
     }
 
+    // 二叉搜索树转换为排序的双向链表  左根右 这样的遍历顺序才是一个排序的链表
+    public TreeNode convert10(TreeNode root) {
+        // 需要进行转换
+        if (root == null) {
+            return null;
+        }
+        inOrder10(root);
+        return head;
+    }
+
+    public void inOrder10(TreeNode root) {
+        // 主要通过两个节点head， pre进行转换，pre指向前一个节点，目的是为了让left进行找到它
+        if (root == null) {
+            return;
+        }
+        inOrder10(root.left);
+        if (head == null) {
+            head = root;
+        }
+        if (pre != null) {
+            pre.right = root;
+        }
+        root.left = pre;
+        pre = root;
+        inOrder10(root.right);
+    }
+
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert09(searchTree);
+        TreeNode convert = searchTreeToLink.convert10(searchTree);
         TreeNode right = null;
+        // 123321
         while (convert != null) {
             right = convert;
             System.out.print(convert.value);

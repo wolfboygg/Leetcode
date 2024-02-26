@@ -123,12 +123,30 @@ public class MaxGold {
         return matrix[ores.length][maxNum];
     }
 
+
+    // 采矿动态规划
+    public int getGold09(int[] golds, int[] ores, int maxNum) {
+        // 使用Matrix数组进行处理
+        int[][] matrix = new int[ores.length+1][maxNum+1];
+        for (int i = 1; i < ores.length + 1; i++) {
+            for (int j = 1; j < maxNum + 1; j++) { // j才是人数
+                  if (j < ores[i-1]) {
+                      matrix[i][j] = matrix[i-1][j];
+                  } else {
+                      // 减去人数在取剩余人数的采矿价值  注意的一点就是j才是人数，所以要使用j去掉已经使用的人数的价值和剩余人数的价值才是最大的价值
+                      matrix[i][j] = Math.max(matrix[i-1][j], matrix[i-1][j-ores[i-1]] + golds[i-1]);
+                  }
+            }
+        }
+        return matrix[ores.length][maxNum];
+    }
+
     public static void main(String[] args) {
         int[] golds = {200, 300, 350, 400, 500};
         int[] ores = {3, 4, 3, 5, 5};
         int manNum = 10;
         MaxGold maxGold = new MaxGold();
-        int result = maxGold.getGold08(golds, ores, manNum);
+        int result = maxGold.getGold09(golds, ores, manNum);
         System.out.println(result);
     }
 }

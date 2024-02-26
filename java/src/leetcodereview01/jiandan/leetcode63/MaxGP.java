@@ -56,9 +56,20 @@ public class MaxGP {
         return maxValue;
     }
 
+    public int getMaxValue05(int[] arr) {
+        // 股票的最大利润，就是通过最小的value 找到最大的
+        int minValue = Integer.MAX_VALUE;
+        int maxValue = 0;
+        for (int i = 0; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            maxValue = Math.max(maxValue, arr[i] - minValue);
+        }
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         MaxGP maxGP = new MaxGP();
-        System.out.println(maxGP.getMaxValue04(arr));
+        System.out.println(maxGP.getMaxValue05(arr));
     }
 }

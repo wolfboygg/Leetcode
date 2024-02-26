@@ -258,11 +258,46 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble09(int[] arr, int start, int end) {
+        // 这种排序方式还是要通过递归的方式进行排序。 主要就是通过找到一个基准的位置，记得要从后面开始处理
+        if (start >= end) { // 相等也要跳出循环
+            return;
+        }
+        int pivot = findPivotValue(arr, start, end);
+        sortByDouble09(arr, start, pivot - 1);
+        sortByDouble09(arr, pivot + 1, end);
+    }
+
+    public int findPivotValue(int[] arr, int start, int end) {
+        // 找到基准值，默认使用第一个元素进行基准
+        int pivotValue = arr[start];
+        int left = start + 1; // 注意这里要舍掉start的值，要从下一个开始处理
+        int right = end;
+        while(left < right) {
+            // 从右边开始循环
+            while (left < right && arr[right] > pivotValue) {
+                right--;
+            }
+            while(left < right && arr[left] < pivotValue) {
+                left++;
+            }
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        // 交换位置
+        arr[start] = arr[left];
+        arr[left] = pivotValue;
+        return left;
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
+        int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble08(arr, 0, arr.length - 1);
+        quickSort.sortByDouble09(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

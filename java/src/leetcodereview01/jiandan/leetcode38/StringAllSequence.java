@@ -143,10 +143,40 @@ public class StringAllSequence {
         }
     }
 
+    public void getAllSequence06(String str) {
+        // 字符串的全排列 通过回溯的方式进行处理
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] chars = str.toCharArray();
+        boolean[] mark = new boolean[chars.length];
+        backTracking06(chars, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking06(char[] chars, boolean[] mark, StringBuilder sb) {
+        // 本质还是对所有字符进行标记，然后在判断是否可以进行添加。直到和字符串的长度相等。
+        if (sb.length() == chars.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true; // 这个就控制了index
+            sb.append(chars[i]);
+            backTracking06(chars, mark, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            mark[i] = false;
+        }
+
+    }
+
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence05(str);
+        stringAllSequence.getAllSequence06(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

@@ -159,6 +159,28 @@ public class GiftMaxValue {
         return help[column - 1][row - 1];
     }
 
+    // 礼物的最大价值 每次向右或者向下进行移动，判断最大价值
+    // 这种题目就是搞一个相同大小的辅助数组进行统计
+    public int getMaxValue09(int[][] matrix) {
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int[][] help = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int i1j = 0; i1j < column; i1j++) {
+                 // 然后进行处理 找最大的
+                 if (i > 0) {
+                     // 从辅助空间找到最大的，要找到最大的。 这是就覆盖的。找到前一个最大的然后在加上价值数组中的值就是最大值。
+                    help[i][j] = Math.max(help[i-1][j], help[i][j]);
+                 }
+                 if (j > 0) {
+                     help[i][j] = Math.max(help[i][j-1], help[i][j]);
+                 }
+                 help[i][j] += matrix[i][j];
+            }
+        }
+        return help[row-1][column-1];
+    }
+
 
     public static void main(String[] args) {
         int[][] arr = {
