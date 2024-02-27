@@ -166,7 +166,7 @@ public class GiftMaxValue {
         int column = matrix[0].length;
         int[][] help = new int[row][column];
         for (int i = 0; i < row; i++) {
-            for (int i1j = 0; i1j < column; i1j++) {
+            for (int j = 0; j < column; j++) {
                  // 然后进行处理 找最大的
                  if (i > 0) {
                      // 从辅助空间找到最大的，要找到最大的。 这是就覆盖的。找到前一个最大的然后在加上价值数组中的值就是最大值。

@@ -293,11 +293,44 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble10(int[] arr, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int pivot = findPivotValue10(arr, start, end);
+        sortByDouble10(arr, start, pivot - 1);
+        sortByDouble10(arr, pivot + 1, end);
+    }
+
+    public int findPivotValue10(int[] arr, int start, int end) {
+        // 找到基准值
+        int pivotValue = arr[start];
+        int left = start + 1;
+        int right = end;
+        while(left != right) {
+            // 从右边开始处理
+            while(left < right && arr[right] > pivotValue) {
+                right--;
+            }
+            while(left < right && arr[left] < pivotValue) {
+                left++;
+            }
+            if (left != right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        arr[start] = arr[left];
+        arr[left] = pivotValue;
+        return left;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble09(arr, 0, arr.length - 1);
+        quickSort.sortByDouble10(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

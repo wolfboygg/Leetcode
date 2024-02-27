@@ -141,12 +141,28 @@ public class MaxGold {
         return matrix[ores.length][maxNum];
     }
 
+    public int getGold10(int[] golds, int[] ores, int maxNum) {
+        // 这里使用辅助数组进行统计最终答案
+        int[][] matrix = new int[ores.length + 1][maxNum + 1];
+        for (int i = 1; i < ores.length + 1; i++) {
+            for (int i1j = 1; i1j < maxNum + 1; i1j++) {
+                if (j < ores[i - 1]) {
+                    matrix[i][j] = matrix[i - 1][j];
+                } else {
+                    // 所有人数 - 使用当前的人数 的最大价值 + 当前人数的最大价值  进行比较
+                    matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i-1][j-ores[i-1]] + golds[i-1]);
+                }
+            }
+        }
+        return matrix[ores.length][maxNum];
+    }
+
     public static void main(String[] args) {
         int[] golds = {200, 300, 350, 400, 500};
         int[] ores = {3, 4, 3, 5, 5};
         int manNum = 10;
         MaxGold maxGold = new MaxGold();
-        int result = maxGold.getGold09(golds, ores, manNum);
+        int result = maxGold.getGold10(golds, ores, manNum);
         System.out.println(result);
     }
 }

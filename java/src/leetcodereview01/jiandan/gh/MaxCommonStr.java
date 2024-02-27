@@ -192,14 +192,51 @@ public class MaxCommonStr {
         return maxValue;
     }
 
+    // 最大的公共字串需要连续，最大的公共子序列不需要连续
+    public int findMaxCommonStr06(String str1, String str2) {
+        // 最大公共子串
+        int[][] matrix = new int[str1.length() + 1][str2.length() + 1];
+        char[] firstArr = str1.toCharArray();
+        char[] secondArr = str2.toCharArray();
+        int maxValue = 0;
+        for (int i = 1; i < str1.length() + 1; i++) {
+            for (int j = 1; j < str2.length() + 1; j++) {
+                if (firstArr[i-1] == secondArr[j-1]) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                    maxValue = Math.max(matrix[i][j], maxValue);
+                }
+            }
+        }
+        return maxValue;
+    }
+
+    public int findMaxCommonSequence06(String str1, String str2) {
+        // 找公共子序列，不需要连续
+        char[] firstArr = str1.toCharArray();
+        char[] secondArr = str2.toCharArray();
+        int[][] matrix = new int[firstArr.length + 1][secondArr.length +1];
+        int maxValue = 0;
+        for (int i = 1; i < firstArr.length + 1; i++) {
+            for (int j = 1; j < secondArr.length + 1; j++) {
+                if (firstArr[i-1] == secondArr[j-1]) {
+                    matrix[i][j]= matrix[i-1][j-1] + 1;
+                    maxValue = Math.max(matrix[i][j], maxValue);
+                } else {
+                    matrix[i][j] = matrix[i-1][j-1];
+                }
+            }
+        }
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         String s1 = "ABCDEFG";
         String s2 = "ABADEFKG";
         // 最大公共字串
         MaxCommonStr maxCommonStr = new MaxCommonStr();
-        int maxLength = maxCommonStr.findMaxCommonStr05(s1, s2);
+        int maxLength = maxCommonStr.findMaxCommonStr06(s1, s2);
         System.out.println(maxLength);
-        int maxSequence = maxCommonStr.findMaxCommonSequence05(s1, s2);
+        int maxSequence = maxCommonStr.findMaxCommonSequence06(s1, s2);
         System.out.println(maxSequence);
     }
 }
