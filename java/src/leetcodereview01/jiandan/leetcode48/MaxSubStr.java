@@ -93,10 +93,26 @@ public class MaxSubStr {
         return max;
     }
 
+    public int findMaxLength05(String str) {
+        // 找到最长的不重复的字串
+        HashMap<Character, Integer> map = new HashMap<>();
+        int index = -1;
+        int max = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (map.containsKey(c)) {
+                index = Math.max(map.getOrDefault(c, -1), index);
+            }
+            map.put(c, i);
+            max = Math.max(max, i - index);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength04(str));
+        System.out.println(maxSubStr.findMaxLength05(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

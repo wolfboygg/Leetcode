@@ -145,7 +145,7 @@ public class MaxGold {
         // 这里使用辅助数组进行统计最终答案
         int[][] matrix = new int[ores.length + 1][maxNum + 1];
         for (int i = 1; i < ores.length + 1; i++) {
-            for (int i1j = 1; i1j < maxNum + 1; i1j++) {
+            for (int j = 1; j < maxNum + 1; j++) {
                 if (j < ores[i - 1]) {
                     matrix[i][j] = matrix[i - 1][j];
                 } else {
