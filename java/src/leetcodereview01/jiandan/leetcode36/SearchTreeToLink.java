@@ -230,10 +230,35 @@ public class SearchTreeToLink {
         inOrder10(root.right);
     }
 
+    public TreeNode convert11(TreeNode root) {
+        // 转换为双向链表 // 通过head pre进行转换
+        if (root == null) {
+            return null;
+        }
+        inOrder11(root);
+        return head;
+    }
+
+    public void inOrder11(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder11(root.left);
+        if (head == null) {
+            head = root;
+        }
+        if (pre != null) {
+            pre.right = root;
+        }
+        root.left = pre;
+        pre = root;
+        inOrder11(root.right);
+    }
+
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert10(searchTree);
+        TreeNode convert = searchTreeToLink.convert11(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

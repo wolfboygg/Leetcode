@@ -170,13 +170,36 @@ public class StringAllSequence {
             sb.deleteCharAt(sb.length() - 1);
             mark[i] = false;
         }
+    }
 
+    public void getAllSequence07(String str) {
+        // 获取字符串所有的序列的重新排序就是通过回溯的方式进行处理
+        char[] chars = str.toCharArray();
+        boolean[] mark = new boolean[chars.length];
+        backTracking07(chars, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking07(char[] chars, boolean[] mark, StringBuilder sb) {
+        if(sb.length() == chars.length) {
+            ret.add(new String(sb));
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            sb.append(chars[i]);
+            mark[i] = true;
+            backTracking07(chars, mark, sb);
+            mark[i] = false;
+            sb.deleteCharAt(sb.length() - 1);
+        }
     }
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence06(str);
+        stringAllSequence.getAllSequence07(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

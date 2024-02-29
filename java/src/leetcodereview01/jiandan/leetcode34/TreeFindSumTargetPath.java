@@ -270,11 +270,36 @@ public class TreeFindSumTargetPath {
         list.remove(list.size()-1);
     }
 
+    public boolean findPath10(TreeNode root, int target) {
+        // 还是需要通过递归的进行查找
+        if (root == null) {
+            return false;
+        }
+        backTracking10(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void backTracking10(TreeNode root, int target, ArrayList<Integer> integers) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        integers.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(integers));
+        } else {
+            backTracking10(root.left, target, integers);
+            backTracking10(root.right, target, integers);
+        }
+        integers.remove(integers.size() - 1);
+
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath09(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath10(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

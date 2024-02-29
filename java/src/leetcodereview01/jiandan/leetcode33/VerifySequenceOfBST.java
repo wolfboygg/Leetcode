@@ -268,8 +268,42 @@ public class VerifySequenceOfBST {
         return realVerify08(arr, start, rightIndex - 1) && realVerify08(arr, rightIndex , end-1);
     }
 
+    public boolean verify09(int[] arr) {
+        // 验证一下这个序列是不是一个二叉树的后续遍历顺序
+        // 找到根，然后在分左右在分别进行检测
+        // 后续遍历的根在最后
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        return realVerify09(arr, 0, arr.length -1);
+    }
+
+    public boolean realVerify09(int[] arr, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+
+        int rootValue = arr[end];
+        int rightIndex = -1;
+        for(int i = start; i < end; i++) {
+          if (arr[i] > rootValue) {
+              rightIndex = i;
+              break;
+          }
+        }
+        for(int i = rightIndex + 1; i < end; i++) {
+          if (arr[i] < rootValue) {
+              System.out.println("realVerify09....:" + arr[i] + ":rightIndex:" + rightIndex);
+              return false;
+          }
+        }
+        // 分了左右然后在分别进行检测
+        return realVerify09(arr, start, rightIndex - 1) && realVerify09(arr, rightIndex, end -1);
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 2};
-        System.out.println(new VerifySequenceOfBST().verify08(arr));
+        System.out.println(new VerifySequenceOfBST().verify09(arr));
     }
 }
