@@ -129,9 +129,32 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power06(double base, int target) {
+        // 看是不是一个负数
+        boolean isNegation = target < 0;
+        double realValue =  realPower06(base, Math.abs(target));
+        return isNegation ?  1.0 / realValue : realValue;
+    }
+
+    public double realPower06(double base, int target) {
+        // 查看是不是 0 / 1
+        if (target == 0)  {
+            return 1.0;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double realValue = realPower06(base, target / 2);
+        realValue *= realValue; // 这里相当于重复一遍
+        if (target % 2 != 0) {
+            realValue *= base;
+        }
+        return realValue;
+    }
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power05(2, 3));
+        System.out.println(doubleNumPower.power06(2, 3));
         ;
     }
 }

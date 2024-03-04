@@ -157,6 +157,24 @@ public class TreeSub {
         return root.value == node.value && isSubTreeWithRoot07(root.left, node.left) && isSubTreeWithRoot07(root.right, node.right);
     }
 
+    public boolean isSub08(TreeNode root, TreeNode node) {
+        // 判断是不是一个字结构
+        if (root == null || node == null) {
+            return false;
+        }
+        return isSubtreeWithRoot08(root, node) || isSub08(root.left, node) || isSub08(root.right, node);
+    }
+
+    private boolean isSubtreeWithRoot08(TreeNode root, TreeNode node) {
+        if (root == null) {
+            return false;
+        }
+        if (node == null) {
+            return true;
+        }
+        return root.value == node.value && isSubtreeWithRoot08(root.left, node.left) && isSubtreeWithRoot08(root.right, node.right);
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
@@ -176,12 +194,12 @@ public class TreeSub {
 
         TreeNode node8 = new TreeNode(8);
         TreeNode node9 = new TreeNode(8);
-        TreeNode node10 = new TreeNode(6);
+        TreeNode node10 = new TreeNode(7);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub07(node1, node8));
+        System.out.println(new TreeSub().isSub08(node1, node8));
 
     }
 }

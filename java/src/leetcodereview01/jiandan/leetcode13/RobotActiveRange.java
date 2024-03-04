@@ -333,8 +333,72 @@ public class RobotActiveRange {
         }
     }
 
+    public void findPath09(int m, int n, int target) {
+        // 找到能进入的格子
+        int[][] matrix = new int[m][n];
+        int maxValue = Math.max(m, n);
+        int[] valueArr = new int[maxValue];
+        // 通过计算
+        this.row = m;
+        this.column = n;
+        for (int i = 0; i < valueArr.length; i++) {
+            int temp = i;
+            while(temp > 0) {
+                valueArr[i] += temp % 10;
+                temp = temp / 10;
+            }
+        }
+        // 赋值matrix
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = valueArr[i] + valueArr[j];
+            }
+        }
+        boolean[][] mark = new boolean[m][n];
+        int[][] next =  {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        backTracking09(matrix, mark, next, 0, 0, target);
+        System.out.println(count);
+    }
+
+    public void backTracking09(int[][] matrix, boolean[][] mark, int[][] next, int i, int j, int target) {
+        if (i < 0 || i >= row || j < 0  || j >= column || mark[i][j] || matrix[i][j] > target) {
+            return;
+        }
+        count++;
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            backTracking09(matrix, mark, next, i+ ints[0], j +ints[1], target);
+        }
+    }
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath08(3, 2, 2);
+        robotActiveRange.findPath09(3, 2, 2);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

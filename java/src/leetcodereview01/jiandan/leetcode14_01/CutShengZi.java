@@ -150,9 +150,30 @@ public class CutShengZi {
         return (int) (Math.pow(3, three) * Math.pow(2, tow));
     }
 
+    public int cut08(int target) {
+        if (target < 2) {
+            return 0;
+        }
+        if (target == 2) {
+            return 1;
+        }
+        if (target == 3) {
+            return 2;
+        }
+        // 取三凑2
+        int threeCount = 0;
+        int twoCount = 0;
+        threeCount = target / 3;
+        if (target - threeCount * 3 == 1) {
+            threeCount -= 1;
+        }
+        twoCount = (target - threeCount * 3) / 2;
+        return (int) (Math.pow(3, threeCount)  * Math.pow(2, twoCount));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut07(8));
+        System.out.println(cutShengZi.cut08(8));
     }
 
     private int cut(int target) {

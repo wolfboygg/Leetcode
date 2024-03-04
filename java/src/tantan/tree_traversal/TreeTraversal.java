@@ -290,22 +290,107 @@ public class TreeTraversal {
         System.out.print(list.toString());
     }
 
+    public void preOrderTraversal03(TreeNode root) {
+        // 通过递归的方式进行遍历
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrderTraversal03(root.leftChild);
+        preOrderTraversal03(root.rightChild);
+    }
+
+    public void inOrderTraversal03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversal03(root.leftChild);
+        System.out.print(root.data + " ");
+        inOrderTraversal03(root.rightChild);
+    }
+
+    public void postOrderTraversal03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal03(root.leftChild);
+        postOrderTraversal03(root.rightChild);
+        System.out.print(root.data + " ");
+    }
+
+    // 不使用递归的方式进行实现
+    public void preOrderTraversalByStack03(TreeNode root) {
+        if (root == null) return;
+        // 使用stack可以遍历处理
+        Stack<TreeNode> stack = new Stack<>();
+        // 这里不能直接使用while循环进行处理,需要双层处理
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                System.out.print(root.data + " ");
+                stack.push(root);
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                root = pop.rightChild;
+            }
+        }
+    }
+
+    public void inOrderTraversalByStack03(TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null ||  !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                System.out.print(pop.data + " ");
+                root = pop.rightChild;
+            }
+        }
+    }
+
+    public void postOrderTraversalByStack03(TreeNode root) {
+        // 后续遍历有点复杂
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;// 需要记录前一个节点
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            // 根节点还是要入栈 需要二次入栈
+            TreeNode pop = stack.pop();
+            if (pop.rightChild == null || pop.rightChild == pre) {
+                pre = pop;
+                System.out.print(pop.data + " ");
+            } else {
+                stack.push(pop);
+                root = pop.rightChild;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(
                 3, 2, 9, null, null, 10, null, null, 8, null, 4
         ));
         TreeTraversal treeTraversal = new TreeTraversal();
         TreeNode binaryTree = treeTraversal.createBinaryTree(inputList);
-        treeTraversal.preOrderTraversal01(binaryTree);
+        treeTraversal.preOrderTraversal03(binaryTree);
         System.out.println();
-        treeTraversal.inOrderTraversal01(binaryTree);
+        treeTraversal.inOrderTraversal03(binaryTree);
         System.out.println();
-        treeTraversal.postOrderTraversal01(binaryTree);
+        treeTraversal.postOrderTraversal03(binaryTree);
         System.out.println();
-        treeTraversal.preOrderTraversalByStack02(binaryTree);
+        treeTraversal.preOrderTraversalByStack03(binaryTree);
         System.out.println();
-        treeTraversal.inOrderTraversalByStack02(binaryTree);
+        treeTraversal.inOrderTraversalByStack03(binaryTree);
         System.out.println();
-        treeTraversal.postOrderTraversalByStack02(binaryTree);
+        treeTraversal.postOrderTraversalByStack03(binaryTree);
     }
 }
