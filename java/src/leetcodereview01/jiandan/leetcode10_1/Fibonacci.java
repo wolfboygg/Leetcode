@@ -142,6 +142,8 @@ public class Fibonacci {
         }
         return value;
     }
+
+
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
         int fibonacciValue = fibonacci.getFibonacciByGH07(6);

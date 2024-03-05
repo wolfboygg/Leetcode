@@ -110,6 +110,20 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot06(TreeNode root, TreeNode left, TreeNode right) {
+        // 找到最近的公共祖先 需要的就是通过一个while循环进行查找
+        while(root != null) {
+            if (root.value > left.value && root.value > right.value) {
+                root = root.left;
+            } else if (root.value < left.value && root.value < right.value) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();

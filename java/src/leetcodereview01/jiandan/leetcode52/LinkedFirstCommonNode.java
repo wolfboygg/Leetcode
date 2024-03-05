@@ -72,6 +72,17 @@ public class LinkedFirstCommonNode {
         System.out.println(P1.value);
     }
 
+    public void findCommonNode08(Node node1, Node node2) {
+        // 找到两个链表的第一个公共节点
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1.next == null ? node2 : P1.next;
+            P2 = P2.next == null ? node1 : P2.next;
+        }
+        System.out.println(P1.value);
+    }
+
 
     public static void main(String[] args) {
         LinkedFirstCommonNode linkedFirstCommonNode = new LinkedFirstCommonNode();
@@ -97,7 +108,7 @@ public class LinkedFirstCommonNode {
         node013.next = node03;
 
         linkedFirstCommonNode.findCommonNode(node01, node011);
-        linkedFirstCommonNode.findCommonNode07(node01, node011);
+        linkedFirstCommonNode.findCommonNode08(node01, node011);
 
     }
 

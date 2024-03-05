@@ -152,6 +152,35 @@ public class FindSequenceWithSum {
         return ret;
     }
 
+    public List<List<Integer>> findSequence06(int target) {
+        // 找到一个和为target序列
+        List<List<Integer>> ret = new ArrayList<>();
+        int P1 = 1, P2 = 2;
+        int value = P1 + P2;
+        while(P2 < target) {
+            // 然后往后加就行呗，注意当等于target之后需要全部移动
+            if(value < target) {
+                P2++;
+                value += P2;
+            } else if (value > target) {
+                value -=P1;
+                P1++;
+            } else {
+                // 这里相等了，需要进行所有的序列入队
+                List<Integer> arr = new ArrayList<>();
+                for(int i = P1; i <= P2; i++) {
+                  arr.add(i);
+                }
+                ret.add(arr);
+                value-=P1;
+                P1++;
+                P2++;
+                value+=P2;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
         List<List<Integer>> sequence = findSequenceWithSum.findSequence05(100);

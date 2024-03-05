@@ -49,6 +49,15 @@ public class CircleLastNumber {
         return x;
     }
 
+    public int lastNumberByGH07(int n, int m) {
+        // 在n为length的数组中以m为步长删除元素，求最后剩余的是那个元素
+        int x = 0;
+        for (int i = 2; i < n + 1; i++) { // 需要从第2个元素开始,到n结束。以 x = (x+m) %i
+            x = (x + m) % i;
+        }
+        return x;
+    }
+
     public static void main(String[] args) {
         // 通过递归的方式进行求解
         CircleLastNumber circleLastNumber = new CircleLastNumber();

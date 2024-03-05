@@ -89,6 +89,17 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) +1;
     }
 
+    // 获取二叉树的深度
+    public int getTreeDepth08(TreeNode root) {
+        // 通过递归的方式进行增加深度
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getTreeDepth08(root.left);
+        int rightDepth = getTreeDepth08(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
 
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();

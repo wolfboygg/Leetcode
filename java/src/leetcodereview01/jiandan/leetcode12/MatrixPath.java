@@ -126,8 +126,8 @@ public class MatrixPath {
         this.row = row;
         this.column = column;
         boolean[][] mark = new boolean[row][column]; // 这里有问题
-        for (int i = 0; i <= row; i++) {
-            for (int j = 0; j <= column; j++) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
                 if (backTracking05(matrix, next, mark, chars, i, j, 0)) {
                     return true;
                 }
@@ -155,6 +155,49 @@ public class MatrixPath {
         return false;
     }
 
+    public boolean findPath06(char[][] matrix, String str) {
+        // 解题思路通过遍历所有的matrix的元素，找到路径
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        boolean [][] mark = new boolean[row][column];
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                  if (backTracking06(matrix, next, mark, chars, i, j, 0)) {
+                      return true;
+                  }
+            }
+        }
+        return false;
+    }
+
+    private boolean backTracking06(char[][] matrix, int[][] next, boolean[][] mark, char[] chars, int i, int j, int index) {
+        if (index == chars.length) {
+            return true;
+        }
+        // 这里不能等于row，所以要排除掉。否则就有问题了。
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != chars[index]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking06(matrix, next, mark, chars, i + ints[0], j + ints[1], index + 1)) { // 这里会加1 因此需要等于length
+                return true;
+            }
+
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
     // ABCE
     // SFCS
     // ADEE
@@ -162,7 +205,7 @@ public class MatrixPath {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
         String str = "ABCCEE";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath05(charMatrix, str);
+        boolean isExit = matrixPath.findPath06(charMatrix, str);
         System.out.println(isExit);
     }
 

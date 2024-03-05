@@ -131,11 +131,29 @@ public class SymmetricTree {
         return left.value == right.value && check07(left.left, right.right) && check07(left.right, right.left);
     }
 
+    public boolean isSymmetric08(TreeNode root) {
+        // 判断是否是一个镜像的二叉树，当然还是需要通过递归的方式进行
+        if (root == null) {
+            return false;
+        }
+        return check08(root, root);
+    }
+
+    public boolean check08(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+        return node1.value == node2.value && check08(node1.left, node2.right) && check06(node1.right, node2.left);
+    }
+
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric07(tree));
+        System.out.println(symmetricTree.isSymmetric08(tree));
     }
 
 }

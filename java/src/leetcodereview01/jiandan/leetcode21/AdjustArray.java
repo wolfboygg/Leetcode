@@ -151,10 +151,29 @@ public class AdjustArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void adjustByPointer09(int[] arr) {
+        // 调整数组的奇偶顺序 使用指针的方式处理
+        int low = 0;
+        int height = arr.length - 1;
+        while(low < height) {
+            while(low < height && arr[height] % 2 == 0) {
+                height--;
+            }
+            while(low < height && arr[low] % 2 != 0) {
+                low++;
+            }
+            if (low != height) {
+                int temp = arr[low];
+                arr[low] = arr[height];
+                arr[height] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
     public static void main(String[] args) {
         AdjustArray adjustArray = new AdjustArray();
         int[] arr = {1, 5, 8, 3, 2, 4, 5};
-        adjustArray.adjustByPointer08(arr);
+        adjustArray.adjustByPointer09(arr);
     }
 
     public void adjustByFor(int[] arr) {

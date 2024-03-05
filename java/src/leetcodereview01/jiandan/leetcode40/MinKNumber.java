@@ -190,12 +190,35 @@ public class MinKNumber {
       return list;
     }
 
+    // 最小的K个数，使用大头堆进行解决
+    public List<Integer> findMinKNumByDump09(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        // 使用大头堆进行处理
+        Queue<Integer>  queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (queue.peek() > arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        List<Integer> ret = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            ret.add(queue.poll());
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 1, 6, 2, 7, 3, 8};
         MinKNumber minKNumber = new MinKNumber();
         int[] num = minKNumber.findMinKNum(arr, 4);
         System.out.println(Arrays.toString(num));
-        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump08(arr, 4);
+        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump09(arr, 4);
         System.out.println(minKNumByDump.toString());
 //        minKNumber.findMinKNumberByDump03(arr, 4);
     }

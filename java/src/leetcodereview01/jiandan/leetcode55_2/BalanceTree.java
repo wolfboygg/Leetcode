@@ -109,11 +109,24 @@ public class BalanceTree {
         }
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    // 这种递归的操作必须有一个全局的变量来承接结果
+    public int isBalanceTree07(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree07(root.left);
+        int rightDepth = isBalanceTree07(root.right);
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree05(tree);
+        balanceTree.isBalanceTree06(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

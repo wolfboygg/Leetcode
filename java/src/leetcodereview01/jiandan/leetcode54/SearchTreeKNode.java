@@ -104,11 +104,23 @@ public class SearchTreeKNode {
         dfs05(root.left);
     }
 
+    // 二叉搜索数的第K大节点 左根右， 那么我们使用倒着中序列遍历即刻
+    public void dfs06(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs06(root.right);
+        if (--k == 0) {
+            this.result = root.value;
+        }
+        dfs06(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs05(tree);
+        searchTreeKNode.dfs06(tree);
         System.out.println(searchTreeKNode.result);
     }
 

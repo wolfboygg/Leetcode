@@ -50,9 +50,21 @@ public class LeftRotateString {
         System.out.println(Arrays.toString(chars));
     }
 
+    public void rotate05(String str, int n) {
+        // 以n开始旋转
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] chars = str.toCharArray();
+        reverse(chars, 0, n - 1);
+        reverse(chars, n, str.length() - 1);
+        reverse(chars, 0, str.length() -1);
+        System.out.println(Arrays.toString(chars));
+    }
+
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate04(str, 2);
+        leftRotateString.rotate05(str, 2);
     }
 }

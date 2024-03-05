@@ -91,10 +91,41 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    // 这个问题通过二分查找的方式，找到左右，然后进行输出个数
+    public int count4(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int leftIndex = binaryFind04(arr, target, true);
+        int rightIndex = binaryFind04(arr, target, false) -1;
+        System.out.println(leftIndex + "ri" + rightIndex);
+        if (leftIndex >= 0 && leftIndex < arr.length && rightIndex >= 0 && rightIndex < arr.length && arr[leftIndex] == target && arr[rightIndex] == target) {
+            System.out.println(rightIndex - leftIndex + 1);
+            return rightIndex - leftIndex + 1;
+        }
+        return -1;
+    }
+
+    public int binaryFind04(int[] arr, int target, boolean isLow) {
+        // 通过二分算法进行查找
+        int low = 0, height = arr.length - 1;
+        int targetIndex = -1;
+        while(low <= height) {
+            int middle = low + (height - low)  / 2;
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                height = middle - 1;
+                targetIndex = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count3(arr, 8);
+        sortArrayFindNumCount.count4(arr, 10);
     }
 
     private void count(int[] arr, int target) {

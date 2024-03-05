@@ -85,12 +85,24 @@ public class MaxSubArray {
         return maxValue;
     }
 
+    // 连续子数组的最大和，比较最大和和当前的值的大小，如果比当前值还小那么重新开始计算
+    public int findSum10(int[] arr) {
+        int curValue = arr[0];
+        int maxValue = 0;
+        for (int i = 1; i < arr.length; i++) {
+             curValue = Math.max(arr[i], curValue + arr[i]);
+             maxValue = Math.max(maxValue, curValue);
+        }
+        System.out.println(maxValue);
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum09(arr);
+        maxSubArray.findSum10(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);

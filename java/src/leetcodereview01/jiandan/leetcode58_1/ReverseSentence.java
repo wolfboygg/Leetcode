@@ -185,9 +185,39 @@ public class ReverseSentence {
         }
     }
 
+    public void reverse07(String str) {
+        // 要找到空格然后进行翻转
+        char[] chars = str.toCharArray();
+        int P1 = 0;
+        int P2 = 0;
+        for (int i = 0; i <= chars.length; i++) {
+            if (P2 == chars.length || chars[P2] == ' ') {
+                reverseWord07(chars, P1, P2-1);
+                P1 = P2;
+            }
+            P2++;
+        }
+        // 然后整体进行翻转
+        reverseWord07(chars, 0, chars.length - 1);
+        System.out.println(Arrays.toString(chars));
+    }
+
+    public void reverseWord07(char[] chars, int start, int end) {
+        // 进行翻转
+        int left = start;
+        int right = end;
+        while(left < right) {
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+            left++;
+            right--;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse06(str);
+        reverseSentence.reverse07(str);
     }
 }
