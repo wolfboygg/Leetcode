@@ -229,14 +229,52 @@ public class MaxCommonStr {
         return maxValue;
     }
 
+    // 求最大公共字串
+    public int findMaxCommonStr07(String str1, String str2) {
+        // 使用一个公共数组进行辅助实现
+        char[] strArr01 = str1.toCharArray();
+        char[] strArr02 = str2.toCharArray();
+        int max = 0;
+        int[][] matrix = new int[strArr01.length +1][strArr02.length+1];
+        for (int i = 1; i < strArr01.length +1; i++) {
+            for (int j = 1; j < strArr02.length +1; j++) {
+                if (strArr01[i-1] == strArr02[j-1]) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                    max = Math.max(matrix[i][j], max);
+                } else {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        return max;
+    }
+    // 最大公共子序列 (要求不连续)
+    public int findMaxCommonSequence07(String str1, String str2) {
+        char[] strArr01 = str1.toCharArray();
+        char[] strArr02 = str2.toCharArray();
+        int max = 0;
+        int[][] matrix = new int[strArr01.length + 1][strArr02.length + 1];
+        for (int i = 1; i < strArr01.length + 1; i++) {
+            for (int j = 1; j < strArr02.length + 1; j++) {
+                  if (strArr01[i-1] == strArr02[j-1]) {
+                      matrix[i][j] = matrix[i-1][j-1] + 1;
+                      max = Math.max(max, matrix[i][j]);
+                  } else {
+                      matrix[i][j] = matrix[i-1][j-1];
+                  }
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String s1 = "ABCDEFG";
         String s2 = "ABADEFKG";
         // 最大公共字串
         MaxCommonStr maxCommonStr = new MaxCommonStr();
-        int maxLength = maxCommonStr.findMaxCommonStr06(s1, s2);
+        int maxLength = maxCommonStr.findMaxCommonStr07(s1, s2);
         System.out.println(maxLength);
-        int maxSequence = maxCommonStr.findMaxCommonSequence06(s1, s2);
+        int maxSequence = maxCommonStr.findMaxCommonSequence07(s1, s2);
         System.out.println(maxSequence);
     }
 }

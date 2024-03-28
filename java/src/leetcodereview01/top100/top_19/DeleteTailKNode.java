@@ -73,6 +73,5 @@ public class DeleteTailKNode {
             System.out.print(node.value);
             node = node.next;
         }
-        Thread
     }
 }

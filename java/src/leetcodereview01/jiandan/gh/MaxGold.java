@@ -157,12 +157,28 @@ public class MaxGold {
         return matrix[ores.length][maxNum];
     }
 
+    // 黄金矿工
+    public int getGold11(int[] golds, int[] ores, int manNum) {
+        // 计算最大价值 需要使用一个数组进行处理
+        int[][] matrix = new int[ores.length + 1][manNum + 1];
+        for (int i = 1; i < ores.length + 1; i++) {
+            for (int j = 1; j < manNum + 1; j++) {
+                if (j < ores[i-1]) {
+                    matrix[i][j]  = matrix[i-1][j];
+                } else {
+                    matrix[i][j] = Math.max(matrix[i-1][j], matrix[i-1][j-ores[i-1]] + golds[i-1]);
+                }
+            }
+        }
+        return matrix[ores.length][manNum];
+    }
+
     public static void main(String[] args) {
         int[] golds = {200, 300, 350, 400, 500};
         int[] ores = {3, 4, 3, 5, 5};
         int manNum = 10;
         MaxGold maxGold = new MaxGold();
-        int result = maxGold.getGold10(golds, ores, manNum);
+        int result = maxGold.getGold11(golds, ores, manNum);
         System.out.println(result);
     }
 }

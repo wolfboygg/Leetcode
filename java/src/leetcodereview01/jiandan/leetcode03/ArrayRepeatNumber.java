@@ -195,11 +195,28 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    // 对应的数字到对应的index位置
+    public int findRepeatNumber11(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i) {
+                if (arr[i] != arr[arr[i]]) {
+                    // 进行交换
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber10(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber11(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {
