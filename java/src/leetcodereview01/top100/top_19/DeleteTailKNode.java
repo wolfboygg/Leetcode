@@ -34,6 +34,27 @@ public class DeleteTailKNode {
         P2.next = next.next;
         return head;
     }
+
+    public Node deleteTailKNode01(Node head, int n) {
+        //  删除链表倒数第K个节点
+        // 要保证删除的一定不是最后一个节点 要找到前一个节点
+        Node pre = head;
+        //  1->2->3->4->5 n = 2
+        for (int i = 0; i < n; i++) {
+            pre = pre.next;
+        }
+        Node temp = head;
+        while(pre != null) {
+            temp = temp.next;
+            pre = pre.next;
+        }
+        // 进行删除
+        Node next = temp.next;
+        temp.value = next.value;
+        temp.next = next.next;
+        return head;
+    }
+
     public static void main(String[] args){
         // 给定一个链表: 1->2->3->4->5, 和 n = 2.
         Node node1 = new Node(1);
@@ -47,10 +68,11 @@ public class DeleteTailKNode {
         node3.next = node4;
         node4.next = node5;
         DeleteTailKNode deleteTailKNode = new DeleteTailKNode();
-        Node node = deleteTailKNode.deleteTailKNode(node1, 2);
+        Node node = deleteTailKNode.deleteTailKNode01(node1, 2);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;
         }
+        Thread
     }
 }

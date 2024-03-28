@@ -176,11 +176,30 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber10(int[] arr) {
+        // 通过循环操作将对应的数字放到对应的下标下面
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+              while(arr[i] != i) {
+                  if (arr[i] != arr[arr[i]]) {
+                      int temp = arr[i];
+                      arr[i] = arr[temp];
+                      arr[temp] = temp;
+                  } else {
+                      return arr[i];
+                  }
+              }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber09(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber10(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

@@ -195,13 +195,35 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode09(Node head, Node target) {
+        // 删除目标节点 主要考虑删除的节点的位置
+        if (target.next != null) {
+            // 表示删除的是中间节点 使用节点覆盖操作
+            Node next = target.next;
+            target.next = next.next;
+            target.value = next.value;
+        } else {
+            // 判断是否是头部节点
+            if (target == head) {
+                head = null;
+            } else {
+                // 需要进行遍历找到前一个节点
+                Node pre = head;
+                while(pre.next != target) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
         Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode08(head, tobeDelete);
+        deleteNode.deleteNode09(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

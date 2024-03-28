@@ -375,22 +375,105 @@ public class TreeTraversal {
         }
     }
 
+    // 递归进行遍历
+    public void preOrderTraversal04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrderTraversal04(root.leftChild);
+        preOrderTraversal04(root.rightChild);
+    }
+
+    public void inOrderTraversal04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversal04(root.leftChild);
+        System.out.print(root.data + " ");
+        inOrderTraversal04(root.rightChild);
+    }
+
+    public void postOrderTraversal04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal04(root.leftChild);
+        postOrderTraversal04(root.rightChild);
+        System.out.print(root.data + " ");
+    }
+
+    public void preOrderTraversalByStack04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                System.out.print(root.data + " ");
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                root = pop.rightChild;
+            }
+        }
+    }
+
+    public void inOrderTraversalByStack04(TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                System.out.print(pop.data + " ");
+                root = pop.rightChild;
+            }
+        }
+    }
+
+    public void postOrderTraversalByStack04(TreeNode root) {
+        // 后续遍历比较复杂一点就是临界条件，需要是right== null || root.right == pre
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            TreeNode pop = stack.pop();
+            if (pop.rightChild == null || pop.rightChild == pre) {
+                System.out.print(pop.data + " ");
+                pre = pop;
+            } else {
+                stack.push(pop);
+                root = pop.rightChild;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(
                 3, 2, 9, null, null, 10, null, null, 8, null, 4
         ));
         TreeTraversal treeTraversal = new TreeTraversal();
         TreeNode binaryTree = treeTraversal.createBinaryTree(inputList);
-        treeTraversal.preOrderTraversal03(binaryTree);
+        treeTraversal.preOrderTraversal04(binaryTree);
         System.out.println();
-        treeTraversal.inOrderTraversal03(binaryTree);
+        treeTraversal.inOrderTraversal04(binaryTree);
         System.out.println();
-        treeTraversal.postOrderTraversal03(binaryTree);
+        treeTraversal.postOrderTraversal04(binaryTree);
         System.out.println();
-        treeTraversal.preOrderTraversalByStack03(binaryTree);
+        treeTraversal.preOrderTraversalByStack04(binaryTree);
         System.out.println();
-        treeTraversal.inOrderTraversalByStack03(binaryTree);
+        treeTraversal.inOrderTraversalByStack04(binaryTree);
         System.out.println();
-        treeTraversal.postOrderTraversalByStack03(binaryTree);
+        treeTraversal.postOrderTraversalByStack04(binaryTree);
     }
 }

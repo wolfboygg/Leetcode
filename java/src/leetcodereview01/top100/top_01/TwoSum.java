@@ -29,11 +29,34 @@ public class TwoSum {
         }
         return ret;
     }
+
+    public List<Integer> towSum01(int[] arr, int target) {
+        List<Integer> ret = new ArrayList<>();
+        if (arr == null || arr.length == 0) {
+            return ret;
+        }
+        // 通过双指针的方式进行查找
+        int P1 = 0;
+        int P2 = arr.length -1;
+        while(P1 != P2) {
+            if (P1 < P2 && arr[P1] + arr[P2] < target) {
+                P1++;
+            } else if (P1 < P2 && arr[P1] + arr[P2] > target) {
+                P2--;
+            } else {
+                ret.add(arr[P1]);
+                ret.add(arr[P2]);
+                return ret;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args){
         int[] num = new int[] {2, 7, 11, 15};
         int targe = 9;
         TwoSum twoSum = new TwoSum();
-        List<Integer> integers = twoSum.towSum(num, targe);
+        List<Integer> integers = twoSum.towSum01(num, targe);
         System.out.println(integers.toString());
     }
 }

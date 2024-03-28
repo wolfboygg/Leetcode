@@ -21,12 +21,29 @@ public class TowSequenceArray {
             return arr[arr.length / 2];
         }
     }
+
+    // 求两个数组的中位数 首先要合并数组 排序之后进行求解
+    public int findMiddleNum01(int[] arr1, int[] arr2) {
+        // 合并
+        int[] arr = new int[arr1.length + arr2.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i < arr1.length ? arr1[i] : arr2[i - arr1.length];
+        }
+        Arrays.sort(arr);
+        if (arr.length % 2 == 0) {
+            // 0 1 2 3 4 5
+            return (arr[arr.length / 2] + arr[arr.length / 2 - 1]) / 2;
+        } else {
+            return arr[arr.length / 2];
+        }
+    }
+
     public static void main(String[] args){
         int[] arr1 = {1, 2};
         int[] arr2 = {3 ,4};
 
         TowSequenceArray sequenceArray = new TowSequenceArray();
-        int num = sequenceArray.findMiddleNum(arr1, arr2);
+        int num = sequenceArray.findMiddleNum01(arr1, arr2);
         System.out.println(num);
     }
 }

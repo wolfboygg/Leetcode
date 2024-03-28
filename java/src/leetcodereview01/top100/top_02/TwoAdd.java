@@ -62,6 +62,41 @@ public class TwoAdd {
         return reverse.next;
     }
 
+    public LinkNode towAdd01(LinkNode node1, LinkNode node2) {
+        // 思路就是通过相加之后在进行翻转，注意有进位的情况
+        LinkNode pre = new LinkNode(-1);
+        LinkNode temp = pre;
+        int nextValue = 0;
+        while(node1 != null || node2 != null || nextValue > 0) {
+            // 开始处理
+            int value = 0;
+            if (node1 != null) {
+                value += node1.value;
+            }
+            if (node2 != null) {
+                value += node2.value;
+            }
+            value += nextValue;
+            int realValue = value % 10;
+            nextValue = value / 10;
+            LinkNode node = new LinkNode(realValue);
+            temp.next = node;
+            temp = temp.next;
+            if (node1 != null) node1 = node1.next;
+            if (node2 != null ) node2 = node2.next;
+        }
+        // 进行翻转
+        LinkNode head = pre.next;
+        LinkNode newPre = new LinkNode(-1);
+        while(head != null) {
+            LinkNode next = head.next;
+            head.next = newPre.next;
+            newPre.next = head;
+            head = next;
+        }
+        return newPre.next;
+    }
+
     public static void main(String[] args){
         LinkNode node1 = new LinkNode(2);
         LinkNode node2 = new LinkNode(4);
@@ -79,7 +114,7 @@ public class TwoAdd {
         node5.next = node6;
 
         TwoAdd twoAdd = new TwoAdd();
-        LinkNode head = twoAdd.towAdd(node1, node4);
+        LinkNode head = twoAdd.towAdd01(node1, node4);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

@@ -148,11 +148,26 @@ public class RotateArray {
         return arr[low]; // 最小值落在low上
     }
 
+    // 4, 5, 0, 1, 2, 3
+    public int getMinValueByTX08(int[] arr) {
+        // 旋转数组找到最小的值 它的特性就是中位置一定是最小的
+        int low = 0, height = arr.length -1;
+        while(low < height) {
+            int middle = low + (height - low) / 2;
+            if (arr[middle] < arr[height]) {
+                height = middle; // 这里不能减1 只能从这里开始
+            } else {
+                low = middle + 1;
+            }
+        }
+        return arr[low];
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTX07(arr2);
+        int i = rotateArray.getMinValueByTX08(arr2);
         System.out.println("最小值为:" + i);
     }
 }

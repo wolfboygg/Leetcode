@@ -143,10 +143,25 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH08(int n) {
+        // 1 1 2 3 5
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        int value1 = 1;
+        int value2 = 1;
+        int res = 0;
+        for (int i = 3; i <= 3; i++) {
+            res = value1 + value2;
+            value1 = value2;
+            value2 = res;
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH07(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH08(6);
         System.out.println(fibonacciValue);
     }
 }
