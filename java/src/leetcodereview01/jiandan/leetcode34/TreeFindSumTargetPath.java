@@ -1,6 +1,9 @@
 package leetcodereview01.jiandan.leetcode34;
 
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -295,11 +298,39 @@ public class TreeFindSumTargetPath {
 
     }
 
+    // 从二叉树中找到一个路径和目标值相同 递归的方式处理
+    public boolean findPath11(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        // 通过递归的方式进行处理
+        realFindPath(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        // 看看是否为0
+        list.add(root.value);
+        target -= root.value;
+        if (target == 0 && root.left == null && root.right == null) {
+            // 表示找到了
+            ret.add(new ArrayList<>(list));
+        } else {
+            // 接着找左右子树
+            realFindPath(root.left, target, list);
+            realFindPath(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath10(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath11(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

@@ -151,12 +151,35 @@ public class Fibonacci {
         int value1 = 1;
         int value2 = 1;
         int res = 0;
-        for (int i = 3; i <= 3; i++) {
+        for (int i = 3; i <= n; i++) {
             res = value1 + value2;
             value1 = value2;
             value2 = res;
         }
         return res;
+    }
+
+    public int getFibonacciByGH09(int n) {
+        // 通过动态规划的方式进行求解
+        if (n == 0) {
+            return 0;
+        }
+        // 1 1 2 3 5
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        int value = 0;
+        int pre1 = 1;
+        int pre2 = 1;
+        for (int i = 3; i <= n; i++) {
+            value = pre1 + pre2;
+            pre1 = pre2;
+            pre2 = value;
+        }
+        return value;
     }
 
     public static void main(String[] args) {

@@ -116,6 +116,18 @@ public class SearchTreeKNode {
         dfs06(root.left);
     }
 
+    public void dfs07(TreeNode root) {
+        // 搜索二叉树倒数k个节点
+        if (root == null) {
+            return;
+        }
+        dfs07(root.right);
+        if (--k == 0) {
+            result = root.value;
+        }
+        dfs07(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();

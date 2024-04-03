@@ -28,8 +28,9 @@ public class DoubleNumPower {
     public double power01(double base, int target) {
         boolean isNegative = target < 0;
         double result = pow01(base, Math.abs(target));
-        return isNegative ? 1/result: result;
+        return isNegative ? 1 / result : result;
     }
+
     public double pow01(double base, int target) {
         if (target == 0) {
             return 1;
@@ -39,8 +40,8 @@ public class DoubleNumPower {
         }
         double res = pow01(base, target / 2);
         res *= res;
-        if (target % 2 !=0) {
-            res = res* base;
+        if (target % 2 != 0) {
+            res = res * base;
         }
         return res;
     }
@@ -49,8 +50,9 @@ public class DoubleNumPower {
         // 求base的的target次方
         boolean isNegative = target < 0;
         double result = pow02(base, Math.abs(target));
-        return isNegative ? 1/ result : result;
+        return isNegative ? 1 / result : result;
     }
+
     public double pow02(int base, int target) {
         if (target == 0) {
             return 1;
@@ -132,13 +134,13 @@ public class DoubleNumPower {
     public double power06(double base, int target) {
         // 看是不是一个负数
         boolean isNegation = target < 0;
-        double realValue =  realPower06(base, Math.abs(target));
-        return isNegation ?  1.0 / realValue : realValue;
+        double realValue = realPower06(base, Math.abs(target));
+        return isNegation ? 1.0 / realValue : realValue;
     }
 
     public double realPower06(double base, int target) {
         // 查看是不是 0 / 1
-        if (target == 0)  {
+        if (target == 0) {
             return 1.0;
         }
         if (target == 1) {
@@ -152,9 +154,31 @@ public class DoubleNumPower {
         return realValue;
     }
 
+    public double power07(double base, int target) {
+        // 求指数问题
+        boolean isNegative = target < 0;
+        double realValue = realPower07(base, Math.abs(target));
+        return isNegative ? 1 / realValue : realValue;
+    }
+
+    public double realPower07(double base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        // /2的方式少计算一次
+        double value = realPower07(base, target / 2);
+        value *= value;
+        if (target / 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power06(2, 3));
-        ;
+        System.out.println(doubleNumPower.power07(2, -3));
     }
 }

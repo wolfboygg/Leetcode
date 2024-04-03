@@ -21,6 +21,7 @@ public class MaxQueue {
             helpQueue.pollLast();
         }
         helpQueue.offerLast(value);
+        // 从队尾进行加入
     }
 
     public int popFront() {

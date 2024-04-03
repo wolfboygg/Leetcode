@@ -1,6 +1,8 @@
 package leetcodereview01.jiandan.leetcode42;
 
 
+import java.util.HashMap;
+
 public class MaxSubArray {
     public void findSum03(int[] arr) {
         int pre = 0;
@@ -33,8 +35,8 @@ public class MaxSubArray {
         int preValue = 0;
         int maxValue = arr[0];
         for (int i = 0; i < arr.length; i++) {
-              preValue = Math.max(preValue + arr[i], arr[i]);
-              maxValue = Math.max(maxValue, preValue);
+            preValue = Math.max(preValue + arr[i], arr[i]);
+            maxValue = Math.max(maxValue, preValue);
         }
         System.out.println(maxValue);
     }
@@ -43,8 +45,8 @@ public class MaxSubArray {
         int pre = 0;
         int maxValue = arr[0];
         for (int i = 0; i < arr.length; i++) {
-              pre = Math.max(arr[i], pre + arr[i]);
-              maxValue = Math.max(maxValue, pre);
+            pre = Math.max(arr[i], pre + arr[i]);
+            maxValue = Math.max(maxValue, pre);
         }
         System.out.println(maxValue);
     }
@@ -90,8 +92,21 @@ public class MaxSubArray {
         int curValue = arr[0];
         int maxValue = 0;
         for (int i = 1; i < arr.length; i++) {
-             curValue = Math.max(arr[i], curValue + arr[i]);
-             maxValue = Math.max(maxValue, curValue);
+            curValue = Math.max(arr[i], curValue + arr[i]);
+            maxValue = Math.max(maxValue, curValue);
+        }
+        System.out.println(maxValue);
+        return maxValue;
+    }
+
+    public int findSum11(int[] arr) {
+        // 最大的连续子数组的最大值 使用最大规划进行处理
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int maxValue = 0;
+        int res = 0; // 通过max值进行处理 通过累计和累计最大值
+        for (int i = 0; i < arr.length; i++) {
+            res = Math.max(arr[i], arr[i] + res);
+            maxValue = Math.max(maxValue, res);
         }
         System.out.println(maxValue);
         return maxValue;
@@ -102,7 +117,7 @@ public class MaxSubArray {
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum10(arr);
+        maxSubArray.findSum11(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);
@@ -128,7 +143,7 @@ public class MaxSubArray {
         // 使用动态规划求解
         int curSum = arr[0];
         int pre = 0;
-        for (int i = 0; i< arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             pre = Math.max(arr[i], pre + arr[i]); // 如果加完之后还要比这个值小，那么重新开始统计
             curSum = Math.max(pre, curSum);
         }

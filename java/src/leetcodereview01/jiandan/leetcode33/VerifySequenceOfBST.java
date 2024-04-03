@@ -37,7 +37,7 @@ public class VerifySequenceOfBST {
         if (arr.length == 0) {
             return false;
         }
-        return realVerify01(arr, 0, arr.length -1);
+        return realVerify01(arr, 0, arr.length - 1);
     }
 
     public boolean realVerify01(int[] arr, int left, int right) {
@@ -58,7 +58,7 @@ public class VerifySequenceOfBST {
                 return false;
             }
         }
-        return realVerify01(arr, left, currentIndex -1) && realVerify01(arr, currentIndex, right-1);
+        return realVerify01(arr, left, currentIndex - 1) && realVerify01(arr, currentIndex, right - 1);
     }
 
     // 根据二叉搜索树的特性来进行处理
@@ -66,7 +66,7 @@ public class VerifySequenceOfBST {
         if (arr == null || arr.length == 0) {
             return false;
         }
-        return realVerify02(arr, 0, arr.length -1);
+        return realVerify02(arr, 0, arr.length - 1);
     }
 
     private boolean realVerify02(int[] arr, int left, int right) {
@@ -82,12 +82,12 @@ public class VerifySequenceOfBST {
                 break;
             }
         }
-        for(int i = currentIndex + 1; i < right; i++) {
+        for (int i = currentIndex + 1; i < right; i++) {
             if (arr[i] < root) {
                 return false;
             }
         }
-        return realVerify02(arr, left, currentIndex - 1) && realVerify02(arr, currentIndex, right -  1);
+        return realVerify02(arr, left, currentIndex - 1) && realVerify02(arr, currentIndex, right - 1);
     }
 
     public boolean verify03(int[] arr) {
@@ -112,20 +112,20 @@ public class VerifySequenceOfBST {
                 break;
             }
         }
-        for(int i = rightIndex + 1; i < right - 1; i++) {
-          if (arr[i] < root) {
-              return false;
-          }
+        for (int i = rightIndex + 1; i < right - 1; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
         }
         // 然后开始分别进行验证
-        return realVerify03(arr, left, rightIndex - 1) && realVerify03(arr, rightIndex, right -1);
+        return realVerify03(arr, left, rightIndex - 1) && realVerify03(arr, rightIndex, right - 1);
     }
 
     public boolean verify04(int[] arr) {
         if (arr == null || arr.length == 0) {
             return false;
         }
-        return realVerify04(arr, 0, arr.length -1);
+        return realVerify04(arr, 0, arr.length - 1);
     }
 
     private boolean realVerify04(int[] arr, int start, int end) {
@@ -141,10 +141,10 @@ public class VerifySequenceOfBST {
                 break;
             }
         }
-        for(int i = rightIndex + 1; i <= end -1; i++) {
-          if (arr[i] < root) {
-              return false;
-          }
+        for (int i = rightIndex + 1; i <= end - 1; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
         }
         return realVerify04(arr, start, rightIndex - 1) && realVerify04(arr, rightIndex, end - 1);
     }
@@ -165,10 +165,10 @@ public class VerifySequenceOfBST {
         int root = arr[end];
         int rightStartIndex = 0;
         for (int i = start; i <= end; i++) {
-              if (arr[i] > root) {
-                  rightStartIndex = i;
-                  break;
-              }
+            if (arr[i] > root) {
+                rightStartIndex = i;
+                break;
+            }
         }
         for (int i = rightStartIndex; i <= end; i++) {
             if (arr[i] < root) {
@@ -198,13 +198,13 @@ public class VerifySequenceOfBST {
             }
         }
 
-        for(int i = rightIndex; i <= end; i++) {
+        for (int i = rightIndex; i <= end; i++) {
             if (arr[i] < root) {
                 return false;
             }
         }
 
-        return realVerify06(arr, start, rightIndex - 1) && realVerify06(arr, rightIndex, end-1);
+        return realVerify06(arr, start, rightIndex - 1) && realVerify06(arr, rightIndex, end - 1);
     }
 
     public boolean verify07(int[] arr) {
@@ -222,16 +222,16 @@ public class VerifySequenceOfBST {
         }
         int root = arr[end];
         int rightIndex = 0;
-        for(int i = start; i < end; i++) {
-          if (arr[i] > root) {
-              rightIndex = i;
-              break;
-          }
+        for (int i = start; i < end; i++) {
+            if (arr[i] > root) {
+                rightIndex = i;
+                break;
+            }
         }
-        for(int i = rightIndex; i <= end; i++) {
-          if (arr[i] < root) {
-              return false;
-          }
+        for (int i = rightIndex; i <= end; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
         }
         return realVerify07(arr, start, rightIndex - 1) && realVerify07(arr, rightIndex, end - 1);
     }
@@ -239,7 +239,7 @@ public class VerifySequenceOfBST {
     public boolean verify08(int[] arr) {
         // 验证一个这个序列是不是二叉树的后序遍历顺序
         // 检查是不是二叉树的后序遍历顺序 左右根，需要通过递归的方式进行追个检查子树的顺序
-        if (arr == null ||arr.length == 0) {
+        if (arr == null || arr.length == 0) {
             return false;
         }
         return realVerify08(arr, 0, arr.length - 1);
@@ -260,12 +260,12 @@ public class VerifySequenceOfBST {
             }
         }
         // 还需要检查后面的结果是否正确
-        for(int i = rightIndex + 1; i < end; i++) {
-          if (arr[i] < root) {
-              return false;
-          }
+        for (int i = rightIndex + 1; i < end; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
         }
-        return realVerify08(arr, start, rightIndex - 1) && realVerify08(arr, rightIndex , end-1);
+        return realVerify08(arr, start, rightIndex - 1) && realVerify08(arr, rightIndex, end - 1);
     }
 
     public boolean verify09(int[] arr) {
@@ -275,7 +275,7 @@ public class VerifySequenceOfBST {
         if (arr == null || arr.length == 0) {
             return false;
         }
-        return realVerify09(arr, 0, arr.length -1);
+        return realVerify09(arr, 0, arr.length - 1);
     }
 
     public boolean realVerify09(int[] arr, int start, int end) {
@@ -285,25 +285,54 @@ public class VerifySequenceOfBST {
 
         int rootValue = arr[end];
         int rightIndex = -1;
-        for(int i = start; i < end; i++) {
-          if (arr[i] > rootValue) {
-              rightIndex = i;
-              break;
-          }
+        for (int i = start; i < end; i++) {
+            if (arr[i] > rootValue) {
+                rightIndex = i;
+                break;
+            }
         }
-        for(int i = rightIndex + 1; i < end; i++) {
-          if (arr[i] < rootValue) {
-              System.out.println("realVerify09....:" + arr[i] + ":rightIndex:" + rightIndex);
-              return false;
-          }
+        for (int i = rightIndex + 1; i < end; i++) {
+            if (arr[i] < rootValue) {
+                System.out.println("realVerify09....:" + arr[i] + ":rightIndex:" + rightIndex);
+                return false;
+            }
         }
         // 分了左右然后在分别进行检测
-        return realVerify09(arr, start, rightIndex - 1) && realVerify09(arr, rightIndex, end -1);
+        return realVerify09(arr, start, rightIndex - 1) && realVerify09(arr, rightIndex, end - 1);
+    }
+
+    // 验证二叉树后续遍历的顺序问题
+    public boolean verify10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        // 如何验证 左右跟 还是要区分左右进行验证 递归进行验证
+        return realVerify10(arr, 0, arr.length - 1);
+    }
+
+    public boolean realVerify10(int[] arr, int start, int end) {
+        if (start > end) {
+            return true;
+        }
+        int root = arr[end];
+        int rightIndex = 0;
+        for (int i = start; i < end; i++) {
+            if (arr[i] > root) {
+                rightIndex = i;
+                break;
+            }
+        }
+        for (int i = rightIndex; i < end; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+        }
+        return realVerify(arr, start, rightIndex - 1) && realVerify(arr, rightIndex, end - 1);
     }
 
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 2};
-        System.out.println(new VerifySequenceOfBST().verify09(arr));
+        System.out.println(new VerifySequenceOfBST().verify10(arr));
     }
 }

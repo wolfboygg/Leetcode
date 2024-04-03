@@ -171,6 +171,23 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCount)  * Math.pow(2, twoCount));
     }
 
+    public int cut09(int target) {
+        // 减绳子
+        if (target <= 2) {
+            return 1;
+        }
+        if (target == 3) {
+            return 2;
+        }
+        int three = target / 3;
+        int tow = 0;
+        if (target - three * 3 == 1) {
+            three -= 1;
+        }
+        tow = (target - three * 3) / 2;
+        return (int) (Math.pow(3, three) * Math.pow(2, tow));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
         System.out.println(cutShengZi.cut08(8));

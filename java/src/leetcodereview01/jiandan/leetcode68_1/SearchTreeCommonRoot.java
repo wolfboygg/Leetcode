@@ -56,7 +56,7 @@ public class SearchTreeCommonRoot {
     }
 
     public TreeNode findComRoot02(TreeNode node, TreeNode left, TreeNode right) {
-        while(node != null) {
+        while (node != null) {
             // 判断左右
             if (left.value > node.value && right.value > node.value) {
                 node = node.right;
@@ -70,7 +70,7 @@ public class SearchTreeCommonRoot {
     }
 
     public TreeNode findComRoot03(TreeNode node, TreeNode left, TreeNode right) {
-        while(node != null) {
+        while (node != null) {
             if (node.value > left.value && node.value > right.value) {
                 node = node.left;
             } else if (node.value < left.value && node.value < right.value) {
@@ -84,7 +84,7 @@ public class SearchTreeCommonRoot {
 
     public TreeNode findComRoot04(TreeNode node, TreeNode left, TreeNode right) {
         // 二叉搜索树的最近公共祖先
-        while(node != null) {
+        while (node != null) {
             if (node.value > left.value && node.value > right.value) {
                 node = node.left;
             } else if (node.value < left.value && node.value < right.value) {
@@ -98,7 +98,7 @@ public class SearchTreeCommonRoot {
 
     public TreeNode findComRoot05(TreeNode root, TreeNode left, TreeNode right) {
         // 二叉搜索树找到公共祖先 左比跟小 右比跟大 所以可以根据这个特性进行处理
-        while(root != null) {
+        while (root != null) {
             if (root.value > left.value && root.value > right.value) {
                 root = root.left;
             } else if (root.value < left.value && root.value < right.value) {
@@ -112,7 +112,7 @@ public class SearchTreeCommonRoot {
 
     public TreeNode findComRoot06(TreeNode root, TreeNode left, TreeNode right) {
         // 找到最近的公共祖先 需要的就是通过一个while循环进行查找
-        while(root != null) {
+        while (root != null) {
             if (root.value > left.value && root.value > right.value) {
                 root = root.left;
             } else if (root.value < left.value && root.value < right.value) {
@@ -124,10 +124,26 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot07(TreeNode root, TreeNode node1, TreeNode node2) {
+        if (root == null) {
+            return null;
+        }
+        while (root != null) {
+            if (root.value > node1.value && root.value > node2.value) {
+                root = root.left;
+            } else if (root.value < node1.value && root.value < node2.value) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot05(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot06(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

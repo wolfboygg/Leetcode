@@ -255,10 +255,38 @@ public class SearchTreeToLink {
         inOrder11(root.right);
     }
 
+    // 搜索二叉树转换为一个有序列表 左跟右 这样进行遍历 然后进行转换
+    public TreeNode convert12(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        inOrder12(root);
+        return head;
+    }
+
+    public void inOrder12(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder12(root.left);
+        // 找到最左边的节点
+        if (head == null) {
+            head = root;
+        }
+        // 没遍历right 先遍历左孩子
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder12(root.right);
+    }
+
+
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert11(searchTree);
+        TreeNode convert = searchTreeToLink.convert12(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

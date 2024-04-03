@@ -64,7 +64,7 @@ public class SymmetricTree {
         if (head1 == null && head2 == null) {
             return true;
         }
-        if (head1 == null || head2== null) {
+        if (head1 == null || head2 == null) {
             return false;
         }
         return head1.value == head2.value && check03(head1.left, head2.right) && check03(head1.right, head2.left);
@@ -149,11 +149,29 @@ public class SymmetricTree {
         return node1.value == node2.value && check08(node1.left, node2.right) && check06(node1.right, node2.left);
     }
 
+    public boolean isSymmetric09(TreeNode root) {
+        // 判断是否是一个镜像二叉树
+        if (root == null) {
+            return false;
+        }
+        return realIsSymmetric09(root, root);
+    }
+
+    public boolean realIsSymmetric09(TreeNode root1, TreeNode root2) {
+        // 左子树等于右子树
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        return root1.value == root2.value && realIsSymmetric09(root1.left, root2.left) && realIsSymmetric09(root1.right, root2.right);
+    }
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric08(tree));
+        System.out.println(symmetricTree.isSymmetric09(tree));
     }
 
 }

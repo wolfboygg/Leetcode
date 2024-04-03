@@ -198,6 +198,26 @@ public class GiftMaxValue {
         return help[row -1][column -1];
     }
 
+    public int getMaxValue11(int[][] matrix) {
+        // 求礼物的最大价值 通过辅助数组进行实现
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int[][] valueMatrix = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                // 只找最大的
+                if (i > 0) {
+                    valueMatrix[i][j] = Math.max(valueMatrix[i][j], valueMatrix[i-1][j]);
+                }
+                if (j > 0) {
+                    valueMatrix[i][j] = Math.max(valueMatrix[i][j], valueMatrix[i][j-1]);
+                }
+                valueMatrix[i][j] += matrix[i][j];
+            }
+        }
+        return valueMatrix[row  - 1][column - 1];
+    }
+
     public static void main(String[] args) {
         int[][] arr = {
                 {1, 3, 1},
@@ -205,7 +225,7 @@ public class GiftMaxValue {
                 {4, 2, 1}
         };
         GiftMaxValue giftMaxValue = new GiftMaxValue();
-        System.out.println(giftMaxValue.getMaxValue10(arr));
+        System.out.println(giftMaxValue.getMaxValue11(arr));
     }
 
 }

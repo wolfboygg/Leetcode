@@ -69,8 +69,19 @@ public class Number1Count {
         return count;
     }
 
+
+    public int getNumberOf1Count07(int target) {
+        // 求一个整数转换为二进制时候的1的个数
+        int count = 0;
+        while (target > 0) {
+            count++;
+            target = target & (target - 1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         Number1Count numIn1Count = new Number1Count();
-        System.out.println(numIn1Count.getNumberOf1Count06(10));
+        System.out.println(numIn1Count.getNumberOf1Count07(10));
     }
 }

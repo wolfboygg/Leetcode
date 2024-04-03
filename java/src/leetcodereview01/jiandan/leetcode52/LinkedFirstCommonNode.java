@@ -83,9 +83,21 @@ public class LinkedFirstCommonNode {
         System.out.println(P1.value);
     }
 
+    public void findCommonNode09(Node node1, Node node2) {
+        // 找到公共节点 使用快慢指针的方式进行切换
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1 != null ? P1.next : node2;
+            P2 = P2 != null ? P2.next : node1;
+        }
+        System.out.println(P1.value);
+    }
+
 
     public static void main(String[] args) {
         LinkedFirstCommonNode linkedFirstCommonNode = new LinkedFirstCommonNode();
+        Node node00 = new Node(2);
         Node node01 = new Node(4);
         Node node02 = new Node(1);
 
@@ -98,6 +110,7 @@ public class LinkedFirstCommonNode {
         Node node04 = new Node(4);
         Node node05 = new Node(5);
 
+        node00.next = node01;
         node01.next = node02;
         node02.next = node03;
         node03.next = node04;
@@ -108,7 +121,7 @@ public class LinkedFirstCommonNode {
         node013.next = node03;
 
         linkedFirstCommonNode.findCommonNode(node01, node011);
-        linkedFirstCommonNode.findCommonNode08(node01, node011);
+        linkedFirstCommonNode.findCommonNode09(node01, node011);
 
     }
 

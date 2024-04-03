@@ -109,10 +109,28 @@ public class MaxSubStr {
         return max;
     }
 
+    public int findMaxLength06(String str) {
+        // 找到最大的不连续字符串的长度
+        int index = -1;
+        int maxLength = 0;
+        int resLength = 0;
+        char[] charArr = str.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < charArr.length; i++) {
+            if (map.containsKey(charArr[i])) {
+                index = Math.max(index, map.get(charArr[i]));
+            }
+            map.put(charArr[i], i);
+            resLength = Math.max(resLength, i - index);
+            maxLength = Math.max(resLength, maxLength);
+        }
+        return maxLength;
+    }
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength05(str));
+        System.out.println(maxSubStr.findMaxLength06(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

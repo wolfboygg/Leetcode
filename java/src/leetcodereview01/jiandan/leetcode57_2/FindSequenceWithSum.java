@@ -13,7 +13,7 @@ public class FindSequenceWithSum {
         int start = 1;
         int end = 2;
         int curSum = 3;
-        while(end < sum) {
+        while (end < sum) {
             if (curSum < sum) {
                 end++;
                 curSum += end;
@@ -27,10 +27,10 @@ public class FindSequenceWithSum {
                 }
                 result.add(list);
                 // 加完了还需要处理
-                curSum-=start;
+                curSum -= start;
                 start++;
                 end++;
-                curSum+=end;
+                curSum += end;
             }
         }
         return result;
@@ -42,7 +42,7 @@ public class FindSequenceWithSum {
         int P2 = 2;
         int sum = 3;
         List<List<Integer>> result = new ArrayList<>();
-        while(P2 <= target) {
+        while (P2 <= target) {
             // 进行判断
             if (sum < target) {
                 P2++;
@@ -71,17 +71,17 @@ public class FindSequenceWithSum {
         int P2 = 2;
         List<List<Integer>> list = new ArrayList<>();
         int curSum = P1 + P2;
-        while(P2 <= target) {
+        while (P2 <= target) {
             if (curSum < target) {
                 P2++;
                 curSum += P2;
             } else if (curSum > target) {
-                curSum-=P1;
+                curSum -= P1;
                 P1++;
             } else {
                 // 进行加入
                 List<Integer> tempList = new ArrayList<>();
-                for(int i = P1; i <= P2; i++) {
+                for (int i = P1; i <= P2; i++) {
                     tempList.add(i);
                 }
                 list.add(tempList);
@@ -99,7 +99,7 @@ public class FindSequenceWithSum {
         int end = 2;
         int curSum = start + end;
         List<List<Integer>> ret = new ArrayList<>();
-        while(end <= sum) {
+        while (end <= sum) {
             if (curSum < sum) {
                 end++;
                 curSum += end;
@@ -109,8 +109,8 @@ public class FindSequenceWithSum {
             } else {
                 // 表示等于了那么就搞一下
                 List<Integer> temp = new ArrayList<>();
-                for(int i = start; i <= end; i++) {
-                  temp.add(i);
+                for (int i = start; i <= end; i++) {
+                    temp.add(i);
                 }
                 ret.add(temp);
                 curSum -= start;
@@ -126,27 +126,28 @@ public class FindSequenceWithSum {
     public List<List<Integer>> findSequence05(int target) {
         // 从1 到 100  和为100
         List<List<Integer>> ret = new ArrayList<>();
-        int P1 = 1; int P2 = 2;
+        int P1 = 1;
+        int P2 = 2;
         int sum = 3;
         while (P2 <= target) {
             if (sum == target) {
                 List<Integer> list = new ArrayList<>();
-                for(int j = P1; j <= P2; j++) {
-                  list.add(j);
+                for (int j = P1; j <= P2; j++) {
+                    list.add(j);
                 }
                 ret.add(list);
                 // 后序还需要往后走
-                sum-=P1;
+                sum -= P1;
                 P1++;
                 P2++;
-                sum+=P2;
+                sum += P2;
             } else if (sum < target) {
                 P2++;
                 sum += P2;
             } else {
-               // 改变一下sum看看是否与target相等
-               sum-=P1;
-               P1++;
+                // 改变一下sum看看是否与target相等
+                sum -= P1;
+                P1++;
             }
         }
         return ret;
@@ -157,25 +158,53 @@ public class FindSequenceWithSum {
         List<List<Integer>> ret = new ArrayList<>();
         int P1 = 1, P2 = 2;
         int value = P1 + P2;
-        while(P2 < target) {
+        while (P2 < target) {
             // 然后往后加就行呗，注意当等于target之后需要全部移动
-            if(value < target) {
+            if (value < target) {
                 P2++;
                 value += P2;
             } else if (value > target) {
-                value -=P1;
+                value -= P1;
                 P1++;
             } else {
                 // 这里相等了，需要进行所有的序列入队
                 List<Integer> arr = new ArrayList<>();
-                for(int i = P1; i <= P2; i++) {
-                  arr.add(i);
+                for (int i = P1; i <= P2; i++) {
+                    arr.add(i);
                 }
                 ret.add(arr);
-                value-=P1;
+                value -= P1;
                 P1++;
                 P2++;
-                value+=P2;
+                value += P2;
+            }
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> findSequence07(int target) {
+        // 找到连续的和为target的序列
+        List<List<Integer>> ret = new ArrayList<>();
+        int P1 = 1;
+        int P2 = 2;
+        int sum = 3;
+        while (P2 <= target) {
+            if (sum > target) {
+                sum -= P1;
+                P1++;
+            } else if (sum < target) {
+                P2++;
+                sum += P2;
+            } else {
+                List<Integer> list = new ArrayList<>();
+                for (int i = P1; i <= P2; i++) {
+                    list.add(i);
+                }
+                ret.add(list);
+                sum -= P1;
+                P1++;
+                P2++;
+                sum += P2;
             }
         }
         return ret;
@@ -183,11 +212,11 @@ public class FindSequenceWithSum {
 
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence05(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence06(100);
         System.out.println(sequence);
     }
 
-    private List<List<Integer>>  findSequence(int sum) {
+    private List<List<Integer>> findSequence(int sum) {
         List<List<Integer>> numSequence = new ArrayList<>();
         int start = 1;
         int end = 2;

@@ -148,9 +148,28 @@ public class WayNumber {
         return res;
     }
 
+    public int getWayNumber09(int n) {
+        // 青蛙跳台阶
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int value = 0;
+        int pre1 = 1;
+        int pre2 = 2;
+        for (int i = 3; i <= n; i++) {
+            value = pre1 + pre2;
+            pre1 = pre2;
+            pre2 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
-        int wayNumber1 = wayNumber.getWayNumber07(7);
+        int wayNumber1 = wayNumber.getWayNumber08(7);
         System.out.println(wayNumber1);
     }
 }

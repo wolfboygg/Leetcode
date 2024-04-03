@@ -20,7 +20,7 @@ public class MaxGP {
             if (arr[i] < min) {
                 min = arr[i];
             }
-            maxValue = Math.max(maxValue, arr[i]- min);
+            maxValue = Math.max(maxValue, arr[i] - min);
         }
         return maxValue;
     }
@@ -78,9 +78,19 @@ public class MaxGP {
         return maxValue;
     }
 
+    public int getMaxValue07(int[] arr) {
+        int minValue = arr[0];
+        int maxValue = 0;
+        for (int i = 1; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            maxValue = Math.max(maxValue, arr[i] - minValue);
+        }
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         MaxGP maxGP = new MaxGP();
-        System.out.println(maxGP.getMaxValue06(arr));
+        System.out.println(maxGP.getMaxValue07(arr));
     }
 }

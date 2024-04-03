@@ -144,14 +144,32 @@ public class StackPushPopList {
         return stack.isEmpty();
     }
 
+    // 检查是否是栈的弹出序列 使用一个辅助栈进行实现
+    public boolean isPopSequence10(int[] pushList, int[] popList) {
+        if (pushList == null || popList == null) {
+            return false;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int popIndex = 0;
+        for (int i = 0; i < pushList.length; i++) {
+            stack.push(pushList[i]);
+            while(!stack.isEmpty() && stack.peek() == popList[popIndex]) {
+                stack.pop();
+                popIndex++;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
     public static void main(String[] args) {
         int[] pushList = {1, 2, 3, 4, 5};
         int[] popList = {4, 5, 3, 2, 1};
         int[] popList02 = {4, 3, 5, 1, 2};
         StackPushPopList stackPushPopList = new StackPushPopList();
-        System.out.println(stackPushPopList.isPopSequence09(pushList, popList));
-        System.out.println(stackPushPopList.isPopSequence09(pushList, popList02));
-        System.out.println(stackPushPopList.isPopSequence09(pushList, popList));
+        System.out.println(stackPushPopList.isPopSequence10(pushList, popList));
+        System.out.println(stackPushPopList.isPopSequence10(pushList, popList02));
+        System.out.println(stackPushPopList.isPopSequence10(pushList, popList));
     }
 
     private boolean isPopSquence(int[] pushList, int[] popList) {

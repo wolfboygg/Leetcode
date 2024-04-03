@@ -131,12 +131,24 @@ public class MirrorTree {
         return node;
     }
 
+    public TreeNode mirrorTree09(TreeNode root) {
+        // 镜像二叉树
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree09(root.left);
+        TreeNode right = mirrorTree09(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree08(tree);
+        mirrorTree.mirrorTree09(tree);
         mirrorTree.traversalTree(tree);
     }
 

@@ -89,12 +89,29 @@ public class FindFirstCharInString {
         }
     }
 
+    public void findFirstChar07(String str) {
+        // 找到只出现一次的字符串
+        char[] charArr = str.toCharArray();
+        int[] countCharArr = new int[128];
+        for (int i = 0; i < charArr.length; i++) {
+            int index = charArr[i];
+            countCharArr[index]++;
+        }
+        // 遍历
+        for (int i = 0; i < charArr.length; i++) {
+            if (countCharArr[charArr[i]] == 1) {
+                System.out.println("first char is:" + charArr[i]);
+                break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
 //        char c = findFirstCharInString.find(str);
 //        System.out.println(c);
-        findFirstCharInString.findFirstChar06(str);
+        findFirstCharInString.findFirstChar07(str);
     }
 
     private char find(String str) {

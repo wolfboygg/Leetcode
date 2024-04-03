@@ -79,11 +79,11 @@ public class QuickSort {
         int pivot = arr[startIndex];
         int left = startIndex + 1;
         int right = endIndex;
-        while(left != right) {
-            while(left < right && arr[right] > pivot) {
+        while (left != right) {
+            while (left < right && arr[right] > pivot) {
                 right--;
             }
-            while(left < right && arr[left] < pivot) {
+            while (left < right && arr[left] < pivot) {
                 left++;
             }
             if (left < right) {
@@ -114,11 +114,11 @@ public class QuickSort {
         int left = startIndex;
         int right = endIndex;
         int pivot = arr[startIndex];
-        while(left != right) {
-            while(left < right && arr[right] > pivot) {
+        while (left != right) {
+            while (left < right && arr[right] > pivot) {
                 right--;
             }
-            while(left < right && arr[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++;
             }
             if (left < right) {
@@ -146,10 +146,10 @@ public class QuickSort {
         int right = endIndex;
         int pivot = arr[startIndex];
         while (left != right) {
-            while(left < right && arr[right] > pivot) {
+            while (left < right && arr[right] > pivot) {
                 right--;
             }
-            while(left < right && arr[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++; // 这里需要++ 往后走一个
             }
             if (left < right) {
@@ -158,7 +158,7 @@ public class QuickSort {
                 arr[right] = temp;
             }
         }
-        arr[startIndex] = arr[left] ;
+        arr[startIndex] = arr[left];
         arr[left] = pivot;
         return left;
     }
@@ -168,7 +168,7 @@ public class QuickSort {
             return;
         }
         int pivot = partition06(arr, startIndex, endIndex);
-        sortByDouble06(arr, startIndex, pivot -1);
+        sortByDouble06(arr, startIndex, pivot - 1);
         sortByDouble06(arr, pivot + 1, endIndex);
     }
 
@@ -176,11 +176,11 @@ public class QuickSort {
         int left = startIndex;
         int right = endIndex;
         int pivot = arr[startIndex];
-        while(left != right) {
+        while (left != right) {
             while (left < right && arr[right] > pivot) {
                 right--;
             }
-            while(left < right && arr[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++;
             }
             if (left < right) {
@@ -207,11 +207,11 @@ public class QuickSort {
         int left = startIndex;
         int right = endIndex;
         int pivot = arr[startIndex];
-        while(left != right) {
+        while (left != right) {
             while (left < right && arr[right] > pivot) { // 一定要从右边开始
                 right--;
             }
-            while(left < right && arr[left] <= pivot) {
+            while (left < right && arr[left] <= pivot) {
                 left++;
             }
             if (left < right) {
@@ -239,11 +239,11 @@ public class QuickSort {
         int base = arr[startIndex];
         int left = startIndex + 1;
         int right = endIndex;
-        while(left != right) {
-            while(left < right && arr[right] > base) {// 右边开始
+        while (left != right) {
+            while (left < right && arr[right] > base) {// 右边开始
                 right--;
             }
-            while(left < right && arr[left] < base) {
+            while (left < right && arr[left] < base) {
                 left++;
             }
             if (left < right) {
@@ -273,12 +273,12 @@ public class QuickSort {
         int pivotValue = arr[start];
         int left = start + 1; // 注意这里要舍掉start的值，要从下一个开始处理
         int right = end;
-        while(left < right) {
+        while (left < right) {
             // 从右边开始循环
             while (left < right && arr[right] > pivotValue) {
                 right--;
             }
-            while(left < right && arr[left] < pivotValue) {
+            while (left < right && arr[left] < pivotValue) {
                 left++;
             }
             if (left < right) {
@@ -307,12 +307,12 @@ public class QuickSort {
         int pivotValue = arr[start];
         int left = start + 1;
         int right = end;
-        while(left != right) {
+        while (left != right) {
             // 从右边开始处理
-            while(left < right && arr[right] > pivotValue) {
+            while (left < right && arr[right] > pivotValue) {
                 right--;
             }
-            while(left < right && arr[left] < pivotValue) {
+            while (left < right && arr[left] < pivotValue) {
                 left++;
             }
             if (left != right) {
@@ -326,11 +326,44 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble11(int[] arr, int start, int end) {
+        // 快速排序
+        if (start >= end) {
+            return;
+        }
+        int pivotIndex = findPivot(arr, start, end);
+        sortByDouble11(arr, start, pivotIndex - 1);
+        sortByDouble11(arr, pivotIndex + 1, end);
+    }
+
+    public int findPivot(int[] arr, int start, int end) {
+        // 选一个基准值来进行判断 交换
+        int pivotValue = arr[start];
+        int left = start + 1;
+        int right = end;
+        while (left != right) {
+            while (left < right && arr[left] < pivotValue) {
+                left++;
+            }
+            while (left < right && arr[right] > pivotValue) {
+                right--;
+            }
+            if (left != right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        // 最后和start换
+        arr[start] = arr[left];
+        arr[left] = pivotValue;
+        return left;
+    }
 
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble10(arr, 0, arr.length - 1);
+        quickSort.sortByDouble11(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

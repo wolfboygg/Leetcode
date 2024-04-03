@@ -110,7 +110,7 @@ public class BalanceTree {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
-    // 这种递归的操作必须有一个全局的变量来承接结果
+    // 这种递归的操作必须有一个全局的变量来承接结果  
     public int isBalanceTree07(TreeNode root) {
         if (root == null) {
             return 0;
@@ -122,11 +122,24 @@ public class BalanceTree {
         }
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    public int isBalanceTree08(TreeNode root) {
+        // 判断是否是平衡二叉树 就是判断左右两个子树的差值是否大于1
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree08(root.left);
+        int rightDepth = isBalanceTree08(root.right);
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree06(tree);
+        balanceTree.isBalanceTree08(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

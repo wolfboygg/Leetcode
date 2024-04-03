@@ -4,6 +4,7 @@ package leetcodereview01.jiandan.leetcode38;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StringAllSequence {
@@ -196,10 +197,36 @@ public class StringAllSequence {
         }
     }
 
+    public void getAllSequence08(String str) {
+        // 字符串的全排列
+        char[] charArr = str.toCharArray();
+        boolean[] mark = new boolean[charArr.length];
+        realAllSequence08(charArr, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void realAllSequence08(char[] arr, boolean[] mark, StringBuilder sb) {
+        if (sb.length() == arr.length) {
+            ret.add(new String(sb));
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            sb.append(arr[i]);
+            mark[i] = true;
+            realAllSequence08(arr, mark, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            mark[i] = false;
+        }
+    }
+
+
+
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence07(str);
+        stringAllSequence.getAllSequence08(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

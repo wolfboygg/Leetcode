@@ -170,10 +170,36 @@ public class AdjustArray {
         }
         System.out.println(Arrays.toString(arr));
     }
+
+    public void adjustByPointer10(int[] arr) {
+        // 调整数组中的元素的奇偶顺序
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        int P2 = arr.length -1;
+        while(P1 < P2) {
+            while(P1 < P2 && arr[P2] % 2 == 0) {
+                P2--;
+            }
+            while(P1 < P2 && arr[P1] % 2 != 0) {
+                P1++;
+            }
+            if (P1 != P2) {
+                int temp = arr[P1];
+                arr[P1] = arr[P2];
+                arr[P2] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+
+
     public static void main(String[] args) {
         AdjustArray adjustArray = new AdjustArray();
         int[] arr = {1, 5, 8, 3, 2, 4, 5};
-        adjustArray.adjustByPointer09(arr);
+        adjustArray.adjustByPointer10(arr);
     }
 
     public void adjustByFor(int[] arr) {

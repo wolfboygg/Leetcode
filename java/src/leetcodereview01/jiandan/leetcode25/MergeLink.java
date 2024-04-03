@@ -146,6 +146,28 @@ public class MergeLink {
         return temp.next;
     }
 
+    public Node merge09(Node node1, Node node2) {
+        // 合并两个排序的链表
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+
+            if (node1.value > node2.value) {
+                temp.next = node2;
+                node2 = node2.next;
+            } else {
+                temp.next = node1;
+                node1 = node1.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(3);
@@ -161,7 +183,7 @@ public class MergeLink {
         node5.next = node6;
 
         MergeLink mergeLink = new MergeLink();
-        Node node = mergeLink.merge08(node1, node4);
+        Node node = mergeLink.merge09(node1, node4);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

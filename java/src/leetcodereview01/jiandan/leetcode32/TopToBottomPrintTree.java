@@ -108,7 +108,7 @@ public class TopToBottomPrintTree {
         Queue<TreeNode> queue = new LinkedList<>();
         List<Integer> list = new ArrayList<>();
         queue.offer(node);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             list.add(poll.value);
             if (poll.left != null) {
@@ -129,7 +129,7 @@ public class TopToBottomPrintTree {
         List<Integer> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(node);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             list.add(poll.value);
             if (poll.left != null) {
@@ -147,7 +147,7 @@ public class TopToBottomPrintTree {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(node);
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             list.add(poll.value);
             if (poll.left != null) {
@@ -164,7 +164,7 @@ public class TopToBottomPrintTree {
         List<Integer> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             list.add(poll.value);
             if (poll.left != null) {
@@ -182,7 +182,7 @@ public class TopToBottomPrintTree {
         List<Integer> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             list.add(poll.value);
             if (poll.left != null) {
@@ -200,7 +200,7 @@ public class TopToBottomPrintTree {
         // 需要使用栈进行辅助
         Queue<TreeNode> stack = new LinkedList<>();
         stack.offer(root);
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             TreeNode pop = stack.poll();
             System.out.print(pop.value + " ");
             if (pop.left != null) {
@@ -215,7 +215,7 @@ public class TopToBottomPrintTree {
     public void print08(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             System.out.print(poll.value + " ");
             if (poll.left != null) {
@@ -234,7 +234,7 @@ public class TopToBottomPrintTree {
         // 从上到下打印二叉树
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(node);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             if (poll.left != null) {
                 queue.offer(poll.left);
@@ -250,7 +250,7 @@ public class TopToBottomPrintTree {
         // 层次遍历 使用队列进行辅助
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             if (poll.left != null) {
                 queue.offer(poll.left);
@@ -266,7 +266,7 @@ public class TopToBottomPrintTree {
         // 二叉树的广度遍历 使用一个队列的来实现
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             if (poll.left != null) {
                 queue.offer(poll.left);
@@ -278,9 +278,28 @@ public class TopToBottomPrintTree {
         }
     }
 
+    // 广度优先遍历二叉树
+    public void print12(TreeNode root) {
+        // 使用广度优先遍历就需要使用队列辅助打印
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.offer(root);
+            while (!queue.isEmpty()) {
+                TreeNode poll = queue.poll();
+                if (poll.left != null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+                System.out.print(poll.value + " ");
+            }
+        }
+    }
+
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.print11(tree);
+        topToBottomPrintTree.print12(tree);
     }
 }

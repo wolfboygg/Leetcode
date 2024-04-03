@@ -93,6 +93,21 @@ public class ReverseLink {
         return pre.next;
     }
 
+    public Node reverseLink08(Node head) {
+        // 反转链表
+        if (head == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
+        }
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node01 = new Node(1);
         Node node02 = new Node(2);
@@ -104,7 +119,7 @@ public class ReverseLink {
         node03.next = node04;
         node04.next = node05;
         ReverseLink reverseLink = new ReverseLink();
-        Node node = reverseLink.reverseLink07(node01);
+        Node node = reverseLink.reverseLink08(node01);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

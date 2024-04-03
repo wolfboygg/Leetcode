@@ -116,7 +116,7 @@ public class TreeSub {
         if (root == null) {
             return false;
         }
-        if (node == null){
+        if (node == null) {
             return true;
         }
         return root.value == node.value && isSubtreeWithRoot05(root.left, node.left) && isSubtreeWithRoot05(root.right, node.right);
@@ -173,6 +173,24 @@ public class TreeSub {
             return true;
         }
         return root.value == node.value && isSubtreeWithRoot08(root.left, node.left) && isSubtreeWithRoot08(root.right, node.right);
+    }
+
+    public boolean isSub09(TreeNode root, TreeNode childRoot) {
+        // 判断是否是子树
+        if (root == null || childRoot == null) {
+            return false;
+        }
+        return realIsSub08(root, childRoot) || isSub09(root.left, childRoot) || isSub09(root.right, childRoot);
+    }
+
+    public boolean realIsSub08(TreeNode root, TreeNode child) {
+        if (root == null) {
+            return false;
+        }
+        if (child == null) {
+            return true;
+        }
+        return root.value == child.value && realIsSub08(root.left, child.left) && realIsSub08(root.right, child.right);
     }
 
 

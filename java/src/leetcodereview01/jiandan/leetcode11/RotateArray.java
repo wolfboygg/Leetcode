@@ -163,11 +163,31 @@ public class RotateArray {
         return arr[low];
     }
 
+    public int getMinValueByTx09(int[] arr) {
+        // 找到旋转数组中的最小值，通过二分查找的方式进行处理
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 4, 5, 0, 1, 2, 3
+        int low = 0;
+        int height = arr.length - 1;
+        while(low < height) {
+            // 这里需要计算middle的值
+            int middle = low + (height - low) / 2;
+            if (arr[middle] < arr[height]) {
+                height = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return arr[low];
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTX08(arr2);
+        int i = rotateArray.getMinValueByTx09(arr);
         System.out.println("最小值为:" + i);
     }
 }

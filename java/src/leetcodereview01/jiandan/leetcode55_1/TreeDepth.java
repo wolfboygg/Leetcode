@@ -100,11 +100,21 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getTreeDepth09(TreeNode root) {
+        // 求二叉树的深度
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getTreeDepth(root.left);
+        int rightDepth = getTreeDepth(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
 
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();
         TreeNode tree = treeDepth.createTree();
-        int depth = treeDepth.getTreeDepth07(tree);
+        int depth = treeDepth.getTreeDepth09(tree);
         System.out.println(depth);
     }
 

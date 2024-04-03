@@ -35,7 +35,7 @@ public class MinKNumber {
             }
         }
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             list.add(queue.poll());
         }
         return list;
@@ -52,13 +52,13 @@ public class MinKNumber {
         for (int i = 0; i < k; i++) {
             queue.offer(arr[i]);
         }
-        for (int i = k; i< arr.length; i++) {
+        for (int i = k; i < arr.length; i++) {
             if (queue.peek() > arr[i]) {
                 queue.poll();
                 queue.offer(arr[i]);
             }
         }
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             System.out.print(queue.poll());
         }
     }
@@ -68,7 +68,7 @@ public class MinKNumber {
         PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1-o2;
+                return o1 - o2;
             }
         });
         for (int i = 0; i < k; i++) {
@@ -80,7 +80,7 @@ public class MinKNumber {
                 queue.offer(arr[i]);
             }
         }
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             System.out.println(queue.poll());
         }
     }
@@ -108,7 +108,7 @@ public class MinKNumber {
     public List<Integer> findMinKNumByDump05(int[] arr, int k) {
         // 找出最小的k个数，需要使用大头堆来进行处理，如果比大就出
         // 先放入K个数
-        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1- o2);
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
         for (int i = 0; i < k; i++) {
             queue.offer(arr[i]);
         }
@@ -120,7 +120,7 @@ public class MinKNumber {
         }
         // 最后输出
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             list.add(queue.poll());
         }
         return list;
@@ -141,7 +141,7 @@ public class MinKNumber {
         }
         // 然后输出
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             list.add(queue.poll());
         }
         return list;
@@ -151,8 +151,8 @@ public class MinKNumber {
     public List<Integer> findMinKNumByDump07(int[] arr, int target) {
         // 最小的k个数，使用大头堆进行实现
         PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
-        for(int i = 0; i < target; i++) {
-          queue.offer(arr[i]);
+        for (int i = 0; i < target; i++) {
+            queue.offer(arr[i]);
         }
         for (int i = target; i < arr.length; i++) {
             Integer peek = queue.peek();
@@ -162,7 +162,7 @@ public class MinKNumber {
             }
         }
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             Integer poll = queue.poll();
             list.add(poll);
         }
@@ -184,10 +184,10 @@ public class MinKNumber {
             }
         }
         List<Integer> list = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             list.add(queue.poll());
         }
-      return list;
+        return list;
     }
 
     // 最小的K个数，使用大头堆进行解决
@@ -196,7 +196,7 @@ public class MinKNumber {
             return null;
         }
         // 使用大头堆进行处理
-        Queue<Integer>  queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
         for (int i = 0; i < k; i++) {
             queue.offer(arr[i]);
         }
@@ -207,10 +207,33 @@ public class MinKNumber {
             }
         }
         List<Integer> ret = new ArrayList<>();
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             ret.add(queue.poll());
         }
         return ret;
+    }
+
+
+    public List<Integer> findMinKNumberByDump10(int[] arr, int k) {
+        // 找到最小的K个数
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>((Comparator<Integer>) (o1, o2) -> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (arr[i] < queue.peek()) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            list.add(queue.poll());
+        }
+        return list;
     }
 
     public static void main(String[] args) {
@@ -218,7 +241,7 @@ public class MinKNumber {
         MinKNumber minKNumber = new MinKNumber();
         int[] num = minKNumber.findMinKNum(arr, 4);
         System.out.println(Arrays.toString(num));
-        List<Integer> minKNumByDump = minKNumber.findMinKNumByDump09(arr, 4);
+        List<Integer> minKNumByDump = minKNumber.findMinKNumberByDump10(arr, 4);
         System.out.println(minKNumByDump.toString());
 //        minKNumber.findMinKNumberByDump03(arr, 4);
     }
