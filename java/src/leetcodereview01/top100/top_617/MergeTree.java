@@ -1,6 +1,5 @@
 package leetcodereview01.top100.top_617;
 
-import com.sun.scenario.effect.Merge;
 import leetcodereview01.jiandan.leetcode36.SearchTreeToLink;
 
 public class MergeTree {
