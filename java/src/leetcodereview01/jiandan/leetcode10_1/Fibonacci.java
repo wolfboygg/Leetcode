@@ -182,6 +182,24 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH10(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        int pre = 1;
+        int post = 1;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = pre +  post;
+            pre = post;
+            post = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
         int fibonacciValue = fibonacci.getFibonacciByGH08(6);

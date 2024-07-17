@@ -2,13 +2,15 @@ package leetcodereview01.jiandan.leetcode04;
 
 public class MatrixArrayFind {
 
-    /** 按规律查找 */
+    /**
+     * 按规律查找
+     */
     public boolean findDestNumber04(int[][] matrix, int target) {
         int row = matrix.length;
         int column = matrix[0].length;
         int r = 0;
-        int c = column -1;
-        while(r < row && c >=0) {
+        int c = column - 1;
+        while (r < row && c >= 0) {
             if (matrix[r][c] > target) {
                 c--;
             } else if (matrix[r][c] < target) {
@@ -82,10 +84,10 @@ public class MatrixArrayFind {
         int row = matrix.length;
         int column = matrix[0].length;
         int r = 0;
-        int c = column -1;
-        while(r < row && c >=0) {
+        int c = column - 1;
+        while (r < row && c >= 0) {
             if (matrix[r][c] > target) {
-               c--;
+                c--;
             } else if (matrix[r][c] < target) {
                 r++;
             } else {
@@ -100,8 +102,8 @@ public class MatrixArrayFind {
         int row = matrix.length;
         int column = matrix[0].length;
         int i = 0;
-        int j = column -1;
-        while(i < row && j >=0) {
+        int j = column - 1;
+        while (i < row && j >= 0) {
             if (matrix[i][j] > target) {
                 j--;
             } else if (matrix[i][j] < target) {
@@ -118,9 +120,9 @@ public class MatrixArrayFind {
         int column = arr[0].length;
         int i = 0;
         int j = column - 1;
-        while(i < row && j >=0) {
+        while (i < row && j >= 0) {
             if (arr[i][j] > target) {
-               j--;
+                j--;
             } else if (arr[i][j] < target) {
                 i++;
             } else {
@@ -134,8 +136,8 @@ public class MatrixArrayFind {
         int row = matrix.length;
         int column = matrix[0].length;
         int i = 0;
-        int j = column -1;
-        while(i < row && j >=0) {
+        int j = column - 1;
+        while (i < row && j >= 0) {
             if (matrix[i][j] > target) {
                 j--;
             } else if (matrix[i][j] < target) {
@@ -151,8 +153,8 @@ public class MatrixArrayFind {
         int row = matrix.length;
         int column = matrix[0].length;
         int i = 0;
-        int j = column -1;
-        while(i < row && j >=0) {
+        int j = column - 1;
+        while (i < row && j >= 0) {
             if (matrix[i][j] > target) {
                 j--;
             } else if (matrix[i][j] < target) {
@@ -170,7 +172,7 @@ public class MatrixArrayFind {
         int column = matrix[0].length;
         int i = 0;
         int j = column - 1;
-        while(i < row && j >= 0) {
+        while (i < row && j >= 0) {
             if (matrix[i][j] > target) {
                 j--;
             } else if (matrix[i][j] < target) {
@@ -188,7 +190,7 @@ public class MatrixArrayFind {
         int column = matrix[0].length;
         int i = column - 1;
         int j = 0;
-        while(i >= 0 && j < row) {
+        while (i >= 0 && j < row) {
             if (matrix[i][j] > target) {
                 i--;
             } else if (matrix[i][j] < target) {
@@ -201,11 +203,11 @@ public class MatrixArrayFind {
     }
 
     public boolean findDestNumber11(int[][] matrix, int target) {
-        int row = matrix.length -1;
-        int column = matrix[0].length -1;
+        int row = matrix.length - 1;
+        int column = matrix[0].length - 1;
         int i = 0;
         int j = column - 1;
-        while(i <= row && j >=0) {
+        while (i <= row && j >= 0) {
             if (matrix[i][j] > target) {
                 j--;
             } else if (matrix[i][j] < target) {
@@ -218,15 +220,35 @@ public class MatrixArrayFind {
     }
 
     public boolean findDestNumber12(int[][] matrix, int target) {
-        int row = matrix.length -1;
-        int column = matrix[0].length-1;
+        int row = matrix.length - 1;
+        int column = matrix[0].length - 1;
         int i = 0;
         int j = column;
-        while(i <= row && j >=0) {
+        while (i <= row && j >= 0) {
             if (matrix[i][j] < target) {
                 i++;
             } else if (matrix[i][j] > target) {
                 j--;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean findDestNumber13(int[][] matrix, int target) {
+        if (matrix == null) {
+            return false;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int i = row - 1;
+        int j = 0;
+        while(i >= 0 && j < column) {
+            if (matrix[i][j] > target) {
+                i--;
+            } else if (matrix[i][j]  < target) {
+                j++;
             } else {
                 return true;
             }
@@ -243,7 +265,7 @@ public class MatrixArrayFind {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean destNumberExit = matrixArrayFind.findDestNumber12(arr, 22);
+        boolean destNumberExit = matrixArrayFind.findDestNumber13(arr, 31);
         if (destNumberExit) {
             System.out.println("存在");
         } else {

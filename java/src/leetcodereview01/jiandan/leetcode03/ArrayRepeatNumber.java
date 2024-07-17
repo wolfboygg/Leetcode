@@ -212,11 +212,30 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber12(int[] arr) {
+        // 位置替换法
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i) {
+                if (arr[i] != arr[arr[i]]) {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber11(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber12(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

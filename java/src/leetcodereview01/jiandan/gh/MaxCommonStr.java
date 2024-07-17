@@ -267,14 +267,54 @@ public class MaxCommonStr {
         return max;
     }
 
+
+    public int findMaxCommonStr08(String s1, String s2) {
+        // 最大公共字串 需要连续
+        int s1Length = s1.length();
+        int s2Length = s2.length();
+        char[] arrS1 = s1.toCharArray();
+        char[] arrS2 = s2.toCharArray();
+        int[][] matrix = new int[s1Length + 1][s2Length + 1];
+        int maxLength = 0;
+        for (int i = 1; i <= s1Length; i++) {
+            for (int j = 1; j <= s2Length; j++) {
+                if (arrS1[i-1] == arrS2[j-1]) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                    maxLength = Math.max(maxLength, matrix[i][j]);
+                } else {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    public int findMaxCommonSequence08(String s1, String s2) {
+        char[] s1Arr = s1.toCharArray();
+        char[] s2Arr = s2.toCharArray();
+        int max = 0;
+        int[][] matrix = new int[s1Arr.length +1][s2Arr.length + 1];
+        for (int i = 1; i < s1Arr.length + 1; i++) {
+            for (int j = 1; j < s2Arr.length + 1; j++) {
+                if (s1Arr[i-1]== s2Arr[j-1]) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                } else {
+                    matrix[i][j] = matrix[i-1][j-1];
+                }
+                max = Math.max(max, matrix[i][j]);
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String s1 = "ABCDEFG";
         String s2 = "ABADEFKG";
         // 最大公共字串
         MaxCommonStr maxCommonStr = new MaxCommonStr();
-        int maxLength = maxCommonStr.findMaxCommonStr07(s1, s2);
+        int maxLength = maxCommonStr.findMaxCommonStr08(s1, s2);
         System.out.println(maxLength);
-        int maxSequence = maxCommonStr.findMaxCommonSequence07(s1, s2);
+        int maxSequence = maxCommonStr.findMaxCommonSequence08(s1, s2);
         System.out.println(maxSequence);
     }
 }

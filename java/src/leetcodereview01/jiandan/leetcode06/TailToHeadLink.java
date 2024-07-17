@@ -176,6 +176,25 @@ public class TailToHeadLink {
         }
     }
 
+    // 反转链表
+    public void printLinkByHead09(Node head) {
+        if (head ==  null) {
+            return;
+        }
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
+        }
+        head = pre.next;
+        while(head != null) {
+            System.out.print(head.value + " ");
+            head = head.next;
+        }
+    }
+
     public static void main(String[] args) {
         TailToHeadLink tailToHeadLink = new TailToHeadLink();
         TailToHeadLink.Node node01 = new TailToHeadLink.Node(1);
@@ -187,6 +206,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByHead08(node01);
+        tailToHeadLink.printLinkByHead09(node01);
     }
 }

@@ -254,12 +254,41 @@ public class RebuildTree {
         return root;
     }
 
+    public TreeNode rebuildTree12(int[] preOrder, int[] inOrder) {
+        // 重新构建二叉树，通过递归的方式进行处理
+        if (preOrder == null || preOrder.length == 0 || inOrder == null || inOrder.length == 0) {
+            return null;
+        }
+        // 需要存储一下index，为了计算左右子树的节点个数
+        for (int i = 0; i < inOrder.length; i++) {
+            indexOrder.put(inOrder[i], i);
+        }
+        TreeNode node = realRebuild12(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+        return node;
+    }
+
+    // 3  9  20  15  7
+    // 9, 3, 15, 20, 7
+    public TreeNode realRebuild12(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int rootInOrderIndex = indexOrder.get(rootValue);
+        int leftNum = rootInOrderIndex - inLeft;
+        TreeNode root = new TreeNode();
+        root.value = rootValue;
+        root.left = realRebuild12(preOrder, preLeft + 1, preLeft + leftNum, inOrder, inLeft, rootInOrderIndex - 1);
+        root.right = realRebuild12(preOrder, preLeft + 1 + leftNum, preRight, inOrder, rootInOrderIndex + 1, inRight);
+        return root;
+    }
+
     public static void main(String[] args) {
         int[] preOrder = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         RebuildTree rebuildTree = new RebuildTree();
         // 3920157
-        TreeNode treeNode = rebuildTree.rebuildTree10(preOrder, inOrder);
+        TreeNode treeNode = rebuildTree.rebuildTree12(preOrder, inOrder);
         rebuildTree.preOrderTraversal(treeNode);
     }
 }
