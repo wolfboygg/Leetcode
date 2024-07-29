@@ -550,6 +550,22 @@ public class TreeTraversal {
         }
     }
 
+    public void traversalTreeByLevel(TreeNode root) {
+        // 通过队列的方式进行实现
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            System.out.print(poll.data + " ");
+            if (poll.leftChild != null) {
+                queue.offer(poll.leftChild);
+            }
+            if (poll.rightChild != null) {
+                queue.offer(poll.rightChild);
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(
@@ -568,5 +584,7 @@ public class TreeTraversal {
         treeTraversal.inOrderTraversalByStack05(binaryTree);
         System.out.println();
         treeTraversal.postOrderTraversalByStack05(binaryTree);
+        System.out.println();
+        treeTraversal.traversalTreeByLevel(binaryTree);
     }
 }

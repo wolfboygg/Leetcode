@@ -216,9 +216,28 @@ public class BubbleSort {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void sort11(int[] arr) {
+        // 优化版本
+        for (int i = 0; i < arr.length; i++) {
+            boolean isSort = true;
+            for(int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    isSort = false;
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+            if (isSort) {
+                break;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
         BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.sort10(arr);
+        bubbleSort.sort11(arr);
     }
 }

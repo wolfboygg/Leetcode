@@ -360,10 +360,75 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble12(int[] arr, int start, int end) {
+        // 快速排序
+        if (start >= end) {
+            return;
+        }
+        int pivotIndex = findPivotValue12(arr, start, end);
+        sortByDouble12(arr, start, pivotIndex - 1);
+        sortByDouble12(arr, pivotIndex + 1, end);
+    }
+
+    // 平均时间复杂度为nlogn 最坏为n * n
+    public int findPivotValue12(int[] arr, int start, int end) {
+        int left = start + 1;
+        int right = end;
+        int pivotValue = arr[start];
+        while(left < right) {
+            if (left < right && arr[right] > pivotValue) {
+                right--;
+            }
+            if (left < right && arr[left] < pivotValue) {
+                left++;
+            }
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        arr[start] = arr[left];
+        arr[left] = pivotValue;
+        return left;
+    }
+
+    public void sortByDouble13(int[] arr, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int pivotIndex = findPivotIndex13(arr, start, end);
+        sortByDouble13(arr, start, pivotIndex - 1);
+        sortByDouble13(arr, pivotIndex + 1, end);
+    }
+
+    public int findPivotIndex13(int[] arr, int start, int end) {
+        int pivotRoot = arr[start];
+        int left = start + 1;
+        int right = end;
+        while(left < right) {
+            while(left < right && arr[right] > pivotRoot) {
+                right--;
+            }
+            while(left < right && arr[left] < pivotRoot) {
+                left++;
+            }
+            if (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        arr[start] = arr[left];
+        arr[left] = pivotRoot;
+        return left;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble11(arr, 0, arr.length - 1);
+        quickSort.sortByDouble13(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }
