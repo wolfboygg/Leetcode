@@ -218,6 +218,27 @@ public class GiftMaxValue {
         return valueMatrix[row  - 1][column - 1];
     }
 
+    /** 礼物的最大价值 通过动态规划的方式 */
+    public int getMaxValue12(int[][] matrix) {
+        // 通过一个辅助的数组进行求解
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int[][] help = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (i > 0) {
+                    help[i][j] = Math.max(help[i-1][j], help[i][j]);
+                }
+                if (j > 0) {
+                    help[i][j] = Math.max(help[i][j-1], help[i][j]);
+                }
+                help[i][j] += matrix[i][j];
+            }
+        }
+        return help[row-1][column-1];
+    }
+
+
     public static void main(String[] args) {
         int[][] arr = {
                 {1, 3, 1},

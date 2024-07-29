@@ -26,9 +26,17 @@ public class PrintMaxN {
         }
     }
 
+    public void print04(int target) {
+        // 打印到最大
+        int value = (int) (Math.pow(10, target) - 1);
+        for (int i = 0; i <= value; i++) {
+            System.out.println(i);
+        }
+    }
+
     public static void main(String[] args) {
         PrintMaxN printMaxN = new PrintMaxN();
-        printMaxN.print03(3);
+        printMaxN.print04(3);
     }
 
     private void printAllNumber(int n) {

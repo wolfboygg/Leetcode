@@ -138,10 +138,27 @@ public class TowSumInArray {
         return new int[2];
     }
 
+    // 数组中是否存在两个数的和为target
+    public int[] getTargetSum07(int[] arr, int target) {
+        // 通过双指针的方式进行查找
+        int P1 = 0;
+        int P2 = arr.length -1;
+        while (P1 <  P2) {
+            if (arr[P2] + arr[P1] > target) {
+                P2--;
+            } else if (arr[P2] + arr[P1] < target) {
+                P1++;
+            } else {
+                return new int[]{arr[P1], arr[P2]};
+            }
+        }
+        return new int[2];
+    }
+
     public static void main(String[] args) {
         int[] arr = {2, 7, 11, 15};
         TowSumInArray towSumInArray = new TowSumInArray();
-        int[] targetValue = towSumInArray.getTargetSum06(arr, 9);
+        int[] targetValue = towSumInArray.getTargetSum07(arr, 9);
         System.out.println(Arrays.toString(targetValue));
     }
 }

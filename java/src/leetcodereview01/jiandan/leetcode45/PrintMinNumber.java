@@ -65,9 +65,29 @@ public class PrintMinNumber {
         System.out.println(sb.toString());
     }
 
+    // 打印最小的组合数 通过比较的方式进行处理
+    public void printMin03(int[] arr) {
+        // 字符串进行比较
+        String[] str = new String[arr.length];
+        for (int i = 0; i < str.length; i++) {
+            str[i] = arr[i] + "";
+        }
+        Arrays.sort(str, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o1 + o2).compareTo(o2 + o1);
+            }
+        });
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length; i++) {
+            sb.append(str[i]);
+        }
+        System.out.println(sb);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {3, 32, 321};
-        new PrintMinNumber().printMin02(arr);
+        new PrintMinNumber().printMin03(arr);
     }
 }

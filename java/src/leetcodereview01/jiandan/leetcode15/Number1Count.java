@@ -80,8 +80,18 @@ public class Number1Count {
         return count;
     }
 
+    public int getNumberOf1Count08(int target) {
+        // & n-1
+        int n = 0;
+        while(target > 0) {
+            n += 1;
+            target &= (target -1);
+        }
+        return n;
+    }
+
     public static void main(String[] args) {
         Number1Count numIn1Count = new Number1Count();
-        System.out.println(numIn1Count.getNumberOf1Count07(10));
+        System.out.println(numIn1Count.getNumberOf1Count08(10));
     }
 }

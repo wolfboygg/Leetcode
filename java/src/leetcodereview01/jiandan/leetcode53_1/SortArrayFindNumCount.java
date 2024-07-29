@@ -122,10 +122,39 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    // 找到最小的count，就是找到前一个找到后一个 相减
+    public void count5(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int leftIndex = binaryFind05(arr, target, true);
+        int rightIndex = binaryFind05(arr, target, false) -1;
+        if (leftIndex >= 0 && leftIndex < arr.length && rightIndex >= 0 && rightIndex < arr.length && arr[leftIndex] == target && arr[rightIndex]== target) {
+            System.out.println(rightIndex - leftIndex + 1) ;
+        }
+    }
+
+    public int binaryFind05(int[] arr, int target, boolean isLow) {
+        int low = 0;
+        int height = arr.length - 1;
+        int targetIndex = -1;
+        while(low <= height) {
+            int middle = low + (height - low) / 2;
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                height = middle - 1;
+                targetIndex = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count4(arr, 10);
+        sortArrayFindNumCount.count01(arr, 10);
     }
 
     private void count(int[] arr, int target) {

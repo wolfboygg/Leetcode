@@ -75,10 +75,31 @@ public class FindCountMoreHalfArray {
         System.out.println(max);
     }
 
+    // 找到超过一半的数字 通过hashmap进行查找
+    public void findByHashMap07(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) +1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Set<Integer> integers = map.keySet();
+        Iterator<Integer> iterator = integers.iterator();
+        Integer max = -1;
+        while (iterator.hasNext()) {
+            Integer next = iterator.next();
+            Integer integer = map.get(next);
+            max = max > integer ? max : next; // 取的应该是key 比值取key
+        }
+        System.out.println(max);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         FindCountMoreHalfArray findCountMoreHalfArray = new FindCountMoreHalfArray();
-        findCountMoreHalfArray.findByHashMap06(arr);
+        findCountMoreHalfArray.findByHashMap07(arr);
     }
 
     // 使用HashMap进行统计

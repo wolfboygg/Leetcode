@@ -188,9 +188,30 @@ public class CutShengZi {
         return (int) (Math.pow(3, three) * Math.pow(2, tow));
     }
 
+
+    public int cut10(int target) {
+        // 贪婪算法
+        if (target <= 2) {
+            return 1;
+        }
+        if (target ==3) {
+            return 2;
+        }
+        // 先算3
+        int three = target / 3;
+        int tow = 0;
+        if (target - three * 3 == 1) {
+            three -= 1;
+        }
+        // 这里也需要算一下 不止是== 1的情况 还有正好等于2的情况
+        tow = (target - three * 3) / 2;
+        return (int) (Math.pow(3, three)  * Math.pow(2, tow));
+
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut08(8));
+        System.out.println(cutShengZi.cut10(8));
     }
 
     private int cut(int target) {

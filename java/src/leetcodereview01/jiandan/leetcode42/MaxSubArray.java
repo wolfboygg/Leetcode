@@ -2,6 +2,7 @@ package leetcodereview01.jiandan.leetcode42;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MaxSubArray {
     public void findSum03(int[] arr) {
@@ -112,12 +113,26 @@ public class MaxSubArray {
         return maxValue;
     }
 
+    /** 最大的子数组和 连续的 通过动态规划的进行计算 重新设置位置 */
+    public int findSum12(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int max = 0;
+        int subMax = 0;
+        for (int i = 0; i < arr.length; i++) {
+            subMax = Math.max(arr[i], subMax + arr[i]);
+            max = Math.max(max, subMax);
+        }
+        System.out.println(max);
+        return max;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum11(arr);
+        maxSubArray.findSum12(arr);
         String str = "abc";
         String str2 = "abc";
         System.out.println(str == str2);

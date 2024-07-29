@@ -282,11 +282,42 @@ public class SearchTreeToLink {
         inOrder12(root.right);
     }
 
+    public TreeNode convert13(TreeNode root) {
+        // 搜索二叉树转换为链表
+        if (root == null) {
+            return null;
+        }
+        // 通过中序遍历进行转换 从小到大 左 根 右
+        inOrder13(root);
+        if (head != null) {
+            return head;
+        }
+        return null;
+    }
+
+
+    public void inOrder13(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder13(root.left);
+        // 这里需要进行抓换
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder13(root.right);
+    }
+
 
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert12(searchTree);
+        TreeNode convert = searchTreeToLink.convert13(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

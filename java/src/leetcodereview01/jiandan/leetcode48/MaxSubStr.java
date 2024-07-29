@@ -1,6 +1,9 @@
 package leetcodereview01.jiandan.leetcode48;
 
+import org.omg.CORBA.INTERNAL;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class MaxSubStr {
 
@@ -113,7 +116,6 @@ public class MaxSubStr {
         // 找到最大的不连续字符串的长度
         int index = -1;
         int maxLength = 0;
-        int resLength = 0;
         char[] charArr = str.toCharArray();
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < charArr.length; i++) {
@@ -121,16 +123,34 @@ public class MaxSubStr {
                 index = Math.max(index, map.get(charArr[i]));
             }
             map.put(charArr[i], i);
-            resLength = Math.max(resLength, i - index);
-            maxLength = Math.max(resLength, maxLength);
+            maxLength = Math.max(maxLength, i - index); // 思想其实是滑动窗口的方式
         }
         return maxLength;
+    }
+
+    public int findMaxLength07(String str) {
+        // 最长的不连续字符串长度
+        char[] chars = str.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int resLength = 0;
+        int index = -1;
+        for (int i = 0; i < chars.length; i++) {
+            if (map.containsKey(chars[i])) {
+                // 有问题了
+                index = Math.max(index, map.getOrDefault(chars[i], i));
+            }
+            map.put(chars[i], i);
+            resLength = Math.max(resLength, i - index);
+            max = Math.max(max, resLength);
+        }
+        return max;
     }
 
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength06(str));
+        System.out.println(maxSubStr.findMaxLength07(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

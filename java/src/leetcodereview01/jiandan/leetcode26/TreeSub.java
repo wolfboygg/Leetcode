@@ -193,6 +193,27 @@ public class TreeSub {
         return root.value == child.value && realIsSub08(root.left, child.left) && realIsSub08(root.right, child.right);
     }
 
+    // 判断是否是树的子结构 使用递归的方式进行判断
+    public boolean isSub10(TreeNode root, TreeNode child) {
+        // 判断null的 需要判断是否有一个为null
+        if (root == null || child == null) {
+            return false;
+        }
+        return isSubTreeWithRoot10(root, child) || isSub10(root.left, child) || isSub10(root.right, child);
+    }
+
+    public boolean isSubTreeWithRoot10(TreeNode root, TreeNode child) {
+        // 校验
+        if (root == null) {
+            return false;
+        }
+        if (child == null) {
+            return true;
+        }
+        return root.value == child.value && isSubTreeWithRoot10(root.left,child.left) && isSubTreeWithRoot10(root.right, child.right);
+    }
+
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
@@ -212,12 +233,12 @@ public class TreeSub {
 
         TreeNode node8 = new TreeNode(8);
         TreeNode node9 = new TreeNode(8);
-        TreeNode node10 = new TreeNode(7);
+        TreeNode node10 = new TreeNode(9);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub08(node1, node8));
+        System.out.println(new TreeSub().isSub10(node1, node8));
 
     }
 }

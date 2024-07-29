@@ -128,6 +128,20 @@ public class SearchTreeKNode {
         dfs07(root.left);
     }
 
+    // 搜索二叉搜索树的第K大的节点 先右 根 左
+    public void  dfs08(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs08(root.right);
+        k--;
+        if (k == 0) {
+            result = root.value;
+
+        }
+        dfs08(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();

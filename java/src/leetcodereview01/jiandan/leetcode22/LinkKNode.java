@@ -141,7 +141,26 @@ public class LinkKNode {
         return  P2;
     }
 
+    public Node getTailKNode10(Node head, int k) {
+        // 倒数第K个节点
+        if (k < 0 || head == null) {
+            return null;
+        }
+        // 先走K步，然后在统一开始走
+        Node P1 = head;
+        Node P2 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
 
+        return P2;
+    }
+
+    // 1, 2, 3, 4, 5
     public static void main(String[] args) {
         LinkKNode linkKNode = new LinkKNode();
         Node node01 = new Node(1);
@@ -153,7 +172,7 @@ public class LinkKNode {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        Node node = linkKNode.getTailKNode09(node01, 2);
+        Node node = linkKNode.getTailKNode10(node01, 1);
         System.out.println(node.value);
     }
 }

@@ -177,8 +177,33 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power08(int base, int target) {
+        // 先看看是否是负数，然后在通过/2的方式进行计算大小
+        boolean isNegative = target < 0;
+        int value = realPower08(base, Math.abs(target));
+        return isNegative ? 1.0 / value : value;
+    }
+
+    public int realPower08(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        int value = realPower08(base, target / 2);
+        value *= value;
+        if (target % 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power07(2, -3));
+        System.out.println(doubleNumPower.power08(2, -3));
     }
+
+
 }

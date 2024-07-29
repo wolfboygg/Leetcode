@@ -222,11 +222,44 @@ public class StringAllSequence {
     }
 
 
+    // 字符串的全排列
+    public List<String> getAllSequence09(String str) {
+        // 需要回溯
+        if (str == null || str.length() == 0) {
+            return new ArrayList<>();
+        }
+        char[] charArr = str.toCharArray();
+        boolean[] mark = new boolean[charArr.length];
+        backTracking09(charArr, mark, new StringBuilder());
+        System.out.println(ret.toString());
+        return ret;
+    }
+
+    public void backTracking09(char[] charArr, boolean[] mark, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(sb.toString());
+            return;
+        }
+
+        for (int i = 0; i < charArr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            sb.append(charArr[i]);
+            mark[i] = true;
+            backTracking09(charArr, mark, sb);
+            mark[i] = false;
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence08(str);
+        stringAllSequence.getAllSequence09(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

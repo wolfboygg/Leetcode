@@ -142,6 +142,19 @@ public class MirrorTree {
         return root;
     }
 
+    public TreeNode mirrorTree10(TreeNode root) {
+        // 镜像二叉树
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree10(root.left);
+        TreeNode right = mirrorTree10(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();

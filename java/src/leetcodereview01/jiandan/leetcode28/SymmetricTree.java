@@ -16,7 +16,7 @@ public class SymmetricTree {
         // 1,2,2,3,4,4,3
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(5);
         TreeNode node4 = new TreeNode(3);
         TreeNode node5 = new TreeNode(4);
         TreeNode node6 = new TreeNode(4);
@@ -168,10 +168,30 @@ public class SymmetricTree {
         return root1.value == root2.value && realIsSymmetric09(root1.left, root2.left) && realIsSymmetric09(root1.right, root2.right);
     }
 
+    // 判断是否一颗对称的二叉树
+    public boolean isSymmetric10(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return realIsSymmetric10(root, root);
+    }
+
+    public boolean realIsSymmetric10(TreeNode node1, TreeNode node2) {
+        // 判断是否对称，通过递归的方式进行处理
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+        return node1.value == node2.value && realIsSymmetric10(node1.left, node2.right) && realIsSymmetric10(node1.right, node2.left);
+    }
+
+
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric09(tree));
+        System.out.println(symmetricTree.isSymmetric10(tree));
     }
 
 }

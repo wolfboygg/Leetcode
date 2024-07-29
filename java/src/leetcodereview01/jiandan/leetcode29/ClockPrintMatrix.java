@@ -275,6 +275,50 @@ public class ClockPrintMatrix {
         return value;
     }
 
+
+    // 循环打印矩阵，注意奇数的问题
+    public List<Integer> printMatrix08(int[][] matrix) {
+        if (matrix == null ) {
+            return new ArrayList<>();
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int left = 0;
+        int right = column - 1;
+        int top = 0;
+        int bottom = row - 1;
+        List<Integer> value = new ArrayList<>();
+        while(left <= right && top <= bottom) {
+            // 上
+            for (int i = left; i <= right; i++) {
+                value.add(matrix[top][i]);
+            }
+            // 右
+            for (int i = top + 1; i <= bottom; i++) {
+                value.add(matrix[i][right]);
+            }
+            // 下
+            if (top != bottom) {
+                for (int i = right - 1; i >= left; i--) {
+                    value.add(matrix[bottom][i]);
+                }
+            }
+            // 左
+            if (left != right) {
+                for (int i = bottom - 1; i > top; i--) {
+                    value.add(matrix[i][left]);
+                }
+            }
+            left++;
+            top++;
+            right--;
+            bottom--;
+
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         int[][] matrix = {
                 {1, 2, 3, 4},
@@ -283,6 +327,6 @@ public class ClockPrintMatrix {
                 {13, 14, 15, 16},
         };
         ClockPrintMatrix clockPrintMatrix = new ClockPrintMatrix();
-        System.out.println(clockPrintMatrix.printMatrix07(matrix));
+        System.out.println(clockPrintMatrix.printMatrix08(matrix));
     }
 }

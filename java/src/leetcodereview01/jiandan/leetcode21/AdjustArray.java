@@ -194,12 +194,37 @@ public class AdjustArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    // 调整数组的奇偶顺序
+    public void adjustByPointer11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        // 通过指针的方式进行调整
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while (P1 < P2) { // 不是等于的问题，需要在里面判断是否小于
+            while (P1 < P2 && arr[P2] % 2 == 0) {
+                P2--;
+            }
+            while (P1 < P2 && arr[P1] % 2 == 1) { // 这时候循环不会越界
+                P1++;
+            }
+            if (P1 != P2) {
+                int tmp = arr[P1];
+                arr[P1] = arr[P2];
+                arr[P2] = tmp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
 
 
+
+    // 1, 5, 8, 3, 2, 4, 5
     public static void main(String[] args) {
         AdjustArray adjustArray = new AdjustArray();
         int[] arr = {1, 5, 8, 3, 2, 4, 5};
-        adjustArray.adjustByPointer10(arr);
+        adjustArray.adjustByPointer11(arr);
     }
 
     public void adjustByFor(int[] arr) {

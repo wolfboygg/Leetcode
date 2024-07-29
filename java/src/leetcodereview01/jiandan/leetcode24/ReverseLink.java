@@ -108,6 +108,22 @@ public class ReverseLink {
         return pre.next;
     }
 
+    // 反转链表
+    public Node reverseLink09(Node head) {
+        // 使用尾插入法
+        if (head == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
+        }
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node01 = new Node(1);
         Node node02 = new Node(2);
@@ -119,7 +135,7 @@ public class ReverseLink {
         node03.next = node04;
         node04.next = node05;
         ReverseLink reverseLink = new ReverseLink();
-        Node node = reverseLink.reverseLink08(node01);
+        Node node = reverseLink.reverseLink09(node01);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

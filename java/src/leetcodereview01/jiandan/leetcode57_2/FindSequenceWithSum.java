@@ -210,9 +210,38 @@ public class FindSequenceWithSum {
         return ret;
     }
 
+    public List<List<Integer>> findSequence08(int target) {
+        // 找到一个序列的和为target
+        int P1 = 1;
+        int P2 = 2;
+        List<List<Integer>> ret = new ArrayList<>();
+        int currentValue = P1 + P2;
+        while (P2 <= target) {
+            if (currentValue < target) {
+                P2++;
+                currentValue += P2;
+            } else if (currentValue > target) {
+                currentValue -= P1;
+                P1++;
+            } else {
+                // 等于对应的值
+                List<Integer> helpArr = new ArrayList<>();
+                for (int i = P1; i <= P2; i++) {
+                    helpArr.add(i);
+                }
+                ret.add(helpArr);
+                currentValue -= P1;
+                P1++;
+                P2++;
+                currentValue += P2;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence06(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence07(100);
         System.out.println(sequence);
     }
 

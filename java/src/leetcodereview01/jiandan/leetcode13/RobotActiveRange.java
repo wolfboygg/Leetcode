@@ -379,13 +379,58 @@ public class RobotActiveRange {
 
 
 
+    public void findPath10(int m, int n, int target) {
+        // 找到机器人能够进入的格子数
+        int[][] matrix = new int[m][n];
+        this.row = m;
+        this.column = n;
+        // 计算大小
+        int max = Math.max(m, n);
+        int[] arr = new int[max];
+        for (int i = 0; i < arr.length; i++) {
+            int tmp = i;
+            while(tmp > 0) {
+                arr[i] += tmp % 10;
+                tmp = tmp / 10;
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = arr[i] + arr[j];
+            }
+        }
+
+        // 然后进行计算走过的格子
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+
+        boolean[][] mark = new boolean[m][n];
+        backTracking10(matrix, next, mark, 0, 0, target);
+        System.out.println(count);
+    }
+
+    public void backTracking10(int[][] matrix, int [][] next, boolean[][] mark, int i, int j, int target) {
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] > target) {
+            return;
+        }
+
+        this.count++;
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            backTracking10(matrix, next, mark, i + ints[0], j + ints[1], target);
+        }
+    }
 
 
 
 
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath09(3, 2, 2);
+        robotActiveRange.findPath10(3, 2, 2);
     }
 }
 

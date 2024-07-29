@@ -109,11 +109,36 @@ public class MinStack {
         return minorStack.peek();
     }
 
+
+    // 最小栈
+    public void push06(int value) {
+        majorStack.push(value);
+        if (majorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            if (minorStack.peek() > value) {
+                minorStack.push(value);
+            } else {
+                minorStack.push(minorStack.peek());
+            }
+
+        }
+    }
+
+    public int pop06() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int min06() {
+        return minorStack.peek();
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push05(-2);
-        minStack.push05(0);
-        minStack.push05(-3);
+        minStack.push06(-2);
+        minStack.push06(0);
+        minStack.push06(-3);
         System.out.println(minStack.min05());
         minStack.pop05();
         System.out.println(minStack.min05());

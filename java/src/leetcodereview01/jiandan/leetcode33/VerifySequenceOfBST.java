@@ -1,5 +1,6 @@
 package leetcodereview01.jiandan.leetcode33;
 
+
 /**
  * 验证二叉搜索数的后序遍历
  */
@@ -330,9 +331,40 @@ public class VerifySequenceOfBST {
         return realVerify(arr, start, rightIndex - 1) && realVerify(arr, rightIndex, end - 1);
     }
 
+    // 验证是否是二叉搜索树的后续遍历顺序 左右根  右 > 根 > 左
+    public boolean verify11(int[] arr) {
+        // 验证是否是后续遍历 主要是区分左右子树然后在进行验证
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        return realVerify11(arr, 0, arr.length - 1);
+    }
+
+    public boolean realVerify11(int[] arr, int left, int right) {
+        if (left >= right) {
+            return true;
+        }
+        // 区分左右进行验证
+        int root = arr[right];
+        int rightIndex = 0;
+        for (int i = left + 1; i <= right; i++) {
+            if (arr[i] > root) {
+                rightIndex = i;
+                break;
+            }
+        }
+        for (int i = rightIndex + 1; i <= right; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+        }
+        return realVerify(arr, left, rightIndex - 1) && realVerify(arr, rightIndex, right - 1);
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = {1, 3, 2};
-        System.out.println(new VerifySequenceOfBST().verify10(arr));
+        int[] arr = {4,6,5,9,8};
+        int[] arr2 = {44,9,6,5,8};
+        System.out.println(new VerifySequenceOfBST().verify11(arr2));
     }
 }

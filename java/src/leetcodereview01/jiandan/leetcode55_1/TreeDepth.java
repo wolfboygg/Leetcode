@@ -110,6 +110,15 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getTreeDepth10(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getTreeDepth10(root.left);
+        int rightDepth = getTreeDepth10(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
 
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();

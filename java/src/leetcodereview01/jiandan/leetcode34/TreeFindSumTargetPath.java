@@ -325,11 +325,36 @@ public class TreeFindSumTargetPath {
         list.remove(list.size() - 1);
     }
 
+    // 在树上找到一个路径 为target值 注意必须是最后一个节点为叶子节点这样的才是路径
+    public boolean findPath12(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath12(root, target, new ArrayList<>());
+        return !this.ret.isEmpty();
+    }
+
+    public void realFindPath12(TreeNode root, int target, ArrayList<Integer> arr) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        arr.add(root.value);
+        if (target == 0 && root.right == null && root.left == null) {
+            // 表示路径找到
+            ret.add(new ArrayList<>(arr));
+        } else {
+            realFindPath12(root.left, target, arr);
+            realFindPath12(root.right, target, arr);
+        }
+        arr.remove(arr.size() - 1);
+    }
+
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath11(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath12(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

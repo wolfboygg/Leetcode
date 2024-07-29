@@ -27,13 +27,33 @@ public class MaxProfit2 {
             matrix[i][0] = Math.max(matrix[i - 1][0], matrix[i - 1][1] + price[i]); // 没有
             matrix[i][1] = Math.max(matrix[i - 1][0] - price[i], matrix[i - 1][1]);// 有
         }
-        return matrix[price.length -1][0];
+        return matrix[price.length - 1][0];
     }
+
+    /**
+     * 有或者没有，一定要有一个转移的过程，比较有或者没有时候的最大值，表示当前应该有还是没有
+     * @param price
+     * @return
+     */
+    public int getMaxProfit02(int[] price) {
+        // 股票的最大利润，可以多次买卖 需要使用动态规划的方式进行处理
+        int[][] matrix = new int[price.length][2];
+        // arr[i][0] 表示没有
+        // arr[i][1] 表示有
+        matrix[0][0] = 0;
+        matrix[0][1] = -price[0];
+        for (int i = 1; i < price.length; i++) {
+            matrix[i][0] = Math.max(matrix[i - 1][0], matrix[i - 1][1] + price[i]); // 没有 //卖出
+            matrix[i][1] = Math.max(matrix[i - 1][0] - price[i], matrix[i - 1][1]);
+        }
+        return matrix[price.length-1][0]; // 取没有的时候的价值
+    }
+
 
     public static void main(String[] args) {
         int[] price = {7, 1, 5, 3, 6, 4};
         MaxProfit2 maxProfit2 = new MaxProfit2();
-        int value = maxProfit2.getMaxProfit01(price);
+        int value = maxProfit2.getMaxProfit02(price);
         System.out.println(value);
     }
 }

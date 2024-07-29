@@ -229,7 +229,7 @@ public class ReplaceSpace {
     }
 
     public void replaceSpace11(StringBuilder sb) {
-        if (sb == null || sb.isEmpty()) {
+        if (sb == null || sb.length() == 0) {
             return;
         }
         int P1 = sb.length() - 1;
