@@ -29,14 +29,14 @@ public class BubbleSort {
         int length = arr.length;
         for (int i = 0; i < length; i++) {
             boolean isSort = true;
-            for(int j = 0; j < length - i - 1; j++) {
-              // 需要和后一个进行比较，要不然咋比？
-              if (arr[j] > arr[j+1]) {
-                  int temp = arr[j];
-                  arr[j]  = arr[j+1];
-                  arr[j+1] = temp;
-                  isSort = false;
-              }
+            for (int j = 0; j < length - i - 1; j++) {
+                // 需要和后一个进行比较，要不然咋比？
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    isSort = false;
+                }
             }
             if (isSort) {
                 break;
@@ -54,10 +54,10 @@ public class BubbleSort {
             boolean isSort = true;
             for (int j = 0; j < length - i - 1; j++) {
                 // 为了和左后一个比较
-                if (arr[j]  < arr[j+1]) {
+                if (arr[j] < arr[j + 1]) {
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
-                    arr[j+1] = temp;
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -91,10 +91,10 @@ public class BubbleSort {
         for (int i = 0; i < arr.length; i++) {
             boolean isSort = true;
             for (int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j+1]) {
+                if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -109,13 +109,13 @@ public class BubbleSort {
         int length = arr.length;
         for (int i = 0; i < length; i++) {
             boolean isSort = true;
-            for(int j = 0; j < length - i - 1; j++) {
-              if (arr[j] > arr[j+1]) {
-                  int temp = arr[j];
-                  arr[j] = arr[j+1];
-                  arr[j+1] = temp;
-                  isSort = false;
-              }
+            for (int j = 0; j < length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    isSort = false;
+                }
             }
             if (isSort) {
                 break;
@@ -128,11 +128,11 @@ public class BubbleSort {
         // 一轮一轮进行处理
         for (int i = 0; i < arr.length; i++) {
             boolean isSort = true;
-            for(int j = 0; j < arr.length - i - 1; j++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -146,11 +146,11 @@ public class BubbleSort {
     public void sort07(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             boolean isSort = true;
-            for(int j = 0; j < arr.length - i - 1; j++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -167,10 +167,10 @@ public class BubbleSort {
             boolean isSort = true;
             for (int j = 0; j < arr.length - i - 1; j++) {
 
-                if (arr[j] > arr[j+1]) {
+                if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j]= arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -187,11 +187,11 @@ public class BubbleSort {
         // 就是多次进行循环
         for (int i = 0; i < arr.length; i++) {
             boolean isSort = true;
-            for (int j =  0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j+1]) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                     isSort = false;
                 }
             }
@@ -205,11 +205,11 @@ public class BubbleSort {
     public void sort10(int[] arr) {
         // 冒泡排序
         for (int i = 0; i < arr.length; i++) {
-            for(int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j+1]) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
         }
@@ -217,15 +217,39 @@ public class BubbleSort {
     }
 
     public void sort11(int[] arr) {
-        // 优化版本
+        if (arr == null || arr.length == 0) {
+            return;
+        }
         for (int i = 0; i < arr.length; i++) {
             boolean isSort = true;
-            for(int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j+1]) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[i] < arr[i + 1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
                     isSort = false;
+                }
+            }
+            if (isSort) {
+                break;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void sort12(int[] arr) {
+        // 冒泡排序
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            boolean isSort = true;
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] < arr[j + 1]) {
                     int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    isSort = false;
                 }
             }
             if (isSort) {
@@ -238,6 +262,6 @@ public class BubbleSort {
     public static void main(String[] args) {
         int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
         BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.sort11(arr);
+        bubbleSort.sort12(arr);
     }
 }

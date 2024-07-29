@@ -167,6 +167,21 @@ public class WayNumber {
         return value;
     }
 
+    public int getWayNumber10(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        int pre = 1;
+        int post = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = pre + post;
+            pre = post;
+            post = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
         int wayNumber1 = wayNumber.getWayNumber08(7);

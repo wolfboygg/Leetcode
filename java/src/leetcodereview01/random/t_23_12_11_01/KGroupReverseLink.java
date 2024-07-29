@@ -55,10 +55,51 @@ public class KGroupReverseLink {
             pre.next = root;
             root = next;
         }
-        Node temp = pre.next;
-        while(temp != null) {
-            System.out.print(temp.value + " ");
-            temp = temp.next;
+//        Node temp = pre.next;
+//        while(temp != null) {
+//            System.out.print(temp.value + " ");
+//            temp = temp.next;
+//        }
+        return pre.next;
+    }
+
+    public Node kGroupReverse01(Node head, int k) {
+        // k个一组反转链表
+        if (head == null) {
+            return null;
+        }
+        Node newHead = new Node(-1);
+        newHead.next = head;
+        Node start = newHead;
+        Node last = newHead;
+        while(last.next != null) {
+            for (int i = 0; i < k && last != null; i++) {
+                last = last.next;
+            }
+            Node next = last == null ? null : last.next;
+            if (last != null) {
+                last.next = null;
+            }
+            // 反转之后指针发生变化，需要先换一下
+            last = start.next;
+            start.next = realReverse01(start.next);
+
+            start = last;
+            if (last == null) {
+                break;
+            }
+            last.next = next;
+        }
+        return newHead.next;
+    }
+
+    public Node realReverse01(Node head) {
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
         }
         return pre.next;
     }
@@ -82,11 +123,11 @@ public class KGroupReverseLink {
         node7.next = node8;
 
         KGroupReverseLink reverseLink = new KGroupReverseLink();
-        Node node = reverseLink.kGroupReverse(node1, 3);
-//        while(node != null) {
-//            System.out.print(node.value + " ");
-//            node = node.next;
-//        }
+        Node node = reverseLink.kGroupReverse01(node1, 3);
+        while(node != null) {
+            System.out.print(node.value + " ");
+            node = node.next;
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package leetcodereview01.jiandan.leetcode11;
 
-import javax.xml.bind.annotation.XmlID;
 
 public class RotateArray {
 
