@@ -182,11 +182,27 @@ public class RotateArray {
         return arr[low];
     }
 
+    // 4, 5, 1, 2, 3
+    public int getMinValueByTx10(int[] arr) {
+        // 旋转数组中找到最小值  通过二分进行查找
+        int low = 0;
+        int height = arr.length -1;
+        while(low < height) { // 这里不能相等 相等会导致多计算一次 导致low多加一次1
+            int middle = low + (height - low) / 2;
+            if (arr[middle] < arr[height]) {
+                height = middle;
+            } else {
+                low = middle + 1;
+            }
+        }
+        return arr[low];
+    }
+
     public static void main(String[] args) {
-        int[] arr = {4, 5, 6, 7, 0, 1, 2, 3};
+        int[] arr = {4, 5, 6, 7,  1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTx09(arr);
+        int i = rotateArray.getMinValueByTx10(arr);
         System.out.println("最小值为:" + i);
     }
 }

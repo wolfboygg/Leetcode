@@ -242,14 +242,53 @@ public class MatrixPath {
         return false;
     }
 
+    public boolean findPath08(char[][] matrix, String path) {
+        // 通过回溯的方式进行处理
+        if (matrix == null || path.isEmpty()) {
+            return false;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        // 通过回溯的方式进行查找
+        this.row = row;
+        this.column = column;
+        char[] pathArr = path.toCharArray();
+        // 需要定一个方向 和是否走过
+        boolean[][] marked = new boolean[row][column];
+        int[][] next = {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        return backTracking08(matrix, pathArr, 0, 0, marked, next, 0);
+    }
+
+    private boolean backTracking08(char[][] matrix, char[] pathArr, int i, int j, boolean[][] marked, int[][] next, int index) {
+        if (index >= pathArr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || pathArr[index] != matrix[i][j]) {
+            return false;
+        }
+        marked[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking08(matrix, pathArr, i + ints[0], j + ints[1], marked, next, index + 1)) {
+                return true;
+            }
+        }
+        marked[i][j] = false;
+        return false;
+    }
+
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCED";
+        String str = "ABCCEA";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath07(charMatrix, str);
+        boolean isExit = matrixPath.findPath08(charMatrix, str);
         System.out.println(isExit);
     }
 
