@@ -1,7 +1,6 @@
 package leetcodereview01.jiandan.leetcode58_1;
 
 
-
 import java.util.Arrays;
 
 public class ReverseSentence {
@@ -20,7 +19,7 @@ public class ReverseSentence {
             j++;
         }
         // 在整体反转
-        reverseWork(array, 0, array.length-1);
+        reverseWork(array, 0, array.length - 1);
         System.out.println(new String(array));
         return "";
     }
@@ -42,21 +41,21 @@ public class ReverseSentence {
         int i = 0;
         int j = 0;
         int n = chars.length;
-        while(j <= n) {
+        while (j <= n) {
             if (j == n || chars[j] == ' ') {
                 // 找到了位置进行翻转
-                reverseWork02(chars, i, j -1);
+                reverseWork02(chars, i, j - 1);
                 i = j + 1;
             }
             j++;
         }
         // 循环完成之后整体进行翻转
-        reverseWork02(chars, 0, chars.length-1);
+        reverseWork02(chars, 0, chars.length - 1);
         System.out.println(new String(chars));
     }
 
     private void reverseWork02(char[] chars, int i, int j) {
-        while(i < j) {
+        while (i < j) {
             char temp = chars[i];
             chars[i] = chars[j];
             chars[j] = temp;
@@ -71,21 +70,21 @@ public class ReverseSentence {
         int n = str.length();
         int i = 0;
         int j = 0;
-        while(j <= n) { // 这里为了-1
+        while (j <= n) { // 这里为了-1
             if (j == n || arr[j] == ' ') {
                 // 这里就要去翻转
-                reverseWork03(arr, i, j-1);
-                i = j+1;
+                reverseWork03(arr, i, j - 1);
+                i = j + 1;
             }
             j++;
         }
         // 然后再整体翻转
-        reverseWork03(arr, 0, n-1);
+        reverseWork03(arr, 0, n - 1);
         System.out.println(new String(arr));
     }
 
     public void reverseWork03(char[] arr, int start, int end) {
-        while(start < end) {
+        while (start < end) {
             char temp = arr[start];
             arr[start] = arr[end];
             arr[end] = temp;
@@ -100,20 +99,20 @@ public class ReverseSentence {
         int n = chars.length;
         int i = 0;
         int j = 0;
-        while(j <= n) {
+        while (j <= n) {
             if (j == n || chars[j] == ' ') {
                 // 翻转单词
-                reversework04(chars, i , j - 1);
-                i = j+1;
+                reversework04(chars, i, j - 1);
+                i = j + 1;
             }
             j++;
         }
-        reversework04(chars, 0, chars.length -1);
+        reversework04(chars, 0, chars.length - 1);
         System.out.println(Arrays.toString(chars));
     }
 
     private void reversework04(char[] chars, int start, int end) {
-        while(start < end) {
+        while (start < end) {
             char temp = chars[start];
             chars[start] = chars[end];
             chars[end] = temp;
@@ -131,9 +130,9 @@ public class ReverseSentence {
         int P1 = 0;
         int P2 = 0;
         for (int i = 0; i <= chars.length; i++) {
-            if (P2 == chars.length || chars[P2] == ' ' ) {
-               // 这个时候需要翻转
-                reverseWork05(chars, P1, P2-1);
+            if (P2 == chars.length || chars[P2] == ' ') {
+                // 这个时候需要翻转
+                reverseWork05(chars, P1, P2 - 1);
                 P1 = P2;
             }
             P2++;
@@ -145,7 +144,7 @@ public class ReverseSentence {
     }
 
     public void reverseWork05(char[] arr, int start, int end) {
-        while(start < end) {
+        while (start < end) {
             char temp = arr[start];
             arr[start] = arr[end];
             arr[end] = temp;
@@ -176,7 +175,7 @@ public class ReverseSentence {
 
     public void reverseWord06(char[] chars, int start, int end) {
         System.out.println("start:" + start + "->end:" + end);
-        while(start < end) {
+        while (start < end) {
             char temp = chars[start];
             chars[start] = chars[end];
             chars[end] = temp;
@@ -192,7 +191,7 @@ public class ReverseSentence {
         int P2 = 0;
         for (int i = 0; i <= chars.length; i++) {
             if (P2 == chars.length || chars[P2] == ' ') {
-                reverseWord07(chars, P1, P2-1);
+                reverseWord07(chars, P1, P2 - 1);
                 P1 = P2;
             }
             P2++;
@@ -206,7 +205,7 @@ public class ReverseSentence {
         // 进行翻转
         int left = start;
         int right = end;
-        while(left < right) {
+        while (left < right) {
             char temp = chars[left];
             chars[left] = chars[right];
             chars[right] = temp;
@@ -215,9 +214,36 @@ public class ReverseSentence {
         }
     }
 
+    public void reverse08(String str) {
+        // 反转字符串 找到空格 然后
+        char[] charArr = str.toCharArray();
+        int P1 = 0;
+        int P2 = 0;
+        for (int i = 0; i <= charArr.length; i++) {
+            if (P2 == charArr.length || charArr[P2] == ' ') {
+                reverseWork08(charArr, P1, P2 - 1);
+                P1 = P2 + 1;
+            }
+            P2++;
+        }
+        // 在整体反转
+        reverseWork08(charArr, 0, charArr.length - 1);
+        System.out.println(new String(charArr));
+    }
+
+    public void reverseWork08(char[] charArr, int start, int end) {
+        while(start <= end) {
+            char temp = charArr[start];
+            charArr[start] = charArr[end];
+            charArr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse07(str);
+        reverseSentence.reverse08(str);
     }
 }

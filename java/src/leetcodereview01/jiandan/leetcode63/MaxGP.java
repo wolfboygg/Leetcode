@@ -88,9 +88,19 @@ public class MaxGP {
         return maxValue;
     }
 
+    public int getMaxValue08(int[] arr) {
+        int max = -1;
+        int minValue = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            max = Math.max(max, arr[i] - minValue);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         MaxGP maxGP = new MaxGP();
-        System.out.println(maxGP.getMaxValue07(arr));
+        System.out.println(maxGP.getMaxValue08(arr));
     }
 }
