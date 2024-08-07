@@ -57,11 +57,36 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+
+    /** 就看栈顶的字符是否是匹配的那个 */
+    public boolean validKH01(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        char[] chars = str.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == '[' || chars[i] == '(' || chars[i] =='{') {
+                stack.push(chars[i]);
+            }
+            if (chars[i] == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                return false;
+            }
+            if (chars[i] == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                return false;
+            }
+            if (chars[i] == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.validKH(str1));
-        System.out.println(validKH.validKH(str2));
+        System.out.println(validKH.validKH01(str1));
+        System.out.println(validKH.validKH01(str2));
     }
 }
