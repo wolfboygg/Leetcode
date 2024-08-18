@@ -1,5 +1,7 @@
 package leetcodereview01.top100.top_20;
 
+import sun.tools.jstat.Jstat;
+
 import java.util.Stack;
 
 /**
@@ -82,11 +84,36 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean validKH02(String str) {
+        // 验证是否是一个正确的括号，需要使用stack来进行匹配
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        char[] chars = str.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == '(' || chars[i] == '{' || chars[i] == '[') {
+                stack.push(chars[i]);
+            } else if (chars[i]== ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                System.out.println("1111");
+                return false;
+            } else if (chars[i]=='}' && (stack.isEmpty() || stack.pop() != '{')) {
+                System.out.println("2222");
+                return false;
+            } else if (chars[i] == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                System.out.println("3333");
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.validKH01(str1));
-        System.out.println(validKH.validKH01(str2));
+        System.out.println(validKH.validKH02(str1));
+        System.out.println(validKH.validKH02(str2));
     }
 }

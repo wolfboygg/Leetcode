@@ -49,11 +49,25 @@ public class MaxProfit2 {
         return matrix[price.length-1][0]; // 取没有的时候的价值
     }
 
+    // 股票的最大价值
+    public int getMaxProfit03(int[] price) {
+        // 使用动态规划的方式
+        int[][] help = new int[price.length][2];
+        help[0][0] = -price[0];// 表示当前手里有股票
+        for (int i = 1; i < price.length; i++) {
+            help[i][0] = Math.max(help[i-1][1] - price[i], help[i-1][0]); // 表示有
+            help[i][1] = Math.max(help[i-1][1], help[i][0] + price[i]); // 表示没有
+            System.out.println(help[i][0] + "---" + help[i][1]);
+
+        }
+        return help[price.length-1][1];
+    }
+
 
     public static void main(String[] args) {
         int[] price = {7, 1, 5, 3, 6, 4};
         MaxProfit2 maxProfit2 = new MaxProfit2();
-        int value = maxProfit2.getMaxProfit02(price);
+        int value = maxProfit2.getMaxProfit03(price);
         System.out.println(value);
     }
 }

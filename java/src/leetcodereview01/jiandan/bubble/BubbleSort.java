@@ -259,9 +259,30 @@ public class BubbleSort {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void bubble13(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            boolean isSort = true;
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    isSort = false;
+                }
+            }
+            if (isSort) {
+                break;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
         BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.sort12(arr);
+        bubbleSort.bubble13(arr);
     }
 }

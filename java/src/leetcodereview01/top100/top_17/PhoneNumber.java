@@ -24,11 +24,11 @@ public class PhoneNumber {
             return;
         }
         // 这里开始获取对应的charArr
-        char[] arr = map[str.charAt(index) -'0'].toCharArray();
+        char[] arr = map[str.charAt(index) - '0'].toCharArray();
         for (char c : arr) {
             sb.append(c);
             dfs(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() -1);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 
@@ -50,13 +50,37 @@ public class PhoneNumber {
         for (char c : chars) {
             sb.append(c);
             dfs(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() -1);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 
-    public static void main(String[] args){
+    // 打印电话号码
+    public void letterCombinations02(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArr = str.toCharArray();
+        traversal(charArr, 0, new StringBuilder());
+    }
+
+    public void traversal(char[] charArr, int index, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] letterStr = map[charArr[index] - '0'].toCharArray();
+        for (char c : letterStr) {
+            sb.append(c);
+            traversal(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+    }
+
+
+    public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-         phoneNumber.letterCombinations01("234");
+        phoneNumber.letterCombinations02("234");
         System.out.println(ret.toString());
     }
 }
