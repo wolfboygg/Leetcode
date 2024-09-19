@@ -50,8 +50,8 @@ public class RotateArrayFind {
 
     public int findMinNumByOrder(int[] array, int l, int h) {
         for (int i = l; i < h; i++) {
-            if (array[i] > array[i+1]) {
-                return array[i+1];
+            if (array[i] > array[i + 1]) {
+                return array[i + 1];
             }
         }
         return array[l];

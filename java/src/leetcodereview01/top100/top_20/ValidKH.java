@@ -1,6 +1,5 @@
 package leetcodereview01.top100.top_20;
 
-import sun.tools.jstat.Jstat;
 
 import java.util.Stack;
 
