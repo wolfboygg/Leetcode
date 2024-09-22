@@ -16,10 +16,22 @@ public class MaxSequenceSum {
         }
         return max;
     }
+
+    public int findMaxSum01(int[] arr) {
+        // 最大子序列的和
+        int max = 0;
+        int preMax = 0;
+        for (int i = 0; i < arr.length; i++) {
+            preMax = Math.max(arr[i], preMax + arr[i]);
+            max = Math.max(preMax, max);
+        }
+        return max;
+    }
+
     public static void main(String[] args){
         int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
         MaxSequenceSum maxSequenceSum = new MaxSequenceSum();
-        int value = maxSequenceSum.findMaxSum(arr);
+        int value = maxSequenceSum.findMaxSum01(arr);
         System.out.println(value);
     }
 }

@@ -1,6 +1,7 @@
 package leetcodereview01.top100.top_01;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -52,11 +53,32 @@ public class TwoSum {
         return ret;
     }
 
+    public int[] twoSum02(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{-1, -1};
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            if (arr[left] + arr[right] < target) {
+                left++;
+            } else if (arr[left] + arr[right] > target) {
+                right--;
+            } else {
+                return new int[] {left, right};
+            }
+        }
+
+        return new int[] {-1, -1};
+    }
+
     public static void main(String[] args){
         int[] num = new int[] {2, 7, 11, 15};
         int targe = 9;
         TwoSum twoSum = new TwoSum();
         List<Integer> integers = twoSum.towSum01(num, targe);
         System.out.println(integers.toString());
+        int[] arr = twoSum.twoSum02(num, targe);
+        System.out.println(Arrays.toString(arr));
     }
 }

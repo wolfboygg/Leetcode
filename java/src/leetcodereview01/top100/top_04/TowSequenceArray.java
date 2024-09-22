@@ -38,12 +38,26 @@ public class TowSequenceArray {
         }
     }
 
+    /** 求解两个数组的中位数 使用数组合并的方式进行处理 */
+    public int findMiddleNum02(int[] arr1, int[] arr2) {
+        if (arr1 == null && arr2 == null) {
+            return -1;
+        }
+        int[] arr = new int[arr1.length + arr2.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i >= arr1.length ? arr2[i-arr1.length] : arr1[i];
+        }
+        int middleValue = arr.length / 2;
+        int result = arr.length %2 == 0 ? (arr[middleValue-1] + arr[middleValue]) /2 : arr[middleValue];
+        return result;
+    }
+
     public static void main(String[] args){
         int[] arr1 = {1, 2};
-        int[] arr2 = {3 ,4};
+        int[] arr2 = {3 ,4, 5};
 
         TowSequenceArray sequenceArray = new TowSequenceArray();
-        int num = sequenceArray.findMiddleNum01(arr1, arr2);
+        int num = sequenceArray.findMiddleNum02(arr1, arr2);
         System.out.println(num);
     }
 }

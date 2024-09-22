@@ -31,10 +31,67 @@ public class MaxPalindrome {
         }
     }
 
+    public String findMaxHWStr01(String str) {
+        // 中心扩散法
+        int left = 0;
+        int right = 0;
+        int maxLength = 0;
+        int maxLeft = 0;
+        int len = 1;
+        for (int i = 0; i < str.length(); i++) {
+            left = i -1;
+            right = i + 1;
+            // 想左边扩散
+            while(left >=0 && str.charAt(i) == str.charAt(left)) {
+                left--;
+                len++;
+            }
+            // 向右边扩散
+            while(right < str.length() && str.charAt(i) == str.charAt(right)) {
+                right++;
+                len++;
+            }
+            // 中心扩散
+            while(left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+                left--;
+                right++;
+                len+= 2;
+            }
+            if (maxLength < len) {
+                maxLength = len;
+                maxLeft = left;
+            }
+            len = 1;
+        }
+        return str.substring(maxLeft + 1, maxLeft + maxLength + 1);
+    }
+
+    public String findMaxHWStr02(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            find02(str, i, i);
+            find02(str, i, i + 1);
+        }
+        return str.substring(this.left, this.len);
+    }
+
+    public void find02(String str, int left, int right) {
+        while(left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+            if (right - left + 1 > len) {
+                len = right - left + 1;
+                this.left = left;
+            }
+            left--;
+            right++;
+        }
+    }
+
     public static void main(String[] args){
         String str = "dababad";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWStr(str);
+        String temp = maxPalindrome.findMaxHWStr02(str);
         System.out.println(temp);
     }
 }

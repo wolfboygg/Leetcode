@@ -11,7 +11,28 @@ public class SearchRotateArray {
 
     public int find(int[] num, int target) {
         // 通过查找的方式进行处理
-        int index = findByBinary(num, 0, num.length - 1, target);
+        // 就是单纯的二分查找即可
+        int left = 0;
+        int right = num.length - 1;
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (num[middle] == target) {
+                return middle;
+            }
+            if (target < middle) {
+                if (num[middle] < num[right]) {
+                    right = middle -1;
+                } else {
+                    left = middle + 1;
+                }
+            } else {
+                if (num[middle] < num[right]) {
+                    left = middle + 1;
+                } else {
+                    right = middle -1;
+                }
+            }
+        }
         return -1;
     }
 
@@ -29,7 +50,7 @@ public class SearchRotateArray {
 
     public static void main(String[] args){
         // 使用二分查找的方式进行处理
-        int[] num = {4,5,6,7,0,1,2};
+        int[] num = {5,6,7,0,1,2};
         SearchRotateArray searchRotateArray = new SearchRotateArray();
         int index = searchRotateArray.find(num, 0);
         System.out.println(index);

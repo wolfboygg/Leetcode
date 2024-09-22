@@ -31,6 +31,26 @@ public class MergeSortLink {
         return pre.next;
     }
 
+    public Node mergeLink01(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node node = new Node(-1);
+        Node pre = node;
+        while(node1 != null && node2 != null) {
+            if (node1.value > node2.value) {
+                pre.next = node2;
+                node2 = node2.next;
+            } else {
+                pre.next = node1;
+                node1 = node1.next;
+            }
+            pre = pre.next;
+        }
+        pre.next =  node1 == null ? node2 : node1;
+        return node.next;
+    }
+
     public static void main(String[] args){
 
         Node node1 = new Node(1);
@@ -48,7 +68,7 @@ public class MergeSortLink {
 
 
         MergeSortLink mergeSortLink = new MergeSortLink();
-        Node node = mergeSortLink.mergeLink(node1, node4);
+        Node node = mergeSortLink.mergeLink01(node1, node4);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

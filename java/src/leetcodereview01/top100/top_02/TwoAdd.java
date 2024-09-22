@@ -97,6 +97,40 @@ public class TwoAdd {
         return newPre.next;
     }
 
+    public LinkNode twoAdd02(LinkNode node1, LinkNode node2) {
+        if (node1 == null || node2 == null) {
+            return null;
+        }
+        LinkNode pre = new LinkNode(-1);
+        LinkNode temp = pre;
+        int carry = 0;
+        while(node1 != null || node2 != null || carry > 0) {
+            LinkNode node = new LinkNode(carry);
+            if (node1 != null) {
+                node.value += node1.value;
+                node1 = node1.next;
+            }
+            if (node2 != null) {
+                node.value += node2.value;
+                node2 = node2.next;
+            }
+            carry = node.value / 10;
+            node.value %= 10;
+            temp.next = node;
+            temp = temp.next;
+        }
+        // 反转
+        LinkNode node = new LinkNode(-1);
+        pre = pre.next;
+        while(pre != null) {
+            LinkNode next = pre.next;
+            pre.next = node.next;
+            node.next = pre;
+            pre = next;
+        }
+        return node.next;
+    }
+
     public static void main(String[] args){
         LinkNode node1 = new LinkNode(2);
         LinkNode node2 = new LinkNode(4);
@@ -114,7 +148,7 @@ public class TwoAdd {
         node5.next = node6;
 
         TwoAdd twoAdd = new TwoAdd();
-        LinkNode head = twoAdd.towAdd01(node1, node4);
+        LinkNode head = twoAdd.twoAdd02(node1, node4);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;
