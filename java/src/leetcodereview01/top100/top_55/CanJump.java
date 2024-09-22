@@ -23,14 +23,27 @@ public class CanJump {
         return last == 0;
     }
 
+    public boolean jump01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        int last = arr.length - 1;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] + i >= last) {
+                last = i;
+            }
+        }
+        return last == 0;
+    }
+
 
     public static void main(String[] args){
         int[] arr1 = {2,3,1,1,4};
         int[] arr2 = {3,2,1,0,4};
         CanJump canJump = new CanJump();
-        boolean result1 = canJump.jump(arr1);
+        boolean result1 = canJump.jump01(arr1);
         System.out.println(result1);
-        boolean result2 = canJump.jump(arr2);
+        boolean result2 = canJump.jump01(arr2);
         System.out.println(result2);
     }
 }

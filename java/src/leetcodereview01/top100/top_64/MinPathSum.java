@@ -1,6 +1,7 @@
 package leetcodereview01.top100.top_64;
 
 import java.util.Arrays;
+import java.util.IllegalFormatCodePointException;
 
 /**
  *  最小路径和
@@ -52,6 +53,29 @@ public class MinPathSum {
         return matrix[row-1][column-1];
     }
 
+    // 求最小值，需要将所有路经
+    public int findMinPath02(int[][] matrix) {
+        // 使用动态规划的方式进行处理
+        int row = matrix.length;
+        int column = matrix[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                if (i == 0) {
+                    matrix[i][j] += matrix[i][j-1];
+                } else if (j == 0) {
+                    matrix[i][j] += matrix[i-1][j];
+                } else  {
+                    matrix[i][j] += Math.min(matrix[i-1][j], matrix[i][j-1]);
+                }
+
+            }
+        }
+        return matrix[row-1][column-1];
+    }
+
     public static void main(String[] args){
         int[][] matrix = {
                 {1,3,1},
@@ -60,7 +84,7 @@ public class MinPathSum {
         };
         // 基本的想法就是通过一个辅助的数组进行计算，来获取最小的值
         MinPathSum minPathSum = new MinPathSum();
-        int value = minPathSum.findMinPath01(matrix);
+        int value = minPathSum.findMinPath02(matrix);
         System.out.println(value);
     }
 }
