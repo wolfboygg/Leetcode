@@ -30,8 +30,8 @@ public class MyString {
             @Override
             public void run() {
                 Integer integer = threadLocal1.get();
-                threadLocal1.set(5);
-                threadLocal2.set(4.5);
+                threadLocal1.set(Integer.valueOf(5));
+                threadLocal2.set(Double.valueOf(4.5));
             }
         });
 //        LinkedHashMap
