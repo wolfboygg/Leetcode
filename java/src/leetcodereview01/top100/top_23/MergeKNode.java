@@ -38,6 +38,30 @@ public class MergeKNode {
         }
         return pre.next;
     }
+
+    public Node merge01(Node[] node) {
+        // 按顺序排序的合并链表，采用顺序队列的方式
+        if (node == null || node.length == 0) {
+            return null;
+        }
+        Queue<Node> queue = new PriorityQueue<>((o1, o2) -> o1.value - o2.value);
+        for (Node node1 : node) {
+            queue.offer(node1);
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(!queue.isEmpty()) {
+            Node nodeRet = queue.poll();
+            temp.next = nodeRet;
+            temp = temp.next;
+            if (nodeRet.next != null) {
+                queue.offer(nodeRet.next);
+            }
+        }
+        return pre.next;
+    }
+
+
     public static void main(String[] args){
         //1->4->5,
         //1->3->4,
@@ -61,7 +85,7 @@ public class MergeKNode {
 
         Node[] nodes = {node1, node4, node7};
         MergeKNode mergeKNode = new MergeKNode();
-        Node node = mergeKNode.merge(nodes);
+        Node node = mergeKNode.merge01(nodes);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

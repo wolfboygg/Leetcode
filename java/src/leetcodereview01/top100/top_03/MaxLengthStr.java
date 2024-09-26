@@ -1,6 +1,7 @@
 package leetcodereview01.top100.top_03;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 无重复字符的最长子串
@@ -42,10 +43,28 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr02(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        int startIndex = -1;
+        int max = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (map.containsKey(c)) {
+                startIndex = Math.max(startIndex, map.getOrDefault(c, -1));
+            }
+            map.put(c, i);
+            max = Math.max(max, i - startIndex);
+        }
+        return max;
+    }
+
     public static void main(String[] args){
         String str = "abcabcbb";
         MaxLengthStr maxLengthStr = new MaxLengthStr();
-        int value = maxLengthStr.maxLengthStr(str);
+        int value = maxLengthStr.maxLengthStr02(str);
         System.out.println(value);
     }
 }

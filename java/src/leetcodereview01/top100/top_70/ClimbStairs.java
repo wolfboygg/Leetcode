@@ -26,6 +26,26 @@ public class ClimbStairs {
         }
         return value;
     }
+
+    public int climn01(int n) {
+        // 爬楼梯
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int temp01 = 1;
+        int temp02 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = temp01 + temp02;
+            temp01 = temp02;
+            temp02 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args){
         // 动态规划的方式进行求解
         ClimbStairs climbStairs = new ClimbStairs();

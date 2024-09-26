@@ -77,10 +77,34 @@ public class PhoneNumber {
 
     }
 
+    public List<String> letterCombinations03(String str) {
+        if (str == null || str.length() == 0) {
+            return new ArrayList<>();
+        }
+        traversal03(str, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal03(String str, int index, StringBuilder sb) {
+        if (sb.length() == str.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        String letters = map[str.charAt(index) - '0'];
+        char[] charArray = letters.toCharArray();
+        for (char c : charArray) {
+            sb.append(c);
+            traversal03(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations02("234");
+        phoneNumber.letterCombinations03("23");
         System.out.println(ret.toString());
     }
 }
