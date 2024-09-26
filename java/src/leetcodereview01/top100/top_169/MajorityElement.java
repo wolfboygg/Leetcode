@@ -20,9 +20,26 @@ public class MajorityElement {
         }
         return res;
     }
+
+    public int majorNum01(int[] arr) {
+        int res = arr[0];
+        int count = 0;
+        for (int i : arr) {
+            if (i == res) {
+                count++;
+            } else if (--count == 0) {
+                res = i;
+                count = 1;
+            }
+        }
+        return res;
+    }
+
+
+
     public static void main(String[] args){
         MajorityElement majorityElement = new MajorityElement();
         int[] num = {1,2, 1};
-        System.out.println(majorityElement.majorNum(num));
+        System.out.println(majorityElement.majorNum01(num));
     }
 }

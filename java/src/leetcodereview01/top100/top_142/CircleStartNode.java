@@ -33,6 +33,29 @@ public class CircleStartNode {
         }
         return fast;
     }
+
+    public Node findStartNode01(Node head) {
+        // 追两次就OK
+        if (head == null) {
+            return null;
+        }
+        Node slow = head;
+        Node fast = head;
+        while(slow != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+        // 重新只想开头
+        fast = head;
+        while(slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
     
     public static void main(String[] args){
         Node node1 = new Node(3);
@@ -46,7 +69,7 @@ public class CircleStartNode {
         node4.next = node2;
 
         CircleStartNode circleStartNode = new CircleStartNode();
-        Node node = circleStartNode.findStartNode(node1);
+        Node node = circleStartNode.findStartNode01(node1);
         System.out.println(node.value);
 
     }

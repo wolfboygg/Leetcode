@@ -21,6 +21,15 @@ public class TreeNodeDepth {
         int rightDepth = getDepth(node.right);
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    public int getDepth01(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = getDepth01(root.left);
+        int right = getDepth01(root.right);
+        return Math.max(left, right) + 1;
+    }
     
     public static void main(String[] args){
         TreeNode node1 = new TreeNode(1);
@@ -32,6 +41,6 @@ public class TreeNodeDepth {
         node1.left = node3;
         node2.left = node4;
         node3.right = node5;
-        System.out.println(new TreeNodeDepth().getDepth(node1));
+        System.out.println(new TreeNodeDepth().getDepth01(node1));
     }
 }

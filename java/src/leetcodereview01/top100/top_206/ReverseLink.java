@@ -24,6 +24,21 @@ public class ReverseLink {
         return temp.next;
     }
 
+    public Node reverseLink(Node head) {
+        // 头插法
+        if (head == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
+        }
+        return pre.next;
+    }
+
     public static void main(String[] args){
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -37,7 +52,7 @@ public class ReverseLink {
         node4.next = node5;
 
         ReverseLink reverseLink = new ReverseLink();
-        Node node = reverseLink.reverseNode(node1);
+        Node node = reverseLink.reverseLink(node1);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

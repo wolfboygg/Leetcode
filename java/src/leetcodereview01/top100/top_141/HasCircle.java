@@ -30,6 +30,22 @@ public class HasCircle {
         return false;
     }
 
+    public boolean hasCircle01(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        while(slow != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args){
         Node node1 = new Node(3);
         Node node2 = new Node(2);

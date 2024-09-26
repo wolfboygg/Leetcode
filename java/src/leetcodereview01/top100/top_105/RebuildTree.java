@@ -25,17 +25,17 @@ public class RebuildTree {
         for (int i = 0; i < inOrder.length; i++) {
             map.put(inOrder[i], i);
         }
-        return realBuild(preOrder, 0, preOrder.length -1, inOrder, 0, inOrder.length - 1);
+        return realBuild(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
     }
 
-    /**build
-     *      3
-     *     4 5
-     *    12 67
+    /**
+     * build
+     * 3
+     * 4 5
+     * 12 67
      */
     // 3412567
     // 1423657
-
     public TreeNode realBuild(int[] preOrder, int preStar, int preEnd, int[] inOrder, int inStart, int inEnd) {
         if (preEnd - preStar < 0) {
             return null;
@@ -58,9 +58,35 @@ public class RebuildTree {
         System.out.print(node.value + " ");
     }
 
-    public static void main(String[] args){
-      int[] preOrder = {3,4,1,2,5,6,7};
-      int[] inOrder = {1,4,2,3,6,5,7};
+    public TreeNode build01(int[] preOrder, int[] inOrder) {
+        // 根据前序 中序重建二叉树
+        if (preOrder == null || inOrder == null) {
+            return null;
+        }
+        for (int i = 0; i < inOrder.length; i++) {
+            map.put(inOrder[i], i);
+        }
+        return realBuild01(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+    }
+
+    public TreeNode realBuild01(int[] preOrder, int preL, int preR, int[] inOrder, int inL, int inR) {
+        if (preL > preR) {
+            return null;
+        }
+        int rootValue = preOrder[preL];
+        int rootIndex = map.get(rootValue);
+        int leftChildCount = rootIndex - inL;
+        TreeNode root = new TreeNode(rootValue);
+        TreeNode leftChild = realBuild01(preOrder, preL + 1, preL + leftChildCount, inOrder, inL, rootIndex);
+        TreeNode rightChild = realBuild01(preOrder, preL + leftChildCount + 1, preR, inOrder, rootIndex + 1, inR);
+        root.left = leftChild;
+        root.right = rightChild;
+        return root;
+    }
+
+    public static void main(String[] args) {
+        int[] preOrder = {3, 4, 1, 2, 5, 6, 7};
+        int[] inOrder = {1, 4, 2, 3, 6, 5, 7};
         RebuildTree rebuildTree = new RebuildTree();
         TreeNode node = rebuildTree.build(preOrder, inOrder);
         rebuildTree.traversal(node);

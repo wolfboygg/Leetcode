@@ -10,9 +10,21 @@ public class OnlyOneNumber {
         return res;
     }
 
+    public int findOnlyNum01(int[] num) {
+        // 找到只出现一次的
+        if (num == null || num.length == 0) {
+            return -1;
+        }
+        int value = 0;
+        for (int item : num) {
+            value ^= item;
+        }
+        return value;
+    }
+
     public static void main(String[] args){
       int[] arr = {4,1,2,1,2};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        System.out.println(onlyOneNumber.findOnlyNum(arr));
+        System.out.println(onlyOneNumber.findOnlyNum01(arr));
     }
 }

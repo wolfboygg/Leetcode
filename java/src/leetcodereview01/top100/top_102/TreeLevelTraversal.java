@@ -36,8 +36,27 @@ public class TreeLevelTraversal {
                 queue.offer(poll.right);
             }
         }
-
     }
+
+    public void levelTraversal01(TreeNode root) {
+        // 层序遍历用队列进行处理
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+            System.out.print(poll.value + " ");
+        }
+    }
+
     public static void main(String[] args){
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);

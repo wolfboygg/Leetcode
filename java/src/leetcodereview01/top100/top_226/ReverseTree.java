@@ -31,6 +31,18 @@ public class ReverseTree {
         return root;
     }
 
+    // 递归的方式进行翻转
+    public TreeNode reverse01(TreeNode node) {
+        if (node == null) {
+            return null;
+        }
+        TreeNode left = reverse01(node.left);
+        TreeNode right = reverse01(node.right);
+        node.left = right;
+        node.right = left;
+        return node;
+    }
+
     public void traversal(TreeNode root) {
         if (root == null) {
             return;
@@ -69,7 +81,7 @@ public class ReverseTree {
         ReverseTree reverseTree = new ReverseTree();
         reverseTree.traversal(node1);
         System.out.println();
-        reverseTree.reverse(node1);
+        reverseTree.reverse01(node1);
         reverseTree.traversal(node1);
 
     }
