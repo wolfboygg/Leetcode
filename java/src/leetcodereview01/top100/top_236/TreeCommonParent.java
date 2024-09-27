@@ -38,6 +38,22 @@ public class TreeCommonParent {
         return leftComm == null ? rightComm : leftComm;
     }
 
+    public TreeNode findCommonParent01(TreeNode root, TreeNode node1, TreeNode node2) {
+        // 找二叉树的公共祖先，使用递归的方式
+        if (root == null || node2 == root || node1 == root) {
+            return root;
+        }
+        TreeNode leftComm = findCommonParent01(root.left, node1, node2);
+        TreeNode rightComm = findCommonParent01(root.right, node1, node2);
+        if (leftComm == null && rightComm == null) {
+            return null;
+        }
+        if (leftComm != null && rightComm != null) {
+            return root;
+        }
+        return leftComm == null ? rightComm: leftComm;
+    }
+
     public static void main(String[] args){
         TreeNode node1 = new TreeNode(4);
         TreeNode node2 = new TreeNode(2);
@@ -55,7 +71,7 @@ public class TreeCommonParent {
         node3.right = node7;
 
         TreeCommonParent parent = new TreeCommonParent();
-        TreeNode node = parent.findCommonParent(node1, node4, node6);
+        TreeNode node = parent.findCommonParent01(node1, node4, node6);
         if (node == null) {
             System.out.println("没有公共节点");
             return;
