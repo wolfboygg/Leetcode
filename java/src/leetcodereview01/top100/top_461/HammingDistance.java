@@ -13,6 +13,8 @@ public class HammingDistance {
 
     public int getDistance(int x, int y) {
         // 解题思路，先求x y异或之后的值，然后在取1的个数
+        // 0111
+        // 0100
         int value = x ^ y;
         int count = 0;
         while(value != 0) {
