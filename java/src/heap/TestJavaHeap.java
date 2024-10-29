@@ -83,7 +83,7 @@ public class TestJavaHeap {
         });
 
         int[] array = {12, 20, 39, 1, 8, 9, 18, 7, 6, 10};
-        // test min heap
+        // test.txt min heap
         for (int i : array) {
             minHeap.offer(i);
             maxHeap.offer(i);
