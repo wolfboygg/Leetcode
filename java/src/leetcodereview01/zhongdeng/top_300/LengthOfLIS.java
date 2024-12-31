@@ -21,6 +21,7 @@ public class LengthOfLIS {
         int[] dp = new int[nums.length];
         dp[0] = 1;
         int max = 0;
+        // 10, 9, 2, 5, 3, 7, 101, 18
         for (int i = 1; i < nums.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
