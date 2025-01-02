@@ -198,11 +198,30 @@ public class RotateArray {
         return arr[low];
     }
 
+    public int getMinValueByTx11(int[] arr) {
+        // 在旋转数组中查找到最小值
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length -1;
+        // 4, 5, 0, 1, 2, 3
+        while(left < right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] < arr[right]) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return arr[left];
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7,  1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTx10(arr);
+        int i = rotateArray.getMinValueByTx11(arr2);
         System.out.println("最小值为:" + i);
     }
 }

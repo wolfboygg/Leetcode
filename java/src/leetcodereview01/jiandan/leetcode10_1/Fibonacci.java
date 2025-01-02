@@ -200,9 +200,27 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH11(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        int pre = 1;
+        int post = 1;
+        int total = 0;
+        for (int i = 3; i <= n; i++) {
+            total = pre + post;
+            pre = post;
+            post = total;
+        }
+        return total;
+    }
+
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH08(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH11(6);
         System.out.println(fibonacciValue);
     }
 }

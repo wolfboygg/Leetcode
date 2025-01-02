@@ -34,6 +34,14 @@ public class PrintMaxN {
         }
     }
 
+    public void print05(int target) {
+        // 打印最大的1-n
+        int maxValue = Math.max(10, target) -1;
+        for (int i = 0; i <= maxValue; i++) {
+            System.out.print(i + " ");
+        }
+    }
+
     public static void main(String[] args) {
         PrintMaxN printMaxN = new PrintMaxN();
         printMaxN.print04(3);

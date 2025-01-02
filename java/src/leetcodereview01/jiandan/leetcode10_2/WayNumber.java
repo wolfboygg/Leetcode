@@ -30,7 +30,7 @@ public class WayNumber {
             return temp02;
         }
         int result = 0;
-        for (int i = 3;i <= n ; i++) {
+        for (int i = 3; i <= n; i++) {
             result = temp01 + temp02;
             temp01 = temp02;
             temp02 = result;
@@ -43,13 +43,13 @@ public class WayNumber {
         if (n == 1) {
             return 1;
         }
-        if (n ==2) {
+        if (n == 2) {
             return 2;
         }
         int temp01 = 1;
         int temp02 = 2;
-        for (int i = 3; i <=n; i++) {
-            int result = temp01 +temp02;
+        for (int i = 3; i <= n; i++) {
+            int result = temp01 + temp02;
             temp01 = temp02;
             temp02 = result;
         }
@@ -141,7 +141,7 @@ public class WayNumber {
         int temp2 = 2;
         int res = 0;
         for (int i = 3; i <= n; i++) {
-            res = temp1 +  temp2;
+            res = temp1 + temp2;
             temp1 = temp2;
             temp2 = res;
         }
@@ -182,9 +182,30 @@ public class WayNumber {
         return value;
     }
 
+    public int getWayNumber11(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int pre = 1;
+        int post = 2;
+        int total = 0;
+        for (int i = 3; i <= n; i++) {
+            total = pre + post;
+            pre = post;
+            post = total;
+        }
+        return total;
+    }
+
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
-        int wayNumber1 = wayNumber.getWayNumber08(7);
+        int wayNumber1 = wayNumber.getWayNumber11(7);
         System.out.println(wayNumber1);
     }
 }

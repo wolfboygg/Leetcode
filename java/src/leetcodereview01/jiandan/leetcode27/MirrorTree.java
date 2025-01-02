@@ -154,13 +154,24 @@ public class MirrorTree {
         return root;
     }
 
+    public TreeNode mirrorTree11(TreeNode root) {
+        // 镜像二叉树
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree11(root.left);
+        TreeNode right = mirrorTree11(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
 
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree09(tree);
+        mirrorTree.mirrorTree11(tree);
         mirrorTree.traversalTree(tree);
     }
 

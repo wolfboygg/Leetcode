@@ -231,11 +231,32 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber13(int[] arr) {
+        // 将对应的数字放到对应的位置
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            //  这里要不停的循环
+            while(arr[i] != i) {
+                // 知道找到与当前位置相同的i
+                if (arr[i] != arr[arr[i]]) {
+                    int temp = arr[i];
+                    arr[i] = temp;
+                    arr[temp] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber12(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber13(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

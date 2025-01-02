@@ -118,7 +118,7 @@ public class RebuildTree {
         if (node == null) {
             return;
         }
-        System.out.print(node.value);
+        System.out.print(node.value + " ");
         preOrderTraversal(node.left);
         preOrderTraversal(node.right);
     }
@@ -280,6 +280,32 @@ public class RebuildTree {
         root.value = rootValue;
         root.left = realRebuild12(preOrder, preLeft + 1, preLeft + leftNum, inOrder, inLeft, rootInOrderIndex - 1);
         root.right = realRebuild12(preOrder, preLeft + 1 + leftNum, preRight, inOrder, rootInOrderIndex + 1, inRight);
+        return root;
+    }
+
+    // 根据前序和中序构建二叉树
+    public TreeNode rebuildTree13(int[] preOrder, int[] inOrder) {
+        if (preOrder == null || inOrder == null) {
+            return null;
+        }
+        for (int i = 0; i < inOrder.length; i++) {
+            indexOrder.put(inOrder[i], i);
+        }
+        return realRebuildTree13(preOrder, 0, preOrder.length - 1, inOrder, 0, preOrder.length - 1);
+    }
+
+    public TreeNode realRebuildTree13(int[] preOrder, int lPre, int rPre, int[] inOrder, int lIn, int rIn) {
+        // 使用递归的方式进行构建
+        if (lPre > rPre) {
+            return null;
+        }
+        int rootValue = preOrder[lPre];
+        int leftChildIndex = indexOrder.get(rootValue);
+        int leftChildCount = leftChildIndex - lIn;
+        TreeNode root = new TreeNode();
+        root.value = rootValue;
+        root.left = realRebuildTree13(preOrder, lPre + 1, lPre + leftChildCount, inOrder, lIn, leftChildIndex - 1);
+        root.right = realRebuildTree13(preOrder, lPre + leftChildCount + 1, rPre, inOrder, leftChildIndex + 1, rIn);
         return root;
     }
 

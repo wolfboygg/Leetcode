@@ -83,16 +83,33 @@ public class TwoStackToQueue {
         return postStack.pop();
     }
 
+    public void push06(int value) {
+        preStack.push(value);
+    }
+
+    public int pop06() {
+        if (postStack.empty()) {
+            while(!preStack.isEmpty()) {
+                postStack.push(preStack.pop());
+            }
+        }
+        return postStack.pop();
+    }
+
+    public boolean isEmpty06() {
+        return preStack.empty() && postStack.empty();
+    }
+
 
     public static void main(String[] args) {
         TwoStackToQueue twoStackToQueue = new TwoStackToQueue();
-        twoStackToQueue.push05(1);
-        twoStackToQueue.push05(2);
-        twoStackToQueue.push05(3);
-        twoStackToQueue.push05(4);
-        twoStackToQueue.push05(5);
-        while (!twoStackToQueue.isEmpty()) {
-            System.out.print(twoStackToQueue.pop05());
+        twoStackToQueue.push06(1);
+        twoStackToQueue.push06(2);
+        twoStackToQueue.push06(3);
+        twoStackToQueue.push06(4);
+        twoStackToQueue.push06(5);
+        while (!twoStackToQueue.isEmpty06()) {
+            System.out.print(twoStackToQueue.pop06());
         }
     }
 }

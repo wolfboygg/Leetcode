@@ -14,11 +14,11 @@ public class CutShengZi {
         int threeTime = 0;
         int towTime = 0;
         threeTime = target / 3;
-        if (target - threeTime * 3 ==1) {
+        if (target - threeTime * 3 == 1) {
             threeTime--;
         }
         towTime = (target - threeTime * 3) / 2;
-        System.out.println("threeTime:" + threeTime +"->towTime:" + towTime);
+        System.out.println("threeTime:" + threeTime + "->towTime:" + towTime);
         return (int) (Math.pow(3, threeTime) * Math.pow(2, towTime));
     }
 
@@ -41,7 +41,7 @@ public class CutShengZi {
             threeTime--;
         }
         int towTime = (target - threeTime * 3) / 2;
-        System.out.println("threeTime:" + threeTime +"->towTime:" + towTime);
+        System.out.println("threeTime:" + threeTime + "->towTime:" + towTime);
         return (int) (Math.pow(3, threeTime) * Math.pow(2, towTime));
     }
 
@@ -59,7 +59,7 @@ public class CutShengZi {
         int threeCut = 0;
         int towCut = 0;
         threeCut = target / 3;
-        if (target - threeCut * 3 ==1) {
+        if (target - threeCut * 3 == 1) {
             threeCut--;
         }
         towCut = (target - threeCut * 3) / 2;
@@ -79,7 +79,7 @@ public class CutShengZi {
         int threeCut = 0;
         int towCut = 0;
         threeCut = target / 3;
-        if (target - threeCut * 3 ==1) {
+        if (target - threeCut * 3 == 1) {
             threeCut--;
         }
         towCut = (target - threeCut * 3) / 2;
@@ -142,10 +142,10 @@ public class CutShengZi {
         int three = target / 3;
         int tow = 0;
         if (target - three * 3 == 1) {
-            three --;
+            three--;
         }
         // 这里要放到判断之后
-        tow = (target -  3 * three) / 2;
+        tow = (target - 3 * three) / 2;
         System.out.println(tow);
         return (int) (Math.pow(3, three) * Math.pow(2, tow));
     }
@@ -168,7 +168,7 @@ public class CutShengZi {
             threeCount -= 1;
         }
         twoCount = (target - threeCount * 3) / 2;
-        return (int) (Math.pow(3, threeCount)  * Math.pow(2, twoCount));
+        return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
     }
 
     public int cut09(int target) {
@@ -194,7 +194,7 @@ public class CutShengZi {
         if (target <= 2) {
             return 1;
         }
-        if (target ==3) {
+        if (target == 3) {
             return 2;
         }
         // 先算3
@@ -205,13 +205,30 @@ public class CutShengZi {
         }
         // 这里也需要算一下 不止是== 1的情况 还有正好等于2的情况
         tow = (target - three * 3) / 2;
-        return (int) (Math.pow(3, three)  * Math.pow(2, tow));
+        return (int) (Math.pow(3, three) * Math.pow(2, tow));
+    }
 
+
+    public int cut11(int target) {
+        if (target <= 0) {
+            return 0;
+        }
+        if (target <= 2) {
+            return 1;
+        }
+        // 满三凑2
+        int threeCount = target / 3;
+        int twoCount = (target - (threeCount * 3)) / 2;;
+        if (target - threeCount * 3 == 1) {
+            threeCount--;
+            twoCount = (target - (threeCount * 3)) / 2;
+        }
+        return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
     }
 
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut10(8));
+        System.out.println(cutShengZi.cut11(7));
     }
 
     private int cut(int target) {

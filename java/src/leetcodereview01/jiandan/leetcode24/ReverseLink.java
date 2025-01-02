@@ -124,6 +124,21 @@ public class ReverseLink {
         return pre.next;
     }
 
+    public Node reverseLink10(Node head) {
+        if (head == null) {
+            return null;
+        }
+        // 使用头插法
+        Node pre = new Node(-1);
+        while(head != null) {
+            Node next = head.next;
+            head.next = pre.next;
+            pre.next = head;
+            head = next;
+        }
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node01 = new Node(1);
         Node node02 = new Node(2);

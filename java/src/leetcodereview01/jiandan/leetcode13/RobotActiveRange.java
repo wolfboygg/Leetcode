@@ -18,7 +18,7 @@ public class RobotActiveRange {
         int[] value = new int[maxLength];
         for (int i = 0; i < maxLength; i++) {
             int temp = i;
-            while ( temp > 0) {
+            while (temp > 0) {
                 value[i] += (temp % 10);
                 temp = temp / 10;
                 System.out.println("aaa");
@@ -60,7 +60,7 @@ public class RobotActiveRange {
         int[] value = new int[maxLength];
         for (int i = 0; i < maxLength; i++) {
             int index = i;
-            while(index > 0)   {
+            while (index > 0) {
                 value[i] += index % 10;
                 index = index / 10;
             }
@@ -102,7 +102,7 @@ public class RobotActiveRange {
         int[] value = new int[max];
         for (int i = 0; i < max; i++) {
             int index = i;
-            while(index > 0) {
+            while (index > 0) {
                 value[i] += index % 10;
                 index = index / 10;
             }
@@ -129,7 +129,7 @@ public class RobotActiveRange {
         marked[i][j] = true;
         count++;
         for (int[] ints : next) {
-            backTracking02(matrix, next, marked, i + ints[0], j+ ints[1]);
+            backTracking02(matrix, next, marked, i + ints[0], j + ints[1]);
         }
     }
 
@@ -143,7 +143,7 @@ public class RobotActiveRange {
         int[] value = new int[maxValue];
         for (int i = 0; i < maxValue; i++) {
             int temp = i;
-            while(temp > 0) {
+            while (temp > 0) {
                 value[i] += temp % 10;
                 temp = temp / 10;
             }
@@ -151,14 +151,14 @@ public class RobotActiveRange {
         int[][] matrix = new int[row][column];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                  matrix[i][j] = value[i] + value[j];
+                matrix[i][j] = value[i] + value[j];
             }
         }
         boolean[][] marked = new boolean[row][column];
         int[][] next = {
                 {-1, 0}, {0, -1}, {1, 0}, {0, 1}
         };
-        backtracking03(matrix, marked, next,0, 0);
+        backtracking03(matrix, marked, next, 0, 0);
         System.out.println(count);
     }
 
@@ -182,14 +182,14 @@ public class RobotActiveRange {
         int[] value = new int[maxLength];
         for (int i = 0; i < maxLength; i++) {
             int temp = i;
-            while(temp > 0) {
+            while (temp > 0) {
                 value[i] += temp % 10;
                 temp = temp / 10;
             }
         }
         int[][] matrix = new int[m][n];
         for (int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
+            for (int j = 0; j < n; j++) {
                 matrix[i][j] = value[i] + value[j];
             }
         }
@@ -224,7 +224,7 @@ public class RobotActiveRange {
         int[] value = new int[maxValue];
         for (int i = 0; i < maxValue; i++) {
             int temp = i;
-            while(temp != 0) {
+            while (temp != 0) {
                 value[i] += temp % 10;
                 temp = temp / 10;
             }
@@ -232,17 +232,17 @@ public class RobotActiveRange {
         int[][] matrix = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                  matrix[i][j] = value[i] + value[j];
+                matrix[i][j] = value[i] + value[j];
             }
         }
-        int[][] next = {{-1, 0}, {0 , -1}, {1, 0}, {0, 1}};
+        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
         boolean[][] marked = new boolean[m][n];
         backtracking05(matrix, next, marked, 0, 0);
         System.out.println(count);
     }
 
     private void backtracking05(int[][] matrix, int[][] next, boolean[][] marked, int i, int j) {
-        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] > target ) {
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] > target) {
             return;
         }
         marked[i][j] = true;
@@ -259,16 +259,16 @@ public class RobotActiveRange {
         this.row = m;
         this.column = n;
         for (int i = 0; i < max; i++) {
-              int temp = i;
-              while(temp != 0) {
-                  value[i] += temp  % 10;
-                  temp = temp / 10;
-              }
+            int temp = i;
+            while (temp != 0) {
+                value[i] += temp % 10;
+                temp = temp / 10;
+            }
         }
         int[][] matrix = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                  matrix[i][j] = value[i] + value[j];
+                matrix[i][j] = value[i] + value[j];
             }
         }
         int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
@@ -297,7 +297,7 @@ public class RobotActiveRange {
         int[] tempValue = new int[max];
         for (int i = 0; i < tempValue.length; i++) {
             int temp = i;
-            while(temp > 0) {
+            while (temp > 0) {
                 tempValue[i] += temp % 10;
                 temp = temp / 10;
             }
@@ -309,7 +309,7 @@ public class RobotActiveRange {
             }
         }
 
-        int[][] next =  {
+        int[][] next = {
                 {-1, 0},
                 {0, -1},
                 {1, 0},
@@ -329,7 +329,7 @@ public class RobotActiveRange {
         count++;
         mark[i][j] = true;
         for (int[] ints : next) {
-            backTracking08(matrix, next, mark, i+ints[0], j+ints[1], target);
+            backTracking08(matrix, next, mark, i + ints[0], j + ints[1], target);
         }
     }
 
@@ -343,7 +343,7 @@ public class RobotActiveRange {
         this.column = n;
         for (int i = 0; i < valueArr.length; i++) {
             int temp = i;
-            while(temp > 0) {
+            while (temp > 0) {
                 valueArr[i] += temp % 10;
                 temp = temp / 10;
             }
@@ -355,7 +355,7 @@ public class RobotActiveRange {
             }
         }
         boolean[][] mark = new boolean[m][n];
-        int[][] next =  {
+        int[][] next = {
                 {-1, 0},
                 {0, -1},
                 {1, 0},
@@ -366,17 +366,15 @@ public class RobotActiveRange {
     }
 
     public void backTracking09(int[][] matrix, boolean[][] mark, int[][] next, int i, int j, int target) {
-        if (i < 0 || i >= row || j < 0  || j >= column || mark[i][j] || matrix[i][j] > target) {
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] > target) {
             return;
         }
         count++;
         mark[i][j] = true;
         for (int[] ints : next) {
-            backTracking09(matrix, mark, next, i+ ints[0], j +ints[1], target);
+            backTracking09(matrix, mark, next, i + ints[0], j + ints[1], target);
         }
     }
-
-
 
 
     public void findPath10(int m, int n, int target) {
@@ -389,7 +387,7 @@ public class RobotActiveRange {
         int[] arr = new int[max];
         for (int i = 0; i < arr.length; i++) {
             int tmp = i;
-            while(tmp > 0) {
+            while (tmp > 0) {
                 arr[i] += tmp % 10;
                 tmp = tmp / 10;
             }
@@ -401,7 +399,7 @@ public class RobotActiveRange {
         }
 
         // 然后进行计算走过的格子
-        int[][] next = new int[][] {
+        int[][] next = new int[][]{
                 {-1, 0},
                 {0, -1},
                 {1, 0},
@@ -413,7 +411,7 @@ public class RobotActiveRange {
         System.out.println(count);
     }
 
-    public void backTracking10(int[][] matrix, int [][] next, boolean[][] mark, int i, int j, int target) {
+    public void backTracking10(int[][] matrix, int[][] next, boolean[][] mark, int i, int j, int target) {
         if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] > target) {
             return;
         }
@@ -425,12 +423,58 @@ public class RobotActiveRange {
         }
     }
 
+    /**
+     * 计算机器人能够进入的格子数目
+     *
+     * @param m
+     * @param n
+     * @param target
+     */
+    public void findPath11(int m, int n, int target) {
+        this.row = m;
+        this.column = n;
+        int[][] next = {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        // 计算格子的value
+        int maxLength = Math.max(m, n);
+        int[] value = new int[maxLength];
+        for (int i = 0; i < value.length; i++) {
+            int temp = i;
+            while (temp > 0) {
+                value[i] += temp % 10;
+                temp = temp / 10;
+            }
+        }
+        int[][] matrix = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] = value[i] + value[j];
+            }
+        }
+        boolean[][] marked = new boolean[m][n];
+        backTracking11(matrix, next, marked, 0, 0, target);
+        System.out.println(this.count);
+    }
 
+    private void backTracking11(int[][] matrix, int[][] next, boolean[][] marked, int i, int j, int target) {
+        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] > target) {
+            return;
+        }
+        marked[i][j] = true;
+        count++;
+        for (int[] ints : next) {
+            backTracking11(matrix, next, marked, i + ints[0], j + ints[1], target);
+        }
+    }
 
 
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath10(3, 2, 2);
+        robotActiveRange.findPath11(3, 2, 2);
     }
 }
 

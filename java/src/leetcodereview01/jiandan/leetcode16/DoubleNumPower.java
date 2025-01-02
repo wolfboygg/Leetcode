@@ -199,10 +199,36 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power09(int base, int target) {
+        // 求平方数
+        boolean isNegative = target < 0;
+        double value = realPower09(base, Math.abs(target));
+        if (isNegative) {
+            return 1 / value;
+        }
+        return value;
+    }
+
+    public double realPower09(int base, int target) {
+        // 通过递归的方式少算
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower09(base, target / 2);
+        value *= value;
+        if (target % 2 == 1) {
+            value *= base;
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power08(2, -3));
+        System.out.println(doubleNumPower.power09(2, 3));
     }
 
 

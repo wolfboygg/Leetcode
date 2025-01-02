@@ -259,6 +259,26 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode12(Node head, Node target) {
+        // 分情况处理 判断是否是头节点
+        if (target.next != null) {
+            // 直接覆盖处理
+            Node next = target.next;
+            target.value = next.value;
+            target.next = next.next;
+        } else { // 删除尾部节点
+            if (target == head) {
+                head = null;
+            } else {
+                Node pre = head;
+                while(pre.next != target) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();

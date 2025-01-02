@@ -253,10 +253,35 @@ public class ReplaceSpace {
         System.out.println(sb.toString());
     }
 
+    public void replaceSpace12(StringBuilder sb) {
+        // 替换空格
+        if (sb == null) {
+            return;
+        }
+        int P1 = sb.length() - 1;
+        for (int i = 0; i <= P1; i++) {
+            if (sb.charAt(i) == ' ') {
+                sb.append("  ");
+            }
+        }
+        int P2 = sb.length() - 1;
+        while(P2 >=0) {
+            if (sb.charAt(P1) == ' ') {
+                sb.setCharAt(P2--, '0');
+                sb.setCharAt(P2--, '2');
+                sb.setCharAt(P2--, '%');
+            } else {
+                sb.setCharAt(P2--, sb.charAt(P1));
+            }
+            P1--;
+        }
+        System.out.println(sb.toString());
+    }
+
 
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder("We are happy.");
         ReplaceSpace replaceSpace = new ReplaceSpace();
-        replaceSpace.replaceSpace11(sb);
+        replaceSpace.replaceSpace12(sb);
     }
 }
