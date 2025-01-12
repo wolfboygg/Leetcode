@@ -317,11 +317,34 @@ public class TopToBottomPrintTree {
         }
     }
 
+    public void print14(TreeNode root) {
+        // 广序遍历二叉树
+        if (root == null) {
+            return;
+        }
+        List<Integer> list = new ArrayList<>();
+        // 使用队列进行辅助
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            if (poll != null) {
+                list.add(poll.value);
+                if (poll.left !=  null) {
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+            }
+        }
+        System.out.println(list.toString());
+    }
 
 
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();
         TreeNode tree = topToBottomPrintTree.createTree();
-        topToBottomPrintTree.print12(tree);
+        topToBottomPrintTree.print14(tree);
     }
 }

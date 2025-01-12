@@ -39,6 +39,18 @@ public class MergeBinaryTree {
         return root1;
     }
 
+    public TreeNode merge01(TreeNode root1, TreeNode root2) {
+        if (root1 == null || root2 == null) {
+            return root1 == null ? root2 : root1;
+        }
+        // 都要合并到第一颗树上
+        root1.value += root2.value;
+        // 使用递归的方式进行处理
+        root1.left = merge01(root1.left, root2.left);
+        root1.right = merge01(root1.right, root2.right);
+        return root1;
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);

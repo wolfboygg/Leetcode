@@ -27,12 +27,32 @@ public class ValidKH {
         return true;
     }
 
+    public boolean valid01(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        Stack<Character> stack = new Stack<>();
+        char[] charArr = str.toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            if (charArr[i] == '(' || charArr[i] == '[' || charArr[i] == '{') {
+                stack.push(charArr[i]);
+            } else if (charArr[i] == ')' && !stack.isEmpty() && stack.peek() == '(') {
+                stack.pop();
+            } else if (charArr[i] == ']' && !stack.isEmpty() && stack.peek() == '[') {
+                stack.pop();
+            } else if (charArr[i] == '}' && !stack.isEmpty() && stack.peek() == '{') {
+                stack.pop();
+            }
+        }
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args) {
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.valid(str1));
-        System.out.println(validKH.valid(str2));
+        System.out.println(validKH.valid01(str1));
+        System.out.println(validKH.valid01(str2));
 
     }
 

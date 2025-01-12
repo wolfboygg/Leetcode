@@ -146,10 +146,34 @@ public class MaxSubStr {
         return max;
     }
 
+    // 最大的连续字串的长度 通过动态规划的方式处理
+    public int findMaxLength08(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        char[] charArray = str.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int subMax = 0;
+        // 还要记录一个index
+        int index = -1; // 记录开始位置，用来计算长度
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                // 这里要index
+                index = Math.max(index, map.get(charArray[i]));
+            }
+            map.put(charArray[i], i);
+            subMax = Math.max(subMax, i - index);
+            max = Math.max(max, subMax);
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength07(str));
+        System.out.println(maxSubStr.findMaxLength08(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

@@ -149,6 +149,19 @@ public class BalanceTree {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    // 判断当前是否是一颗平衡二叉树
+    public int isBalanceTree10(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree10(root.left);
+        int rightDepth = isBalanceTree10(root.right);
+        if (Math.abs(rightDepth - leftDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();

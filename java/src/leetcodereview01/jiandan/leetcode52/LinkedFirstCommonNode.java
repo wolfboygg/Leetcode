@@ -106,6 +106,21 @@ public class LinkedFirstCommonNode {
     }
 
 
+    // 找到公共的节点 通过指针的交换方式进行处理
+    public void findCommonNode11(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return;
+        }
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1 == null ? node2 : P1.next;
+            P2 = P2 == null ? node1 : P2.next;
+        }
+        System.out.println(P1.value);
+    }
+
+
     public static void main(String[] args) {
         LinkedFirstCommonNode linkedFirstCommonNode = new LinkedFirstCommonNode();
         Node node00 = new Node(2);
@@ -132,7 +147,7 @@ public class LinkedFirstCommonNode {
         node013.next = node03;
 
         linkedFirstCommonNode.findCommonNode(node01, node011);
-        linkedFirstCommonNode.findCommonNode10(node01, node011);
+        linkedFirstCommonNode.findCommonNode11(node01, node011);
 
     }
 

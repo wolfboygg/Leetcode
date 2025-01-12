@@ -85,6 +85,25 @@ public class PrintMinNumber {
         System.out.println(sb);
     }
 
+    public void printMin04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        // 通过比较大小 全部转换为字符串
+        String[] strs = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            strs[i] = arr[i] + "";
+        }
+        // 然后进行排序比较
+        Arrays.sort(strs, (o1, o2) -> (o1 + o2).compareTo(o2 + o1));
+        // 然后进行拼接
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strs.length; i++) {
+            sb.append(strs[i]);
+        }
+        System.out.println(sb.toString());
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {3, 32, 321};

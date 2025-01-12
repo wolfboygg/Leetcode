@@ -27,7 +27,7 @@ public class FindMissNumber {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != i + 1) {
-                list.add(i);
+                list.add(i+1);
             }
         }
 

@@ -52,11 +52,29 @@ public class EveryDayTemp {
         return ans;
     }
 
+    // 使用单调栈来处理，或者不会的时候就暴力破解 遍历就完了
+    public int[] getEveryDayTempByStack01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        int[] result = new int[arr.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < arr.length; i++) {
+            int temperature = arr[i];
+            while(!stack.isEmpty() && temperature > arr[stack.peek()]) {
+                int index = stack.pop();
+                result[i] = i - index;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack01(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

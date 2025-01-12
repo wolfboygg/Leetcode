@@ -58,10 +58,25 @@ public class CircleLastNumber {
         return x;
     }
 
+    public int lastNumberByGH08(int n, int m) {
+        // 在n为length的数组中以m为步长删除元素，求最后剩余的是那个元素
+        int x = 0;
+        for (int i = 2; i <= n; i++) {
+            x = (x + m) % i;
+        }
+        return x;
+    }
+
     public static void main(String[] args) {
         // 通过递归的方式进行求解
+        // 0, 1, 2, 3, 4, 5
+        // 0, 1, 3, 4, 5
+        // 0, 1, 3, 4,
+        // 0, 1, 4,
+        // 0 4,
+        // 4
         CircleLastNumber circleLastNumber = new CircleLastNumber();
-        System.out.println(circleLastNumber.lastNumberByGH06(6, 2));
+        System.out.println(circleLastNumber.lastNumberByGH08(6, 2));
     }
     // 5, 3
     private int lastNumber(int n, int m) {

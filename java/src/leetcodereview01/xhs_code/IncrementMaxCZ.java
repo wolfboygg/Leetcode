@@ -67,6 +67,8 @@ public class IncrementMaxCZ {
         return encodeStr;
     }
 
+
+
     public static void main(String[] args) {
         int[] arr = {9, 4, 3, 2};
         int maxValue = getMaxCZValue(arr);

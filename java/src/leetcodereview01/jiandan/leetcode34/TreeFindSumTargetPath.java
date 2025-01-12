@@ -2,7 +2,6 @@ package leetcodereview01.jiandan.leetcode34;
 
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -350,11 +349,34 @@ public class TreeFindSumTargetPath {
         arr.remove(arr.size() - 1);
     }
 
+    public boolean findPath13(TreeNode root, int target) {
+        // 使用递归的方式进行查找
+        if (root == null) {
+            return false;
+        }
+        realFindPath13(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath13(TreeNode root, int target, ArrayList<Integer> arr) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        arr.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(arr));
+        } else {
+            realFindPath13(root.left, target, arr);
+            realFindPath13(root.right, target, arr);
+        }
+        arr.removeLast();
+    }
 
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath12(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath13(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

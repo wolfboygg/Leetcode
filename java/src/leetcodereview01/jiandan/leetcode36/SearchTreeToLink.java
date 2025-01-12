@@ -313,11 +313,38 @@ public class SearchTreeToLink {
         inOrder13(root.right);
     }
 
+    // 搜索二叉树转换为链表
+    public TreeNode convert14(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        // 进行递归遍历操作
+        // 搜索二叉树 左小右大 使用中序遍历的方式进行处理
+        inOrder14(root);
+        return head;
+    }
+
+    public void inOrder14(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder14(root.left);
+        if (head == null) {
+            head = root;
+        }
+        root.left = pre;
+        if (pre != null) {
+            pre.right = root;
+        }
+        pre = root;
+        inOrder14(root.right);
+    }
+
 
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert13(searchTree);
+        TreeNode convert = searchTreeToLink.convert14(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

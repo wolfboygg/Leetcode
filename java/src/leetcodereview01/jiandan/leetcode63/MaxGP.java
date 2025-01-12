@@ -98,9 +98,22 @@ public class MaxGP {
         return max;
     }
 
+    public int getMaxValue09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int minValue = arr[0];
+        int maxValue = 0;
+        for (int i = 0; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            maxValue = Math.max(maxValue, arr[i] - minValue);
+        }
+        return maxValue;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         MaxGP maxGP = new MaxGP();
-        System.out.println(maxGP.getMaxValue08(arr));
+        System.out.println(maxGP.getMaxValue09(arr));
     }
 }

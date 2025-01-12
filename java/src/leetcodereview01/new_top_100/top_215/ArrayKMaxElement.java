@@ -29,10 +29,28 @@ public class ArrayKMaxElement {
         return queue.poll();
     }
 
+    public int getKMaxElement01(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 使用堆来处理 小头堆
+        Queue<Integer> queue = new PriorityQueue<Integer>((o1, o2) -> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (arr[i] > queue.peek()) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        return queue.poll();
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 2, 1, 5, 6, 4};
         ArrayKMaxElement arrayKMaxElement = new ArrayKMaxElement();
-        int kMaxElement = arrayKMaxElement.getKMaxElement(arr, 2);
+        int kMaxElement = arrayKMaxElement.getKMaxElement01(arr, 2);
         System.out.println(kMaxElement);
 
     }

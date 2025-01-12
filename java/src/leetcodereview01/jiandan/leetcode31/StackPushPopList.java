@@ -176,6 +176,23 @@ public class StackPushPopList {
     }
 
 
+    public boolean isPopSequence12(int[] pushList, int[] popList) {
+        // 使用栈辅助实现
+        if (pushList.length == 0) {
+            return false;
+        }
+        Stack<Integer> helpStack = new Stack<>();
+        int popIndex = 0;
+        for (int i = 0; i < pushList.length; i++) {
+            helpStack.push(pushList[i]);
+            while(!helpStack.isEmpty() && popIndex < popList.length && helpStack.peek() == popList[popIndex]) {
+                helpStack.pop();
+                popIndex++;
+            }
+        }
+        return helpStack.isEmpty();
+    }
+
     public static void main(String[] args) {
         int[] pushList = {1, 2, 3, 4, 5};
         int[] popList = {4, 5, 3, 2, 1};

@@ -134,13 +134,39 @@ public class MinStack {
         return minorStack.peek();
     }
 
+
+    // 最小栈 辅助处理
+    public void push07(int value) {
+        majorStack.push(value);
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            int tempValue = minorStack.peek();
+            if (minorStack.peek() > value) {
+                minorStack.push(value);
+            } else {
+                minorStack.push(tempValue);
+            }
+        }
+    }
+
+
+    public int pop07() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int min07() {
+        return minorStack.peek();
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push06(-2);
-        minStack.push06(0);
-        minStack.push06(-3);
-        System.out.println(minStack.min05());
-        minStack.pop05();
-        System.out.println(minStack.min05());
+        minStack.push07(-2);
+        minStack.push07(0);
+        minStack.push07(-3);
+        System.out.println(minStack.min07());
+        minStack.pop07();
+        System.out.println(minStack.min07());
     }
 }

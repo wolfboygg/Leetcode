@@ -254,12 +254,41 @@ public class StringAllSequence {
     }
 
 
+    // 字符串的全 排列
+    public void getAllSequence10(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        // 使用回溯的方式进行遍历
+        char[] charArr = str.toCharArray();
+        boolean[] mark = new boolean[charArr.length];
+        backTracking10(charArr, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking10(char[] charArr, boolean[] mark, StringBuilder sb) {
+        if (charArr.length == sb.length()) {
+            ret.add(sb.toString());
+            return;
+        }
+        for (int i = 0; i < charArr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true;
+            sb.append(charArr[i]);
+            backTracking10(charArr, mark, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            mark[i] = false;
+        }
+    }
+
 
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence09(str);
+        stringAllSequence.getAllSequence10(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

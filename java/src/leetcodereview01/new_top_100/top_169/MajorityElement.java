@@ -24,11 +24,28 @@ public class MajorityElement {
         return num;
     }
 
+    public int majorityElement01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int num = arr[0];
+        int count = 0;
+        for (int item : arr) {
+            if (num == item) {
+                count++;
+            } else if (--count == 0) {
+                num = item;
+                count = 1;
+            }
+        }
+        return num;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 1, 1};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement(arr);
+        int i = bean.majorityElement01(arr);
         System.out.println(i);
     }
 

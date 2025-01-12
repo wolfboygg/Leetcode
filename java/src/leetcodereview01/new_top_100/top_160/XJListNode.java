@@ -25,6 +25,20 @@ public class XJListNode {
         return pre2;
     }
 
+    public Node findXJNode01(Node node1, Node node2) {
+        // 找到相交的节点
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1 == null ? node2 : P1.next;
+            P2 = P2 == null ? node1 : P2.next;
+        }
+        return P1;
+    }
+
 
     public static void main(String[] args) {
         Node node1 = new Node(1);
@@ -49,7 +63,7 @@ public class XJListNode {
         node9.next = node4;
 
         XJListNode xjListNode = new XJListNode();
-        Node xjNode = xjListNode.findXJNode(node1, node7);
+        Node xjNode = xjListNode.findXJNode01(node1, node7);
         System.out.println(xjNode.value);
     }
 }

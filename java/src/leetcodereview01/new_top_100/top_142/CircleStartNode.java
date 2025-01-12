@@ -42,6 +42,33 @@ public class CircleStartNode {
         return null;
     }
 
+    public Node findCircleStart01(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node fast = head;
+        Node slow = head;
+        boolean hasCircle = false;
+        while(fast != null && slow != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                hasCircle = true;
+                break;
+            }
+        }
+        // 需要判断
+        if (hasCircle) {
+            Node start = head;
+            while(start != slow) {
+                start = start.next;
+                slow = slow.next;
+            }
+            return slow;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);

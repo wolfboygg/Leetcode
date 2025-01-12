@@ -361,10 +361,38 @@ public class VerifySequenceOfBST {
         return realVerify(arr, left, rightIndex - 1) && realVerify(arr, rightIndex, right - 1);
     }
 
+    public boolean verify12(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        return realVerify12(arr, 0, arr.length-1);
+    }
+
+    public boolean realVerify12(int[] arr, int left, int right) {
+        if (left >= right) { //这里要注意等于的情况
+            return true;
+        }
+        // 根结点
+        int root = arr[right];
+        int rightIndex = 0;
+        for (int i = left; i <= right; i++) {
+            if (arr[i] > root) {
+                rightIndex = i;
+                break;
+            }
+        }
+        for (int i = rightIndex; i <= right; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+        }
+        return realVerify12(arr, left, rightIndex -1) && realVerify12(arr, rightIndex, right -1);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4,6,5,9,8};
         int[] arr2 = {44,9,6,5,8};
-        System.out.println(new VerifySequenceOfBST().verify11(arr2));
+        System.out.println(new VerifySequenceOfBST().verify11(arr));
     }
 }

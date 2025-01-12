@@ -12,17 +12,26 @@ public class SortArrayFindNoExit {
 
         // 缺失的数字
         int[] arr = {0, 1, 3};
+        // 当前数组中缺失的数字
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]  != i) {
+                System.out.println("缺失的是:"  + i);
+                break;
+            }
+        }
+
+
 //        for (int i = 0; i < arr.length; i++) {
 //            if (arr[i] != i) {
 //                System.out.println("当前数字不存在:" + i);
 //            }
 //        }
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != i) {
-                System.out.println("当前数字不存在:" + i);
-                break;
-            }
-        }
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] != i) {
+//                System.out.println("当前数字不存在:" + i);
+//                break;
+//            }
+//        }
     }
 }

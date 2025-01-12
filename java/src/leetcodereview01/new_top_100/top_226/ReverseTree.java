@@ -16,8 +16,8 @@ public class ReverseTree {
         if (node == null) {
             return;
         }
-        traversalTree(node.left);
         System.out.print(node.value + " ");
+        traversalTree(node.left);
         traversalTree(node.right);
     }
 
@@ -33,6 +33,17 @@ public class ReverseTree {
         return root;
     }
 
+    // 反转二叉树就是调换左右
+    public TreeNode reverseTree01(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree01(root.left);
+        TreeNode right = reverseTree01(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
 
 
 

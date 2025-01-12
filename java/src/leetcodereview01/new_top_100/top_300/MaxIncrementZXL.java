@@ -31,9 +31,53 @@ public class MaxIncrementZXL {
         return max;
     }
 
+    public int calculate01(int[] arr) {
+        // 2 3 4
+        // i = 1
+        // 1, 2,
+        // 最大递增子序列
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[arr.length];
+        dp[0] = 1;
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                // 记录当前的值
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
+    // 最大的递增子序列
+    public int calculate02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[arr.length];
+        dp[0] = 1;
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[] {10, 9, 2, 5, 3, 7, 101, 18};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate(arr));
+        System.out.println(maxIncrementZXL.calculate02(arr));
     }
 }

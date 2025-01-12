@@ -126,24 +126,39 @@ public class MaxSubArray {
         return max;
     }
 
+    // 最大子数组的和
+    public int findSum13(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int subMax = 0;
+        for (int i = 0; i < arr.length; i++) {
+            subMax = Math.max(arr[i], subMax + arr[i]);
+            System.out.println("subMax:" + subMax);
+            max = Math.max(max, subMax);
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        maxSubArray.findSum12(arr);
+        maxSubArray.findSum13(arr);
         String str = "abc";
         String str2 = "abc";
-        System.out.println(str == str2);
-        System.out.println(str.hashCode());
-        System.out.println(str2.hashCode());
-        System.out.println(new String("abc").hashCode());
-        System.out.println(new Integer(4).hashCode());
-        System.out.println(new Integer(4).hashCode());
-
-        System.out.println(new Person().hashCode());
-        System.out.println(new Person().hashCode());
+//        System.out.println(str == str2);
+//        System.out.println(str.hashCode());
+//        System.out.println(str2.hashCode());
+//        System.out.println(new String("abc").hashCode());
+//        System.out.println(new Integer(4).hashCode());
+//        System.out.println(new Integer(4).hashCode());
+//
+//        System.out.println(new Person().hashCode());
+//        System.out.println(new Person().hashCode());
         // Object的hashcode方法是通过native方法实现的，买一个对象的HashCode方法都是不一样的。
         // 对于String Integer对象而言他们个字都实现了自己的hashCode方法
         // String 通过拿到value遍历买一个字符求hash，而Integer通过对应的value求hash，所以

@@ -241,9 +241,37 @@ public class ReverseSentence {
         }
     }
 
+    // 单词反转
+    public void reverse09(String str) {
+        // 先找到空格，然后在进行反转
+        char[] charArray = str.toCharArray();
+        int P1 = 0;
+        int P2 = 0;
+        for (int i = 0; i <= charArray.length; i++) {
+            if (P2 == charArray.length || charArray[P2] == ' ') {
+                realReverse09(charArray, P1, P2 - 1);
+                P1 = P2 + 1;
+            }
+            P2++;
+        }
+        realReverse09(charArray, 0, charArray.length - 1);
+        System.out.println(Arrays.toString(charArray));
+    }
+
+    public void realReverse09(char[] charArr, int start, int end) {
+        while(start <= end) {
+            char temp = charArr[start];
+            charArr[start] = charArr[end];
+            charArr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse08(str);
+        reverseSentence.reverse09(str);
     }
 }

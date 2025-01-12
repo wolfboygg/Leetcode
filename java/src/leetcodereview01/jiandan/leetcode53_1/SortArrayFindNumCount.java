@@ -150,11 +150,42 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    public void count6(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int leftIndex = binaryFind06(arr, target, true);
+        int rightIndex = binaryFind06(arr, target, false) - 1;
+        if (leftIndex >=0 && leftIndex < arr.length && rightIndex >= 0 && rightIndex < arr.length &&
+            leftIndex != rightIndex) {
+            System.out.println(rightIndex - leftIndex  + 1);
+        }
+
+    }
+
+    public int binaryFind06(int[] arr, int target, boolean isLow) {
+        // 二分查找
+        int low =  0;
+        int height = arr.length -1;
+        int targetIndex = -1;
+        while(low <= height) {
+            int middle = low + (height - low) / 2;
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                targetIndex = middle;
+                height = middle - 1;
+            } else {
+                low = middle + 1;
+            }
+            System.out.println(low + "--->" + height);
+        }
+        return targetIndex;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count01(arr, 10);
+        sortArrayFindNumCount.count6(arr, 8);
     }
 
     private void count(int[] arr, int target) {

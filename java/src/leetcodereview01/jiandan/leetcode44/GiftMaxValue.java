@@ -238,6 +238,28 @@ public class GiftMaxValue {
         return help[row-1][column-1];
     }
 
+    public int getMaxValue13(int[][] arr) {
+        if (arr == null) {
+            return -1;
+        }
+        // 构建一个辅助的数组
+        int row = arr.length;
+        int column = arr[0].length;
+        int[][] matrix = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (i > 0) {
+                    matrix[i][j] = Math.max(matrix[i-1][j], matrix[i][j]);
+                }
+                if (j > 0) {
+                    matrix[i][j] = Math.max(matrix[i][j-1], matrix[i][j]);
+                }
+                matrix[i][j] += arr[i][j];
+            }
+        }
+        return matrix[row-1][column-1];
+    }
+
 
     public static void main(String[] args) {
         int[][] arr = {
@@ -246,7 +268,7 @@ public class GiftMaxValue {
                 {4, 2, 1}
         };
         GiftMaxValue giftMaxValue = new GiftMaxValue();
-        System.out.println(giftMaxValue.getMaxValue11(arr));
+        System.out.println(giftMaxValue.getMaxValue13(arr));
     }
 
 }

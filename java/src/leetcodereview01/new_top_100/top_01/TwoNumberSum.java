@@ -46,11 +46,30 @@ public class TwoNumberSum {
         return new int[]{};
     }
 
+    public int[] rowSum2(int[] arr, int target) {
+        // 通过左右指针的方式进行
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else {
+                return new int[] {arr[P1], arr[P2]};
+            }
+        }
+        return new int[] {};
+    }
+
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.twoSum01(num, 9);
+        int[] result = twoNumberSum.rowSum2(num, 9);
         System.out.println(Arrays.toString(result));
     }
 }

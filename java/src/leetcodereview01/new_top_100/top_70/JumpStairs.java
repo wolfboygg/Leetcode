@@ -19,9 +19,30 @@ public class JumpStairs {
         }
         return value;
     }
+
+    public int climbStairs01(int n) {
+        // 跳台阶有几种方式
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int value1 = 1;
+        int value2 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value1 + value2;
+            value1 = value2;
+            value2 = value;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         JumpStairs jumpStairs = new JumpStairs();
-        int num = jumpStairs.climbStairs(5);
+        int num = jumpStairs.climbStairs01(5);
         System.out.println(num);
     }
 }

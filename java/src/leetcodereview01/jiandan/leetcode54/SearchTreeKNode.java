@@ -142,11 +142,23 @@ public class SearchTreeKNode {
         dfs08(root.left);
     }
 
+    // 找到搜索二叉树的第k个节点
+    public void dfs09(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs09(root.right);
+        if (--k== 0) {
+            this.result = root.value;
+        }
+        dfs09(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs06(tree);
+        searchTreeKNode.dfs09(tree);
         System.out.println(searchTreeKNode.result);
     }
 

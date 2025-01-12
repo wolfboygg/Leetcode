@@ -82,9 +82,27 @@ public class LeftRotateString {
         }
     }
 
+    // 旋转字符串以k为位置进行旋转
+    public void rotate07(String str, int k) {
+        char[] charArr = str.toCharArray();
+        reverse07(charArr, 0, k - 1);
+        reverse07(charArr, k, charArr.length - 1);
+        reverse07(charArr, 0, charArr.length -1);
+        System.out.println(Arrays.toString(charArr));
+    }
+
+    public void reverse07(char[] charArr, int start, int end) {
+        while(start <= end) {
+            char temp = charArr[start];
+            charArr[start] = charArr[end];
+            charArr[end] = temp;
+            start++;
+            end--;
+        }
+    }
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate06(str, 2);
+        leftRotateString.rotate07(str, 2);
     }
 }

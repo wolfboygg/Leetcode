@@ -121,12 +121,30 @@ public class FindFirstCharInString {
         }
     }
 
+    // 找只出现一次的字符
+    public void findFirstChar09(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        // 直接用int存储吧
+        int[] value = new int[128];
+        for (int i = 0; i < str.length(); i++) {
+            value[str.charAt(i)] += 1;
+        }
+        // 还需要遍历一遍
+        for (int i = 0; i < str.length(); i++) {
+            if (value[str.charAt(i)] == 1) {
+                System.out.println(str.charAt(i));
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
 //        char c = findFirstCharInString.find(str);
 //        System.out.println(c);
-        findFirstCharInString.findFirstChar08(str);
+        findFirstCharInString.findFirstChar09(str);
     }
 
     private char find(String str) {

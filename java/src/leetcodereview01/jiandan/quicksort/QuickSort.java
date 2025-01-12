@@ -424,11 +424,47 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble14(int[] arr, int left, int right) {
+        // 找到对应的哨兵，然后开始左右开工
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        if (left >= right) {
+            return;
+        }
+        int pivotIndex = findPivotIndex14(arr, left, right);
+        sortByDouble14(arr, left, pivotIndex - 1);
+        sortByDouble14(arr, pivotIndex + 1, right);
+    }
+
+    public int findPivotIndex14(int[] arr, int left, int right) {
+        int pivotValue = arr[left];
+        int start = left + 1;
+        int end = right;
+        while(start < end) {
+            if (start < end && arr[end] > pivotValue) {
+                end--;
+            }
+            if (start < end && arr[start] < pivotValue) {
+                start++;
+            }
+            if (start != end) {
+                int temp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = temp;
+            }
+        }
+        // 最后完成之后交换位置
+        arr[left] = arr[start];
+        arr[start] = pivotValue;
+        return start;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble13(arr, 0, arr.length - 1);
+        quickSort.sortByDouble14(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

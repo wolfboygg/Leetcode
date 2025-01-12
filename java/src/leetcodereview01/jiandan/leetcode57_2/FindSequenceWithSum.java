@@ -239,9 +239,37 @@ public class FindSequenceWithSum {
         return ret;
     }
 
+    public List<List<Integer>> findSequence09(int target) {
+        // 找到所有连续的值
+        List<List<Integer>> list = new ArrayList<>();
+        int start = 1;
+        int end = 2;
+        int curSum = 3;
+        while(end <= target) {
+            if (curSum < target) {
+                end++;
+                curSum += end;
+            } else if (curSum > target) {
+                curSum -= start;
+                start++;
+            } else {
+                List<Integer> ret = new ArrayList<>();
+                for (int i = start; i <= end; i++) {
+                    ret.add(i);
+                }
+                list.add(ret);
+                curSum -= start;
+                start++;
+                end++;
+                curSum += end;
+            }
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence07(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence09(100);
         System.out.println(sequence);
     }
 
