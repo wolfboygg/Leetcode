@@ -89,7 +89,7 @@ public class MaxPalindrome {
     }
 
     public static void main(String[] args){
-        String str = "dababad";
+        String str = "abba";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
         String temp = maxPalindrome.findMaxHWStr02(str);
         System.out.println(temp);

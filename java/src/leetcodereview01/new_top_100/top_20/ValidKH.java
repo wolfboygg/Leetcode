@@ -47,12 +47,33 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean valid02(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+        char[] charArray = str.toCharArray();
+        // 通过栈来处理
+        Stack<Character> stack = new Stack<>();
+        for (char c : charArray) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                return false;
+            } else if (c == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                return false;
+            } else if (c == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.valid01(str1));
-        System.out.println(validKH.valid01(str2));
+        System.out.println(validKH.valid02(str1));
+        System.out.println(validKH.valid02(str2));
 
     }
 

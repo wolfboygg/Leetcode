@@ -75,6 +75,37 @@ public class PalindromeLink {
         return true;
     }
 
+    public boolean isPalindromeLink02(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        while(fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        // 然后进行判断
+        Node pHead = new Node(-1);
+        // 这里要走到下一个
+        slow = slow.next;
+        while(slow != null) {
+            Node next = slow.next;
+            slow.next = pHead.next;
+            pHead.next = slow;
+            slow = next;
+        }
+        // 然后在进行比较判断
+        Node temp = pHead.next;
+        while(temp != null) {
+            if (head.value != temp.value) {
+                return false;
+            }
+            head = head.next;
+            temp = temp.next;
+        }
+        return true;
+    }
 
 
     public static void main(String[] args) {
@@ -90,7 +121,7 @@ public class PalindromeLink {
         node4.next = node5;
 
         PalindromeLink palindromeLink = new PalindromeLink();
-        System.out.println(palindromeLink.isPalindromeLink01(node1));
+        System.out.println(palindromeLink.isPalindromeLink02(node1));
     }
 
 }
