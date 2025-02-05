@@ -99,12 +99,32 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations04(String str) {
+        // 字符组合
+        if (str == null) {
+            return null;
+        }
+        traversal04(str, 0, new StringBuilder());
+        return ret;
+    }
 
+    public void traversal04(String str, int index, StringBuilder sb) {
+        if (sb.length() == str.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
+        for (char c : charArr) {
+            sb.append(c);
+            traversal04(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);// 遍历完成之后要删除
+        }
+    }
 
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations03("23");
+        phoneNumber.letterCombinations04("234");
         System.out.println(ret.toString());
     }
 }

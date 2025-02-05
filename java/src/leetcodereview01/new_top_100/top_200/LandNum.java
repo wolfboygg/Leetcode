@@ -70,15 +70,48 @@ public class LandNum {
         backTraversal01(matrix, i, j + 1);
     }
 
+    // 岛屿的数量
+    public int calculateLandNum02(char[][] matrix) {
+        // 计算岛屿的数量
+        if (matrix == null) {
+            return -1;
+        }
+        // 通过回溯的方式把所有的都设置为0
+        int count = 0;
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                    backTraversal02(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal02(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal02(matrix, i - 1, j);
+        backTraversal02(matrix, i, j - 1);
+        backTraversal02(matrix, i + 1, j);
+        backTraversal02(matrix, i, j + 1);
+
+    }
+
 
     public static void main(String[] args) {
         char[][] grid2 = {
                 {'1', '1', '0', '0', '0'},
                 {'1', '1', '0', '0', '0'},
                 {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '1', '1'}
+                {'0', '0', '0', '0', '0'}
         };
         LandNum landNum = new LandNum();
-        System.out.println(landNum.calculateLandNum01(grid2));
+        System.out.println(landNum.calculateLandNum02(grid2));
     }
 }

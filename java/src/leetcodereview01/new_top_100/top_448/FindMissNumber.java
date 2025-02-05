@@ -40,10 +40,37 @@ public class FindMissNumber {
         arr[right] = temp;
     }
 
+    // 把对应的位置的数换到index的位置
+    public Integer[] find01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return new Integer[]{};
+        }
+        Integer[] newArr = new Integer[]{};
+        for (int i = 0; i < arr.length; i++) {
+            // 进行位置交换
+            while(i + 1 != arr[i] && arr[i] != arr[arr[i] - 1]) {// 交换
+                swipe01(arr, i, arr[i] - 1);
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i + 1) { // 1-n
+                list.add(i+1);
+            }
+        }
+        return list.toArray(newArr);
+    }
+
+    public void swipe01(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
+
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};
         FindMissNumber findMissNumber = new FindMissNumber();
-        Integer[] nums = findMissNumber.find(arr);
+        Integer[] nums = findMissNumber.find01(arr);
         System.out.println(Arrays.toString(nums));
     }
 }

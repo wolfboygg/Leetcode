@@ -45,17 +45,38 @@ public class ProductExceptSelf {
         left[0] = 1;
         right[length - 1] = 1;
         for (int i = 1; i < length; i++) {
-            left[i] = arr[i-1] * left[i-1];
+            left[i] = arr[i - 1] * left[i - 1];
         }
         System.out.println(Arrays.toString(left));
         for (int i = length - 2; i >= 0; i--) {
-            right[i] = right[i+1] * arr[i+1];
+            right[i] = right[i + 1] * arr[i + 1];
 
         }
         System.out.println(Arrays.toString(right));
         int[] result = new int[length];
         for (int i = 0; i < length; i++) {
             result[i] = left[i] * right[i];
+        }
+        return result;
+    }
+
+    public int[] product02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int[] leftArr = new int[arr.length];
+        leftArr[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            leftArr[i] = arr[i - 1] * leftArr[i - 1];
+        }
+        int[] rightArr = new int[arr.length];
+        rightArr[arr.length - 1] = 1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightArr[i] = rightArr[i + 1] * arr[i + 1];
+        }
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = leftArr[i] * rightArr[i];
         }
         return result;
     }
@@ -67,7 +88,7 @@ public class ProductExceptSelf {
         // [24, 12, 4, 1]
         int[] arr = {1, 2, 3, 4};
         ProductExceptSelf productExceptSelf = new ProductExceptSelf();
-        int[] result = productExceptSelf.product01(arr);
+        int[] result = productExceptSelf.product02(arr);
         System.out.println(Arrays.toString(result));
     }
 }

@@ -52,6 +52,44 @@ public class BinaryTreeCommonParent {
         return left == null ? right : left;
     }
 
+    // 二叉树的公共祖先
+    public TreeNode findCommonParent02(TreeNode root, TreeNode node1, TreeNode node2) {
+        if (root == null) {
+            return null;
+        }
+        // 必须判断是否等于root
+        if (node1 == root || node2 == root) {
+            return root;
+        }
+        // 递归处理
+        TreeNode leftChild = findCommonParent02(root.left, node1, node2);
+        TreeNode rightChild = findCommonParent02(root.right, node1, node2);
+        if (leftChild == null && rightChild == null) {
+            return null;
+        }
+        if (leftChild != null && rightChild != null) {
+            return root;
+        }
+        return leftChild == null ? rightChild : leftChild;
+    }
+
+    public TreeNode findCommonParent03(TreeNode root, TreeNode node1, TreeNode node2) {
+        if (root == null) {
+            return null;
+        }
+        if (node1 == root || node2 == root) {
+            return root;
+        }
+        TreeNode leftChild = findCommonParent03(root.left, node1, node2);
+        TreeNode rightChild = findCommonParent03(root.right, node1, node2);
+        if (leftChild == null && rightChild == null) {
+            return null;
+        }
+        if (leftChild != null && rightChild != null) {
+            return root;
+        }
+        return leftChild == null ? rightChild : leftChild;
+    }
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(4);
@@ -70,7 +108,7 @@ public class BinaryTreeCommonParent {
         node3.right = node7;
 
         BinaryTreeCommonParent binaryTreeCommonParent = new BinaryTreeCommonParent();
-        TreeNode commonParent = binaryTreeCommonParent.findCommonParent01(node1, node4, node5);
+        TreeNode commonParent = binaryTreeCommonParent.findCommonParent03(node1, node4, node5);
         if (commonParent == null) {
             System.out.println("找不到");
         } else {

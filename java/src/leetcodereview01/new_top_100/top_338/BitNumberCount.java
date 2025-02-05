@@ -16,9 +16,9 @@ public class BitNumberCount {
         for (int i = 0; i <= n; i++) {
             int temp = i;
             int count = 0;
-            while(temp != 0) {
-                temp &= temp-1;
-                count ++;
+            while (temp != 0) {
+                temp &= temp - 1;
+                count++;
             }
             list.add(count);
         }
@@ -33,9 +33,27 @@ public class BitNumberCount {
         for (int i = 0; i <= n; i++) {
             int temp = i;
             int count = 0;
-            while(temp != 0) {
+            while (temp != 0) {
                 count++;
-                temp &= (temp-1);
+                temp &= (temp - 1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
+
+    public List<Integer> getBitNumber02(int n) {
+        if (n < 0) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            int temp = i;
+            int count = 0;
+            while (temp != 0) {
+                count++;
+                temp &= (temp - 1);
             }
             list.add(count);
         }
@@ -44,7 +62,7 @@ public class BitNumberCount {
 
     public static void main(String[] args) {
         BitNumberCount bitNumberCount = new BitNumberCount();
-        List<Integer> bitNumber = bitNumberCount.getBitNumber01(5);
+        List<Integer> bitNumber = bitNumberCount.getBitNumber02(5);
         System.out.println(bitNumber.toString());
     }
 }

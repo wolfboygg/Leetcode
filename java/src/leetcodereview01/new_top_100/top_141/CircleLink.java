@@ -45,6 +45,23 @@ public class CircleLink {
         return false;
     }
 
+    public boolean isCircle02(Node head) {
+        // 判断链表是否有环
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
@@ -60,7 +77,7 @@ public class CircleLink {
         node4.next= node5;
         node5.next = node6;
         node6.next = node3;
-        boolean circle = circleLink.isCircle01(node1);
+        boolean circle = circleLink.isCircle02(node1);
         System.out.println(circle);
     }
 }

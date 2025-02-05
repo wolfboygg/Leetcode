@@ -41,11 +41,46 @@ public class MajorityElement {
         return num;
     }
 
+    public int majorityElement02(int[] arr) {
+        // 多个数组的中的元素的最多的
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int count = 0;
+        int num = arr[0];
+        for (int item : arr) {
+            if (num == item) {
+                count++;
+            } else if (--count == 0) {
+                num = item;
+                count = 1;
+            }
+        }
+        return num;
+    }
+
+    //  求众数是那个
+    public int majorityElement03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int count = 0;
+        int num = arr[0];
+        for (int item : arr) {
+            if (item == num) {
+                count++;
+            } else if (--count == 0) {
+                count = 1;
+                num = item;
+            }
+        }
+        return num;
+    }
 
     public static void main(String[] args) {
         int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 1, 1};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement01(arr);
+        int i = bean.majorityElement03(arr);
         System.out.println(i);
     }
 

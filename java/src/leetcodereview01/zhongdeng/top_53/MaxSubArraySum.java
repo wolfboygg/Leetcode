@@ -19,10 +19,23 @@ public class MaxSubArraySum {
         return max;
     }
 
+    public int getMaxSubArraySum01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int subSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            subSum = Math.max(arr[i], subSum + arr[i]);
+            max = Math.max(max, subSum);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         int[] nums = {5, 4, -1, 7, 8};
         MaxSubArraySum maxSubArraySum = new MaxSubArraySum();
-        System.out.println(maxSubArraySum.getMaxSubArraySum(nums));
+        System.out.println(maxSubArraySum.getMaxSubArraySum01(nums));
     }
 }
