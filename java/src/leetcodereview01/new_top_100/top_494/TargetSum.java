@@ -27,10 +27,31 @@ public class TargetSum {
         }
     }
 
+    public int count01(int[] arr, int target) {
+        // 通过+ -算法来达到target的值
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        backTracking01(arr, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking01(int[] arr, int target, int sum, int index) {
+        if (index == arr.length) {
+            if (target == sum) {
+                count++;
+            }
+        } else {
+            backTracking01(arr, target, sum + arr[index], index + 1);
+            backTracking01(arr, target, sum - arr[index], index + 1);
+        }
+    }
+
+
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count(value, target));
+        System.out.println(targetSum.count01(value, target));
     }
 }

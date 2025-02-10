@@ -33,11 +33,23 @@ public class OnlyOneNumber {
         return value;
     }
 
+    public int onlyOne02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 只出现一次，那么通过异或就可以将出现两次的重置为0
+        int value = 0;
+        for (int i = 0; i < arr.length; i++) {
+            value ^= arr[i];
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
        // 任何数和0异或的任何数
         int[] arr = {4,1,2,1,2};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        int i = onlyOneNumber.onlyOne01(arr);
+        int i = onlyOneNumber.onlyOne02(arr);
         System.out.println(i);
     }
 }

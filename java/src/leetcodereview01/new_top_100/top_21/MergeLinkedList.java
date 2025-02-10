@@ -55,6 +55,27 @@ public class MergeLinkedList {
         return temp.next;
     }
 
+    public Node merge02(Node node1, Node node2) {
+        // 合并两个排序链表
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value > node2.value) {
+                temp.next = node2;
+                node2 = node2.next;
+            } else {
+                temp.next = node1;
+                node1 = node1.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -68,7 +89,7 @@ public class MergeLinkedList {
         node2.next = node4;
 
         MergeLinkedList mergeLinkedList = new MergeLinkedList();
-        Node merge = mergeLinkedList.merge01(node1, node2);
+        Node merge = mergeLinkedList.merge02(node1, node2);
         while (merge != null) {
             System.out.print(merge.value + " ");
             merge = merge.next;

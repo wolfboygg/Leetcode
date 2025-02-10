@@ -52,15 +52,55 @@ public class WordSearch {
         return false;
     }
 
+    public boolean findPath01(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        // 开始进行回溯搜索
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking01(matrix, mark, next, str, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking01(char[][] matrix, boolean[][] mark, int[][] next, String str, int i, int j, int index) {
+        if (index == str.length()) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking01(matrix, mark, next, str, i + ints[0], j + ints[1], index +1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
 
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEE";
+        String str = "ABCCEVS";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath(charMatrix, str);
+        boolean isExit = search.findPath01(charMatrix, str);
         System.out.println(isExit);
     }
 }

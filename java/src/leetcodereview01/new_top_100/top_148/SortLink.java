@@ -59,6 +59,47 @@ public class SortLink {
         return pre.next;
     }
 
+    public Node sortLink01(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        // 通过二分的方式在进行merge 主要方式还是递归
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node mid = P1;
+        Node left = sortLink01(head, mid);
+        Node right = sortLink01(mid, tail);
+        return merge01(left, right);
+    }
+
+    public Node merge01(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value > node2.value) {
+                temp.next = node2;
+                node2 = node2.next;
+            } else {
+                temp.next = node1;
+                node1 = node1.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
@@ -68,7 +109,7 @@ public class SortLink {
         node2.next = node3;
         node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink(node1, null);
+        Node node = sortLink.sortLink01(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

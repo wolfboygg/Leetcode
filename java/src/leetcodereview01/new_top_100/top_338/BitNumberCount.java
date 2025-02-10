@@ -60,9 +60,26 @@ public class BitNumberCount {
         return list;
     }
 
+    public List<Integer> getBitNumber03(int n) {
+        if (n < 0) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            int temp = i;
+            int count = 0;
+            while(temp > 0) {
+                temp &= (temp -1);
+                count++;
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         BitNumberCount bitNumberCount = new BitNumberCount();
-        List<Integer> bitNumber = bitNumberCount.getBitNumber02(5);
+        List<Integer> bitNumber = bitNumberCount.getBitNumber03(5);
         System.out.println(bitNumber.toString());
     }
 }

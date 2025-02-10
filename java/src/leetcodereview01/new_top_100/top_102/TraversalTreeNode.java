@@ -33,6 +33,25 @@ public class TraversalTreeNode {
         }
     }
 
+    // 层序遍历二叉树
+    public void traversal01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.print(node.value + " ");
+            if (node.left != null){
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(3);
         TreeNode node2 = new TreeNode(9);
@@ -50,6 +69,6 @@ public class TraversalTreeNode {
         node2.right = node8;
 
         TraversalTreeNode traversalTreeNode = new TraversalTreeNode();
-        traversalTreeNode.traversal(node1);
+        traversalTreeNode.traversal01(node1);
     }
 }

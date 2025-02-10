@@ -7,6 +7,7 @@ public class MaxIncrementZXL {
 
     /**
      * 使用动态规划的方式处理
+     *
      * @param arr
      * @return
      */
@@ -16,7 +17,7 @@ public class MaxIncrementZXL {
         }
         int max = 0;
         int[] dp = new int[arr.length];
-        dp[0] =1;
+        dp[0] = 1;
         // 2, 5, 3, 7, 101
         // 1, 2, 2, 3, 4
         for (int i = 1; i < arr.length; i++) {
@@ -118,7 +119,7 @@ public class MaxIncrementZXL {
 
     public int calculate05(int[] arr) {
         // 最长递增子序列
-        if (arr ==  null || arr.length == 0) {
+        if (arr == null || arr.length == 0) {
             return -1;
         }
         int[] dp = new int[arr.length];
@@ -135,9 +136,28 @@ public class MaxIncrementZXL {
         return max;
     }
 
+    // 最大增长子序列，这个是有顺序的
+    public int calculate06(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[arr.length];
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            dp[i] = 1; // 计算当前的数
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max = Math.max(dp[i], max);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
-        int[] arr = new int[] {10, 9, 2, 5, 3, 7, 101, 205, 18};
+        int[] arr = new int[]{10, 9, 2, 5, 3, 7, 101, 205, 18};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate05(arr));
+        System.out.println(maxIncrementZXL.calculate06(arr));
     }
 }

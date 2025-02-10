@@ -40,10 +40,27 @@ public class MoveZero {
         System.out.println(Arrays.toString(arr));
     }
 
+    // 移动0的位置 向后移动，通过指针的方式
+    public void move02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int slow = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                int temp = arr[i];
+                arr[i] = arr[slow];
+                arr[slow] = temp;
+                slow++;
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.move01(arr);
+        moveZero.move02(arr);
         System.out.println(Arrays.toString(arr));
     }
 

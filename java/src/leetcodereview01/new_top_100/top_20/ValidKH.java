@@ -126,11 +126,32 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean validKH04(String str) {
+        // 通过栈来实现验证括号
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) =='(' || str.charAt(i)=='[' || str.charAt(i) == '{') {
+                stack.push(str.charAt(i));
+            } else if (str.charAt(i) == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                return false;
+            } else if (str.charAt(i) == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+                return false;
+
+            } else if (str.charAt(i) == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.validKH03(str1));
-        System.out.println(validKH.validKH03(str2));
+        System.out.println(validKH.validKH04(str1));
+        System.out.println(validKH.validKH04(str2));
     }
 }

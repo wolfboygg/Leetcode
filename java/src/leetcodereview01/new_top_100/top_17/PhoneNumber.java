@@ -121,10 +121,33 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations05(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        // 使用递归的方式进行处理
+        traversal05(str, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal05(String str, int index, StringBuilder sb) {
+        if (str.length() == sb.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        // chatAt得到的数字，所以要减去'0'
+        char[] charArray = map[str.charAt(index) - '0'].toCharArray();
+        for (char c : charArray) {
+            sb.append(c);
+            traversal05(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations04("234");
+        phoneNumber.letterCombinations05("234");
         System.out.println(ret.toString());
     }
 }

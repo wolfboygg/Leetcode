@@ -44,10 +44,28 @@ public class MaxLengthSubStr {
         return max;
     }
 
+    public int maxLengthSubStr02(String str) {
+        // 最长无重复的字串
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        HashMap<Character, Integer> map = new HashMap<>();
+        int index = -1;
+        int max = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                index = Math.max(index, map.getOrDefault(str.charAt(i), -1));
+            }
+            map.put(str.charAt(i), i);
+            max = Math.max(max, i - index);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
-        String str = "abcabcbb";
+        String str = "abcabdcbb";
         MaxLengthSubStr maxLengthSubStr = new MaxLengthSubStr();
-        int result = maxLengthSubStr.maxLengthSubStr(str);
+        int result = maxLengthSubStr.maxLengthSubStr02(str);
         System.out.println(result);
     }
 }

@@ -41,9 +41,20 @@ public class HMTRange {
         return count;
     }
 
+    // 先来一个异或操作，然后在进行判断1的个数
+    public int getDistance03(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value -1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance02(1, 4);
+        int distance = hmtRange.getDistance03(1, 4);
         System.out.println(distance);
     }
 }

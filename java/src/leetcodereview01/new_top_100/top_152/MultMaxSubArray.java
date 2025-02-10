@@ -26,10 +26,30 @@ public class MultMaxSubArray {
         }
         return result;
     }
+    // 由于存在负数 所以要记录最大的值和最小的值，因为可能会反转
+    public int calculate02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 1;
+        int min = 1;
+        int result = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int tmx = max;
+            int tmi = min;
+            max = Math.max(Math.max(tmx * arr[i], arr[i]), arr[i] * tmi);
+            min = Math.min(Math.min(tmi * arr[i], arr[i]), arr[i] * tmx);
+            if (min < (-1 << 31)) {
+                min = arr[i];
+            }
+            result = Math.max(result, max);
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         int[] arr = new int[]{5, 6, -1, 2, -3};
         MultMaxSubArray multMaxSubArray = new MultMaxSubArray();
-        System.out.println(multMaxSubArray.calculate(arr));
+        System.out.println(multMaxSubArray.calculate02(arr));
     }
 }

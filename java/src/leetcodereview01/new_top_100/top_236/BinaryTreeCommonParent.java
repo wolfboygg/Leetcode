@@ -91,6 +91,26 @@ public class BinaryTreeCommonParent {
         return leftChild == null ? rightChild : leftChild;
     }
 
+    public TreeNode findCommonParent04(TreeNode root, TreeNode node1, TreeNode node2) {
+        // 通过左右子树进行查找 还是使用递归的方式处理
+        if (root == null) {
+            return null;
+        }
+        if (root == node1 || root == node2) {
+            return root;
+        }
+        TreeNode left = findCommonParent04(root.left, node1, node2);
+        TreeNode right = findCommonParent04(root.right, node1, node2);
+
+        if (left == null && right == null) {
+            return null;
+        }
+        if (left != null && right != null) {
+            return root;
+        }
+        return left == null ? right : left;
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(4);
         TreeNode node2 = new TreeNode(2);

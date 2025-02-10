@@ -58,6 +58,18 @@ public class ReverseTree {
         return root;
     }
 
+    public TreeNode reverseTree03(TreeNode root) {
+        // 反转二叉树
+        if (root == null) {
+            return null;
+        }
+        TreeNode leftNode = reverseTree03(root.left);
+        TreeNode rightNode = reverseTree03(root.right);
+        root.left = rightNode;
+        root.right = leftNode;
+        return root;
+    }
+
     public static void main(String[] args) {
         ReverseTree reverseTree = new ReverseTree();
         TreeNode root0 = new TreeNode(1);
@@ -76,7 +88,7 @@ public class ReverseTree {
         root2.right = root6;
         reverseTree.traversalTree(root0);
         System.out.println();
-        TreeNode node = reverseTree.reverseTree01(root0);
+        TreeNode node = reverseTree.reverseTree03(root0);
         reverseTree.traversalTree(node);
         System.out.println();
     }

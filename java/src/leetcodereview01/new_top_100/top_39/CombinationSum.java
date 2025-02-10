@@ -32,10 +32,39 @@ public class CombinationSum {
         }
     }
 
+    // 所有能组成target的元素集合，可以无限去某一个元素
+    // 通过遍历的方式进行求解
+    public List<List<Integer>> findAllResult01(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking01(arr, target, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking01(int[] arr, int target, int start, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if (start >= arr.length) {
+            return;
+        }
+        for (int i = start; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking01(arr, target - arr[i], i, list);
+            list.removeLast();
+        }
+    }
+
+
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult01(arr, 7);
         System.out.println(allResult.toString());
     }
 }

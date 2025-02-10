@@ -54,10 +54,34 @@ public class TreeNodeTargetSum {
         result.removeLast();
     }
 
+    public boolean findPath01(TreeNode root, int target) {
+        // 通过递归的方式找到对应path
+        if (root == null) {
+            return false;
+        }
+        realFindPath01(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath01(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath01(root.left, target, list);
+            realFindPath01(root.right, target, list);
+        }
+        list.removeLast();
+    }
+
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath01(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

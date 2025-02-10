@@ -184,6 +184,53 @@ public class TwoAddLink {
         return P1.next;
     }
 
+    public ListNode addTwoNumber05(ListNode node1, ListNode node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        ListNode pre = new ListNode(-1);
+        ListNode temp = pre;
+        int carry = 0;
+        while(node1 != null && node2 != null) {
+            ListNode node = new ListNode(carry);
+            node.val += node1.val;
+            node.val += node2.val;
+            carry = node.val / 10;
+            node.val %= 10;
+            temp.next = node;
+            temp = temp.next;
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        if (carry != 0 && node1 == null && node2 == null) {
+            temp.next = new ListNode(carry);
+        } else {
+            temp.next = node1 == null ? node2 : node1;
+            ListNode node = temp.next;
+            node.val += carry;
+            if (node.val > 10) {
+                carry = node.val % 10;
+                if (node.next == null) {
+                    node.next = new ListNode(carry);
+                } else {
+                    ListNode next = node.next;
+                    next.val += carry;
+                }
+                node.val /= 10;
+            }
+        }
+        // 进行反转
+        pre = pre.next;
+        ListNode newTemp = new ListNode(-1);
+        while(pre != null) {
+            ListNode next = pre.next;
+            pre.next = newTemp.next;
+            newTemp.next = pre;
+            pre = next;
+        }
+        return newTemp.next;
+    }
+
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(2);
@@ -200,7 +247,7 @@ public class TwoAddLink {
         node5.next = node6;
         node6.next = node7;
         TwoAddLink twoAddLink = new TwoAddLink();
-        ListNode node = twoAddLink.addTwoNumber04(node1, node4);
+        ListNode node = twoAddLink.addTwoNumber05(node1, node4);
         while (node != null) {
             System.out.print(node.val);
             node = node.next;

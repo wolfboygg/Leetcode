@@ -87,12 +87,28 @@ public class EveryDayTemp {
         return result;
     }
 
+    // 通过栈的方式进行处理 单调栈 记录当前的index，如果找到大的要while一下
+    public int[] getEveryDayTempByStack03(int[] temperatures) {
+        if (temperatures == null || temperatures.length == 0) {
+            return null;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[temperatures.length];
+        for (int i = 0; i < temperatures.length; i++) {
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int index = stack.pop();
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack02(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack03(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

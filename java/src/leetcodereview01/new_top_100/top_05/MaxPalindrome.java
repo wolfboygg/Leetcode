@@ -4,7 +4,7 @@ package leetcodereview01.new_top_100.top_05;
  * 最长的回文字符串
  * 采用中心扩散方法。注意如果是偶数找不到中心位置，没法扩散，所以要i-1进行扩散
  */
-public class MaxPalindrome {
+public class  MaxPalindrome {
 
     private int left = 0;
     private int len = 0;
@@ -110,13 +110,35 @@ public class MaxPalindrome {
             start--;
             end++;
         }
+    }
 
+    public String findMaxHWStr04(String str) {
+        // 通过遍历的方式找到left和len
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            find04(str, i, i);
+            find04(str, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find04(String str, int start, int end) {
+        while(start >= 0 && end < str.length() && str.charAt(start) == str.charAt(end)) {
+            if (end - start + 1 > len) {
+                this.left = start;
+                this.len = end - start + 1;
+            }
+            start--;
+            end++;
+        }
     }
 
     public static void main(String[] args) {
-        String str = "abba";
+        String str = "abbac";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWStr03(str);
+        String temp = maxPalindrome.findMaxHWStr04(str);
         System.out.println(temp);
     }
 }

@@ -18,6 +18,19 @@ public class MaxSubArraySum {
         return max;
     }
 
+    public int calculate01(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int curMax = 0;
+        for (int i = 0; i < arr.length; i++) {
+            curMax = Math.max(curMax + arr[i], arr[i]);
+            max = Math.max(max, curMax);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[] {-2,1,-3,4,-1,2,1,-5,4};
         MaxSubArraySum maxSubArraySum = new MaxSubArraySum();

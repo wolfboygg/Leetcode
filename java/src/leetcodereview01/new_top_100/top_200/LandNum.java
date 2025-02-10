@@ -100,18 +100,48 @@ public class LandNum {
         backTraversal02(matrix, i, j - 1);
         backTraversal02(matrix, i + 1, j);
         backTraversal02(matrix, i, j + 1);
-
     }
 
+    public int calculateLandNumber03(char[][] matrix) {
+        // 计算陆地的面积
+        if (matrix == null) {
+            return -1;
+        }
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    // 处理周围的‘1’
+                    backTraversal03(matrix, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+    public void backTraversal03(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal03(matrix, i - 1, j);
+        backTraversal03(matrix, i, j - 1);
+        backTraversal03(matrix, i + 1, j);
+        backTraversal03(matrix, i, j + 1);
+    }
 
     public static void main(String[] args) {
         char[][] grid2 = {
                 {'1', '1', '0', '0', '0'},
                 {'1', '1', '0', '0', '0'},
                 {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', '0'}
+                {'0', '0', '0', '0', '1'}
         };
         LandNum landNum = new LandNum();
-        System.out.println(landNum.calculateLandNum02(grid2));
+        System.out.println(landNum.calculateLandNumber03(grid2));
     }
 }
