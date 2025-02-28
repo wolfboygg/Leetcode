@@ -143,21 +143,45 @@ public class PalindromeLink {
         return true;
     }
 
+    // 回文链表
+    public boolean isPalindromeLink04(Node head) {
+        if (head == null) {
+            return false;
+        }
+        // 先找到中心点，然后进行比较
+        Node P1 = head;
+        Node P2 = head;
+        // 1 2  4 5
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node start = P1.next;
+        P1.next = null;
+        while(start != null) {
+            if (start.value != head.value) {
+                return false;
+            }
+            start = start.next;
+            head = head.next;
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(2);
         Node node4 = new Node(1);
-//        Node node5 = new Node(3);
+        Node node5 = new Node(3);
 
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
-//        node4.next = node5;
+        node4.next = node5;
 
         PalindromeLink palindromeLink = new PalindromeLink();
-        System.out.println(palindromeLink.isPalindromeLink03(node1));
+        System.out.println(palindromeLink.isPalindromeLink04(node1));
     }
 
 }

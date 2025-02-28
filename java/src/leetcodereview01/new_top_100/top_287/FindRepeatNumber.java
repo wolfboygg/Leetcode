@@ -41,10 +41,30 @@ public class FindRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber02(int[] arr) {
+        //找到重复的输
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 1 - n 放到对应的位置
+        for (int i = 0; i < arr.length; i++) {
+            while (arr[i] != i + 1) {
+                if (arr[i] != arr[arr[i]]) {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 4, 3, 2};
         FindRepeatNumber findRepeatNumber = new FindRepeatNumber();
-        int result = findRepeatNumber.findRepeatNumber01(arr);
+        int result = findRepeatNumber.findRepeatNumber02(arr);
         System.out.println(result);
     }
 }

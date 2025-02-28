@@ -78,10 +78,35 @@ public class TreeNodeTargetSum {
         list.removeLast();
     }
 
+    public boolean findPath02(TreeNode root, int target) {
+        // 使用递归的方式进行处理
+        if (root == null) {
+            return false;
+        }
+        // 通过递归的方式进行处理
+        realFindPath02(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath02(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (root.right == null && root.left == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath02(root.left, target, list);
+            realFindPath02(root.right, target, list);
+        }
+        list.removeLast();
+    }
+
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath01(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath02(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

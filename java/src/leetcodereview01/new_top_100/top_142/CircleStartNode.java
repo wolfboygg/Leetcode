@@ -123,6 +123,33 @@ public class CircleStartNode {
         return null;
     }
 
+    // 找入环节点
+    public Node findCircleStart04(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        boolean isHas = false;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        if (isHas) {
+            P2 = head;
+            while(P1 != P2) {
+                P1 = P1.next;
+                P2 = P2.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -137,7 +164,7 @@ public class CircleStartNode {
         node5.next = node6;
         node6.next = node3;
         CircleStartNode circleStartNode = new CircleStartNode();
-        System.out.println(circleStartNode.findCircleStart03(node1).value);
+        System.out.println(circleStartNode.findCircleStart04(node1).value);
     }
 
 }

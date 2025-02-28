@@ -79,10 +79,27 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr04(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int index = -1;
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                index = Math.max(index, map.getOrDefault(str.charAt(i), -1));
+            }
+            max = Math.max(max, i - index);
+            map.put(str.charAt(i), i);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "abcabcbb";
         MaxLengthStr maxLengthStr = new MaxLengthStr();
-        int value = maxLengthStr.maxLengthStr02(str);
+        int value = maxLengthStr.maxLengthStr03(str);
         System.out.println(value);
     }
 }

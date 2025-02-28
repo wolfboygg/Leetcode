@@ -52,9 +52,20 @@ public class HMTRange {
         return count;
     }
 
+    public int getDistance04(int a, int b) {
+        // 测试距离 先通过异或的方式得到value，然后再计算个数
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value -1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance03(1, 4);
+        int distance = hmtRange.getDistance04(1, 4);
         System.out.println(distance);
     }
 }

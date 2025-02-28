@@ -47,9 +47,33 @@ public class MultMaxSubArray {
         return result;
     }
 
+    public int calculate03(int[] arr) {
+        // 乘积作答子数组，所以要记录一个最小值，防止负数
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = arr[0];
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            int tmx = max;
+            int tmi = min;
+            max = Math.max(Math.max(arr[i], tmx * arr[i]), tmi * arr[i]);
+            min = Math.min(Math.min(arr[i], tmi * arr[i]), tmx * arr[i]);
+            if (min < (-1 << 31)) {
+                min = arr[i];
+            }
+        }
+        return max;
+    }
+
+
+
+
+
+
     public static void main(String[] args) {
         int[] arr = new int[]{5, 6, -1, 2, -3};
         MultMaxSubArray multMaxSubArray = new MultMaxSubArray();
-        System.out.println(multMaxSubArray.calculate02(arr));
+        System.out.println(multMaxSubArray.calculate03(arr));
     }
 }

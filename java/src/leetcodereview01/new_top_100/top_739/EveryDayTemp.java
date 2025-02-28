@@ -104,11 +104,28 @@ public class EveryDayTemp {
         return result;
     }
 
+    public int[] getEveryDayTempByStack04(int[] arr) {
+        // 使用栈进行处理
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        int[] value = new int[arr.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < arr.length; i++) {
+            while(!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
+                int index = stack.pop();
+                value[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack03(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack04(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

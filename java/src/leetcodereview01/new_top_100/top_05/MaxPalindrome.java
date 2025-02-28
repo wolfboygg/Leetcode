@@ -135,10 +135,33 @@ public class  MaxPalindrome {
         }
     }
 
+    public String findMaxHWString05(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            find05(str, i, i);
+            find05(str, i-1, i);
+        }
+        System.out.println(this.len);
+        return str.substring(left, len);
+    }
+
+    public void find05(String str, int start, int end) {
+        while(start >= 0 && end < str.length() && str.charAt(start) == str.charAt(end)) {
+            if (end - start  + 1 > len) {
+                this.left = start;
+                this.len = end - start + 1;
+            }
+            start--;
+            end++;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abbac";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWStr04(str);
+        String temp = maxPalindrome.findMaxHWString05(str);
         System.out.println(temp);
     }
 }

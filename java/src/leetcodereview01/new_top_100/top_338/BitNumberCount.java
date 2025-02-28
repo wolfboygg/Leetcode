@@ -77,9 +77,26 @@ public class BitNumberCount {
         return list;
     }
 
+    public List<Integer> getBitNumber04(int n) {
+        if (n == 0) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            int temp = i;
+            int count = 0;
+            while(temp > 0) {
+                count++;
+                temp &= (temp -1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         BitNumberCount bitNumberCount = new BitNumberCount();
-        List<Integer> bitNumber = bitNumberCount.getBitNumber03(5);
+        List<Integer> bitNumber = bitNumberCount.getBitNumber04(5);
         System.out.println(bitNumber.toString());
     }
 }

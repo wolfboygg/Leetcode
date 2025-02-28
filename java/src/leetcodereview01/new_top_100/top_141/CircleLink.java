@@ -78,6 +78,22 @@ public class CircleLink {
         return false;
     }
 
+    public boolean isCircle04(Node node) {
+        if (node == null) {
+            return false;
+        }
+        // 使用快慢指针处理
+        Node P1 = node;
+        Node P2 = node;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
@@ -93,7 +109,7 @@ public class CircleLink {
         node4.next= node5;
         node5.next = node6;
         node6.next = node3;
-        boolean circle = circleLink.isCircle03(node1);
+        boolean circle = circleLink.isCircle04(node1);
         System.out.println(circle);
     }
 }

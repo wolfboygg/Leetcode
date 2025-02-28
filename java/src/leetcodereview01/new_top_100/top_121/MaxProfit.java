@@ -44,11 +44,24 @@ public class MaxProfit {
         return maxValue;
     }
 
+    public int maxProfit03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int min = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            min = Math.min(min, arr[i]);
+            max = Math.max(arr[i] - min , max);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         // 找到最大的利润
         MaxProfit bean = new MaxProfit();
-        int i = bean.maxProfit02(arr);
+        int i = bean.maxProfit03(arr);
         System.out.println(i);
     }
 

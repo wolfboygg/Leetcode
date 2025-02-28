@@ -117,6 +117,33 @@ public class TraversalTree {
         }
     }
 
+    // 中序遍历二叉树
+    public void traverseByDG03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        traverseByDG03(root.left);
+        System.out.print(root.value + " ");
+        traverseByDG03(root.right);
+    }
+
+    public void traverseByStack03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                System.out.print(node.value + " ");
+                root = node.right;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -126,9 +153,9 @@ public class TraversalTree {
         node1.left = node3;
 
         TraversalTree traversalTree = new TraversalTree();
-        traversalTree.traverseByDG02(node1);
+        traversalTree.traverseByDG03(node1);
         System.out.println();
-        traversalTree.traverseByStack02(node1);
+        traversalTree.traverseByStack03(node1);
 
     }
 }

@@ -78,6 +78,34 @@ public class TreeNodeChangeLink {
         preTraversal01(root.right, list);
     }
 
+    // 二叉树转换为链表
+    public void flatten03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preTraversal02(root, list);
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode pre = list.get(i-1);
+            TreeNode cur = list.get(i);
+            pre.right = cur;
+            pre.left = null;
+        }
+        while(root != null) {
+            System.out.print(root.value + " ");
+            root = root.right;
+        }
+    }
+
+    public void preTraversal02(TreeNode root, List<TreeNode> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        preTraversal02(root.left, list);
+        preTraversal02(root.right, list);
+    }
+
     public static void main(String[] args) {
 
         TreeNode node1 = new TreeNode(1);
@@ -94,7 +122,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten01(node1);
+        treeNodeChangeLink.flatten03(node1);
         // 直接展开 不需要构建Node
     }
 }

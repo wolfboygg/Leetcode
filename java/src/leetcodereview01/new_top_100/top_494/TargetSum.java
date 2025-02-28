@@ -47,6 +47,26 @@ public class TargetSum {
         }
     }
 
+    public int count02(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 通过回溯的方式进行处理
+        backTracking02(arr, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking02(int[] arr, int target, int sum, int index) {
+        if (arr.length == index) {
+            if (target == sum) {
+                count++;
+            }
+        } else {
+            backTracking01(arr, target, sum+arr[index], index+1);
+            backTracking01(arr, target, sum-arr[index], index+1);
+        }
+    }
+
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};

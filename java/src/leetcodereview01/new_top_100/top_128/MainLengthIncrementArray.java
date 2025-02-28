@@ -82,11 +82,36 @@ public class MainLengthIncrementArray {
         return max;
     }
 
+    // 无序的数组中找到递增最大字数组
+    public int getMaxLength03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 使用一个set进行处理
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(arr[i] - 1)) {
+                int num = arr[i];
+                int curLength = 1;
+                // 这里应该转接之后的值
+                while(set.contains(num + 1)) {
+                    num = num + 1;
+                    curLength += 1;
+                }
+                max = Math.max(max, curLength);
+            }
+        }
+        return max;
+    }
 
     public static void main(String[] args) {
         int[] arr = {100, 4, 200, 1, 3, 2};
         MainLengthIncrementArray mainLengthIncrementArray = new MainLengthIncrementArray();
-        System.out.println(mainLengthIncrementArray.getMaxLength02(arr));
+        System.out.println(mainLengthIncrementArray.getMaxLength03(arr));
     }
 
 }

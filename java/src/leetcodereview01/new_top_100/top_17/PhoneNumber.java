@@ -144,10 +144,30 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations06(String str) {
+        if (str == null || str.length() ==0) {
+            return null;
+        }
+        traversal06(str, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal06(String str, int index, StringBuilder sb) {
+        if (index == str.length()) {
+            ret.add(new String(sb));
+            return;
+        }
+        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            sb.append(charArr[i]);
+            traversal06(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() -1);
+        }
+    }
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations05("234");
+        phoneNumber.letterCombinations06("234");
         System.out.println(ret.toString());
     }
 }

@@ -63,7 +63,19 @@ public class BinaryTreeDiameter {
         int leftDepth = diameter03(root.left);
         int rightDepth = diameter03(root.right);
         int depth = Math.max(leftDepth, rightDepth) + 1;
-        res = Math.max(res, depth);
+        res = Math.max(res, leftDepth + rightDepth);
+        return depth;
+    }
+
+    public int diameter04(TreeNode root) {
+        // 通过递归的方式求出左右子树的深度，然后进行相加
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter04(root.left);
+        int rightDepth = diameter04(root.right);
+        int depth = Math.max(leftDepth, rightDepth) + 1;
+        res = Math.max(res, leftDepth + rightDepth);
         return depth;
     }
 
@@ -79,7 +91,7 @@ public class BinaryTreeDiameter {
         node2.right = node5;
 
         BinaryTreeDiameter binaryTreeDiameter = new BinaryTreeDiameter();
-        int diameter = binaryTreeDiameter.diameter02(node1);
+        int diameter = binaryTreeDiameter.diameter01(node1);
         System.out.println(diameter);
     }
 

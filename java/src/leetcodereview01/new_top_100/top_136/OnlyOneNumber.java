@@ -45,11 +45,23 @@ public class OnlyOneNumber {
         return value;
     }
 
+    public int onlyOne03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 使用异或的方式
+        int value = 0;
+        for (int item : arr) {
+            value = value ^ item;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
        // 任何数和0异或的任何数
         int[] arr = {4,1,2,1,2};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        int i = onlyOneNumber.onlyOne02(arr);
+        int i = onlyOneNumber.onlyOne03(arr);
         System.out.println(i);
     }
 }

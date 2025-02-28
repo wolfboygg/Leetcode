@@ -93,6 +93,48 @@ public class WordSearch {
         return false;
     }
 
+    // 单词搜索
+    public boolean findPath02(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking02(matrix, mark, next, i, j, 0, str)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking02(char[][] matrix, boolean[][] mark, int[][] next, int i, int j, int index, String str) {
+        if (index >= str.length()) {
+            return true;
+        }
+        System.out.println(str.charAt(index));
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking02(matrix, mark, next, i + ints[0], j + ints[1], index + 1, str)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
@@ -100,7 +142,7 @@ public class WordSearch {
                 {'A', 'D', 'E', 'V'}};
         String str = "ABCCEVS";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath01(charMatrix, str);
+        boolean isExit = search.findPath02(charMatrix, str);
         System.out.println(isExit);
     }
 }
