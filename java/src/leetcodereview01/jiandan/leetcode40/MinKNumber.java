@@ -284,13 +284,30 @@ public class MinKNumber {
         return list;
     }
 
+    // 最小的K个数
+    public List<Integer> findMinKNumberByDump13(int[] arr, int k) {
+        if (arr == null) {
+            return new ArrayList<>();
+        }
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (queue.peek() > arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        return queue.stream().toList();
+    }
 
     public static void main(String[] args) {
         int[] arr = {4, 5, 1, 6, 2, 7, 3, 8};
         MinKNumber minKNumber = new MinKNumber();
         int[] num = minKNumber.findMinKNum(arr, 4);
         System.out.println(Arrays.toString(num));
-        List<Integer> minKNumByDump = minKNumber.findMinKNumberByDump12(arr, 4);
+        List<Integer> minKNumByDump = minKNumber.findMinKNumberByDump13(arr, 4);
         System.out.println(minKNumByDump.toString());
 //        minKNumber.findMinKNumberByDump03(arr, 4);
     }

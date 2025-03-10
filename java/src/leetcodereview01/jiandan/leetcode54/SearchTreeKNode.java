@@ -154,11 +154,24 @@ public class SearchTreeKNode {
         dfs09(root.left);
     }
 
+    public void dfs10(TreeNode root) {
+        // 搜索二叉树的倒数K个节点
+        if (root == null) {
+            return ;
+        }
+        // 先遍历右子树，然后在根，最后才是左子树
+        dfs10(root.right);
+        if (--k==0) { // 使用统一的K
+            result = root.value;
+        }
+        dfs10(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs09(tree);
+        searchTreeKNode.dfs10(tree);
         System.out.println(searchTreeKNode.result);
     }
 

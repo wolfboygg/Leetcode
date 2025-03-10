@@ -67,13 +67,28 @@ public class IncrementMaxCZ {
         return encodeStr;
     }
 
-
+    public static int getMaxCZValue02(int[] arr) {
+        // 增量元素最大的差值 // 找到最小的干
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int minValue = arr[0];
+        int value = -1;
+        for (int i = 1; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            if (arr[i] > minValue) {
+                value = Math.max(value, arr[i] - minValue);
+            }
+            System.out.println(value);
+        }
+        return value;
+    }
 
     public static void main(String[] args) {
         int[] arr = {9, 4, 3, 2};
-        int maxValue = getMaxCZValue(arr);
+        int maxValue = getMaxCZValue02(arr);
         System.out.println(maxValue);
-        System.out.println(String2MD5("hellworld"));
-        System.out.println(String2SHA256("hellworld"));
+//        System.out.println(String2MD5("hellworld"));
+//        System.out.println(String2SHA256("hellworld"));
     }
 }

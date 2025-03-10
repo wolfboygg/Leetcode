@@ -205,11 +205,28 @@ public class SymmetricTree {
         return root1.value == root2.value && realIsSymmetric11(root1.left, root2.right) && realIsSymmetric11(root1.right, root2.left);
     }
 
+    public boolean isSymmetric12(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return realIsSymmetric12(root, root);
+    }
+
+    public boolean realIsSymmetric12(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+        return node1.value == node2.value && realIsSymmetric12(node1.left, node2.right) && realIsSymmetric12(node1.right, node2.left);
+    }
+
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric11(tree));
+        System.out.println(symmetricTree.isSymmetric12(tree));
     }
 
 }

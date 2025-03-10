@@ -389,10 +389,39 @@ public class VerifySequenceOfBST {
         return realVerify12(arr, left, rightIndex -1) && realVerify12(arr, rightIndex, right -1);
     }
 
+    public boolean verify13(int[] arr) {
+        // 验证二叉树的后续遍历 左 右 根 想的没错
+        if (arr ==  null || arr.length == 0) {
+            return false;
+        }
+        return realVerify13(arr, 0, arr.length -1);
+    }
+
+    public boolean realVerify13(int[] arr, int start, int end) {
+        if (start >= end) {
+            return true;
+        }
+        int rootValue = arr[end];
+        // 找到比他大的
+        int rightIndex = 0;
+        for (int i = 0; i <= end; i++) {
+            if (arr[i] > rootValue) {
+                rightIndex = i;
+                break;
+            }
+        }
+        for (int i = rightIndex ; i < end; i++) {
+            if (arr[i] < rootValue) {
+                return false;
+            }
+        }
+        return realVerify13(arr, start, rightIndex - 1) && realVerify13(arr, rightIndex, end - 1);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4,6,5,9,8};
         int[] arr2 = {44,9,6,5,8};
-        System.out.println(new VerifySequenceOfBST().verify11(arr));
+        System.out.println(new VerifySequenceOfBST().verify13(arr));
     }
 }

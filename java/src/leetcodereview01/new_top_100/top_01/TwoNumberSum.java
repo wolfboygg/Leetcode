@@ -1,8 +1,6 @@
 package leetcodereview01.new_top_100.top_01;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 两数相加
@@ -165,11 +163,44 @@ public class TwoNumberSum {
         return new int[]{};
     }
 
+    // 分为有序和无序
+    public int[] twoSumYx06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            if (arr[left] + arr[right] > target) {
+                right--;
+            } else if (arr[left] + arr[right] < target) {
+                left++;
+            } else {
+                return new int[] {arr[left], arr[right]};
+            }
+        }
+        return new int[] {};
+    }
+
+    public int[] twoSumWx06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
+            }
+            set.add(arr[i]);
+        }
+        return new int[] {};
+    }
+
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.towSumWx05(num2, 6);
+        int[] result = twoNumberSum.twoSumWx06(num2, 6);
         System.out.println(Arrays.toString(result));
     }
 }

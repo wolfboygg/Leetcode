@@ -279,13 +279,36 @@ public class DeleteNode {
         }
     }
 
+    public void deleteNode13(Node head, Node target) {
+        if (head == null) {
+            return;
+        }
+        if (target.next != null) {
+            // 表示是中间节点
+            Node next = target.next;
+            target.value = next.value;
+            target.next = next.next;
+        } else {
+            if (target == head) {
+                head = null;
+            } else {
+                // 找到前一个删除
+                Node pre = head;
+                while(pre.next != target) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
-        Node tobeDelete = head.next.next.next.next.next;
+        Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode11(head, tobeDelete);
+        deleteNode.deleteNode13(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

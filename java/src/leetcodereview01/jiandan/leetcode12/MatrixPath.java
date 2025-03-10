@@ -40,140 +40,23 @@ public class MatrixPath {
         return false;
     }
 
+
     public boolean findPath03(char[][] matrix, String str) {
-        // 怎么遍历就是通过挨个进行查找
-        int row = matrix.length;
-        int column = matrix[0].length;
-        this.row = row;
-        this.column = column;
-        char[] arr = str.toCharArray();
-        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        boolean[][] marked = new boolean[row][column];
-        // 通过每一个元素进行遍历找到路径
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (backTracking03(matrix, arr, next, marked, 0, i, j)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean backTracking03(char[][] matrix, char[] arr, int[][] next, boolean[][] marked, int pathLength, int i, int j) {
-        if (pathLength == arr.length) {
-            return true;
-        }
-        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != arr[pathLength]) {
+        if (str == null) {
             return false;
         }
-        marked[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking03(matrix, arr, next, marked, pathLength + 1, i + ints[0], j + ints[1])) {
-                return true;
-            }
-        }
-        marked[i][j] = false;
-        return false;
-    }
-
-    public boolean findPath04(char[][] matrix, String str) {
-        // 排查矩阵中是否存在string
-        char[] chars = str.toCharArray();
-        int row = matrix.length;
-        int column = matrix[0].length;
-        this.row = row;
-        this.column = column;
-        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        boolean[][] marked = new boolean[row][column];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (backTracking04(matrix, next, marked, chars, i, j, 0)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean backTracking04(char[][] matrix, int[][] next, boolean[][] marked, char[] arr, int i, int j, int index) {
-        if (index == arr.length) {
-            return true;
-        }
-        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || matrix[i][j] != arr[index]) {
-            return false;
-        }
-        marked[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking04(matrix, next, marked, arr, i + ints[0], j + ints[1], index + 1)) {
-                return true;
-            }
-        }
-        marked[i][j] = false;
-        return false;
-    }
-
-    // 采用回溯算法进行找到 判断当前字符串是否在网格中存在
-    public boolean findPath05(char[][] matrix, String str) {
-        // 找到左上右下进行判断 需要matrix每一个元素都需尝试
-        char[] chars = str.toCharArray();
-        int[][] next = {
-                {-1, 0},
-                {0, -1},
-                {1, 0},
-                {0, 1}
-        };
-        int row = matrix.length;
-        int column = matrix[0].length;
-        this.row = row;
-        this.column = column;
-        boolean[][] mark = new boolean[row][column]; // 这里有问题
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (backTracking05(matrix, next, mark, chars, i, j, 0)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean backTracking05(char[][] matrix, int[][] next, boolean[][] mark, char[] chars, int i, int j, int index) {
-        // 遍历完成也算完成
-        if (chars.length == index) { // 只有等于length才能说明完成了所有的遍历
-            return true;
-        }
-        System.out.println("i:" + i + "-->j:" + j + "-->index:" + index);
-        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != chars[index]) {
-            return false;
-        }
-        mark[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking05(matrix, next, mark, chars, i + ints[0], j + ints[1], index + 1)) {
-                return true;
-            }
-        }
-        mark[i][j] = false;
-        return false;
-    }
-
-    public boolean findPath06(char[][] matrix, String str) {
-        // 解题思路通过遍历所有的matrix的元素，找到路径
-        int row = matrix.length;
-        int column = matrix[0].length;
-        this.row = row;
-        this.column = column;
-        int[][] next = new int[][]{
-                {-1, 0},
-                {0, -1},
-                {1, 0},
-                {0, 1}
-        };
+        row = matrix.length;
+        column = matrix[0].length;
         boolean[][] mark = new boolean[row][column];
-        char[] chars = str.toCharArray();
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1}
+        };
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                if (backTracking06(matrix, next, mark, chars, i, j, 0)) {
+                if (backTracking03(matrix, mark, next, str, i, j, 0)) {
                     return true;
                 }
             }
@@ -181,60 +64,16 @@ public class MatrixPath {
         return false;
     }
 
-    private boolean backTracking06(char[][] matrix, int[][] next, boolean[][] mark, char[] chars, int i, int j, int index) {
-        if (index == chars.length) {
+    public boolean backTracking03(char[][] matrix, boolean[][] mark, int[][] next, String str, int i, int j, int index) {
+        if (index == str.length()) {
             return true;
         }
-        // 这里不能等于row，所以要排除掉。否则就有问题了。
-        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != chars[index]) {
+        if (i < 0 || i >= row || j < 0 ||  j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
             return false;
         }
         mark[i][j] = true;
         for (int[] ints : next) {
-            if (backTracking06(matrix, next, mark, chars, i + ints[0], j + ints[1], index + 1)) { // 这里会加1 因此需要等于length
-                return true;
-            }
-
-        }
-        mark[i][j] = false;
-        return false;
-    }
-
-    public boolean findPath07(char[][] matrix, String sb) {
-        // 在矩阵中进行查找是否存在一个字符串的值
-        char[] charArr = sb.toCharArray();
-        int row = matrix.length;
-        int column = matrix[0].length;
-        // 给定一下方向
-        int[][] next = new int[][]{
-                {-1, 0},
-                {0, -1},
-                {1, 0},
-                {0, 1}
-        };
-        this.row = row;
-        this.column = column;
-        boolean[][] mark = new boolean[row][column];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (backTracking07(matrix, charArr, next, mark, i, j, 0)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean backTracking07(char[][] matrix, char[] charArr, int[][] next, boolean[][] mark, int i, int j, int index) {
-        if (index == charArr.length) {
-            return true;
-        }
-        if (i < 0 || i >= row || j < 0 || j >= column || charArr[index] != matrix[i][j] || mark[i][j]) {
-            return false;
-        }
-        mark[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking07(matrix, charArr, next, mark, i + ints[0], j + ints[1], index + 1)) {
+            if (backTracking03(matrix, mark, next, str, i + ints[0], j + ints[1], index + 1)) {
                 return true;
             }
         }
@@ -242,165 +81,20 @@ public class MatrixPath {
         return false;
     }
 
-    public boolean findPath08(char[][] matrix, String path) {
-        // 通过回溯的方式进行处理
-        if (matrix == null || path.isEmpty()) {
-            return false;
-        }
-        int row = matrix.length;
-        int column = matrix[0].length;
-        // 通过回溯的方式进行查找
-        this.row = row;
-        this.column = column;
-        char[] pathArr = path.toCharArray();
-        // 需要定一个方向 和是否走过
-        boolean[][] marked = new boolean[row][column];
-        int[][] next = {
-                {-1, 0},
-                {0, -1},
-                {1, 0},
-                {0, 1}
-        };
-        return backTracking08(matrix, pathArr, 0, 0, marked, next, 0);
-    }
 
-    private boolean backTracking08(char[][] matrix, char[] pathArr, int i, int j, boolean[][] marked, int[][] next, int index) {
-        if (index >= pathArr.length) {
-            return true;
-        }
-        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || pathArr[index] != matrix[i][j]) {
-            return false;
-        }
-        marked[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking08(matrix, pathArr, i + ints[0], j + ints[1], marked, next, index + 1)) {
-                return true;
-            }
-        }
-        marked[i][j] = false;
-        return false;
-    }
-
-    // 查找路径是否存在
-    public boolean findPath09(char[][] matrix, String str) {
-        // 使用回溯的方式进行处理
-        if (matrix == null || str == null) {
-            return false;
-        }
-        this.row = matrix.length;
-        this.column = matrix[0].length;
-        int[][] next = {
-                {-1, 0},
-                {0, -1},
-                {1, 0},
-                {0, 1}
-        };
-        boolean[][] marked = new boolean[row][column];
-        char[] pathArr = str.toCharArray();
-        return backTracking09(matrix, pathArr, 0, 0, next, marked, 0);
-    }
-
-    public boolean backTracking09(char[][] matrix, char[] pathArr, int i, int j, int[][] next, boolean[][] marked, int index) {
-        if (index >= pathArr.length) {
-            return true;
-        }
-        if (i < 0 || i >= row || j < 0 || j >= column || marked[i][j] || pathArr[index] != matrix[i][j]) {
-            return false;
-        }
-        marked[i][j] = true;
-        for (int[] ints : next) {
-            if (backTracking09(matrix, pathArr, i + ints[0], j + ints[1], next, marked, index + 1)) {
-                return true;
-            }
-        }
-        marked[i][j] = false;
-        return false;
-    }
 
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "ABCCED";
+        String str = "SFCSF";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath09(charMatrix, str);
+        boolean isExit = matrixPath.findPath03(charMatrix, str);
         System.out.println(isExit);
     }
 
     public int row = 0;
     public int column = 0;
 
-    public boolean findPath01(char[][] matrix, String str) {
-        // 在矩阵中进行查找，其实就是字符进行处理，然后回溯
-        row = matrix.length;
-        column = matrix[0].length;
-        char[] pathList = str.toCharArray();
-        boolean[][] marked = new boolean[row][column];
-        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (backTracking01(matrix, pathList, marked, next, 0, i, j)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean backTracking01(char[][] matrix, char[] pathList, boolean[][] marked, int[][] next, int pathIndex, int r, int c) {
-        if (pathIndex == pathList.length) {
-            return true;
-        }
-        if (r >= row || r < 0 || c < 0 || c >= column || matrix[r][c] != pathList[pathIndex] && marked[r][c]) {
-            return false;
-        }
-        marked[r][c] = true;
-        for (int[] ints : next) {
-            if (backTracking(matrix, pathList, marked, next, pathIndex + 1, r + ints[0], c + ints[1])) {
-                return true;
-            }
-        }
-        marked[r][c] = false;
-        return false;
-    }
-
-
-    public boolean findPath(char[][] matrix, String str) {
-        int row = matrix.length;
-        int column = matrix[0].length;
-        this.row = row;
-        this.column = column;
-        int r = 0;
-        int c = 0;
-        int[][] next = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-        char[] pathList = str.toCharArray();
-        boolean[][] marked = new boolean[row][column];
-        for (int i = r; i < row; i++) {
-            for (int j = c; j < column; j++) {
-                if (backTracking(matrix, pathList, marked, next, 0, i, j)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean backTracking(char[][] matrix, char[] pathList, boolean[][] marked, int[][] next, int currPath, int r, int c) {
-        if (currPath == pathList.length) {
-            return true;
-        }
-        if (c < 0 || c >= column || r < 0 || r >= row || marked[r][c] || pathList[currPath] != matrix[r][c]) {
-            return false;
-        }
-        marked[r][c] = true;
-        for (int[] ints : next) {
-            if (backTracking(matrix, pathList, marked, next, currPath + 1, r + ints[0], c + ints[1])) {
-                return true;
-            }
-
-        }
-        marked[r][c] = false;
-        return false;
-    }
 }

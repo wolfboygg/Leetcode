@@ -241,12 +241,35 @@ public class AdjustArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void adjustByPointer13(int[] arr) {
+        // 调整数组的奇偶顺序
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            while(P1 < P2 && arr[P2] % 2 == 0) {
+                P2--;
+            }
+            while(P1 < P2 && arr[P1] % 2 == 1) {
+                P1++;
+            }
+            if (P1 != P2) {
+                 int temp = arr[P1];
+                 arr[P1] = arr[P2];
+                 arr[P2] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
 
     // 1, 5, 8, 3, 2, 4, 5
     public static void main(String[] args) {
         AdjustArray adjustArray = new AdjustArray();
         int[] arr = {1, 5, 8, 3, 2, 4, 5};
-        adjustArray.adjustByPointer12(arr);
+        adjustArray.adjustByPointer13(arr);
     }
 
     public void adjustByFor(int[] arr) {

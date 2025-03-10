@@ -108,10 +108,35 @@ public class MainLengthIncrementArray {
         return max;
     }
 
+    // 最长连续递增序列
+    public int getMaxLength04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(arr[i] - 1)) {
+                int currentValue = arr[i];
+                int count = 1;
+                while(set.contains(currentValue + 1)) {
+                    currentValue += 1;
+                    count++;
+                }
+                max = Math.max(max, count);
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {100, 4, 200, 1, 3, 2};
         MainLengthIncrementArray mainLengthIncrementArray = new MainLengthIncrementArray();
-        System.out.println(mainLengthIncrementArray.getMaxLength03(arr));
+        System.out.println(mainLengthIncrementArray.getMaxLength04(arr));
     }
 
 }

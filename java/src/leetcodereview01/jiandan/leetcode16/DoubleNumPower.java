@@ -225,10 +225,30 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power10(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = realPower10(base, Math.abs(target));
+        return isNegative ? 1 * 1.0 / value : value;
+    }
+
+    public double realPower10(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return  base;
+        }
+        double value = realPower10(base, target / 2);
+        value *= value;
+        if (target % 2 != 0) {
+            value *= base;
+        }
+        return value;
+    }
 
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power09(2, 3));
+        System.out.println(doubleNumPower.power10(2, 3));
     }
 
 

@@ -226,6 +226,20 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
     }
 
+    public int cut12(int target) {
+        // 求最大值， 贪心算法
+        if (target <= 2) {
+            return -1;
+        }
+        int threeCount = target / 3;
+        int twoCount = 0;
+        if (target - threeCount * 3 == 1) {
+            threeCount = threeCount - 1;
+        }
+        twoCount = (target - threeCount * 3) / 2;
+        return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
+    }
+
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
         System.out.println(cutShengZi.cut11(7));

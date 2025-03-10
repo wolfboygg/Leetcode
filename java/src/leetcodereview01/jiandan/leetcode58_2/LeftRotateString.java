@@ -100,9 +100,34 @@ public class LeftRotateString {
             end--;
         }
     }
+
+    public void rotate08(String str, int k) {
+        // 旋转字符串
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArr = str.toCharArray();
+        reverse08(charArr, 0, k - 1);
+        reverse08(charArr, k, charArr.length - 1);
+        reverse08(charArr, 0 , charArr.length - 1);
+        System.out.println(new String(charArr).toString());
+    }
+
+    public void reverse08(char[] charArr, int start, int end) {
+        while(start <= end) {
+            char temp = charArr[start];
+            charArr[start] = charArr[end];
+            charArr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+
+
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate07(str, 2);
+        leftRotateString.rotate08(str, 2);
     }
 }

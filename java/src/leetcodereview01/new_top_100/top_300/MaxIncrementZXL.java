@@ -48,10 +48,29 @@ public class MaxIncrementZXL {
         return max;
     }
 
+    // 最长递增子数组
+    public int calculate02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int[] dp = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    max = Math.max(dp[i], max);
+                }
+            }
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{10, 9, 2, 5, 3, 7, 101, 205, 18};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate01(arr));
+        System.out.println(maxIncrementZXL.calculate02(arr));
     }
 }

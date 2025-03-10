@@ -260,6 +260,27 @@ public class GiftMaxValue {
         return matrix[row-1][column-1];
     }
 
+    public int getMaxValue14(int[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int[][] dp = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (i > 0) {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j]);
+                }
+                if (j > 0) {
+                    dp[i][j] = Math.max(dp[i][j-1], dp[i][j]);
+                }
+                dp[i][j] += matrix[i][j];
+            }
+        }
+        return dp[row-1][column-1];
+    }
+
 
     public static void main(String[] args) {
         int[][] arr = {
@@ -268,7 +289,7 @@ public class GiftMaxValue {
                 {4, 2, 1}
         };
         GiftMaxValue giftMaxValue = new GiftMaxValue();
-        System.out.println(giftMaxValue.getMaxValue13(arr));
+        System.out.println(giftMaxValue.getMaxValue14(arr));
     }
 
 }
