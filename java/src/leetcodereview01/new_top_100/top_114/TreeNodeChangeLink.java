@@ -1,10 +1,13 @@
 package leetcodereview01.new_top_100.top_114;
 
+import com.sun.source.tree.Tree;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 二叉树展开为链表
+ * 展开后的单链表应该与二叉树 先序遍历 顺序相同。
  */
 public class TreeNodeChangeLink {
 
@@ -106,6 +109,35 @@ public class TreeNodeChangeLink {
         preTraversal02(root.right, list);
     }
 
+    // 通过前序遍历排好序之后在进行连接
+    public void flatten04(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preOrderTraversal04(root, list);
+        // 开始处理
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode pre = list.get(i-1);
+            TreeNode node = list.get(i);
+            pre.left = null;
+            pre.right = node;
+        }
+        while(root != null) {
+            System.out.print(root.value + " ");
+            root = root.right;
+        }
+    }
+
+    public void preOrderTraversal04(TreeNode root, List<TreeNode> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        preOrderTraversal04(root.left, list);
+        preOrderTraversal04(root.right, list);
+    }
+
     public static void main(String[] args) {
 
         TreeNode node1 = new TreeNode(1);
@@ -122,7 +154,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten03(node1);
+        treeNodeChangeLink.flatten04(node1);
         // 直接展开 不需要构建Node
     }
 }

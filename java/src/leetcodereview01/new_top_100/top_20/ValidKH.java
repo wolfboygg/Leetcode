@@ -168,11 +168,31 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean validKH06(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        Stack<Character> stack = new Stack<>();
+        char[] charArr = str.toCharArray();
+        for (char c : charArr) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                return false;
+            } else if (c == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                return false;
+            } else if (c == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.validKH05(str1));
-        System.out.println(validKH.validKH05(str2));
+        System.out.println(validKH.validKH06(str1));
+        System.out.println(validKH.validKH06(str2));
     }
 }

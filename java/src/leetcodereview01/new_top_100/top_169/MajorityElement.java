@@ -111,11 +111,28 @@ public class MajorityElement {
         return num;
     }
 
+    public int majorityElement06(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int num = arr[0];
+        int count = 1;
+        for (int i = 1; i < arr.length; i++) {
+            if (num == arr[i]) {
+                count++;
+            } else if (--count ==0) {
+                num = arr[i];
+                count = 1;
+            }
+        }
+        return num;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2,2, 1};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement05(arr);
+        int i = bean.majorityElement06(arr);
         System.out.println(i);
     }
 

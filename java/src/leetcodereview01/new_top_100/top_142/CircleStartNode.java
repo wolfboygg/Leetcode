@@ -150,6 +150,34 @@ public class CircleStartNode {
         return null;
     }
 
+    // 找到入环点
+    public Node findCircleStart05(Node head) {
+        if (head == null) {
+            return null;
+        }
+        // 先判断是否有环
+        boolean isHasCircle = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHasCircle = true;
+                break;
+            }
+        }
+        if (isHasCircle) {
+            P1 = head;
+            while(P1 != P2) {
+                P2 = P2.next;
+                P1 = P1.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -164,7 +192,7 @@ public class CircleStartNode {
         node5.next = node6;
         node6.next = node3;
         CircleStartNode circleStartNode = new CircleStartNode();
-        System.out.println(circleStartNode.findCircleStart04(node1).value);
+        System.out.println(circleStartNode.findCircleStart05(node1).value);
     }
 
 }

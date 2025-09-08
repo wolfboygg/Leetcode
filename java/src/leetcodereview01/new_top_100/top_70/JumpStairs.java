@@ -82,9 +82,27 @@ public class JumpStairs {
         return value;
     }
 
+    public int climStairs04(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int value1 = 1;
+        int value2 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value1 + value2;
+            value1 = value2;
+            value2 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         JumpStairs jumpStairs = new JumpStairs();
-        int num = jumpStairs.climbStairs03(5);
+        int num = jumpStairs.climStairs04(5);
         System.out.println(num);
     }
 }

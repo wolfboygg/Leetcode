@@ -85,12 +85,38 @@ public class ArrayFindIndex {
         return targetIndex;
     }
 
+    public int[] find03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        int leftIndex = realFind03(arr, target, true);
+        int rightIndex = realFind03(arr, target, false) -1;
+        return new int[]{leftIndex, rightIndex};
+    }
+
+    public int realFind03(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = 0;
+        while(left <= right) {
+            System.out.println(left + "--->" + right);
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                right = middle - 1;
+                targetIndex= left;
+            } else {
+                left = middle + 1; // 这里要 + 1
+            }
+        }
+        return targetIndex;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find02(arr, target);
+        int[] result = arrayFindIndex.find03(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }

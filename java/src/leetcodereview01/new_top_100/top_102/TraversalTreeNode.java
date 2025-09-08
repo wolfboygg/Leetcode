@@ -71,6 +71,24 @@ public class TraversalTreeNode {
         }
     }
 
+    public void traversal03(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            System.out.print(poll.value + " ");
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(3);
         TreeNode node2 = new TreeNode(9);
@@ -88,6 +106,6 @@ public class TraversalTreeNode {
         node2.right = node8;
 
         TraversalTreeNode traversalTreeNode = new TraversalTreeNode();
-        traversalTreeNode.traversal02(node1);
+        traversalTreeNode.traversal03(node1);
     }
 }

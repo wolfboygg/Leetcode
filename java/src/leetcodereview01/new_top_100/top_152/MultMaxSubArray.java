@@ -68,12 +68,28 @@ public class MultMaxSubArray {
 
 
 
-
+    public int calculate04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int min = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int tempMax = max;
+            int tempMin = min;
+            max = Math.max(Math.max(arr[i] * tempMax, arr[i]), tempMin * arr[i]);
+            min = Math.min(Math.min(arr[i] * tempMin, arr[i]), arr[i] * tempMax);
+            if (min < (-1 << 31)) {
+                min = arr[i];
+            }
+        }
+        return max;
+    }
 
 
     public static void main(String[] args) {
         int[] arr = new int[]{5, 6, -1, 2, -3};
         MultMaxSubArray multMaxSubArray = new MultMaxSubArray();
-        System.out.println(multMaxSubArray.calculate03(arr));
+        System.out.println(multMaxSubArray.calculate04(arr));
     }
 }

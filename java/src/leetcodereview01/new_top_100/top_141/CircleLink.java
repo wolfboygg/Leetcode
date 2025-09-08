@@ -95,6 +95,23 @@ public class CircleLink {
         return false;
     }
 
+    public boolean isCircle05(Node node) {
+        // 判断链表是否存在环
+        if (node == null) {
+            return false;
+        }
+        Node P1 = node;
+        Node P2 = node;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
         Node node1 = new Node(1);

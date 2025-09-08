@@ -135,14 +135,54 @@ public class WordSearch {
         return false;
     }
 
+    public boolean findPath03(char[][] matrix, String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking03(matrix, mark, next, i, j, 0, str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking03(char[][] matrix, boolean[][] mark, int[][] next, int i, int j, int index, String str) {
+        if (index >= str.length()) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || str.charAt(index) != matrix[i][j]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking03(matrix, mark, next, i + ints[0], j + ints[1], index + 1, str)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEVS";
+        String str = "ABCCEVD";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath02(charMatrix, str);
+        boolean isExit = search.findPath03(charMatrix, str);
         System.out.println(isExit);
     }
 }

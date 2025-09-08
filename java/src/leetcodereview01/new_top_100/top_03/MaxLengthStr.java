@@ -96,10 +96,27 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr05(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        int defaultIndex = -1;
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(str.charAt(i), -1));
+            }
+            map.put(str.charAt(i), i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "abcabcbb";
         MaxLengthStr maxLengthStr = new MaxLengthStr();
-        int value = maxLengthStr.maxLengthStr03(str);
+        int value = maxLengthStr.maxLengthStr05(str);
         System.out.println(value);
     }
 }

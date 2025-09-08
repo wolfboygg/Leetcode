@@ -3,23 +3,23 @@ package leetcodereview01.new_top_100.top_33;
 public class SearchRotateArray {
     // 选中数组中查找 通过特性处理
     public int find(int[] arr, int target) {
-        // 也是通过二分查找处理
         if (arr == null || arr.length == 0) {
             return -1;
         }
-        int start = 0;
-        int end = arr.length - 1;
-        int targetIndex = -1;
-        while(start <= end) {
-            int middle = start + (end - start) / 2;
-            if (arr[middle] == target) {
-                return middle;
-            }
-            if (arr[0] <= arr[middle]) {
-
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            System.out.println(left + "--->" + right);
+            int middle = left + (right - left) / 2;
+            if (arr[middle] < target) {
+                right = middle - 1;
+            } else if (arr[middle] > target){
+                left = middle + 1;
+            } else {
+                return left;
             }
         }
-        return targetIndex;
+        return -1;
     }
 
     public static void main(String[] args) {

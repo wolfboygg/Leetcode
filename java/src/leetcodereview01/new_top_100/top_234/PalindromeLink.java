@@ -168,20 +168,52 @@ public class PalindromeLink {
         return true;
     }
 
+    // 回文链表
+    public boolean isPalindromeLink05(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        Node newHead = P1.next;
+        P1.next = null;
+        while(newHead != null) {
+            Node next = newHead.next;
+            newHead.next = temp.next;
+            temp.next = newHead;
+            newHead = next;
+        }
+        Node newNode = pre.next;
+        while(newNode != null) {
+            if (newNode.value != head.value) {
+                return false;
+            }
+            head = head.next;
+            newNode = newNode.next;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(2);
         Node node4 = new Node(1);
-        Node node5 = new Node(3);
+//        Node node5 = new Node(3);
 
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
-        node4.next = node5;
+//        node4.next = node5;
 
         PalindromeLink palindromeLink = new PalindromeLink();
-        System.out.println(palindromeLink.isPalindromeLink04(node1));
+        System.out.println(palindromeLink.isPalindromeLink05(node1));
     }
 
 }

@@ -131,6 +131,32 @@ public class TwoAdd {
         return node.next;
     }
 
+    public LinkNode twoAdd03(LinkNode node1, LinkNode node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        int carry = 0;
+        LinkNode pre = new LinkNode(-1);
+        LinkNode temp = pre;
+        while(node1 != null && node2 != null) {
+            LinkNode node = new LinkNode(carry);
+            node.value += node1.value;
+            node.value += node2.value;
+            carry = node.value / 10;
+            node.value %= 10;
+            node1 = node1.next;
+            node2 = node2.next;
+            temp.next = node;
+            temp = temp.next;
+        }
+        if (carry > 0) {
+            temp.next = new LinkNode(carry);
+        }
+        LinkNode head = pre.next;
+        // 需要反转
+        return head;
+    }
+
     public static void main(String[] args){
         LinkNode node1 = new LinkNode(2);
         LinkNode node2 = new LinkNode(4);
@@ -148,7 +174,7 @@ public class TwoAdd {
         node5.next = node6;
 
         TwoAdd twoAdd = new TwoAdd();
-        LinkNode head = twoAdd.twoAdd02(node1, node4);
+        LinkNode head = twoAdd.twoAdd03(node1, node4);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

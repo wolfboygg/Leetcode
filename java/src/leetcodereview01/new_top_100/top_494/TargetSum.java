@@ -67,11 +67,29 @@ public class TargetSum {
         }
     }
 
+    public int count03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        backTracking03(arr, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking03(int[] arr, int target, int index, int sum) {
+        if (index == arr.length) {
+            if (target == sum) {
+                count++;
+            }
+            return;
+        }
+        backTracking03(arr, target, index + 1, sum + arr[index]);
+        backTracking03(arr, target, index + 1, sum - arr[index]);
+    }
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count01(value, target));
+        System.out.println(targetSum.count02(value, target));
     }
 }

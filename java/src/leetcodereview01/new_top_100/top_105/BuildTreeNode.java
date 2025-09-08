@@ -99,11 +99,35 @@ public class BuildTreeNode {
         return root;
     }
 
+    public TreeNode build03(int[] preOrder, int[] inOrder) {
+        // 构建二叉树
+        if (preOrder == null || preOrder.length == 0 || inOrder == null || inOrder.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < inOrder.length; i++) {
+            inOrderIndex.put(inOrder[i], i);
+        }
+        return realBuild03(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+    }
+
+    public TreeNode realBuild03(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int rootIndex = inOrderIndex.get(rootValue);
+        int leftChildCount = rootIndex - inLeft;
+        TreeNode root = new TreeNode(rootValue);
+        root.left = realBuild02(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
+        root.right = realBuild02(preOrder,  preLeft + leftChildCount + 1, preRight, inOrder,  rootIndex +1, inRight);
+        return root;
+    }
+
     public static void main(String[] args) {
         int[] pre = { 3,9,20,15,7};
         int[] inOrder = {9,3,15,20,7};
         BuildTreeNode buildTreeNode = new BuildTreeNode();
-        TreeNode root = buildTreeNode.build02(pre, inOrder);
+        TreeNode root = buildTreeNode.build03(pre, inOrder);
         buildTreeNode.preTraversal(root);
     }
 }

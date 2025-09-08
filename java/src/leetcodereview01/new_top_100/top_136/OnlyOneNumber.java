@@ -57,11 +57,23 @@ public class OnlyOneNumber {
         return value;
     }
 
+    // 只出现一次的数，通过异或的方式
+    public int onlyOne04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int value = 0;
+        for (int i = 0; i < arr.length; i++) {
+            value ^= arr[i];
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
        // 任何数和0异或的任何数
         int[] arr = {4,1,2,1,2};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        int i = onlyOneNumber.onlyOne03(arr);
+        int i = onlyOneNumber.onlyOne04(arr);
         System.out.println(i);
     }
 }

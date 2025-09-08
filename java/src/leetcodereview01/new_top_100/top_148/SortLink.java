@@ -100,16 +100,53 @@ public class SortLink {
         return pre.next;
     }
 
+    public Node sortLink02(Node start, Node tail) {
+        if (start == null) {
+            return null;
+        }
+        if (start.next == tail) {
+            start.next = null;
+            return start;
+        }
+        Node P1 = start;
+        Node P2 = start;
+        while(P2 != tail && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node mid = P1;
+        Node left = sortLink02(start, mid);
+        Node right = sortLink02(mid, tail);
+        return merge02(left, right);
+    }
+
+    public Node merge02(Node node1, Node node2) {
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value > node2.value) {
+                temp.next = node2;
+                node2 = node2.next;
+            } else {
+                temp.next = node1;
+                node1 = node1.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
         Node node3 = new Node(1);
-        Node node4 = new Node(3);
+//        Node node4 = new Node(3);
         node1.next = node2;
         node2.next = node3;
-        node3.next = node4;
+//        node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink01(node1, null);
+        Node node = sortLink.sortLink02(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

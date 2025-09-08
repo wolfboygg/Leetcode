@@ -165,9 +165,29 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations07(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        traversal07(str, 0, new StringBuilder());
+    }
+
+    public void traversal07(String str, int index, StringBuilder sb) {
+        if (str.length() == sb.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            sb.append(charArr[i]);
+            traversal07(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations06("234");
+        phoneNumber.letterCombinations07("234");
         System.out.println(ret.toString());
     }
 }

@@ -105,10 +105,28 @@ public class ArrayKMaxElement {
         return queue.poll();
     }
 
+    // 数组中前K个大的元素 小头堆进行实现
+    public int getKMaxElement05(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2)-> o1 - o2);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (queue.peek() < arr[i]) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        return queue.peek();
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 2, 1, 5, 6, 4};
         ArrayKMaxElement arrayKMaxElement = new ArrayKMaxElement();
-        int kMaxElement = arrayKMaxElement.getKMaxElement04(arr, 2);
+        int kMaxElement = arrayKMaxElement.getKMaxElement05(arr, 2);
         System.out.println(kMaxElement);
 
     }

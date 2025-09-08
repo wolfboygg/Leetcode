@@ -154,6 +154,30 @@ public class MaxSquare {
         return max * max;
     }
 
+    public int getMaxSquare06(char[][] matrix) {
+        // 计算正方形
+        if (matrix == null) {
+            return -1;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int max = 0;
+        int[][] dp = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(dp[i-1][j-1], Math.min(dp[i-1][j], dp[i][j-1])) + 1;
+                    }
+                    max = Math.max(max, dp[i][j]);
+                }
+            }
+        }
+        return max * max;
+    }
+
     public static void main(String[] args) {
         char[][] matrix = {
                 {'1', '1', '1', '0', '0'},
@@ -162,7 +186,7 @@ public class MaxSquare {
                 {'1', '0', '0', '1', '0'}
         };
         MaxSquare maxSquare = new MaxSquare();
-        int area = maxSquare.getMaxSquare05(matrix);
+        int area = maxSquare.getMaxSquare06(matrix);
         System.out.println(area);
     }
 }

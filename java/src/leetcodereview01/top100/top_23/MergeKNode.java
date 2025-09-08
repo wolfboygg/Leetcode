@@ -61,6 +61,28 @@ public class MergeKNode {
         return pre.next;
     }
 
+    // 合并多个链表，那么就需要上点手段了
+    public Node merge02(Node[] nodes) {
+        if (nodes == null || nodes.length == 0) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        Queue<Node> queue = new PriorityQueue<>( (o1, o2) -> o1.value - o2.value);
+        for (int i = 0; i < nodes.length; i++) {
+            queue.offer(nodes[i]);
+        }
+        while(!queue.isEmpty()) {
+            Node node = queue.poll();
+            Node next = node.next;
+            temp.next = node;
+            temp = temp.next;
+            if (next != null) {
+                queue.offer(next);
+            }
+        }
+        return pre.next;
+    }
 
     public static void main(String[] args){
         //1->4->5,
@@ -85,7 +107,7 @@ public class MergeKNode {
 
         Node[] nodes = {node1, node4, node7};
         MergeKNode mergeKNode = new MergeKNode();
-        Node node = mergeKNode.merge01(nodes);
+        Node node = mergeKNode.merge02(nodes);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

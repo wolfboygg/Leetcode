@@ -83,11 +83,36 @@ public class CombinationSum {
         }
     }
 
+    //  需要使用回溯的方式进行处理
+    public List<List<Integer>> findAllResult03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking03(arr, target, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking03(int[] arr, int target, int start, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = start; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            // 这里要传递的是i，要不然会重复
+            backTracking03(arr, target - arr[i], i, list);
+            list.removeLast();
+        }
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult02(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult03(arr, 7);
         System.out.println(allResult.toString());
     }
 }

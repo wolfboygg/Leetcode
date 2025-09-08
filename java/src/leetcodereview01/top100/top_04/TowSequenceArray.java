@@ -52,12 +52,21 @@ public class TowSequenceArray {
         return result;
     }
 
+    public int findMiddleNum03(int[] arr1, int[] arr2) {
+        // 通过合并数组之后进行
+        int[] arr = new int[arr1.length + arr2.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i >= arr1.length ? arr2[i- arr1.length] : arr1[i];
+        }
+        return arr.length % 2 == 0? arr[arr.length / 2 - 1] + arr[arr.length / 2] / 2 : arr[arr.length /2];
+    }
+
     public static void main(String[] args){
         int[] arr1 = {1, 2};
         int[] arr2 = {3 ,4, 5};
 
         TowSequenceArray sequenceArray = new TowSequenceArray();
-        int num = sequenceArray.findMiddleNum02(arr1, arr2);
+        int num = sequenceArray.findMiddleNum03(arr1, arr2);
         System.out.println(num);
     }
 }
