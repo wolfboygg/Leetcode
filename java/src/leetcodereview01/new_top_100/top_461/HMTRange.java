@@ -63,9 +63,22 @@ public class HMTRange {
         return count;
     }
 
+    // 0001
+    // 0100
+    public int getDistance05(int a, int b) {
+        int value = a ^ b;
+        // 然后求1的个数
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value -1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance04(1, 4);
+        int distance = hmtRange.getDistance05(1, 4);
         System.out.println(distance);
     }
 }

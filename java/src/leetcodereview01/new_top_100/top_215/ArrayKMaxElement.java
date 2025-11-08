@@ -123,10 +123,28 @@ public class ArrayKMaxElement {
         return queue.peek();
     }
 
+    public int getKMaxElement06(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 使用小头堆来实现
+        Queue<Integer> queue = new PriorityQueue<>(((o1, o2) -> o1 - o2));
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        for (int i = k; i < arr.length; i++) {
+            if (arr[i] >= queue.peek()) {
+                queue.poll();
+                queue.offer(arr[i]);
+            }
+        }
+        return queue.peek();
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 2, 1, 5, 6, 4};
         ArrayKMaxElement arrayKMaxElement = new ArrayKMaxElement();
-        int kMaxElement = arrayKMaxElement.getKMaxElement05(arr, 2);
+        int kMaxElement = arrayKMaxElement.getKMaxElement06(arr, 2);
         System.out.println(kMaxElement);
 
     }

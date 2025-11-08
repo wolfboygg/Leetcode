@@ -100,9 +100,23 @@ public class Rob198 {
         return dp[arr.length - 1];
     }
 
+    public int rob07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        // 不连续拿，最大是多少，其实就是缩小范围
+        int[] dp = new int[arr.length];
+        dp[0] = arr[0];
+        dp[1] = Math.max(dp[0], arr[1]);
+        for (int i = 2; i < arr.length; i++) {
+            dp[i] = Math.max(dp[i-1], dp[i-2] + arr[i]);
+        }
+        return dp[arr.length - 1];
+    }
+
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 1};
+        int[] arr = new int[]{1, 2, 3, 4};
         Rob198 rob198 = new Rob198();
-        System.out.println(rob198.rob06(arr));
+        System.out.println(rob198.rob07(arr));
     }
 }

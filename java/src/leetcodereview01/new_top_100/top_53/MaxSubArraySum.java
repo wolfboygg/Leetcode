@@ -57,8 +57,22 @@ public class MaxSubArraySum {
         return max;
     }
 
+    public int calculate04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int curSum = 0;
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            curSum = Math.max(arr[i], curSum + arr[i]);
+            max = Math.max(max, curSum);
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
-        int[] arr = new int[] {-2,1,-3,4,-1,2,1,-5,4};
+        int[] arr = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         MaxSubArraySum maxSubArraySum = new MaxSubArraySum();
         // 6
         System.out.println(maxSubArraySum.calculate03(arr));

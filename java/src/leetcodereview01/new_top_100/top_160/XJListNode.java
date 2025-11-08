@@ -71,7 +71,7 @@ public class XJListNode {
         }
         Node P1 = node1;
         Node P2 = node2;
-        while(P1 != P2) {
+        while (P1 != P2) {
             P1 = P1 == null ? node2 : P1.next;
             P2 = P2 == null ? node1 : P2.next;
         }
@@ -84,7 +84,20 @@ public class XJListNode {
         }
         Node P1 = node1;
         Node P2 = node2;
-        while(P1 != P2) {
+        while (P1 != P2) {
+            P1 = P1 == null ? node2 : P1.next;
+            P2 = P2 == null ? node1 : P2.next;
+        }
+        return P1;
+    }
+
+    public Node findXJNode06(Node node1, Node node2) {
+        if (node1 == null || node2 == null) {
+            return null;
+        }
+        Node P1 = node1;
+        Node P2 = node2;
+        while (P1 != P2) {
             P1 = P1 == null ? node2 : P1.next;
             P2 = P2 == null ? node1 : P2.next;
         }
@@ -114,7 +127,7 @@ public class XJListNode {
         node9.next = node4;
 
         XJListNode xjListNode = new XJListNode();
-        Node xjNode = xjListNode.findXJNode05(node1, node7);
+        Node xjNode = xjListNode.findXJNode06(node1, node7);
         System.out.println(xjNode.value);
     }
 }

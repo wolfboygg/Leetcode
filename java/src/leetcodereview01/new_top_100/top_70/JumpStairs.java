@@ -100,9 +100,31 @@ public class JumpStairs {
         return value;
     }
 
+    public int climStairs05(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int num1 = 1;
+        int num2 = 2;
+        int sum = 0;
+        for (int i = 3; i <= n; i++) {
+            sum = num1 + num2;
+            num1 = num2;
+            num2 = sum;
+        }
+        return sum;
+    }
+
+
     public static void main(String[] args) {
         JumpStairs jumpStairs = new JumpStairs();
-        int num = jumpStairs.climStairs04(5);
+        int num = jumpStairs.climStairs05(5);
         System.out.println(num);
     }
 }

@@ -98,10 +98,29 @@ public class CoinChange {
     }
 
 
+    public int calculate06(int[] coins, int amount) {
+        if (coins == null || coins.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i >= coins[j]) {
+                    dp[i] = Math.min(dp[i - coins[j]] + 1, dp[i]);
+                }
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        return dp[amount] >= amount ? -1 : dp[amount];
+    }
+
+
     public static void main(String[] args) {
         int[] coins = {1, 2, 5};
         int amount = 11;
         CoinChange coinChange = new CoinChange();
-        System.out.println(coinChange.calculate05(coins, amount));
+        System.out.println(coinChange.calculate06(coins, amount));
     }
 }

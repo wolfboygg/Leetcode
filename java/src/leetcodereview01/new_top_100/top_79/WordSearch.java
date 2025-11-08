@@ -1,7 +1,5 @@
 package leetcodereview01.new_top_100.top_79;
 
-import leetcodereview01.jiandan.leetcode12.MatrixPath;
-
 /**
  * 单词搜索
  */
@@ -175,14 +173,55 @@ public class WordSearch {
         return false;
     }
 
+    public boolean findPath04(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        boolean[][] mark = new boolean[row][column];
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking04(matrix, charArray, mark, next, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking04(char[][] matrix, char[] charArray, boolean[][] mark, int[][] next, int i, int j, int index) {
+        if (index == charArray.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] != charArray[index] || mark[i][j]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking04(matrix, charArray, mark, next, i + ints[0], j + ints[1], index + 1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEVD";
+        String str = "ABCCEDF";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath03(charMatrix, str);
+        boolean isExit = search.findPath04(charMatrix, str);
         System.out.println(isExit);
     }
 }

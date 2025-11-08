@@ -93,6 +93,17 @@ public class ReverseTree {
         return root;
     }
 
+    public TreeNode reverseTree06(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree06(root.left);
+        TreeNode right = reverseTree06(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
     public static void main(String[] args) {
         ReverseTree reverseTree = new ReverseTree();
         TreeNode root0 = new TreeNode(1);
@@ -111,7 +122,7 @@ public class ReverseTree {
         root2.right = root6;
         reverseTree.traversalTree(root0);
         System.out.println();
-        TreeNode node = reverseTree.reverseTree05(root0);
+        TreeNode node = reverseTree.reverseTree06(root0);
         reverseTree.traversalTree(node);
         System.out.println();
     }

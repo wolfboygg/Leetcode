@@ -86,10 +86,33 @@ public class TargetSum {
         backTracking03(arr, target, index + 1, sum - arr[index]);
     }
 
+    // + - 凑和的问题
+    public int count04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        backTracking04(arr, target, 0, 0);
+        return count;
+    }
+
+    // 通过+-的方式
+    public void backTracking04(int[] arr, int target, int index, int sum) {
+        if (index == arr.length) {
+            if (sum == target) {
+                count++;
+            }
+            return;
+        }
+        backTracking04(arr, target, index + 1, sum + arr[index]);
+        backTracking04(arr, target, index + 1, sum - arr[index]);
+    }
+
+
+
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count02(value, target));
+        System.out.println(targetSum.count04(value, target));
     }
 }

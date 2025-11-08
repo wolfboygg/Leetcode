@@ -83,10 +83,28 @@ public class SlideWinMaxValue {
         return list;
     }
 
+    public List<Integer> findWinMaxValue04(int[] arr, int win) {
+        if (arr == null || arr.length == 0) {
+            return new ArrayList<>();
+        }
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for (int i = 0; i < win; i++) {
+            queue.offer(arr[i]);
+        }
+        List<Integer> list = new ArrayList<>();
+        list.add(queue.peek());
+        for (int i = win; i < arr.length; i++) {
+            queue.remove(arr[i - win]);
+            queue.offer(arr[i]);
+            list.add(queue.peek());
+        }
+        return list;
+    }
+
     public static void main(String[] args){
         int[] arr =  {1,3,-1,-3,5,3,6,7};
         SlideWinMaxValue slideWinMaxValue = new SlideWinMaxValue();
-        List<Integer> value = slideWinMaxValue.findWinMaxValue03(arr, 3);
+        List<Integer> value = slideWinMaxValue.findWinMaxValue04(arr, 3);
         System.out.println(value.toString());
     }
 

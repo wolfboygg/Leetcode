@@ -89,6 +89,17 @@ public class BinaryTreeDiameter {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    // 求二叉树的直径，就是左 + 右
+    public int diameter06(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter06(root.left);
+        int rightDepth = diameter06(root.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);
@@ -101,7 +112,7 @@ public class BinaryTreeDiameter {
         node2.right = node5;
 
         BinaryTreeDiameter binaryTreeDiameter = new BinaryTreeDiameter();
-        int diameter = binaryTreeDiameter.diameter02(node1);
+        int diameter = binaryTreeDiameter.diameter06(node1);
         System.out.println(diameter);
         System.out.println(res);
     }

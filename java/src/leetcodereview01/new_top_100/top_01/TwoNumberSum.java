@@ -228,11 +228,44 @@ public class TwoNumberSum {
         return null;
     }
 
+    public int[] twoSumYx08(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return  new int[]{};
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else {
+                return new int[]{arr[P1], arr[P2]};
+            }
+        }
+        return new int[]{};
+    }
+
+    public int[] twoSumWx08(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target-arr[i])) {
+                return new int[] {arr[i], target- arr[i]};
+            }
+            set.add(arr[i]);
+        }
+        return new int[] {};
+    }
+
+
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.twoSumYx07(num, 9);
+        int[] result = twoNumberSum.twoSumWx08(num2, 6);
         System.out.println(Arrays.toString(result));
     }
 }

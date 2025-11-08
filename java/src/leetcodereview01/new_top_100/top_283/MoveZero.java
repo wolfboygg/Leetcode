@@ -103,12 +103,43 @@ public class MoveZero {
         }
     }
 
+    public void move06(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int slow = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                int temp = arr[i];
+                arr[i] = arr[slow];
+                arr[slow] = temp;
+                slow++;
+            }
+        }
+    }
+
+    public void move07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int slow = 0;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] == 0 && slow < i) {
+                System.out.println(i);
+                int temp = arr[i];
+                arr[i] = arr[slow];
+                arr[slow] = temp;
+                slow++;
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.move05(arr);
+        moveZero.move07(arr);
         System.out.println(Arrays.toString(arr));
     }
 

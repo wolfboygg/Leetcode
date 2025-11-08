@@ -117,11 +117,37 @@ public class AllSequence {
         }
     }
 
+    public List<List<Integer>> allSequence04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return new ArrayList<>();
+        }
+        boolean[] mark = new boolean[arr.length];
+        backTracking04(arr, 0, new ArrayList<>(), mark);
+        return ret;
+    }
+
+    public void backTracking04(int[] arr, int index, List<Integer> list, boolean[] mark) {
+        if (arr.length == index) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true;
+            list.add(arr[i]);
+            backTracking04(arr, index + 1, list, mark);
+            list.removeLast();
+            mark[i] = false;
+        }
+    }
+
 
     public static void main(String[] args) {
         AllSequence allSequence = new AllSequence();
         int[] arr = new int[] {1, 2, 3};
-        List<List<Integer>> result= allSequence.allSequence03(arr);
+        List<List<Integer>> result= allSequence.allSequence04(arr);
         System.out.println(result.toString());
     }
 }

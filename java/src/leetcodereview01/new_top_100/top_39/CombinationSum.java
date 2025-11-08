@@ -108,11 +108,46 @@ public class CombinationSum {
         }
     }
 
+    public List<List<Integer>> findAllResult04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new ArrayList<>();
+        }
+        backTracking04(arr, 0, target, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking04(int[] arr, int index, int target, List<Integer> list) {
+        if (index == arr.length) {
+            return;
+        }
+        if (target == 0) {
+            System.out.println(list.toString());
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+//            if (target < 0) {
+//                break;
+//            }
+//            target -= arr[i]; // 不能先减，减完没有恢复 恢复版本，如果不使用这种方式就不能这样使用
+//            list.add(arr[i]);
+//            backTracking04(arr, i, target, list);
+//            Integer i1 = list.removeLast();
+//            target += i1;
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking04(arr, i, target - arr[i], list);
+            list.removeLast();
+        }
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult03(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult04(arr, 7);
         System.out.println(allResult.toString());
     }
 }

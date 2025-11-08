@@ -194,6 +194,38 @@ public class LandNum {
         backTraversal05(matrix, i, j + 1);
     }
 
+
+    public int calculateLandNumber06(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                    backTraversal06(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal06(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal05(matrix, i - 1, j);
+        backTraversal05(matrix, i + 1, j);
+        backTraversal05(matrix, i, j - 1);
+        backTraversal05(matrix, i, j + 1);
+    }
+
     public static void main(String[] args) {
         char[][] grid2 = {
                 {'1', '1', '0', '0', '0'},
@@ -202,6 +234,6 @@ public class LandNum {
                 {'0', '0', '1', '0', '1'}
         };
         LandNum landNum = new LandNum();
-        System.out.println(landNum.calculateLandNumber05(grid2));
+        System.out.println(landNum.calculateLandNumber06(grid2));
     }
 }

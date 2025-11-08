@@ -82,6 +82,26 @@ public class SearchMatrix {
         return false;
     }
 
+    public boolean search04(int[][] matrix, int target) {
+        if (matrix == null) {
+            return false;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int i = 0;
+        int j = column - 1;
+        while(i < row && j >= 0) {
+            if (matrix[i][j] > target) {
+                j--;
+            } else if (matrix[i][j] < target) {
+                i++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         SearchMatrix searchMatrix = new SearchMatrix();
         int[][] matrix = new int[][]{
@@ -91,7 +111,7 @@ public class SearchMatrix {
                 {10, 13, 14, 17, 24},
                 {18, 21, 23, 26, 30}
         };
-        boolean isExit = searchMatrix.search03(matrix, 28);
+        boolean isExit = searchMatrix.search04(matrix, 22);
         System.out.println(isExit ? "存在" : "不存在");
     }
 }
