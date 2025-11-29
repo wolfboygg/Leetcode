@@ -135,11 +135,40 @@ public class MoveZero {
     }
 
 
+    // 移动0的位置
+    public void move08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int slow = 0;
+        // 正向移动
+//        for (int i = 0; i < arr.length; i++) {
+//            if (arr[i] != 0) {
+//                int temp = arr[i];
+//                arr[i] = arr[slow];
+//                arr[slow] = temp;
+//                slow++;
+//            }
+//        }
+
+        for (int i = arr.length - 1; i >= 0 ; i--) {
+            if (arr[i] == 0 && slow < i) {
+                int temp = arr[i];
+                arr[i] = arr[slow];
+                arr[slow] = temp;
+                slow++;
+            }
+        }
+
+
+    }
+
+
 
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.move07(arr);
+        moveZero.move08(arr);
         System.out.println(Arrays.toString(arr));
     }
 

@@ -76,9 +76,22 @@ public class HMTRange {
         return count;
     }
 
+    // 0001
+    // 0100
+    // 0101
+    public int getDistance06(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            value = value & (value -1);
+            count++;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance05(1, 4);
+        int distance = hmtRange.getDistance06(1, 4);
         System.out.println(distance);
     }
 }

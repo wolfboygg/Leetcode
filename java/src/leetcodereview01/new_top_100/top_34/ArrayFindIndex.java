@@ -117,7 +117,7 @@ public class ArrayFindIndex {
         }
         int leftIndex = realFind04(arr, target, true);
         int rightIndex= realFind04(arr, target, false);
-        return new int[] {0, rightIndex - 1};
+        return new int[] {leftIndex, rightIndex - 1};
     }
 
     public int realFind04(int[] arr, int target, boolean isLow) {
@@ -137,11 +137,40 @@ public class ArrayFindIndex {
         return targetIndex;
     }
 
+
+    public int[] find05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int leftIndex = realFind05(arr, target, true);
+        int rightIndex = realFind05(arr, target, false) - 1;
+        // 判断一下
+        return new int[] {leftIndex, rightIndex};
+    }
+
+    public int realFind05(int[] arr, int target, boolean isLow) {
+        int realIndex = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left <= right) {
+            System.out.println(left + "," + right);
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (arr[middle] >= target && isLow)) {
+                right = middle - 1;
+                realIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return realIndex;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find04(arr, target);
+        int[] result = arrayFindIndex.find05(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }

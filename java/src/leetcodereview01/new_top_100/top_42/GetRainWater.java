@@ -78,10 +78,32 @@ public class GetRainWater {
         return res;
     }
 
+
+    public int trap04(int[] arr) {
+        if (arr == null || arr.length ==0) {
+            return -1;
+        }
+        int[] leftArr = new int[arr.length];
+        int[] rightArr = new int[arr.length];
+        leftArr[0] = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            leftArr[i] = Math.max(leftArr[i-1], arr[i]);
+        }
+        rightArr[arr.length-1] = arr[arr.length-1];
+        for (int i = arr.length - 2; i >= 0 ; i--) {
+            rightArr[i] = Math.max(arr[i], rightArr[i+1]);
+        }
+        int res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            res += Math.min(leftArr[i], rightArr[i]) - arr[i];
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         GetRainWater getRainWater = new GetRainWater();
         int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int result = getRainWater.trap03(arr);
+        int result = getRainWater.trap01(arr);
         System.out.println(result);
     }
 

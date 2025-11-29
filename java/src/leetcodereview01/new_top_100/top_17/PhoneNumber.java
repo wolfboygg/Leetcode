@@ -207,10 +207,34 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations09(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        char[] charArray = str.toCharArray();
+        boolean[] mark = new boolean[charArray.length];
+        traversal09(charArray, mark, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal09(char[] charArr, boolean[] mark, int index, StringBuilder sb) {
+        if (index == charArr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char c = charArr[index];
+        char[] charArray = map[c - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal09(charArr, mark, index + 1, sb);
+            sb.deleteCharAt(sb.length() -1);
+        }
+    }
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations08("234");
+        phoneNumber.letterCombinations09("234");
         System.out.println(ret.toString());
     }
 }

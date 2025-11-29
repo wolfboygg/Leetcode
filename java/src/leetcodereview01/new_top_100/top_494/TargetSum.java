@@ -107,6 +107,25 @@ public class TargetSum {
         backTracking04(arr, target, index + 1, sum - arr[index]);
     }
 
+    public int count05(int[] value, int target) {
+        if (value == null || value.length == 0) {
+            return -1;
+        }
+        backTracking05(value, 0, target, 0);
+        return count;
+    }
+
+    public void backTracking05(int[] value, int index, int target, int sum) {
+        if (index == value.length) {
+            if (sum == target) {
+                count++;
+            }
+            return;
+        }
+        backTracking05(value, index + 1, target, sum + value[index]);
+        backTracking05(value, index + 1, target, sum - value[index]);
+    }
+
 
 
     public static void main(String[] args) {

@@ -113,10 +113,29 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr06(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        int defaultIndex = -1;
+        int max = 0;
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(charArray[i], -1));
+            }
+            map.put(charArray[i], i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         String str = "abcabcbb";
         MaxLengthStr maxLengthStr = new MaxLengthStr();
-        int value = maxLengthStr.maxLengthStr05(str);
+        int value = maxLengthStr.maxLengthStr06(str);
         System.out.println(value);
     }
 }

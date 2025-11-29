@@ -1,5 +1,7 @@
 package leetcodereview01.new_top_100.top_169;
 
+import java.util.PriorityQueue;
+
 /**
  * 多数元素
  */
@@ -146,10 +148,27 @@ public class MajorityElement {
         return num;
     }
 
+    public int majorityElement08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int count = 1;
+        int value = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == value) {
+                count++;
+            } else if (--count == 0) {
+                value = arr[i];
+                count = 1;
+            }
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 2, 1};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement07(arr);
+        int i = bean.majorityElement08(arr);
         System.out.println(i);
     }
 

@@ -116,11 +116,30 @@ public class CoinChange {
         return dp[amount] >= amount ? -1 : dp[amount];
     }
 
+    public int calculate07(int[] coins, int num) {
+        // 兑换零钱最小的个数
+        if (coins == null || coins.length == 0 || num == 0) {
+            return -1;
+        }
+        int[] dp = new int[num+1];
+        Arrays.fill(dp, num);
+        dp[0] = 0; // 开始要赋值为0
+        for (int i = 1; i < num + 1; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (i >= coins[j]) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        System.out.println(Arrays.toString(dp));
+        return dp[num] == num ? 0 : dp[num];
+    }
+
 
     public static void main(String[] args) {
         int[] coins = {1, 2, 5};
         int amount = 11;
         CoinChange coinChange = new CoinChange();
-        System.out.println(coinChange.calculate06(coins, amount));
+        System.out.println(coinChange.calculate07(coins, amount));
     }
 }

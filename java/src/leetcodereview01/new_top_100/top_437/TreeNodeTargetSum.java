@@ -149,6 +149,30 @@ public class TreeNodeTargetSum {
         list.remove(list.size() - 1);
     }
 
+    public boolean findPath05(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        // 递归进行处理
+        realFindPath05(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath05(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.right == null && root.left == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath05(root.left, target, list);
+            realFindPath05(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
 
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();

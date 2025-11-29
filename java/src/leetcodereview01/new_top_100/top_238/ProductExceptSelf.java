@@ -170,6 +170,29 @@ public class ProductExceptSelf {
         return help;
     }
 
+    public int[] produce07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int[] leftArr = new int[arr.length];
+        int[] rightArr = new int[arr.length];
+
+        leftArr[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            leftArr[i] = leftArr[i-1] * arr[i-1];
+        }
+        rightArr[arr.length-1] = 1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightArr[i] = rightArr[i+1] * arr[i+1];
+        }
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = leftArr[i] * rightArr[i];
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
         // 除去自身之后的乘积
         // [1, 2, 3, 4]
@@ -178,7 +201,7 @@ public class ProductExceptSelf {
         // [24, 12, 8, 6]
         int[] arr = {1, 2, 3, 4};
         ProductExceptSelf productExceptSelf = new ProductExceptSelf();
-        int[] result = productExceptSelf.produce06(arr);
+        int[] result = productExceptSelf.produce07(arr);
         System.out.println(Arrays.toString(result));
     }
 }

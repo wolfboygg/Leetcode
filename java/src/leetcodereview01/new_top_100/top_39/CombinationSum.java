@@ -143,11 +143,38 @@ public class CombinationSum {
         }
     }
 
+    // 组合的和，找到能凑成target的组合
+    public List<List<Integer>> findAllResult05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking05(arr, target, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking05(int[] arr, int target, int index, List<Integer> list) {
+        if (index >= arr.length) {
+            return;
+        }
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking05(arr, target - arr[i], i, list);
+            list.remove(list.size() -1);
+        }
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult04(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult05(arr, 7);
         System.out.println(allResult.toString());
     }
 }

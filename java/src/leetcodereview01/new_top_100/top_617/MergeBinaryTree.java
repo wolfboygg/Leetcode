@@ -110,6 +110,20 @@ public class MergeBinaryTree {
         return root1;
     }
 
+    public TreeNode merge07(TreeNode node1, TreeNode node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        if (node1 == null || node2 == null) {
+            return node1 == null ? node2 : node1;
+        }
+        TreeNode node = new TreeNode(node1.value);
+        node.value += node2.value;
+        node.left = merge07(node1.left, node2.left);
+        node.right = merge07(node1.right, node2.right);
+        return node;
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -134,7 +148,7 @@ public class MergeBinaryTree {
         node33.right = node55;
 
         MergeBinaryTree mergeBinaryTree = new MergeBinaryTree();
-        TreeNode root = mergeBinaryTree.merge06(node1, node11);
+        TreeNode root = mergeBinaryTree.merge07(node1, node11);
         mergeBinaryTree.traversalTree(root);
     }
 }

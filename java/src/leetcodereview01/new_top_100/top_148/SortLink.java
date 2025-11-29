@@ -137,6 +137,45 @@ public class SortLink {
         return pre.next;
     }
 
+    // 使用递归加merge的方式进行排序
+    public Node sortLink03(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != tail) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node mid = P1;
+        Node left = sortLink03(head, mid);
+        Node right = sortLink03(mid, tail);
+        return merge03(left, right);
+    }
+
+    public Node merge03(Node node1, Node node2) {
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value > node2.value) {
+                temp.next = node2;
+                node2 = node2.next;
+            } else {
+                temp.next = node1;
+                node1 = node1.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
@@ -146,7 +185,7 @@ public class SortLink {
         node2.next = node3;
 //        node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink02(node1, null);
+        Node node = sortLink.sortLink03(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

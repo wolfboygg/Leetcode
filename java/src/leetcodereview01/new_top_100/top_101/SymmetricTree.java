@@ -118,19 +118,37 @@ public class SymmetricTree {
         return root1.value == root2.value && realIsSymmetric05(root1.left, root2.right) && realIsSymmetric05(root1.right, root2.left);
     }
 
+    public boolean isSymmetric06(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return realIsSymmetric06(root, root);
+    }
+
+    public boolean realIsSymmetric06(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        return root1.value == root2.value && realIsSymmetric06(root1.left, root2.right) && realIsSymmetric06(root1.right, root2.left);
+    }
+
+
     public static void main(String[] args) {
         // 判断是否是对称的二叉树
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);
         TreeNode node3 = new TreeNode(2);
         TreeNode node4 = new TreeNode(3);
-        TreeNode node5 = new TreeNode(3);
+        TreeNode node5 = new TreeNode(4);
         node1.left = node2;
         node1.right = node3;
         node2.left = node4;
         node3.right = node5;
         SymmetricTree symmetricTree = new SymmetricTree();
-        boolean symmetric = symmetricTree.isSymmetric05(node1);
+        boolean symmetric = symmetricTree.isSymmetric06(node1);
         System.out.println(symmetric);
     }
 }

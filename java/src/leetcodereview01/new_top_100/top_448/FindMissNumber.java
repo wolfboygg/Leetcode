@@ -110,11 +110,33 @@ public class FindMissNumber {
         return list.toArray(newArr);
     }
 
+    public Integer[] find04(int[] arr) {
+        // 注意这时的范围为1-N
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i+1 && arr[i] != arr[arr[i]-1]) {
+                int temp = arr[i];
+                arr[i]= arr[temp-1];
+                arr[temp-1] = temp;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        Integer[] newArr = new Integer[]{};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i+1) {
+                list.add(i+1);
+            }
+        }
+        return list.toArray(newArr);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};
         FindMissNumber findMissNumber = new FindMissNumber();
-        Integer[] nums = findMissNumber.find03(arr);
+        Integer[] nums = findMissNumber.find04(arr);
         System.out.println(Arrays.toString(nums));
     }
 }

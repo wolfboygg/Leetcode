@@ -130,6 +130,26 @@ public class MergeLinkedList {
         return pre.next;
     }
 
+    public Node merge06(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        Node temp = new Node(-1);
+        Node pre = temp;
+        while(node1 != null && node2 != null) {
+            if (node1.value < node2.value) {
+                temp.next = node1;
+                node1 = node1.next;
+            } else {
+                temp.next = node2;
+                node2 = node2.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -143,7 +163,7 @@ public class MergeLinkedList {
         node2.next = node4;
 
         MergeLinkedList mergeLinkedList = new MergeLinkedList();
-        Node merge = mergeLinkedList.merge05(node1, node2);
+        Node merge = mergeLinkedList.merge06(node1, node2);
         while (merge != null) {
             System.out.print(merge.value + " ");
             merge = merge.next;

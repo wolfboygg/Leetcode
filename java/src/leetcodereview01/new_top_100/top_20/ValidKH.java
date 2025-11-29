@@ -208,11 +208,32 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean valid08(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        char[] charArray = str.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < charArray.length; i++) {
+            if (charArray[i] == '(' || charArray[i] == '[' ||charArray[i] == '{') {
+                stack.push(charArray[i]);
+            } else if (stack.isEmpty() || (charArray[i] == ')' && stack.pop() != '(')) {
+                return false;
+            } else if (stack.isEmpty() || (charArray[i] == ']' && stack.pop() != '[')) {
+                return false;
+            } else if (stack.isEmpty() || (charArray[i] == '}' && stack.pop() != '{')) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.validKH07(str1));
-        System.out.println(validKH.validKH07(str2));
+        System.out.println(validKH.valid08(str1));
+        System.out.println(validKH.valid08(str2));
     }
 }
