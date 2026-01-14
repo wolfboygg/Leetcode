@@ -29,10 +29,30 @@ public class WaterContainer {
         return value;
     }
 
+    public int getWaterMaxValue02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int start = 0;
+        int end = arr.length -1;
+        int max = 0;
+        while(start < end) {
+            int value = Math.min(arr[start], arr[end]) * (end - start);
+            max = Math.max(max, value);
+            if (arr[start] <= arr[end]) {
+                start++;
+            } else {
+                end--;
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         WaterContainer waterContainer = new WaterContainer();
         int[] arr = new int[] {1,8,6,2,5,4,8,3,7};
-        int value = waterContainer.getWaterMaxValue01(arr);
+        int value = waterContainer.getWaterMaxValue02(arr);
         System.out.println(value);
     }
 

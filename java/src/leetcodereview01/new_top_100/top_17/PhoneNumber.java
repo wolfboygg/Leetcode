@@ -231,6 +231,27 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations10(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal10(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal10(char[] charArr, int index, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(new String(sb));
+            return;
+        }
+        char[] charArray = map[charArr[index] - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal10(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();

@@ -182,11 +182,35 @@ public class MainLengthIncrementArray {
         return max;
     }
 
+    // 这种使用存储的方式进行便利查找
+    public int getMaxLength07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        Set<Integer> set = new HashSet<>();
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+        for (int i = 0; i < arr.length; i++) {
+            int count = 0;
+            if (!set.contains(arr[i] - 1)) {
+                count++;
+                int value = arr[i];
+                while(set.contains(value + 1)) {
+                    count++;
+                    value = value + 1;
+                }
+                max = Math.max(max, count);
+            }
+        }
+        return max;
+    }
 
     public static void main(String[] args) {
         int[] arr = {100, 4, 200, 1, 3, 2};
         MainLengthIncrementArray mainLengthIncrementArray = new MainLengthIncrementArray();
-        System.out.println(mainLengthIncrementArray.getMaxLength06(arr));
+        System.out.println(mainLengthIncrementArray.getMaxLength07(arr));
     }
 
 }

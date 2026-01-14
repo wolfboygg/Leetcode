@@ -167,6 +167,36 @@ public class TreeNodeChangeLink {
     }
 
 
+    public void flatten06(TreeNode root) {
+        // 借助list来实现
+        if (root == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preOrderTraversal06(root, list);
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode pre = list.get(i-1);
+            TreeNode cur = list.get(i);
+            pre.left = null;
+            pre.right = cur;
+        }
+        TreeNode treeNode = list.get(0);
+        while (treeNode != null) {
+            System.out.print(treeNode.value + " ");
+            treeNode = treeNode.right;
+        }
+    }
+
+    public void preOrderTraversal06(TreeNode root, List<TreeNode>  list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        preOrderTraversal06(root.left, list);
+        preOrderTraversal06(root.right, list);
+    }
+
+
     public static void main(String[] args) {
 
         TreeNode node1 = new TreeNode(1);
@@ -183,7 +213,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten05(node1);
+        treeNodeChangeLink.flatten06(node1);
         // 直接展开 不需要构建Node
     }
 }

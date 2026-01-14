@@ -214,6 +214,24 @@ public class TraversalTree {
         }
     }
 
+    public void traversalByStack07(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            System.out.print(pop.value + " ");
+            if (pop.right != null) {
+                root = pop.right;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -225,7 +243,7 @@ public class TraversalTree {
         TraversalTree traversalTree = new TraversalTree();
         traversalTree.traversalByDG05(node1);
         System.out.println();
-        traversalTree.traversalByStack06(node1);
+        traversalTree.traversalByStack07(node1);
 
     }
 }

@@ -147,6 +147,25 @@ public class CircleLink {
         return isCircle;
     }
 
+    public boolean isCircle08(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        boolean isCircle = false;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                isCircle = true;
+                break;
+            }
+        }
+        return isCircle;
+    }
+
+
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
         Node node1 = new Node(1);
@@ -160,8 +179,8 @@ public class CircleLink {
         node3.next = node4;
         node4.next= node5;
         node5.next = node6;
-//        node6.next = node3;
-        boolean circle = circleLink.isCircle07(node1);
+        node6.next = node3;
+        boolean circle = circleLink.isCircle08(node1);
         System.out.println(circle);
     }
 }

@@ -126,12 +126,31 @@ public class TargetSum {
         backTracking05(value, index + 1, target, sum - value[index]);
     }
 
+    public int count06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        backTracking06(arr, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking06(int[] arr, int target, int index, int sum) {
+        if (index == arr.length) {
+            if (sum == target) {
+                count++;
+            }
+            return;
+        }
+        // 不需要for
+        backTracking06(arr, target, index + 1, sum + arr[index]);
+        backTracking06(arr, target, index + 1, sum-  arr[index]);
+    }
 
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count04(value, target));
+        System.out.println(targetSum.count06(value, target));
     }
 }

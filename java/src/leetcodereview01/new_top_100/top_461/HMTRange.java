@@ -89,9 +89,20 @@ public class HMTRange {
         return count;
     }
 
+    // 先异或在求结果
+    public int getDistance07(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            value &= (value - 1);
+            count++;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance06(1, 4);
+        int distance = hmtRange.getDistance07(1, 4);
         System.out.println(distance);
     }
 }

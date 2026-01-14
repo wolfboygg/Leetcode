@@ -1,5 +1,7 @@
 package leetcodereview01.new_top_100.top_79;
 
+import java.util.PriorityQueue;
+
 /**
  * 单词搜索
  */
@@ -258,6 +260,47 @@ public class WordSearch {
         return false;
     }
 
+    // 单词搜索
+    public boolean findPath06(char[][] matrix, String str) {
+        if (matrix == null) {
+            return false;
+        }
+        char[] charArray = str.toCharArray();
+        row = matrix.length;
+        column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < charArray.length; i++) {
+            if (backTracking06(charArray, matrix, 0, 0, 0, mark, next)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking06(char[] charArray, char[][] matrix, int index, int i, int j, boolean[][] mark, int[][] next) {
+        if (index >= charArray.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != charArray[index]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking06(charArray, matrix,index + 1, i + ints[0], j + ints[1], mark, next)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
+
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
@@ -265,7 +308,7 @@ public class WordSearch {
                 {'A', 'D', 'E', 'V'}};
         String str = "ABCCEDC";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath05(charMatrix, str);
+        boolean isExit = search.findPath06(charMatrix, str);
         System.out.println(isExit);
     }
 }

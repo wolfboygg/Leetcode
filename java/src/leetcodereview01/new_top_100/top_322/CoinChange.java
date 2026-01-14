@@ -135,11 +135,29 @@ public class CoinChange {
         return dp[num] == num ? 0 : dp[num];
     }
 
+    public int calculate08(int[] arr, int coin) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[coin+1];
+//        Arrays.fill(dp, coin + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= coin; i++) {
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < arr.length; j++) {
+                if (i >= arr[j]) {
+                    dp[i] = Math.min(dp[i], dp[i-arr[j]] + 1);
+                }
+            }
+        }
+        return dp[coin] == Integer.MAX_VALUE ? -1 : dp[coin];
+    }
+
 
     public static void main(String[] args) {
         int[] coins = {1, 2, 5};
         int amount = 11;
         CoinChange coinChange = new CoinChange();
-        System.out.println(coinChange.calculate07(coins, amount));
+        System.out.println(coinChange.calculate08(coins, amount));
     }
 }

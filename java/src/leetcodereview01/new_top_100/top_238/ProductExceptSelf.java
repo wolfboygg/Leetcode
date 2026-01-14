@@ -112,12 +112,12 @@ public class ProductExceptSelf {
 
         leftArr[0] = 1;
         for (int i = 1; i < arr.length; i++) {
-            leftArr[i] = leftArr[i-1] * arr[i-1];
+            leftArr[i] = leftArr[i - 1] * arr[i - 1];
         }
 
         rightArr[arr.length - 1] = 1;
-        for (int i = arr.length - 2; i >=0; i--) {
-            rightArr[i] = rightArr[i+1] * arr[i+1];
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightArr[i] = rightArr[i + 1] * arr[i + 1];
         }
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
@@ -136,10 +136,10 @@ public class ProductExceptSelf {
         leftArrow[0] = 1;
         rightArrow[arr.length - 1] = 1;
         for (int i = 1; i < arr.length; i++) {
-            leftArrow[i] = leftArrow[i-1] * arr[i-1];
+            leftArrow[i] = leftArrow[i - 1] * arr[i - 1];
         }
         for (int i = arr.length - 2; i >= 0; i--) {
-            rightArrow[i] = rightArrow[i+1] * arr[i+1];
+            rightArrow[i] = rightArrow[i + 1] * arr[i + 1];
         }
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
@@ -150,7 +150,7 @@ public class ProductExceptSelf {
 
     public int[] produce06(int[] arr) {
         if (arr == null || arr.length == 0) {
-            return new int[] {};
+            return new int[]{};
         }
         // 需要两个辅助数组来实现
         int[] leftArrow = new int[arr.length];
@@ -158,10 +158,10 @@ public class ProductExceptSelf {
         leftArrow[0] = 1;
         rightArrow[arr.length - 1] = 1;
         for (int i = 1; i < arr.length; i++) {
-            leftArrow[i] = arr[i-1] * leftArrow[i-1];
+            leftArrow[i] = arr[i - 1] * leftArrow[i - 1];
         }
-        for (int i = arr.length - 2; i >=0; i--) {
-            rightArrow[i] = rightArrow[i+1] * arr[i+1];
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightArrow[i] = rightArrow[i + 1] * arr[i + 1];
         }
         int[] help = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
@@ -179,12 +179,35 @@ public class ProductExceptSelf {
 
         leftArr[0] = 1;
         for (int i = 1; i < arr.length; i++) {
-            leftArr[i] = leftArr[i-1] * arr[i-1];
+            leftArr[i] = leftArr[i - 1] * arr[i - 1];
         }
-        rightArr[arr.length-1] = 1;
+        rightArr[arr.length - 1] = 1;
         for (int i = arr.length - 2; i >= 0; i--) {
-            rightArr[i] = rightArr[i+1] * arr[i+1];
+            rightArr[i] = rightArr[i + 1] * arr[i + 1];
         }
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = leftArr[i] * rightArr[i];
+        }
+        return result;
+    }
+
+    public int[] produce08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int[] leftArr = new int[arr.length];
+        int[] rightArr = new int[arr.length];
+        leftArr[0] = 1;
+        rightArr[arr.length - 1] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            leftArr[i] = leftArr[i - 1] * arr[i-1];
+        }
+        System.out.println(Arrays.toString(leftArr));
+        for (int i = arr.length - 2; i >= 0; i--) {
+            rightArr[i] = rightArr[i + 1] * arr[i+1];
+        }
+        System.out.println(Arrays.toString(rightArr));
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) {
             result[i] = leftArr[i] * rightArr[i];
@@ -201,7 +224,7 @@ public class ProductExceptSelf {
         // [24, 12, 8, 6]
         int[] arr = {1, 2, 3, 4};
         ProductExceptSelf productExceptSelf = new ProductExceptSelf();
-        int[] result = productExceptSelf.produce07(arr);
+        int[] result = productExceptSelf.produce08(arr);
         System.out.println(Arrays.toString(result));
     }
 }

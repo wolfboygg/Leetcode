@@ -165,10 +165,27 @@ public class MajorityElement {
         return value;
     }
 
+    public int majorityElement09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int count = 1;
+        int value = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == value) {
+                count++;
+            } else if (--count == 0) {
+                value = arr[i];
+                count = 1;
+            }
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
-        int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 2, 1};
+        int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 2, 1, 1, 1};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement08(arr);
+        int i = bean.majorityElement09(arr);
         System.out.println(i);
     }
 

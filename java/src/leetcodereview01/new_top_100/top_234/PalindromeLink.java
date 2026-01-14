@@ -200,20 +200,56 @@ public class PalindromeLink {
         return true;
     }
 
+    // 这个更好弄，找到中心点，翻转之后进行比较即可
+    public boolean isPalindromeLinked06(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        // 然后进行反转
+        Node next1 = P1.next;
+        P1.next = null;
+        P1 = next1;
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(P1 != null) {
+            Node next = P1.next;
+            P1.next = temp.next;
+            temp.next = P1;
+            P1 = next;
+        }
+        // 然后进行比较
+        pre = pre.next;
+        while(pre != null) {
+            System.out.println(pre.value + "," + head.value);
+            if (head.value != pre.value) {
+                return false;
+            }
+            head = head.next;
+            pre = pre.next;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        Node node1 = new Node(1);
+        Node node1 = new Node(3);
         Node node2 = new Node(2);
         Node node3 = new Node(2);
         Node node4 = new Node(1);
-//        Node node5 = new Node(3);
+        Node node5 = new Node(3);
 
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
-//        node4.next = node5;
+        node4.next = node5;
 
         PalindromeLink palindromeLink = new PalindromeLink();
-        System.out.println(palindromeLink.isPalindromeLink05(node1));
+        System.out.println(palindromeLink.isPalindromeLinked06(node1));
     }
 
 }

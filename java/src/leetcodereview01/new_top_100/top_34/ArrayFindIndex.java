@@ -165,12 +165,38 @@ public class ArrayFindIndex {
         return realIndex;
     }
 
+    // 数组中查找
+    public int[] find06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[2];
+        }
+        int leftIndex = realFind06(arr, target, true);
+        int rightIndex = realFind06(arr, target, false) -1;
+        return new int[]{leftIndex, rightIndex};
+    }
+
+    public int realFind06(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = -1;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (arr[middle] >= target && isLow)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find05(arr, target);
+        int[] result = arrayFindIndex.find06(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }

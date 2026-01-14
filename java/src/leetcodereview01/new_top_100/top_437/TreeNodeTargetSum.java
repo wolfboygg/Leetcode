@@ -174,10 +174,34 @@ public class TreeNodeTargetSum {
     }
 
 
+    public boolean findPath06(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath06(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath06(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath06(root.left, target, list);
+            realFindPath06(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath04(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath06(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

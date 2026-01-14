@@ -187,12 +187,28 @@ public class EveryDayTemp {
     }
 
 
+    public int[] getEveryDayTempByStack09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] values = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            while (!stack.isEmpty() && arr[i] >= arr[stack.peek()]) {
+                int index = stack.pop();
+                values[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return values;
+    }
+
 
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack08(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack09(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

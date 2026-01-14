@@ -164,11 +164,27 @@ public class MoveZero {
     }
 
 
+    public void move09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int pointer = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                int temp = arr[i];
+                arr[i] = arr[pointer];
+                arr[pointer] = temp;
+                pointer++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.move08(arr);
+        moveZero.move09(arr);
         System.out.println(Arrays.toString(arr));
     }
 

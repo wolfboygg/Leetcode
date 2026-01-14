@@ -46,10 +46,91 @@ public class NextSequence {
         arr[end] = temp;
     }
 
+
+    // 1, 2, 3
+    public void getNextSequence02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        // 先找到比前一个小的，在找到比大的，然后进行交换
+        int dest = -1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] <= arr[i + 1]) {
+                dest = i;
+                break;
+            }
+        }
+        if (dest > 0) { // 注意找不到的情况
+            int dest2 = -1;
+            for (int i = dest + 1; i < arr.length; i++) {
+                if (arr[i] > arr[dest]) {
+                    dest2 = i;
+                }
+            }
+            swap01(arr, dest, dest2);
+        }
+
+        reverse01(arr, dest + 1, arr.length -1);
+    }
+
+    public void swap01(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start]= arr[end];
+        arr[end] = temp;
+    }
+
+    public void reverse01(int[] arr, int start, int end) {
+        if (start < end) {
+            swap01(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
+    public void getNextSequence03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] <= arr[i+1]) {
+                P1 = i;
+                break;
+            }
+        }
+        if (P1 > 0) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            swap02(arr, P1, P2);
+        }
+        reverse02(arr, P1 + 1, arr.length - 1);
+    }
+
+    public void swap02(int[] arr, int P1, int P2) {
+        int temp = arr[P1];
+        arr[P1] = arr[P2];
+        arr[P2] = temp;
+    }
+
+    public void reverse02(int[] arr, int start, int end) {
+        while(start >= 0 && start < arr.length && end >= 0 && end < arr.length) {
+            swap02(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
+
+
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
         int[] arr = new int[]{1, 2, 3};
-        nextSequence.getNextSequence01(arr);
+        nextSequence.getNextSequence03(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

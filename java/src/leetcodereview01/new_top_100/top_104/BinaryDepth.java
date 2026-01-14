@@ -92,6 +92,15 @@ public class BinaryDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getDepth08(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getDepth08(root.left);
+        int rightDepth = getDepth08(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
 
     public static void main(String[] args) {
         TreeNode node11 = new TreeNode(2);
@@ -106,7 +115,7 @@ public class BinaryDepth {
         node33.right = node55;
 
         BinaryDepth binaryDepth = new BinaryDepth();
-        int depth = binaryDepth.getDepth06(node11);
+        int depth = binaryDepth.getDepth08(node11);
         System.out.println(depth);
 
     }

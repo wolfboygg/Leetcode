@@ -170,11 +170,38 @@ public class CombinationSum {
         }
     }
 
+    public List<List<Integer>> findAllResult06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking06(arr, target, 0,  new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking06(int[] arr, int target, int index, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if (index >= arr.length) {
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking06(arr, target - arr[i], i, list);
+            list.remove(list.size() - 1);
+        }
+
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult05(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult06(arr, 7);
         System.out.println(allResult.toString());
     }
 }

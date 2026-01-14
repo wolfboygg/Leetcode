@@ -131,6 +131,22 @@ public class ReverseLink {
         return pre.next;
     }
 
+    public Node reverse08(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(head != null) {
+            Node next = head.next;
+            head.next = temp.next;
+            temp.next = head;
+            head = next;
+        }
+        return pre.next;
+    }
+
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -143,7 +159,7 @@ public class ReverseLink {
         node4.next = node5;
 
         ReverseLink reverseLink = new ReverseLink();
-        Node node = reverseLink.reverse07(node1);
+        Node node = reverseLink.reverse08(node1);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

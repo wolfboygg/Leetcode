@@ -229,6 +229,32 @@ public class CircleStartNode {
         return null;
     }
 
+    public Node findCircleStart08(Node head) {
+        if (head == null) {
+            return null;
+        }
+        boolean isCircle = false;
+        Node fast = head;
+        Node slow = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                isCircle = true;
+                break;
+            }
+        }
+        if (isCircle) {
+            Node pre = head;
+            while(pre != slow) {
+                pre = pre.next;
+                slow = slow.next;
+            }
+            return slow;
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         Node node1 = new Node(1);
@@ -244,7 +270,7 @@ public class CircleStartNode {
         node5.next = node6;
         node6.next = node3;
         CircleStartNode circleStartNode = new CircleStartNode();
-        System.out.println(circleStartNode.findCircleStart07(node1).value);
+        System.out.println(circleStartNode.findCircleStart08(node1).value);
     }
 
 }

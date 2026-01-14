@@ -104,6 +104,97 @@ public class KGroupReverseLink {
         return pre.next;
     }
 
+    // 调整的太费劲了，还需要熟悉
+    public Node kGroupReverse02(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node start = new Node(-1);
+        start.next = head;
+        Node pre = start;
+        Node last = start;
+        while(last.next != null) {
+            for (int i = 0; i < k && last != null; i++) {
+                last = last.next;
+            }
+            Node next = last == null ? null : last.next;
+            if (last != null) {
+                last.next = null;
+            }
+            last = start.next;
+            start.next = reverse01(start.next);
+            if (last == null) {
+                break;
+            }
+            last.next = next;
+            start = last;
+
+        }
+        return pre.next;
+    }
+
+    public Node reverse01(Node head) {
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(head != null) {
+            Node next = head.next;
+            head.next = temp.next;
+            temp.next = head;
+            head = next;
+        }
+        Node next = pre.next;
+//        while(pre != null) {
+//            System.out.print(pre.value + " ");
+//            pre = pre.next;
+//        }
+        return next;
+    }
+
+    public Node kGroupReverse03(Node root, int k) {
+        if (root == null) {
+            return null;
+        }
+        Node start = new Node(-1);
+        start.next = root;
+        Node last = start;
+        Node temp = start;
+        while(last != null) {
+            for (int i = 0; i < k && last != null; i++) {
+                last = last.next;
+            }
+            Node next = last == null ? null : last.next;
+            if (last != null) {
+                last.next = null;
+            }
+            last = start.next;
+            start.next = reverse03(start.next);
+            start = last;
+            if (last == null) {
+                break;
+            }
+            last.next = next;
+        }
+        return temp.next;
+    }
+
+    public Node reverse03(Node head) {
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(head != null) {
+            Node next = head.next;
+            head.next = temp.next;
+            temp.next = head;
+            head = next;
+        }
+        Node node = pre.next;
+        while(pre != null) {
+            System.out.print(pre.value + " ");
+            pre = pre.next;
+        }
+        System.out.println();
+        return node;
+    }
+
 
     public static void main(String[] args){
         Node node1 = new Node(1);
@@ -124,7 +215,7 @@ public class KGroupReverseLink {
         node7.next = node8;
 
         KGroupReverseLink reverseLink = new KGroupReverseLink();
-        Node node = reverseLink.kGroupReverse01(node1, 3);
+        Node node = reverseLink.kGroupReverse03(node1, 3);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

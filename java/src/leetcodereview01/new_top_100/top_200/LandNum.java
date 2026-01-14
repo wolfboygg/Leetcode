@@ -258,6 +258,39 @@ public class LandNum {
         backTraversal07(matrix,i  , j + 1);
     }
 
+
+    public int calculateLandNumber08(char[][] matrix) {
+        // 计算岛屿的数量
+        if (matrix == null) {
+            return -1;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    System.out.println("1111:" + i + ",j= " + j);
+                    count++;
+                    backTraversal08(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal08(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal08(matrix, i - 1, j);
+        backTraversal08(matrix, i + 1, j);
+        backTraversal08(matrix, i, j - 1);
+        backTraversal08(matrix, i, j + 1);
+    }
+
+
     public static void main(String[] args) {
         char[][] grid2 = {
                 {'1', '1', '0', '0', '0'},
@@ -266,6 +299,6 @@ public class LandNum {
                 {'0', '0', '1', '0', '1'}
         };
         LandNum landNum = new LandNum();
-        System.out.println(landNum.calculateLandNumber07(grid2));
+        System.out.println(landNum.calculateLandNumber08(grid2));
     }
 }

@@ -175,6 +175,48 @@ public class SortLink {
         return pre.next;
     }
 
+    // 找到中间值进行排序
+    public Node sortLink04(Node head, Node tail) {
+        // 二分进行排序
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node pre = head;
+        Node temp = head;
+        while( pre != tail && pre.next != null) {
+            temp = temp.next;
+            pre = pre.next.next;
+        }
+        Node middle = temp;
+        Node left = sortLink04(head, middle);
+        Node right = sortLink04(middle, tail);
+        return merge01(left, right);
+    }
+
+    // 找到中心点，开始排序合并
+    public Node sortLink05(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head; // 这里不能穿透 必须返回 已经到最后一个，那么就是最后一个
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node left = sortLink05(head, P1);
+        Node right = sortLink05(P1, tail);
+        return merge03(left, right);
+    }
+
 
     public static void main(String[] args) {
         Node node1 = new Node(4);
@@ -185,7 +227,7 @@ public class SortLink {
         node2.next = node3;
 //        node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink03(node1, null);
+        Node node = sortLink.sortLink05(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;
