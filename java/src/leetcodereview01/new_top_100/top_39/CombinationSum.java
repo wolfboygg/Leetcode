@@ -60,19 +60,18 @@ public class CombinationSum {
         }
     }
 
-    // 组合的总和，这个也是通过回溯的方式来处理
     public List<List<Integer>> findAllResult02(int[] arr, int target) {
         if (arr == null || arr.length == 0) {
             return null;
         }
-        backTracking02(arr, target, 0, new ArrayList<Integer>());
+        // 进行递归查找
+        backTracking02(arr, target, 0, new ArrayList<>());
         return ret;
     }
 
     public void backTracking02(int[] arr, int target, int start, List<Integer> list) {
-        if (0 == target) {
+        if (target == 0) {
             ret.add(new ArrayList<>(list));
-            return;
         }
         for (int i = start; i < arr.length; i++) {
             if (target - arr[i] < 0) {
@@ -84,11 +83,125 @@ public class CombinationSum {
         }
     }
 
+    //  需要使用回溯的方式进行处理
+    public List<List<Integer>> findAllResult03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking03(arr, target, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking03(int[] arr, int target, int start, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = start; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            // 这里要传递的是i，要不然会重复
+            backTracking03(arr, target - arr[i], i, list);
+            list.removeLast();
+        }
+    }
+
+    public List<List<Integer>> findAllResult04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new ArrayList<>();
+        }
+        backTracking04(arr, 0, target, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking04(int[] arr, int index, int target, List<Integer> list) {
+        if (index == arr.length) {
+            return;
+        }
+        if (target == 0) {
+            System.out.println(list.toString());
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+//            if (target < 0) {
+//                break;
+//            }
+//            target -= arr[i]; // 不能先减，减完没有恢复 恢复版本，如果不使用这种方式就不能这样使用
+//            list.add(arr[i]);
+//            backTracking04(arr, i, target, list);
+//            Integer i1 = list.removeLast();
+//            target += i1;
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking04(arr, i, target - arr[i], list);
+            list.removeLast();
+        }
+    }
+
+    // 组合的和，找到能凑成target的组合
+    public List<List<Integer>> findAllResult05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking05(arr, target, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking05(int[] arr, int target, int index, List<Integer> list) {
+        if (index >= arr.length) {
+            return;
+        }
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking05(arr, target - arr[i], i, list);
+            list.remove(list.size() -1);
+        }
+    }
+
+    public List<List<Integer>> findAllResult06(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking06(arr, target, 0,  new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking06(int[] arr, int target, int index, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if (index >= arr.length) {
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking06(arr, target - arr[i], i, list);
+            list.remove(list.size() - 1);
+        }
+
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult02(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult06(arr, 7);
         System.out.println(allResult.toString());
     }
 }

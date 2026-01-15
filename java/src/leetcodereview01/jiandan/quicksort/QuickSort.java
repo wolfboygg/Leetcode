@@ -31,78 +31,42 @@ public class QuickSort {
         return mark;
     }
 
-    public void sort02(int[] arr, int startIndex, int endIndex) {
-        if (startIndex >= endIndex) {
+    public void sortByDouble2(int[] arr, int start, int end) {
+        if (start >= end) {
             return;
         }
-        int pivotIndex = partition02(arr, startIndex, endIndex);
-        sort02(arr, startIndex, pivotIndex - 1);
-        sort02(arr, pivotIndex + 1, endIndex);
+        // 主要是找位置
+        int pivotIndex = partition01(arr, start, end);
+        sortByDouble2(arr, start, pivotIndex - 1);
+        sortByDouble2(arr, pivotIndex + 1, end);
     }
 
-    private int partition02(int[] arr, int startIndex, int endIndex) {
-        // 双边循环
-        int pivot = arr[startIndex];
-        int left = startIndex;
-        int right = endIndex;
-        while (left != right) {
-            while (left < right && arr[right] > pivot) {
+    public int partition01(int[] arr, int start, int end) {
+        int pivotValue = arr[start];
+        int left = start + 1;
+        int right = end;
+        while(left < right) {
+            while(left < right && arr[right] > pivotValue) {
                 right--;
             }
-            while (left < right && arr[left] <= pivot) {
+            while(left < right && arr[left] < pivotValue) {
                 left++;
             }
-
-            if (left < right) {
+            if (left != right) {
                 int temp = arr[left];
                 arr[left] = arr[right];
                 arr[right] = temp;
             }
         }
-        arr[startIndex] = arr[left];
-        arr[left] = pivot;
+        arr[start] = arr[left];
+        arr[left] = pivotValue;
         return left;
     }
-
-    public void sortByDouble03(int[] arr, int left, int right) {
-        if (left >= right) {
-            return;
-        }
-        // 选一个标兵，然后分为左右两个进行比较然后在进行排序
-        int pivotIndex = findPivotIndex(arr, left, right);
-        sortByDouble03(arr, left, pivotIndex -1);
-        sortByDouble03(arr, pivotIndex + 1, right);
-    }
-
-    public int findPivotIndex(int[] arr, int left, int right) {
-        // 直接选取第一个作为标兵
-        int pivotValue = arr[left];
-        int start = left + 1;
-        int end = right;
-        while(start < end) {
-            while(start < end && arr[end] > pivotValue) {
-                end--;
-            }
-            while(start < end && arr[start] < pivotValue) {
-                start++;
-            }
-            if (start != end) {
-                int temp = arr[start];
-                arr[start] = arr[end];
-                arr[end] = temp;
-            }
-        }
-        // 交换位置
-        arr[left] = arr[start];
-        arr[start] = pivotValue;
-        return start;
-    }
-
 
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble03(arr, 0, arr.length - 1);
+        quickSort.sortByDouble2(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

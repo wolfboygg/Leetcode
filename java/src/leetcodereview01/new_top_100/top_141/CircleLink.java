@@ -78,6 +78,93 @@ public class CircleLink {
         return false;
     }
 
+    public boolean isCircle04(Node node) {
+        if (node == null) {
+            return false;
+        }
+        // 使用快慢指针处理
+        Node P1 = node;
+        Node P2 = node;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCircle05(Node node) {
+        // 判断链表是否存在环
+        if (node == null) {
+            return false;
+        }
+        Node P1 = node;
+        Node P2 = node;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCircle06(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P1 != null && P2 != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCircle07(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        boolean isCircle = false;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                isCircle = true;
+                break;
+            }
+        }
+
+        return isCircle;
+    }
+
+    public boolean isCircle08(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node slow = head;
+        Node fast = head;
+        boolean isCircle = false;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                isCircle = true;
+                break;
+            }
+        }
+        return isCircle;
+    }
+
 
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
@@ -93,7 +180,7 @@ public class CircleLink {
         node4.next= node5;
         node5.next = node6;
         node6.next = node3;
-        boolean circle = circleLink.isCircle03(node1);
+        boolean circle = circleLink.isCircle08(node1);
         System.out.println(circle);
     }
 }

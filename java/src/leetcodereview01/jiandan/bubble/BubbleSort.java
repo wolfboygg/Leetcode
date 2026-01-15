@@ -1,5 +1,7 @@
 package leetcodereview01.jiandan.bubble;
 
+import com.sun.security.jgss.GSSUtil;
+
 import java.sql.SQLOutput;
 import java.util.Arrays;
 
@@ -24,28 +26,7 @@ public class BubbleSort {
         System.out.println(Arrays.toString(arr));
     }
 
-    public void sort01(int[] arr) {
-        // 冒泡排序就是一轮一轮进行比较
-        int length = arr.length;
-        for (int i = 0; i < length; i++) {
-            boolean isSort = true;
-            for (int j = 0; j < length - i - 1; j++) {
-                // 需要和后一个进行比较，要不然咋比？
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    isSort = false;
-                }
-            }
-            if (isSort) {
-                break;
-            }
-        }
-        System.out.println(Arrays.toString(arr));
-    }
-
-    public void bubble02(int[] arr) {
+    public void bubble01(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
@@ -54,7 +35,7 @@ public class BubbleSort {
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j+1]) {
                     isSort = false;
-                    int temp = arr[j];
+                    int temp= arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
@@ -66,9 +47,10 @@ public class BubbleSort {
         System.out.println(Arrays.toString(arr));
     }
 
+
     public static void main(String[] args) {
         int[] arr = {5, 8, 6, 3, 9, 2, 1, 7};
         BubbleSort bubbleSort = new BubbleSort();
-        bubbleSort.bubble02(arr);
+        bubbleSort.bubble01(arr);
     }
 }

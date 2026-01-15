@@ -27,7 +27,7 @@ public class FindMissNumber {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != i + 1) {
-                list.add(i+1);
+                list.add(i + 1);
             }
         }
 
@@ -48,14 +48,14 @@ public class FindMissNumber {
         Integer[] newArr = new Integer[]{};
         for (int i = 0; i < arr.length; i++) {
             // 进行位置交换
-            while(i + 1 != arr[i] && arr[i] != arr[arr[i] - 1]) {// 交换
+            while (i + 1 != arr[i] && arr[i] != arr[arr[i] - 1]) {// 交换
                 swipe01(arr, i, arr[i] - 1);
             }
         }
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != i + 1) { // 1-n
-                list.add(i+1);
+                list.add(i + 1);
             }
         }
         return list.toArray(newArr);
@@ -67,10 +67,96 @@ public class FindMissNumber {
         arr[end] = temp;
     }
 
+    public Integer[] find02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while (arr[i] != i + 1 && arr[i] != arr[arr[i] - 1]) {
+                int temp = arr[i];
+                arr[i] = arr[temp - 1];
+                arr[temp - 1] = temp;
+            }
+        }
+        Integer[] newArr = new Integer[]{};
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i + 1) {
+                list.add(i + 1);
+            }
+        }
+        return list.toArray(newArr);
+    }
+
+    // 通过交换的方式来处理没有问题
+    public Integer[] find03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return new Integer[]{};
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i + 1 && arr[i] != arr[arr[i] - 1]) {
+                int value = arr[i];
+                arr[i] = arr[value - 1];
+                arr[value - 1] = value;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        Integer[] newArr = new Integer[]{};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i + 1) {
+                list.add(i+1);
+            }
+        }
+        return list.toArray(newArr);
+    }
+
+    public Integer[] find04(int[] arr) {
+        // 注意这时的范围为1-N
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i+1 && arr[i] != arr[arr[i]-1]) {
+                int temp = arr[i];
+                arr[i]= arr[temp-1];
+                arr[temp-1] = temp;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        Integer[] newArr = new Integer[]{};
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i+1) {
+                list.add(i+1);
+            }
+        }
+        return list.toArray(newArr);
+    }
+
+    public Integer[] find05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i]  != i + 1 && arr[i] != arr[arr[i] - 1]) {
+                int temp = arr[i];
+                arr[i] = arr[temp-1];
+                arr[temp-1] = temp;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]  != i + 1) {
+                list.add(arr[i]);
+            }
+        }
+        return list.toArray(new Integer[list.size()]);
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};
         FindMissNumber findMissNumber = new FindMissNumber();
-        Integer[] nums = findMissNumber.find01(arr);
+        Integer[] nums = findMissNumber.find05(arr);
         System.out.println(Arrays.toString(nums));
     }
 }

@@ -54,7 +54,7 @@ public class MaxLengthSubStr {
         int max = 0;
         for (int i = 0; i < str.length(); i++) {
             if (map.containsKey(str.charAt(i))) {
-                index = Math.max(index, map.getOrDefault(str.charAt(i), -1));
+                index = Math.max(index, map.getOrDefault(str.charAt(i), -1)); // 这里必须取最大的哈
             }
             map.put(str.charAt(i), i);
             max = Math.max(max, i - index);
@@ -62,10 +62,28 @@ public class MaxLengthSubStr {
         return max;
     }
 
+    public int maxLengthSubStr03(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        int defaultIndex = -1;
+        int max = 0;
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(charArray[i], -1));
+            }
+            map.put(charArray[i], i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "abcabdcbb";
         MaxLengthSubStr maxLengthSubStr = new MaxLengthSubStr();
-        int result = maxLengthSubStr.maxLengthSubStr02(str);
+        int result = maxLengthSubStr.maxLengthSubStr03(str);
         System.out.println(result);
     }
 }

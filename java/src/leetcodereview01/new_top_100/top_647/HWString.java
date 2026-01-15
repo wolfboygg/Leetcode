@@ -27,9 +27,56 @@ public class HWString {
         }
     }
 
+    public String calculateHwCount01(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            findHw01(charArray, i, i);
+            findHw01(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void findHw01(char[] charArr, int left, int right) {
+        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (right - left + 1 > len) {
+                this.left = left;
+                this.len = right - left + 1;
+            }
+            left--;
+            right++;
+        }
+    }
+
+    public String calculateHwCount02(String str) {
+        if (str == null) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            findHw02(charArray, i, i);
+            findHw02(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+
+    public void findHw02(char[] charArr, int left, int right) {
+        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (len < right - left + 1) {
+                len = right - left + 1;
+                this.left = left;
+            }
+            left--;
+            right++;
+        }
+    }
+
     public static void main(String[] args) {
         HWString hw = new HWString();
         String str = "aba";
-        System.out.println(hw.calculateHwCount(str));
+        System.out.println(hw.calculateHwCount02(str));
     }
 }

@@ -67,6 +67,14 @@ public class CircleLastNumber {
         return x;
     }
 
+    public int lastNumberByGH09(int n, int m) {
+        int x = 0;
+        for (int i = 2; i <= n; i++) {
+            x = (x + m) % i;
+        }
+        return x;
+    }
+
     public static void main(String[] args) {
         // 通过递归的方式进行求解
         // 0, 1, 2, 3, 4, 5
@@ -76,7 +84,7 @@ public class CircleLastNumber {
         // 0 4,
         // 4
         CircleLastNumber circleLastNumber = new CircleLastNumber();
-        System.out.println(circleLastNumber.lastNumberByGH08(6, 2));
+        System.out.println(circleLastNumber.lastNumberByGH09(6, 2));
     }
     // 5, 3
     private int lastNumber(int n, int m) {

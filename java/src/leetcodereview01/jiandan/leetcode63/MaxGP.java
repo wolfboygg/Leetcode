@@ -111,9 +111,22 @@ public class MaxGP {
         return maxValue;
     }
 
+    public int getMaxValue10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            min = Math.min(min, arr[i]);
+            max = Math.max(max, arr[i]- min);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         MaxGP maxGP = new MaxGP();
-        System.out.println(maxGP.getMaxValue09(arr));
+        System.out.println(maxGP.getMaxValue10(arr));
     }
 }

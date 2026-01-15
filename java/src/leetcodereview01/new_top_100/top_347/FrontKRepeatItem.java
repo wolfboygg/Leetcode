@@ -48,12 +48,12 @@ public class FrontKRepeatItem {
         for (int i = 0; i < arr.length; i++) {
             if (map.containsKey(arr[i])) {
                 Integer count = map.getOrDefault(arr[i], 1);
-                map.put(arr[i], count+1);
+                map.put(arr[i], count + 1);
             } else {
                 map.put(arr[i], 1);
             }
         }
-        Queue<Integer> queue = new PriorityQueue<>((o1, o2)-> map.get(o1)-map.get(o2));
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> map.get(o1) - map.get(o2));
         Set<Integer> integers = map.keySet();
         for (Integer integer : integers) {
             if (queue.size() < k) {
@@ -68,12 +68,178 @@ public class FrontKRepeatItem {
         return queue.stream().toList();
     }
 
+    public List<Integer> findItem02(int[] arr, int k) {
+        // 统计前K个高频元素
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Queue<Integer> queue = new PriorityQueue<Integer>((o1, o2) -> map.get(o1) - map.get(o2));
+        for (Integer key : map.keySet()) {
+            if (queue.size() < k) {
+                queue.offer(key);
+            } else {
+                if (queue.peek() > map.get(key)) {
+                    queue.poll();
+                    queue.offer(key);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
+    public List<Integer> findItem03(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return new ArrayList<>();
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Queue<Integer> queue = new PriorityQueue<>(((o1, o2) -> map.get(o1) - map.get(o2)));
+        Set<Integer> integers = map.keySet();
+        for (Integer item : integers) {
+            if (queue.size() < k) {
+                queue.offer(item);
+            } else {
+                if (map.get(item) > map.get(queue.peek())) {
+                    queue.poll();
+                    queue.offer(item);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
+    // 使用大头堆来解决问题  这种方式可以，但是会导致堆内存无限增大，不太行
+    public List<Integer> findItem04(int[] arr, int k) {
+        // 前K个高频元素
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        // 开始使用堆排序 一样就替换掉了，所以不能直接全部入
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> map.get(o2) - map.get(o1));
+        Set<Integer> integers = map.keySet();
+        for (Integer integer : integers) {
+            queue.offer(integer);
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            list.add(queue.poll());
+        }
+        return list;
+    }
+
+    public List<Integer> findItem06(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.get(arr[i]) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> map.get(o1) - map.get(o2));
+        Set<Integer> integers = map.keySet();
+        for (Integer integer : integers) {
+            if (queue.size() < k) {
+                queue.offer(integer);
+            } else {
+                if (map.get(integer) > map.get(queue.peek())) {
+                    queue.poll();
+                    queue.offer(integer);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
+    // 同样是小头堆求解
+    public List<Integer> findItem07(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                int value =  map.get(arr[i]) + 1;
+                map.put(arr[i], value);
+            } else {
+                map.put(arr[i], 1);
+            }
+
+        }
+        System.out.println(map.toString());
+        Queue<Integer> queue = new PriorityQueue<>((o1,o2) -> map.get(o1) - map.get(o2));
+        for (Integer i : map.keySet()) {
+            if (k-- > 0) {
+                queue.offer(i);
+            } else {
+                if (map.get(queue.peek()) < map.get(i)) {
+                    queue.poll();
+                    queue.offer(i);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
+    public List<Integer> findItem08(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Queue<Integer> queue = new PriorityQueue<>(((o1, o2) -> map.get(o1) - map.get(o2)));
+        Collection<Integer> keySet = map.keySet();
+        for (Integer value : keySet) {
+            System.out.println(value);
+            if (queue.size() < k) {
+                queue.offer(value);
+            } else {
+                if (map.get(value) > map.get(queue.peek())) {
+                    queue.poll();
+                    queue.offer(value);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
 
     public static void main(String[] args) {
         FrontKRepeatItem repeatItem = new FrontKRepeatItem();
         int[] arr = {1, 1, 1, 2, 2, 3, 3, 3};
         int k = 2;
-        List<Integer> result = repeatItem.findItem01(arr, k);
+        List<Integer> result = repeatItem.findItem08(arr, k);
         System.out.println(result.toString());
     }
 }

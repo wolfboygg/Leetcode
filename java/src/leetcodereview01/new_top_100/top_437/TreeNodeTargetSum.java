@@ -78,10 +78,130 @@ public class TreeNodeTargetSum {
         list.removeLast();
     }
 
+    public boolean findPath02(TreeNode root, int target) {
+        // 使用递归的方式进行处理
+        if (root == null) {
+            return false;
+        }
+        // 通过递归的方式进行处理
+        realFindPath02(root, target, new ArrayList<Integer>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath02(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (root.right == null && root.left == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath02(root.left, target, list);
+            realFindPath02(root.right, target, list);
+        }
+        list.removeLast();
+    }
+
+    public boolean findPath03(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath03(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath03(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath03(root.left, target, list);
+            realFindPath03(root.right, target, list);
+        }
+        list.removeLast();
+    }
+
+    public boolean findPath04(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath04(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath04(TreeNode root, int target, List<Integer> list) {
+        if (root == null || target < 0) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath04(root.left, target, list);
+            realFindPath04(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+    public boolean findPath05(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        // 递归进行处理
+        realFindPath05(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath05(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.right == null && root.left == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath05(root.left, target, list);
+            realFindPath05(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+
+    public boolean findPath06(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath06(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath06(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath06(root.left, target, list);
+            realFindPath06(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath01(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath06(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

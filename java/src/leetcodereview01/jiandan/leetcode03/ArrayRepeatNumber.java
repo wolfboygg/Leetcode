@@ -79,146 +79,12 @@ public class ArrayRepeatNumber {
     }
 
     public int findRepeatNumber04(int[] arr) {
-        // 找到是否有重复的数字，就是0～n-1,把对应的数字放到对应的位置
-        for (int i = 0; i < arr.length; i++) {
-            while(arr[i] != i) {
-                if (arr[i] == arr[arr[i]]) {
-                    return arr[i];
-                } else {
-                    int temp = arr[i];
-                    arr[i] = arr[temp];
-                    arr[temp] = temp;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber05(int[] arr) {
-        // 找到数组中重复的数字，就是通过将对应的数字放到对应的位置，否则就进行交换
-        for (int i = 0; i < arr.length; i++) {
-            while(i != arr[i]) {
-                if (arr[i] == arr[arr[i]]) {
-                    return arr[i];
-                } else {
-                    int temp = arr[i];
-                    arr[i] = arr[arr[i]];
-                    arr[temp] = temp;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber06(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            while(i != arr[i]) {
-                if (arr[i] == arr[arr[i]]) {
-                    return arr[i];
-                } else {
-                    int temp = arr[arr[i]];
-                    arr[arr[i]] = arr[i];
-                    arr[i] = temp;
-//                    int temp = arr[i];
-//                    arr[i] = arr[temp];
-//                    arr[temp] = temp;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber07(int[] arr) {
-        // 找到重复的数字就是将对应的数字放到index位置
-        for (int i = 0; i < arr.length; i++) {
-            while(i != arr[i]) {
-                if (arr[i] == arr[arr[i]]) {
-                    return arr[i];
-                } else {
-                    int temp = arr[i];
-                    arr[i] = arr[temp];
-                    arr[temp] = temp;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber08(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-              while (arr[i] != i) {
-                  if (arr[i] != arr[arr[i]]) {
-                      int temp = arr[arr[i]];
-                      arr[arr[i]] = arr[i];
-                      arr[i] = temp;
-                  } else {
-                      return arr[i];
-                  }
-              }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber09(int[] arr) {
-        // 找到重复的数字
-        for (int i = 0; i < arr.length; i++) {
-            while(arr[i] != i) {
-                // change
-                if (arr[i] != arr[arr[i]]) {
-                    int temp = arr[i];
-                    arr[i] = arr[temp];
-                    arr[temp] = temp;
-                } else {
-                    return arr[i];
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber10(int[] arr) {
-        // 通过循环操作将对应的数字放到对应的下标下面
         if (arr == null || arr.length == 0) {
             return -1;
         }
+        // 位置还原法
         for (int i = 0; i < arr.length; i++) {
-              while(arr[i] != i) {
-                  if (arr[i] != arr[arr[i]]) {
-                      int temp = arr[i];
-                      arr[i] = arr[temp];
-                      arr[temp] = temp;
-                  } else {
-                      return arr[i];
-                  }
-              }
-        }
-        return -1;
-    }
-
-    // 对应的数字到对应的index位置
-    public int findRepeatNumber11(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            while(arr[i] != i) {
-                if (arr[i] != arr[arr[i]]) {
-                    // 进行交换
-                    int temp = arr[i];
-                    arr[i] = arr[temp];
-                    arr[temp] = temp;
-                } else {
-                    return arr[i];
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int findRepeatNumber12(int[] arr) {
-        // 位置替换法
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            while(arr[i] != i) {
+            while (i != arr[i]) {
                 if (arr[i] != arr[arr[i]]) {
                     int temp = arr[i];
                     arr[i] = arr[temp];
@@ -231,32 +97,12 @@ public class ArrayRepeatNumber {
         return -1;
     }
 
-    public int findRepeatNumber13(int[] arr) {
-        // 将对应的数字放到对应的位置
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        for (int i = 0; i < arr.length; i++) {
-            //  这里要不停的循环
-            while(arr[i] != i) {
-                // 知道找到与当前位置相同的i
-                if (arr[i] != arr[arr[i]]) {
-                    int temp = arr[i];
-                    arr[i] = temp;
-                    arr[temp] = temp;
-                } else {
-                    return arr[i];
-                }
-            }
-        }
-        return -1;
-    }
 
 
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};
-        int repeatNumber = arrayRepeatNumber.findRepeatNumber13(arr);
+        int repeatNumber = arrayRepeatNumber.findRepeatNumber04(arr);
         if (repeatNumber == -1) {
             System.out.println("不存在");
         } else {

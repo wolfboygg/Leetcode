@@ -340,11 +340,37 @@ public class SearchTreeToLink {
         inOrder14(root.right);
     }
 
+    public TreeNode convert15(TreeNode root) {
+        // 搜索二叉树转换为链表
+        if (root == null) {
+            return null;
+        }
+        // 终须遍历
+        inOrder15(root);
+        return head;
+    }
+
+    public void inOrder15(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder15(root.left);
+        if (head == null) {
+            head = root;
+        }
+        if (pre != null) {
+            pre.right = root;
+        }
+        root.left = pre;
+        pre = root;
+        inOrder15(root.right);
+    }
+
 
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert14(searchTree);
+        TreeNode convert = searchTreeToLink.convert15(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

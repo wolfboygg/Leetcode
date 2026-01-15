@@ -268,10 +268,39 @@ public class ReverseSentence {
         }
     }
 
+    // 反转单词
+    public void reverse10(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        int P1 = 0;
+        int P2 = 0;
+        char[] charArr = str.toCharArray();
+        for (int i = 0; i <= charArr.length; i++) {
+            if (P2 == charArr.length || charArr[P2] == ' ') {
+                reverseWork10(charArr, P1, P2 - 1);
+                P1 = P2 + 1;
+            }
+            P2++;
+        }
+        reverseWork10(charArr, 0, charArr.length - 1);
+        System.out.println(new String(charArr).toString());
+    }
+
+    public void reverseWork10(char[] charArr, int start, int end) {
+        while(start <= end) {
+            char temp = charArr[start];
+            charArr[start] = charArr[end];
+            charArr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
 
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse09(str);
+        reverseSentence.reverse10(str);
     }
 }

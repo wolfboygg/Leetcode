@@ -70,6 +70,63 @@ public class ReverseTree {
         return root;
     }
 
+    public TreeNode reverseTree04(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree04(root.left);
+        TreeNode right = reverseTree04(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    // 递归反转二叉树
+    public TreeNode reverseTree05(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree05(root.left);
+        TreeNode right = reverseTree05(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    public TreeNode reverseTree06(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree06(root.left);
+        TreeNode right = reverseTree06(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    public TreeNode reverseTree07(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree07(root.left);
+        TreeNode right = reverseTree07(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    public TreeNode reverseTree08(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree08(root.left);
+        TreeNode right = reverseTree08(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+
     public static void main(String[] args) {
         ReverseTree reverseTree = new ReverseTree();
         TreeNode root0 = new TreeNode(1);
@@ -88,7 +145,7 @@ public class ReverseTree {
         root2.right = root6;
         reverseTree.traversalTree(root0);
         System.out.println();
-        TreeNode node = reverseTree.reverseTree03(root0);
+        TreeNode node = reverseTree.reverseTree07(root0);
         reverseTree.traversalTree(node);
         System.out.println();
     }

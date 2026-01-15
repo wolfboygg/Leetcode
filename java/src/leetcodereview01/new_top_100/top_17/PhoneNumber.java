@@ -144,10 +144,118 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations06(String str) {
+        if (str == null || str.length() ==0) {
+            return null;
+        }
+        traversal06(str, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal06(String str, int index, StringBuilder sb) {
+        if (index == str.length()) {
+            ret.add(new String(sb));
+            return;
+        }
+        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            sb.append(charArr[i]);
+            traversal06(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() -1);
+        }
+    }
+
+    public void letterCombinations07(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        traversal07(str, 0, new StringBuilder());
+    }
+
+    public void traversal07(String str, int index, StringBuilder sb) {
+        if (str.length() == sb.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            sb.append(charArr[i]);
+            traversal07(str, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+    public void letterCombinations08(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal08(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal08(char[] charArr, int index, StringBuilder sb) {
+        if (index == charArr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        int cIndex = charArr[index] - '0';
+        char[] charArray = map[cIndex].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal08(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+    public List<String> letterCombinations09(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        char[] charArray = str.toCharArray();
+        boolean[] mark = new boolean[charArray.length];
+        traversal09(charArray, mark, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal09(char[] charArr, boolean[] mark, int index, StringBuilder sb) {
+        if (index == charArr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char c = charArr[index];
+        char[] charArray = map[c - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal09(charArr, mark, index + 1, sb);
+            sb.deleteCharAt(sb.length() -1);
+        }
+    }
+
+    public void letterCombinations10(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal10(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal10(char[] charArr, int index, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(new String(sb));
+            return;
+        }
+        char[] charArray = map[charArr[index] - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal10(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations05("234");
+        phoneNumber.letterCombinations09("234");
         System.out.println(ret.toString());
     }
 }

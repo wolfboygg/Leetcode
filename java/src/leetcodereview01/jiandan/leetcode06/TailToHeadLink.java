@@ -59,158 +59,22 @@ public class TailToHeadLink {
         }
     }
 
-    public void printLinkByHead02(Node node) {
-        // 使用头插法进行处理
-        Node head = new Node(-1);
-        while (node != null) {
-            Node next = node.next;
-            node.next = head.next;
-            head.next = node;
-            node = next;
-        }
-        Node newNode = head.next;
-        while (newNode != null) {
-            System.out.print(newNode.value);
-            newNode = newNode.next;
-        }
-    }
-
-    public void printLinkByHead03(Node node) {
-        Node head = new Node(-1);
-        while (node != null) {
-            Node temp = node.next;
-            node.next = head.next;
-            head.next = node;
-            node = temp;
-        }
-        head = head.next;
-        while (head != null) {
-            System.out.println(head.value);
-            head = head.next;
-        }
-    }
-
-    public void printLinkByHead04(Node node) {
-        // 添加头指针
-        Node head = new Node(-1);
-        while (node != null) {
-            Node temp = node.next;
-            node.next = head.next;
-            head.next = node;
-            node = temp;
-        }
-        head = head.next;
-        while (head != null) {
-            System.out.println(head.value);
-            head = head.next;
-        }
-    }
-
-    public void printLinkByHead05(Node node) {
-        // 添加头指针
-        Node head = new Node(-1);
-        while (node != null) {
-            Node temp = node.next;
-            node.next = head.next;
-            head.next = node;
-            node = temp;
-        }
-        head = head.next;
-        while (head != null) {
-            System.out.println(head.value);
-            head = head.next;
-        }
-    }
-
-    public void printLinkByHead06(Node node) {
-        if (node == null) {
-            return;
-        }
-        Node head = new Node(-1);
-        while (node != null) {
-            Node temp = node.next;
-            node.next = head.next;
-            head.next = node;
-            node = temp;
-        }
-        head = head.next;
-        while (head != null) {
-            System.out.println(head.value);
-            head = head.next;
-        }
-    }
-
-    public void printLinkByHead07(Node head) {
-        // 从尾到头打印节点 使用头插法
-        Node node = new Node(-1);
-        while (head != null) {
-            Node next = head.next;
-            head.next = node.next;
-            node.next = head;
-            head = next;
-        }
-        Node temp = node.next;
-        while (temp != null) {
-            System.out.println(temp.value);
-            temp = temp.next;
-        }
-
-    }
-
-    public void printLinkByHead08(Node head) {
-        // 使用头插法进行打印链表
+    public void printLinkByHead01(Node head) {
         if (head == null) {
             return;
         }
         Node pre = new Node(-1);
-        while (head != null) {
-            Node next = head.next;
-            head.next = pre.next;
-            pre.next = head;
-            head = next;
-        }
-        pre = pre.next;
-        while (pre != null) {
-            System.out.print(pre.value);
-            pre = pre.next;
-        }
-    }
-
-    // 反转链表
-    public void printLinkByHead09(Node head) {
-        if (head == null) {
-            return;
-        }
-        Node pre = new Node(-1);
-        while (head != null) {
-            Node next = head.next;
-            head.next = pre.next;
-            pre.next = head;
-            head = next;
-        }
-        head = pre.next;
-        while (head != null) {
-            System.out.print(head.value + " ");
-            head = head.next;
-        }
-    }
-
-    public void printLinkByHead10(TailToHeadLink.Node head) {
-        if (head == null) {
-            return;
-        }
-        Node temp = new Node(-1);
+        Node temp = pre;
         while(head != null) {
             Node next = head.next;
             head.next = temp.next;
             temp.next = head;
             head = next;
         }
-        // 打印一下
-        Node node = temp.next;
-        while(node != null) {
-            System.out.print(node.value + " ");
-            node = node.next;
+        pre = pre.next;
+        while(pre != null) {
+            System.out.print(pre.value + " ");
+            pre = pre.next;
         }
     }
 
@@ -225,6 +89,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByHead10(node01);
+        tailToHeadLink.printLinkByHead01(node01);
     }
 }

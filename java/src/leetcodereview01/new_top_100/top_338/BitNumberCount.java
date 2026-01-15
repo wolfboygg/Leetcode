@@ -77,9 +77,82 @@ public class BitNumberCount {
         return list;
     }
 
+    public List<Integer> getBitNumber04(int n) {
+        if (n == 0) {
+            return null;
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            int temp = i;
+            int count = 0;
+            while(temp > 0) {
+                count++;
+                temp &= (temp -1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
+    public List<Integer> getBitNumber05(int n) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            int temp = i;
+            int count = 0;
+            while(temp > 0) {
+                count++;
+                temp = temp &(temp - 1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
+    public List<Integer> getBitNumber06(int target) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= target; i++) {
+            int value = i;
+            int count = 0;
+            while(value > 0) {
+                count++;
+                value &= (value - 1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
+    public List<Integer> getBitNumber07(int target) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= target; i++) {
+            int value = i;
+            int count = 0;
+            while(value!= 0) {
+                value &= (value -1);
+                count++;
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
+    public List<Integer> getBitNumber08(int target) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= target; i++) {
+            int temp = i;
+            int count = 0;
+            while(temp > 0) {
+                count++;
+                temp &= (temp - 1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         BitNumberCount bitNumberCount = new BitNumberCount();
-        List<Integer> bitNumber = bitNumberCount.getBitNumber03(5);
+        List<Integer> bitNumber = bitNumberCount.getBitNumber08(5);
         System.out.println(bitNumber.toString());
     }
 }

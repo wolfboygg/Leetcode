@@ -156,6 +156,141 @@ public class DeleteTailKNode {
         return head;
     }
 
+    public Node deleteTailKNode05(Node head, int k) {
+        // 删除倒数K个节点
+        if (head == null) {
+            return null;
+        }
+        // 找到倒数K个节点
+        Node pre = head;
+        Node temp = pre;
+        for (int i = 0; i < k; i++) {
+            temp = temp.next;
+        }
+        while(temp != null) {
+            pre = pre.next;
+            temp = temp.next;
+        }
+
+        Node node = pre;
+        if (node.next != null) {
+            Node next = node.next;
+            node.value = next.value;
+            node.next = next.next;
+        } else {
+            if (node == head) {
+                head = null;
+            } else {
+                temp = head;
+                while(temp.next != node) {
+                    temp = temp.next;
+                }
+                temp.next = null;
+            }
+        }
+        return head;
+    }
+
+    public Node deleteTailKNode06(Node root, int k) {
+        if (root == null) {
+            return null;
+        }
+        Node P1 = root;
+        Node P2 = P1;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while(P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        // 删除P2节点
+        if (P2.next != null) {
+            Node next = P2.next;
+            P2.value = next.value;
+            P2.next = next.next;
+        } else {
+            if (P2 == root) {
+                root = null;
+            } else {
+                Node head = root;
+                while(head.next != P2) {
+                    head = head.next;
+                }
+                head.next = null;
+            }
+        }
+        return root;
+    }
+
+
+    public Node deleteTailKNode07(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node pre = head;
+        for (int i = 0; i < k; i++) {
+            pre = pre.next;
+        }
+        Node temp = head;
+        while(pre != null) {
+            pre = pre.next;
+            temp = temp.next;
+        }
+        System.out.println(temp.value);
+        // 删除temp节点
+        if (temp.next != null) {
+            Node next = temp.next;
+            temp.value = next.value;
+            temp.next = next.next;
+        } else {
+            if (temp == head) {
+                head = null;
+            } else {
+                pre = head;
+                while(pre.next != temp) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+        return head;
+    }
+
+    public Node deleteTailKNode08(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        // 找到第k
+        Node pre = head;
+        Node temp = head;
+        for (int i = 0; i < k; i++) {
+            pre = pre.next;
+        }
+        while(pre != null) {
+            pre = pre.next;
+            temp = temp.next;
+        }
+        // temp即倒数第K个节点
+        if (temp.next != null) {
+            Node next = temp.next;
+            temp.value = next.value;
+            temp.next = next.next;
+        } else {
+            if (temp == head) {
+                head = null;
+            } else {
+                pre = head;
+                while(pre.next != temp) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+        return head;
+    }
+
+
     public static void main(String[] args){
         // 给定一个链表: 1->2->3->4->5, 和 n = 2.
         Node node1 = new Node(1);
@@ -169,7 +304,7 @@ public class DeleteTailKNode {
         node3.next = node4;
         node4.next = node5;
         DeleteTailKNode deleteTailKNode = new DeleteTailKNode();
-        Node node = deleteTailKNode.deleteTailKNode04(node1, 1);
+        Node node = deleteTailKNode.deleteTailKNode08(node1, 2);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

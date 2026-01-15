@@ -72,13 +72,31 @@ public class TwoSum {
         return new int[] {-1, -1};
     }
 
+    public int[] twoSum03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else {
+                return new int[] {arr[P1], arr[P2]};
+            }
+        }
+        return new int[]{};
+    }
+
     public static void main(String[] args){
         int[] num = new int[] {2, 7, 11, 15};
         int targe = 9;
         TwoSum twoSum = new TwoSum();
         List<Integer> integers = twoSum.towSum01(num, targe);
         System.out.println(integers.toString());
-        int[] arr = twoSum.twoSum02(num, targe);
+        int[] arr = twoSum.twoSum03(num, targe);
         System.out.println(Arrays.toString(arr));
     }
 }

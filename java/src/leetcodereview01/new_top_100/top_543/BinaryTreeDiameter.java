@@ -63,8 +63,62 @@ public class BinaryTreeDiameter {
         int leftDepth = diameter03(root.left);
         int rightDepth = diameter03(root.right);
         int depth = Math.max(leftDepth, rightDepth) + 1;
-        res = Math.max(res, depth);
+        res = Math.max(res, leftDepth + rightDepth);
         return depth;
+    }
+
+    public int diameter04(TreeNode root) {
+        // 通过递归的方式求出左右子树的深度，然后进行相加
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter04(root.left);
+        int rightDepth = diameter04(root.right);
+        int depth = Math.max(leftDepth, rightDepth) + 1;
+        res = Math.max(res, leftDepth + rightDepth);
+        return depth;
+    }
+
+    public int diameter05(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftDepth = diameter05(node.left);
+        int rightDepth = diameter05(node.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    // 求二叉树的直径，就是左 + 右
+    public int diameter06(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter06(root.left);
+        int rightDepth = diameter06(root.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    public int diameter07(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter07(root.left);
+        int rightDepth = diameter07(root.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+
+    public int diameter08(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter08(root.left);
+        int rightDepth = diameter08(root.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 
     public static void main(String[] args) {
@@ -79,8 +133,9 @@ public class BinaryTreeDiameter {
         node2.right = node5;
 
         BinaryTreeDiameter binaryTreeDiameter = new BinaryTreeDiameter();
-        int diameter = binaryTreeDiameter.diameter02(node1);
+        int diameter = binaryTreeDiameter.diameter08(node1);
         System.out.println(diameter);
+        System.out.println(res);
     }
 
 }

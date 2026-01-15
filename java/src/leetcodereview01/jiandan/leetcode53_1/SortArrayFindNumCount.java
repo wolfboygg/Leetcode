@@ -181,11 +181,43 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    // 排序数组找目标值的count数
+    public int count7(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int leftIndex = binaryFind07(arr, target, true);
+        int rightIndex = binaryFind07(arr, target, false) - 1;
+        System.out.println(leftIndex);
+        System.out.println(rightIndex);
+        if (leftIndex >= 0 && leftIndex < arr.length && rightIndex >= 0 && rightIndex < arr.length && leftIndex != rightIndex) {
+            return rightIndex - leftIndex + 1;
+        }
+        return -1;
+    }
+
+    public int binaryFind07(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = 0;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            // 不是旋转数组，是排序数组，所以是有序的
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count6(arr, 8);
+        sortArrayFindNumCount.count7(arr, 8);
     }
 
     private void count(int[] arr, int target) {

@@ -121,10 +121,29 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations05(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        traversal05(str, new StringBuilder(), 0);
+    }
+
+    public void traversal05(String str, StringBuilder sb, int index) {
+        if (sb.length() == str.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] charArray = map[str.charAt(index) - '0'].toCharArray();
+        for (char c : charArray) {
+            sb.append(c);
+            traversal05(str, sb, index + 1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations04("234");
+        phoneNumber.letterCombinations05("234");
         System.out.println(ret.toString());
     }
 }

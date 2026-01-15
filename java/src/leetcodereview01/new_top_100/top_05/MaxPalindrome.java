@@ -135,10 +135,125 @@ public class  MaxPalindrome {
         }
     }
 
+    public String findMaxHWString05(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            find05(str, i, i);
+            find05(str, i-1, i);
+        }
+        System.out.println(this.len);
+        return str.substring(left, len);
+    }
+
+    public void find05(String str, int start, int end) {
+        while(start >= 0 && end < str.length() && str.charAt(start) == str.charAt(end)) {
+            if (end - start  + 1 > len) {
+                this.left = start;
+                this.len = end - start + 1;
+            }
+            start--;
+            end++;
+        }
+    }
+
+    public String findMaxHWString06(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            find06(str, i, i);
+            find06(str, i-1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find06(String str, int left, int right) {
+        while(left >= 0 && right < str.length() && str.charAt(left) == str.charAt(right)) {
+            if (right - left > len) {
+                this.left = left;
+                len = right - left + 1;
+            }
+            left--;
+            right++;
+        }
+    }
+
+    public String findMaxHWString07(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find07(charArray, i, i);
+            find07(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find07(char[] charArr, int start, int end) {
+        while(start >= 0 && end < charArr.length && charArr[start] == charArr[end]) {
+            if (end - start + 1 > len) {
+                this.len = end - start + 1;
+                this.left = start;
+            }
+            start--;
+            end++;
+        }
+    }
+
+    public String findMaxHWString08(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find08(charArray, i, i);
+            find08(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find08(char[] charArr, int left, int right) {
+        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (right - left + 1 > len) {
+                len = right - left + 1;
+                this.left = left;
+            }
+            left--;
+            right++;
+        }
+    }
+
+    public String findMaxHWString09(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find09(charArray, i, i);
+            find09(charArray, i-1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find09(char[] charArr, int start, int end) {
+        while (start >= 0 && start < charArr.length && end >= 0 && end < charArr.length && charArr[start] == charArr[end]) {
+            if (end - start + 1 > len) {
+                left = start;
+                len = end - start + 1;
+            }
+            start--;
+            end++;
+        }
+    }
+
+
     public static void main(String[] args) {
         String str = "abbac";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWStr04(str);
+        String temp = maxPalindrome.findMaxHWString09(str);
         System.out.println(temp);
     }
 }

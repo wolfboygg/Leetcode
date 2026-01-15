@@ -162,11 +162,22 @@ public class BalanceTree {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int isBalanceTree11(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = isBalanceTree10(root.left);
+        int rightDepth = isBalanceTree10(root.right);
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            isBalance = false;
+        }
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
     
     public static void main(String[] args) {
         BalanceTree balanceTree = new BalanceTree();
         TreeNode tree = balanceTree.createTree();
-        balanceTree.isBalanceTree09(tree);
+        balanceTree.isBalanceTree10(tree);
         System.out.println(balanceTree.isBalance);
     }
 }

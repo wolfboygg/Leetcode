@@ -1,9 +1,6 @@
 package leetcodereview01.top100.top_239;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * 滑动窗口的最大值
@@ -46,10 +43,29 @@ public class SlideWinMaxValue {
         return ret;
     }
 
+    public List<Integer> findWinMaxValue02(int[] arr, int k) {
+        // 解题思路就是通过大头堆的方式去找到
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2)-> o2 - o1);
+        for (int i = 0; i < k; i++) {
+            queue.offer(arr[i]);
+        }
+        List<Integer> list = new ArrayList<>();
+        list.add(queue.peek());
+        for (int i = k; i < arr.length; i++) {
+            queue.remove(arr[i-k]);
+            queue.offer(arr[i]);
+            list.add(queue.peek());
+        }
+        return list;
+    }
+
     public static void main(String[] args){
         int[] arr =  {1,3,-1,-3,5,3,6,7};
         SlideWinMaxValue slideWinMaxValue = new SlideWinMaxValue();
-        List<Integer> value = slideWinMaxValue.findWinMaxValue01(arr, 3);
+        List<Integer> value = slideWinMaxValue.findWinMaxValue02(arr, 3);
         System.out.println(value.toString());
     }
 

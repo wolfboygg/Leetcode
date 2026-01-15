@@ -284,11 +284,36 @@ public class StringAllSequence {
     }
 
 
+    public void getAllSequence11(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        boolean[] mark = new boolean[str.length()];
+        backTracking11(str, mark, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking11(String str, boolean[] mark, StringBuilder sb) {
+        if (sb.length() == str.length()) {
+            ret.add(new String(sb));
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true;
+            sb.append(str.charAt(i));
+            backTracking11(str, mark, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            mark[i] = false;
+        }
+
+    }
 
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence10(str);
+        stringAllSequence.getAllSequence11(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

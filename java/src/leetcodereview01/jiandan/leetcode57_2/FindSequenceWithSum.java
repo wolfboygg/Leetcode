@@ -245,7 +245,7 @@ public class FindSequenceWithSum {
         int start = 1;
         int end = 2;
         int curSum = 3;
-        while(end <= target) {
+        while (end <= target) {
             if (curSum < target) {
                 end++;
                 curSum += end;
@@ -267,9 +267,37 @@ public class FindSequenceWithSum {
         return list;
     }
 
+    public List<List<Integer>> findSequence10(int target) {
+        // 找到序列和
+        int P1 = 1;
+        int P2 = 2;
+        int sum = 3;
+        List<List<Integer>> result = new ArrayList<>();
+        while (P2 <= target) {
+            if (sum < target) {
+                P2++;
+                sum += P2;
+            } else if (sum > target) {
+                sum -= P1;
+                P1++;
+            } else {
+                List<Integer> list = new ArrayList<>();
+                for (int i = P1; i <= P2; i++) {
+                    list.add(i);
+                }
+                result.add(list);
+                sum -= P1;
+                P1++;
+                P2++;
+                sum += P2;
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence09(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence(100);
         System.out.println(sequence);
     }
 

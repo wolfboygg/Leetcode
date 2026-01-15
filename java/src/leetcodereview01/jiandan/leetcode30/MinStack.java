@@ -160,11 +160,24 @@ public class MinStack {
         return minorStack.peek();
     }
 
+    public void push08(int value) {
+        majorStack.push(value);
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            if (minorStack.peek() > value) {
+                minorStack.push(value);
+            } else {
+                minorStack.push(minorStack.peek());
+            }
+        }
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push07(-2);
-        minStack.push07(0);
-        minStack.push07(-3);
+        minStack.push08(-2);
+        minStack.push08(0);
+        minStack.push08(-3);
         System.out.println(minStack.min07());
         minStack.pop07();
         System.out.println(minStack.min07());

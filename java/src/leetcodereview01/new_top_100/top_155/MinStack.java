@@ -51,15 +51,37 @@ public class MinStack {
         return minorStack.peek();
     }
 
+    public void push02(int value) {
+        majorStack.push(value);
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            if (minorStack.peek() < value) {
+                minorStack.push(minorStack.peek());
+            } else {
+                minorStack.push(value);
+            }
+        }
+    }
+
+    public int pop02() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int minValue02() {
+        return minorStack.peek();
+    }
+
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push(1);
-        minStack.push(2);
-        minStack.push(3);
-        minStack.push(4);
-        minStack.push(-1);
-        System.out.println(minStack.minValue01());
-        minStack.pop01();
-        System.out.println(minStack.minValue01());
+        minStack.push02(1);
+        minStack.push02(2);
+        minStack.push02(3);
+        minStack.push02(4);
+        minStack.push02(-1);
+        System.out.println(minStack.minValue02());
+        minStack.pop02();
+        System.out.println(minStack.minValue02());
     }
 }

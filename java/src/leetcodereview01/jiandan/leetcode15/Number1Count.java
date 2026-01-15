@@ -103,11 +103,24 @@ public class Number1Count {
         return count;
     }
 
+    public int getNumberOf1Count10(int target) {
+        if (target < 0) {
+            return -1;
+        }
+        int count = 0;
+        while(target > 0) {
+            count++;
+            target &= (target -1);
+        }
+        return count;
+    }
+
+
     //  1010
     // &0001
 
     public static void main(String[] args) {
         Number1Count numIn1Count = new Number1Count();
-        System.out.println(numIn1Count.getNumberOf1Count09(10));
+        System.out.println(numIn1Count.getNumberOf1Count10(10));
     }
 }

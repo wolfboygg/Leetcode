@@ -134,14 +134,171 @@ public class LandNum {
         backTraversal03(matrix, i, j + 1);
     }
 
+    // 回溯方法
+    public int calculateLandNumber04(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                    backTraversal04(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal04(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal03(matrix, i - 1, j);
+        backTraversal03(matrix, i, j -1);
+        backTraversal03(matrix, i + 1, j);
+        backTraversal03(matrix, i, j + 1);
+    }
+
+    // 回溯的方式将所有的都变为0
+    public int calculateLandNumber05(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                    backTraversal05(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal05(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal05(matrix, i - 1, j);
+        backTraversal05(matrix, i + 1, j);
+        backTraversal05(matrix, i , j - 1);
+        backTraversal05(matrix, i, j + 1);
+    }
+
+
+    public int calculateLandNumber06(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                    backTraversal06(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal06(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal05(matrix, i - 1, j);
+        backTraversal05(matrix, i + 1, j);
+        backTraversal05(matrix, i, j - 1);
+        backTraversal05(matrix, i, j + 1);
+    }
+
+
+    public int calculateLandNumber07(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        int row = matrix.length;
+        int column = matrix[0].length;
+        this.row = row;
+        this.column = column;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    count++;
+                }
+                backTraversal07(matrix, i, j);
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal07(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal07(matrix,i -1 , j);
+        backTraversal07(matrix,i +1 , j);
+        backTraversal07(matrix,i , j -1);
+        backTraversal07(matrix,i  , j + 1);
+    }
+
+
+    public int calculateLandNumber08(char[][] matrix) {
+        // 计算岛屿的数量
+        if (matrix == null) {
+            return -1;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    System.out.println("1111:" + i + ",j= " + j);
+                    count++;
+                    backTraversal08(matrix, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    public void backTraversal08(char[][] matrix, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] == '0') {
+            return;
+        }
+        matrix[i][j] = '0';
+        backTraversal08(matrix, i - 1, j);
+        backTraversal08(matrix, i + 1, j);
+        backTraversal08(matrix, i, j - 1);
+        backTraversal08(matrix, i, j + 1);
+    }
+
+
     public static void main(String[] args) {
         char[][] grid2 = {
                 {'1', '1', '0', '0', '0'},
-                {'1', '1', '0', '0', '0'},
+                {'1', '1', '0', '1', '0'},
                 {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', '1'}
+                {'0', '0', '1', '0', '1'}
         };
         LandNum landNum = new LandNum();
-        System.out.println(landNum.calculateLandNumber03(grid2));
+        System.out.println(landNum.calculateLandNumber08(grid2));
     }
 }

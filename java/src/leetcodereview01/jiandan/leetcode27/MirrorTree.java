@@ -166,6 +166,19 @@ public class MirrorTree {
         return root;
     }
 
+
+    public TreeNode mirrorTree12(TreeNode root) {
+        // 通过递归进行镜像
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree12(root.left);
+        TreeNode right = mirrorTree12(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();

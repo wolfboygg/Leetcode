@@ -122,6 +122,40 @@ public class DeleteTailKNode {
         return head;
     }
 
+    public Node deleteTailKNode04(Node head, int k) {
+        // 删除倒数第K个节点
+        if (head == null) {
+            return null;
+        }
+        Node pre = head;
+        for (int i = 0; i < k; i++) {
+            pre = pre.next;
+        }
+        Node temp = head;
+        while(pre != null) {
+            pre = pre.next;
+            temp = temp.next;
+        }
+        // 删除temp
+        if (temp.next != null) {
+            Node next = temp.next;
+            temp.value = next.value;
+            temp.next = next.next;
+        } else {
+            if (temp == head) {
+                temp = null;
+            } else {
+                // 找到前一个，好费劲啊
+                pre = head;
+                while(pre.next != temp) {
+                    pre = pre.next;
+                }
+                pre.next = null;
+            }
+        }
+        return head;
+    }
+
     public static void main(String[] args){
         // 给定一个链表: 1->2->3->4->5, 和 n = 2.
         Node node1 = new Node(1);
@@ -135,7 +169,7 @@ public class DeleteTailKNode {
         node3.next = node4;
         node4.next = node5;
         DeleteTailKNode deleteTailKNode = new DeleteTailKNode();
-        Node node = deleteTailKNode.deleteTailKNode03(node1, 2);
+        Node node = deleteTailKNode.deleteTailKNode04(node1, 2);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

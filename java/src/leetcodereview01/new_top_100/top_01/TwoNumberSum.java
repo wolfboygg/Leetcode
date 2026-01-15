@@ -1,8 +1,6 @@
 package leetcodereview01.new_top_100.top_01;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 两数相加
@@ -53,20 +51,120 @@ public class TwoNumberSum {
         }
         int P1 = 0;
         int P2 = arr.length - 1;
-        while(P1 < P2) {
+        while (P1 < P2) {
             if (arr[P1] + arr[P2] > target) {
                 P2--;
             } else if (arr[P1] + arr[P2] < target) {
                 P1++;
             } else {
-                return new int[] {arr[P1], arr[P2]};
+                return new int[]{arr[P1], arr[P2]};
+            }
+        }
+        return new int[]{};
+    }
+
+    public int[] twoSum03(int[] arr, int target) {
+        // 两数之和
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            if (arr[left] + arr[right] > target) {
+                right--;
+            } else if (arr[left] + arr[right] < target) {
+                left++;
+            } else {
+                return new int[]{arr[left], arr[right]};
+            }
+        }
+        return null;
+    }
+
+    // 当数组无序的时候
+    public int[] twoSumWX03(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(target - arr[i])) {
+                return new int[]{target - arr[i], arr[i]};
+            }
+            map.put(arr[i], i);
+        }
+        return null;
+    }
+
+    public int[] twoSum04(int[] arr, int target) {
+        // 有序的数组直接使用双指针的方式处理
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while (P1 < P2) {
+            if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else {
+                return new int[]{arr[P1], arr[P2]};
+            }
+        }
+        return null;
+    }
+
+    // 当数组无序的时候需要使用hashmap的方式进行处理，判断在map中是否存在target- arr[i]
+    public int[] twoSumWx04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(target - arr[i])) {
+                return new int[]{target - arr[i], arr[i]};
+            }
+            map.put(arr[i], i);
+        }
+        return null;
+    }
+
+    public int[] towSumYx05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while (P1 < P2) {
+            if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else {
+                return new int[]{arr[P1], arr[P2]};
             }
         }
         return new int[] {};
     }
 
-    public int[] twoSum03(int[] arr, int target) {
-        // 两数之和
+    public int[] towSumWx05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
+            }
+            map.put(arr[i], i);
+        }
+        return new int[]{};
+    }
+
+    // 分为有序和无序
+    public int[] twoSumYx06(int[] arr, int target) {
         if (arr == null || arr.length == 0) {
             return new int[] {};
         }
@@ -81,63 +179,122 @@ public class TwoNumberSum {
                 return new int[] {arr[left], arr[right]};
             }
         }
-        return null;
+        return new int[] {};
     }
 
-    // 当数组无序的时候
-    public int[] twoSumWX03(int[] arr, int target) {
+    public int[] twoSumWx06(int[] arr, int target) {
         if (arr == null || arr.length == 0) {
-            return null;
+            return new int[] {};
         }
-        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
         for (int i = 0; i < arr.length; i++) {
-            if (map.containsKey(target - arr[i])) {
-                return new int[] {target - arr[i], arr[i]};
+            if (set.contains(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
             }
-            map.put(arr[i], i);
+            set.add(arr[i]);
+        }
+        return new int[] {};
+    }
+
+    public int[] twoSumYx07(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            if (arr[P1] + arr[P2] < target) {
+                P1++;
+            } else if (arr[P1] + arr[P2] > target) {
+                P2--;
+            } else {
+                return new int[] {arr[P1], arr[P2]};
+            }
+        }
+        return new int[]{};
+    }
+
+    public int[] twoSumWx07(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
+            }
+            set.add(arr[i]);
         }
         return null;
     }
 
-    public int[] twoSum04(int[] arr, int target) {
-        // 有序的数组直接使用双指针的方式处理
+    public int[] twoSumYx08(int[] arr, int target) {
         if (arr == null || arr.length == 0) {
-            return null;
+            return  new int[]{};
         }
         int P1 = 0;
         int P2 = arr.length - 1;
         while(P1 < P2) {
             if (arr[P1] + arr[P2] > target) {
                 P2--;
-            } else if (arr[P1] + arr[P2]  < target) {
+            } else if (arr[P1] + arr[P2] < target) {
                 P1++;
             } else {
-                return new int[] {arr[P1], arr[P2]};
+                return new int[]{arr[P1], arr[P2]};
             }
+        }
+        return new int[]{};
+    }
+
+    public int[] twoSumWx08(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[]{};
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target-arr[i])) {
+                return new int[] {arr[i], target- arr[i]};
+            }
+            set.add(arr[i]);
+        }
+        return new int[] {};
+    }
+
+    public int[] twoSumWx09(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[2];
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
+            }
+            set.add(arr[i]);
+        }
+        return new int[2];
+    }
+
+
+    public int[] twoSumWx10(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (set.contains(target - arr[i])) {
+                return new int[] {arr[i], target - arr[i]};
+            }
+            set.add(arr[i]);
         }
         return null;
     }
 
-    // 当数组无序的时候需要使用hashmap的方式进行处理，判断在map中是否存在target- arr[i]
-    public int[] twoSumWx04(int[] arr, int target){
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            if (map.containsKey(target - arr[i])) {
-                return new int[]{target - arr[i], arr[i]};
-            }
-            map.put(arr[i], i);
-        }
-        return null;
-    }
 
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.twoSumWx04(num2, 6);
+        int[] result = twoNumberSum.twoSumWx10(num2, 6);
         System.out.println(Arrays.toString(result));
     }
 }
