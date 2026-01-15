@@ -153,26 +153,111 @@ public class BinaryTreeTraversal {
 
     }
 
+    public void preOrderTraversal01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.value + " ");
+        preOrderTraversal01(root.leftChild);
+        preOrderTraversal01(root.rightChild);
+    }
 
+    public void inOrderTraversal01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversal01(root.leftChild);
+        System.out.print(root .value + " ");
+        inOrderTraversal01(root.rightChild);
+    }
+
+    public void postOrderTraversal01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal01(root.leftChild);
+        postOrderTraversal01(root.rightChild);
+        System.out.print(root.value + " ");
+    }
+
+    public void preOrderTraversalByStack01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                System.out.print(root.value + " ");
+                stack.push(root);
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                root = node.rightChild;
+            }
+        }
+    }
+
+    public void inOrderTraversalByStack02(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            if (!stack.isEmpty()) {
+                TreeNode pop = stack.pop();
+                System.out.print(pop.value + " ");
+                root = pop.rightChild;
+            }
+        }
+    }
+
+    public void postOrderTraversalByStack01(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                stack.push(root);
+                root = root.leftChild;
+            }
+            TreeNode node  = stack.pop();
+            if (node.rightChild == null || pre == node.rightChild) {
+                System.out.print(node.value + " ");
+                pre = node;
+            } else {
+                stack.push(node);
+                root = node.rightChild;
+
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
         LinkedList<Integer> inputList = new LinkedList<>(Arrays.asList(
                 3, 2, 9, null, null, 10, null, null, 8, null, 4
         ));
+        String str = new String("jajaj");
         BinaryTreeTraversal traversal = new BinaryTreeTraversal();
         TreeNode headNode = traversal.buildBinaryTree(inputList);
-        traversal.preOrderTraversal(headNode);
+        traversal.preOrderTraversal01(headNode);
         System.out.println();
-        traversal.inOrderTraversal(headNode);
+        traversal.inOrderTraversal01(headNode);
         System.out.println();
-        traversal.postOrderTraversal(headNode);
+        traversal.postOrderTraversal01(headNode);
         System.out.println();
-        traversal.preOrderTraversalByStack(headNode);
+        traversal.preOrderTraversalByStack01(headNode);
         System.out.println();
-        traversal.inOrderTraversalByStack(headNode);
+        traversal.inOrderTraversalByStack02(headNode);
         System.out.println();
-        traversal.postOrderTraversalByStack(headNode);
+        traversal.postOrderTraversalByStack01(headNode);
         System.out.println();
         traversal.postOrderTraversalByStack2(headNode);
     }

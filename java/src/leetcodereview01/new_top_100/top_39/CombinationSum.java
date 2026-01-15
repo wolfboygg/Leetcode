@@ -60,11 +60,35 @@ public class CombinationSum {
         }
     }
 
+    // 组合的总和，这个也是通过回溯的方式来处理
+    public List<List<Integer>> findAllResult02(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking02(arr, target, 0, new ArrayList<Integer>());
+        return ret;
+    }
+
+    public void backTracking02(int[] arr, int target, int start, List<Integer> list) {
+        if (0 == target) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = start; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking02(arr, target - arr[i], i, list);
+            list.removeLast();
+        }
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult01(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult02(arr, 7);
         System.out.println(allResult.toString());
     }
 }

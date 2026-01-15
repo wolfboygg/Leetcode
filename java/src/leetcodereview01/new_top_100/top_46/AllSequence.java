@@ -64,11 +64,38 @@ public class AllSequence {
         }
     }
 
+    // 全排列问题
+    public List<List<Integer>> allSequence02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        boolean[] mark = new boolean[arr.length];
+        backTracking02(arr, mark, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking02(int[] arr, boolean[] mark, List<Integer> list) {
+        if (arr.length == list.size()) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true;
+            list.add(arr[i]);
+            backTracking02(arr, mark, list);
+            list.removeLast();
+            mark[i] = false;
+        }
+    }
+
 
     public static void main(String[] args) {
         AllSequence allSequence = new AllSequence();
         int[] arr = new int[] {1, 2, 3};
-        List<List<Integer>> result= allSequence.allSequence01(arr);
+        List<List<Integer>> result= allSequence.allSequence02(arr);
         System.out.println(result.toString());
     }
 }
