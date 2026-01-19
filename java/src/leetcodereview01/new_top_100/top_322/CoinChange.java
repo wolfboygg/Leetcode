@@ -153,11 +153,27 @@ public class CoinChange {
         return dp[coin] == Integer.MAX_VALUE ? -1 : dp[coin];
     }
 
+    public int calculate09(int[] coins, int amount) {
+        if (coins == null || coins.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[amount + 1];
+        for (int i = 1; i < amount + 1; i++) {
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 0; j < coins.length; j++) {
+                if (i >= coins[j]) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
 
     public static void main(String[] args) {
         int[] coins = {1, 2, 5};
         int amount = 11;
         CoinChange coinChange = new CoinChange();
-        System.out.println(coinChange.calculate08(coins, amount));
+        System.out.println(coinChange.calculate09(coins, amount));
     }
 }

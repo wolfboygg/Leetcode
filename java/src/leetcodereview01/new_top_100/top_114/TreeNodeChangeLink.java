@@ -197,6 +197,36 @@ public class TreeNodeChangeLink {
     }
 
 
+    // 二叉树转换为列表。其实不用考虑递归直接转换，可以使用list存储，根据前序列进行遍历就好了
+    public void flatten07(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preorderTraversal07(root, list);
+
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode node = list.get(i);
+            TreeNode pre = list.get(i-1);
+            pre.right = node;
+            pre.left = null;
+        }
+        while(root != null) {
+            System.out.print(root.value + " ");
+            root = root.right;
+        }
+
+    }
+
+    public void preorderTraversal07(TreeNode root, List<TreeNode> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        preorderTraversal07(root.left, list);
+        preorderTraversal07(root.right, list);
+    }
+
     public static void main(String[] args) {
 
         TreeNode node1 = new TreeNode(1);
@@ -213,7 +243,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten06(node1);
+        treeNodeChangeLink.flatten07(node1);
         // 直接展开 不需要构建Node
     }
 }

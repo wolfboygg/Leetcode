@@ -117,7 +117,6 @@ public class ArrayRepeatNumber {
     }
 
 
-
     public static void main(String[] args) {
         ArrayRepeatNumber arrayRepeatNumber = new ArrayRepeatNumber();
         int[] arr = {2, 3, 1, 0, 2, 5, 3};

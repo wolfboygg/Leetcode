@@ -125,12 +125,53 @@ public class NextSequence {
         }
     }
 
+    // 最后整体翻转是为了解决倒叙  3 2 1的问题
+    public void getNextSequence04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;
+        for (int i = arr.length - 2; i >= 0 ; i--) {
+            if (arr[i] < arr[i+1]) {
+                P1 = i;
+                break;
+            }
+        }
+        // 如果P1存在
+        if (P1 > 0) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            swap04(arr, P1, P2);
+        }
+        // 最后整体交换一下
+        reverse04(arr, P1 + 1, arr.length -1);
+    }
+
+    public void swap04(int[] arr, int left, int right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+    }
+
+    public void reverse04(int[] arr, int start, int end) {
+        while (start < end) {
+            swap04(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
 
 
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
         int[] arr = new int[]{1, 2, 3};
-        nextSequence.getNextSequence03(arr);
+        nextSequence.getNextSequence04(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

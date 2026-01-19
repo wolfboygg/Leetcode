@@ -100,9 +100,19 @@ public class HMTRange {
         return count;
     }
 
+    public int getDistance08(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value -1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance07(1, 4);
+        int distance = hmtRange.getDistance08(1, 4);
         System.out.println(distance);
     }
 }

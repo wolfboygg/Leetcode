@@ -289,12 +289,26 @@ public class TwoNumberSum {
         return null;
     }
 
+    public int[] twoSumWx11(int[] num, int target) {
+        if (num == null || num.length == 0) {
+            return null;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < num.length; i++) {
+            if (set.contains(target - num[i])) {
+                return new int[] {num[i], target - num[i]};
+            }
+            set.add(num[i]);
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.twoSumWx10(num2, 6);
+        int[] result = twoNumberSum.twoSumWx11(num2, 6);
         System.out.println(Arrays.toString(result));
     }
 }

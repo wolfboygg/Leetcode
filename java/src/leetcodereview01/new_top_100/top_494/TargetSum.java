@@ -146,6 +146,28 @@ public class TargetSum {
         backTracking06(arr, target, index + 1, sum-  arr[index]);
     }
 
+    // 通过sum和来处理
+    public int count07(int[] value, int target) {
+        if (value == null || value.length == 0) {
+            return -1;
+        }
+        backTracking07(value, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking07(int[] value, int target, int index, int sum) {
+        if (index == value.length) {
+            if (target == sum) {
+                count++;
+            }
+            return;
+        }
+        backTracking07(value, target, index + 1, sum + value[index]);
+        backTracking07(value, target, index + 1, sum - value[index]);
+    }
+
+
+
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};

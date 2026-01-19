@@ -246,9 +246,31 @@ public class DoubleNumPower {
         return value;
     }
 
+    public double power11(int base, int target) {
+        boolean isNegative = target < 0;
+        double realValue = realPower11(base, Math.abs(target));
+        return isNegative ? 1 / realValue : realValue;
+    }
+
+    public double realPower11(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower11(base, target / 2);
+        value *= value;
+        if (target / 2 == 1) {
+            value = value * base;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power10(2, 3));
+        System.out.println(doubleNumPower.power11(2, -3));
     }
 
 

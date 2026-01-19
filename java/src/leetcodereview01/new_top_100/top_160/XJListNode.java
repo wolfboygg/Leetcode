@@ -128,6 +128,19 @@ public class XJListNode {
         return P1;
     }
 
+    public Node findXJNode09(Node node1, Node node2) {
+        if (node1 == null || node2 == null) {
+            return null;
+        }
+        Node P1 = node1;
+        Node P2 = node2;
+        while(P1 != P2) {
+            P1 = P1 == null ? node2 : P1.next;
+            P2 = P2 == null ? node1 : P2.next;
+        }
+        return P1;
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(1);
         Node node2 = new Node(2);
@@ -151,7 +164,7 @@ public class XJListNode {
         node9.next = node4;
 
         XJListNode xjListNode = new XJListNode();
-        Node xjNode = xjListNode.findXJNode08(node1, node7);
+        Node xjNode = xjListNode.findXJNode09(node1, node7);
         System.out.println(xjNode.value);
     }
 }

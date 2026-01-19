@@ -79,13 +79,44 @@ public class ThreeNumberSum {
         }
     }
 
+    public boolean getSumIsZeroList03(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        backTracking03(arr, 0, 0, 0, new ArrayList<>());
+
+        return !ret.isEmpty();
+    }
+
+    public void backTracking03(int[] arr, int index, int target, int sum, List<Integer> list) {
+        if (list.size() > 3) {
+            return;
+        }
+        if (index >= arr.length) {
+            return;
+        }
+        if (sum == target && list.size() == 3) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (sum > 0 && list.size() >= 3) {
+                break;
+            }
+            list.add(arr[i]);
+            sum += arr[i];
+            backTracking03(arr, i + 1, target, sum, list);
+            sum -= list.get(list.size()-1);
+            list.remove(list.size()-1);
+        }
+    }
 
 
     public static void main(String[] args) {
         ThreeNumberSum threeNumberSum = new ThreeNumberSum();
         int[] arr = new int[] {-1,0,1,2,-1,-4};
 //        int[] arr = new int[] {0,1,1};
-        boolean isExit = threeNumberSum.getSumIsZeroList02(arr);
+        boolean isExit = threeNumberSum.getSumIsZeroList03(arr);
         if (isExit) {
             System.out.println(threeNumberSum.ret.toString());
         }

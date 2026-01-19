@@ -247,6 +247,22 @@ public class MergeLink {
         return pre.next;
     }
 
+    public Node merge14(Node node1, Node node2) {
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value < node2.value) {
+                temp.next = node1;
+                node1 = node1.next;
+            } else {
+                temp.next = node2;
+                node2 = node2.next;
+            }
+            temp = temp.next;
+        }
+        return pre.next;
+    }
+
 
     public static void main(String[] args) {
         Node node1 = new Node(1);
@@ -263,7 +279,7 @@ public class MergeLink {
         node5.next = node6;
 
         MergeLink mergeLink = new MergeLink();
-        Node node = mergeLink.merge13(node1, node4);
+        Node node = mergeLink.merge14(node1, node4);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

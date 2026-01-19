@@ -194,14 +194,39 @@ public class CombinationSum {
             backTracking06(arr, target - arr[i], i, list);
             list.remove(list.size() - 1);
         }
+    }
 
+
+    public List<List<Integer>> findAllResult07(int[] arr, int target) {
+        // 还是通过回溯的方法来进行处理
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking07(arr, 0, target, new ArrayList<>(), 0);
+        return ret;
+    }
+
+    public void backTracking07(int[] arr, int index, int target, List<Integer> list, int sum) {
+        if (sum >= target) {
+            if (sum == target) {
+                ret.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            list.add(arr[i]);
+            sum += arr[i];
+            backTracking07(arr, i, target, list, sum);
+            sum -= arr[i];
+            list.remove(list.size() - 1);
+        }
     }
 
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult06(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult07(arr, 7);
         System.out.println(allResult.toString());
     }
 }

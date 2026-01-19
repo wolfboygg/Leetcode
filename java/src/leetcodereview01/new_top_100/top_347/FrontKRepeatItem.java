@@ -235,11 +235,43 @@ public class FrontKRepeatItem {
     }
 
 
+    // 使用小头堆进行求解
+    public List<Integer> findItem09(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        Queue<Integer> queue = new PriorityQueue<>(((o1, o2) -> map.get(o1) - map.get(o2)));
+        Set<Integer> integers = map.keySet();
+        Iterator<Integer> iterator = integers.iterator();
+        while(iterator.hasNext()) {
+            Integer next = iterator.next();
+            if (queue.size() < k) {
+                queue.offer(next);
+            } else {
+
+                if (map.get(queue.peek()) < map.get(next)) {
+                    queue.poll();
+                    queue.offer(next);
+                }
+            }
+        }
+        return queue.stream().toList();
+    }
+
+
     public static void main(String[] args) {
         FrontKRepeatItem repeatItem = new FrontKRepeatItem();
         int[] arr = {1, 1, 1, 2, 2, 3, 3, 3};
         int k = 2;
-        List<Integer> result = repeatItem.findItem08(arr, k);
+        List<Integer> result = repeatItem.findItem09(arr, k);
         System.out.println(result.toString());
     }
 }

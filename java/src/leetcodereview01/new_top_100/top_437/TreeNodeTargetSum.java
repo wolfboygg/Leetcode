@@ -197,11 +197,34 @@ public class TreeNodeTargetSum {
         list.remove(list.size() - 1);
     }
 
+    // 还是一个递归进行处理的方案
+    public boolean findPath07(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath07(root, target, 0, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath07(TreeNode root, int target, int sum, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.value);
+        if (root.left == null && root.right == null && sum + root.value == target) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath07(root.left, target, sum + root.value, list);
+            realFindPath07(root.right, target, sum + root.value, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
 
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath06(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath07(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

@@ -303,12 +303,35 @@ public class DeleteNode {
     }
 
 
+    public void deleteNode14(Node head, Node target) {
+        if (head == null) {
+            return;
+        }
+        if (target.next != null) {
+            Node next = target.next;
+            target.value = next.value;
+            target.next = next.next;
+        } else {
+            if (head == target) {
+                head = null;
+            } else {
+                Node P1 = head;
+                while(P1.next != target) {
+                    P1 = P1.next;
+                }
+                P1.next = null;
+            }
+        }
+
+    }
+
+
     public static void main(String[] args) {
         DeleteNode deleteNode = new DeleteNode();
         Node head = deleteNode.createLinked();
         Node tobeDelete = head.next.next.next.next;
         System.out.println(tobeDelete.value);
-        deleteNode.deleteNode13(head, tobeDelete);
+        deleteNode.deleteNode14(head, tobeDelete);
         while(head != null) {
             System.out.print(head.value);
             head = head.next;

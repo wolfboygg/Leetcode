@@ -203,6 +203,24 @@ public class EveryDayTemp {
         return values;
     }
 
+    // 单调队列来处理
+    // [0, 1, 4, 2, 1, 1, 0, 0]
+    public int[] getEveryDayTempByStack10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {};
+        }
+        int[] temp = new int[arr.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < arr.length; i++) {
+            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+                Integer index = stack.pop();
+                temp[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return temp;
+    }
+
 
     public static void main(String[] args) {
         // 每日温度 没高度

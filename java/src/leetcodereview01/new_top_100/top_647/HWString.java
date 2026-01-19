@@ -74,9 +74,33 @@ public class HWString {
         }
     }
 
+    public String calculateHwCount03(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            findHw03(charArray, i, i);
+            findHw03(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void findHw03(char[] charArr, int start, int end) {
+        while(start >= 0 && end < charArr.length && charArr[start] == charArr[end]) {
+            if (end - start + 1 > len) {
+                left = start;
+                len = end - start + 1; // 取最长的那个
+            }
+            System.out.println("start:" + left + ",len:" + len);
+            start--;
+            end++;
+        }
+    }
+
     public static void main(String[] args) {
         HWString hw = new HWString();
         String str = "aba";
-        System.out.println(hw.calculateHwCount02(str));
+        System.out.println(hw.calculateHwCount03(str));
     }
 }

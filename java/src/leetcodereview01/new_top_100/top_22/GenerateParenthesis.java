@@ -64,11 +64,39 @@ public class GenerateParenthesis {
         }
     }
 
+    public List<List<String>> generate03(int n) {
+        if (n == 0) {
+            return null;
+        }
+        backTracking03(n, 0, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking03(int max, int start, int end, List<String> list) {
+        if (list.size() == max * 2) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if(start < max) {
+            list.add("(");
+            backTracking03(max, start + 1, end, list);
+            list.remove(list.size() - 1);
+            System.out.println("1111");
+        }
+
+        if(end < start) {
+            list.add(")");
+            backTracking03(max, start, end + 1, list);
+            list.remove(list.size() - 1);
+            System.out.println("2222:" + start + ",end" + end);
+        }
+
+    }
 
 
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        List<List<String>> list = generateParenthesis.generate02(3);
+        List<List<String>> list = generateParenthesis.generate03(3);
         System.out.println(list.toString());
     }
 }
