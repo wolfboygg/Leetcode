@@ -207,10 +207,36 @@ public class MainLengthIncrementArray {
         return max;
     }
 
+    // 最长连续递增子序列
+    public int getMaxLength08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(arr[i] - 1)) {
+                int count = 0;
+                int value = arr[i];
+                while(set.contains(value)) {
+                    count++;
+                    value++;
+                }
+                max = Math.max(max, count);
+            }
+        }
+        return max;
+
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {100, 4, 200, 1, 3, 2};
         MainLengthIncrementArray mainLengthIncrementArray = new MainLengthIncrementArray();
-        System.out.println(mainLengthIncrementArray.getMaxLength07(arr));
+        System.out.println(mainLengthIncrementArray.getMaxLength08(arr));
     }
 
 }

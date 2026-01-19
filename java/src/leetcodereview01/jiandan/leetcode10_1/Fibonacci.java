@@ -39,10 +39,32 @@ public class Fibonacci {
         return value;
     }
 
+
+    public int getFibonacciByGH02(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 1;
+        }
+        int value01 = 1;
+        int value02 = 1;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value01 + value02;
+            value01 = value02;
+            value02 = value;
+        }
+        return value;
+    }
+
     // 1 1 2 3 5 8
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH01(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH02(6);
         System.out.println(fibonacciValue);
     }
 }

@@ -73,118 +73,64 @@ public class MoveZero {
         }
     }
 
+
     public void move04(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
-        int slow = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                int temp = arr[i];
-                arr[i] = arr[slow];
-                arr[slow] = temp;
-                slow++;
+        int P1 = 0;
+        int P2 = arr.length - 1;
+        while(P1 < P2) {
+            if (arr[P1] != 0) {
+                P1++;
+            } else {
+                arr[P1] = arr[P2];
+                arr[P2] = 0;
+                P2--;
+                P1++;
             }
         }
     }
 
+    // 或者直接一个for循环搞定
     public void move05(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
-        int slow = 0;
+        int low = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != 0) {
-                int temp = arr[i];
-                arr[i] = arr[slow];
-                arr[slow] = temp;
-                slow++;
+                int temp = arr[low];
+                arr[low] = arr[i];
+                arr[i] = temp;
+                low++;
             }
         }
     }
 
-    public void move06(int[] arr) {
+    public void moveToStart05(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
-        int slow = 0;
-        for (int i = 0; i < arr.length; i++) {
+        int limit = arr.length - 1;
+        int P1 = limit;
+        for (int i = limit; i >=0 ; i--) {
             if (arr[i] != 0) {
                 int temp = arr[i];
-                arr[i] = arr[slow];
-                arr[slow] = temp;
-                slow++;
-            }
-        }
-    }
-
-    public void move07(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return;
-        }
-        int slow = 0;
-        for (int i = arr.length - 1; i >= 0; i--) {
-            if (arr[i] == 0 && slow < i) {
-                System.out.println(i);
-                int temp = arr[i];
-                arr[i] = arr[slow];
-                arr[slow] = temp;
-                slow++;
-            }
-        }
-    }
-
-
-    // 移动0的位置
-    public void move08(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return;
-        }
-        int slow = 0;
-        // 正向移动
-//        for (int i = 0; i < arr.length; i++) {
-//            if (arr[i] != 0) {
-//                int temp = arr[i];
-//                arr[i] = arr[slow];
-//                arr[slow] = temp;
-//                slow++;
-//            }
-//        }
-
-        for (int i = arr.length - 1; i >= 0 ; i--) {
-            if (arr[i] == 0 && slow < i) {
-                int temp = arr[i];
-                arr[i] = arr[slow];
-                arr[slow] = temp;
-                slow++;
-            }
-        }
-
-
-    }
-
-
-    public void move09(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return;
-        }
-        int pointer = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != 0) {
-                int temp = arr[i];
-                arr[i] = arr[pointer];
-                arr[pointer] = temp;
-                pointer++;
+                arr[i] = arr[P1];
+                arr[P1] = temp;
+                P1--;
             }
         }
         System.out.println(Arrays.toString(arr));
     }
 
 
+
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.move09(arr);
+        moveZero.moveToStart05(arr);
         System.out.println(Arrays.toString(arr));
     }
 

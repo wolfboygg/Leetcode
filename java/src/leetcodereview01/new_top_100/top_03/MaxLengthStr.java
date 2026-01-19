@@ -149,6 +149,23 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr08(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        char[] charArray = str.toCharArray();
+        Map<Character, Integer> map = new HashMap();
+        int max = 0;
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(charArray[i], -1));
+            }
+            max = Math.max(max, i - defaultIndex);
+            map.put(charArray[i], i);
+        }
+        return max;
+    }
 
     public static void main(String[] args) {
         String str = "abcabcbb";

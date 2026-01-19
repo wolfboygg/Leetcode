@@ -239,15 +239,28 @@ public class TreeSub {
     }
 
     public boolean realIsSub12(TreeNode root, TreeNode node) {
-        if (root == null) {
+        if (root == null || node == null) {
             return false;
-        }
-        if (node == null) {
-            return true;
         }
         return root.value == node.value && realIsSub12(root.left, node.left) && realIsSub12(root.right, node.right);
     }
 
+    public boolean isSub13(TreeNode root, TreeNode node1) {
+        if (root == null || node1 == null) {
+            return false;
+        }
+        return realIsSub13(root, node1) || isSub13(root.left, node1) || isSub13(root.right, node1);
+    }
+
+    public boolean realIsSub13(TreeNode root, TreeNode node1) {
+        if (root == null) {
+            return false;
+        }
+        if (node1 == null) {
+            return true;
+        }
+        return root.value == node1.value && realIsSub13(root.left, node1.left) && realIsSub13(root.right, node1.right);
+    }
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(8);
@@ -267,12 +280,12 @@ public class TreeSub {
 
         TreeNode node8 = new TreeNode(8);
         TreeNode node9 = new TreeNode(8);
-        TreeNode node10 = new TreeNode(1);
+        TreeNode node10 = new TreeNode(7);
 
         node8.left = node9;
         node8.right = node10;
 
-        System.out.println(new TreeSub().isSub12(node1, node8));
+        System.out.println(new TreeSub().isSub13(node1, node8));
 
     }
 }

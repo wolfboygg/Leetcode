@@ -195,6 +195,36 @@ public class KGroupReverseLink {
         return node;
     }
 
+    public Node kGroupReverse04(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node pre = new Node(-1);
+        pre.next = head;
+        Node start = pre;
+        Node last = pre;
+        while(last.next != null) {
+            for (int i = 0; i < k && last != null; i++) {
+                last = last.next;
+            }
+            // 找到一组
+            Node next = last == null ? null : last.next;
+            if (last != null) {
+                last.next = null;
+            }
+            last = start.next;
+            start.next = reverse03(start.next);
+            if (last == null) {
+                break;
+            }
+            start = last;
+            last.next = next;
+        }
+        return pre.next;
+    }
+
+
+
 
     public static void main(String[] args){
         Node node1 = new Node(1);
@@ -215,7 +245,7 @@ public class KGroupReverseLink {
         node7.next = node8;
 
         KGroupReverseLink reverseLink = new KGroupReverseLink();
-        Node node = reverseLink.kGroupReverse03(node1, 3);
+        Node node = reverseLink.kGroupReverse04(node1, 3);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

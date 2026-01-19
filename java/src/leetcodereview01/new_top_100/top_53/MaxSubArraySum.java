@@ -97,6 +97,20 @@ public class MaxSubArraySum {
         return max;
     }
 
+    public int calculate07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int currentValue = arr[0];
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            currentValue = Math.max(arr[i], currentValue + arr[i]);
+            max = Math.max(currentValue, max);
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         MaxSubArraySum maxSubArraySum = new MaxSubArraySum();

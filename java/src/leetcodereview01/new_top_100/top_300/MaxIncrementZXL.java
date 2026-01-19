@@ -125,10 +125,29 @@ public class MaxIncrementZXL {
         return max;
     }
 
+    public int calculate06(int[] arr) {
+        // 最长递增子序列，那么可以不用连续
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int[] dp = new int[arr.length];
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max= Math.max(max, dp[i]); // 一定要记忆最大的
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = new int[]{10, 9, 2, 5, 3, 7, 206, 205, 18};
+        int[] arr = new int[]{10, 9, 2, 5, 3, 7, 206, 205, 1};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate05(arr));
+        System.out.println(maxIncrementZXL.calculate06(arr));
     }
 }

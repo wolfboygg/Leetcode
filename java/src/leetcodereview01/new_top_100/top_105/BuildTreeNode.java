@@ -188,11 +188,35 @@ public class BuildTreeNode {
         return root;
     }
 
+    public TreeNode build07(int[] preOrder, int[] inOrder) {
+        if (preOrder == null || inOrder == null) {
+            return null;
+        }
+        for (int i = 0; i < inOrder.length; i++) {
+            inOrderIndex.put(inOrder[i], i);
+        }
+        return realBuild07(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+    }
+
+    public TreeNode realBuild07(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int rootIndex = inOrderIndex.get(rootValue);
+        int childCount = rootIndex - inLeft;
+        TreeNode node = new TreeNode(rootValue);
+        node.left = realBuild07(preOrder, preLeft + 1, preLeft + childCount, inOrder, inLeft, rootIndex - 1);
+        node.right = realBuild07(preOrder, preLeft + childCount + 1, preRight, inOrder, rootIndex + 1, inRight);
+        return node;
+    }
+
+
     public static void main(String[] args) {
         int[] pre = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         BuildTreeNode buildTreeNode = new BuildTreeNode();
-        TreeNode root = buildTreeNode.build06(pre, inOrder);
+        TreeNode root = buildTreeNode.build07(pre, inOrder);
         buildTreeNode.preTraversal(root);
     }
 }

@@ -146,7 +146,27 @@ public class FindMissNumber {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i]  != i + 1) {
-                list.add(arr[i]);
+                list.add(i+1);
+            }
+        }
+        return list.toArray(new Integer[list.size()]);
+    }
+
+    // 先放到对应的位置，然后在进行查找
+    public Integer[] find06(int[] arr) {
+        // 需要注意的是1-n
+        for (int i = 0; i < arr.length; i++) { // 为了找到重复的，不能无限循环下去
+            while(arr[i] != i + 1 && arr[i] != arr[arr[i]-1]) { // 不想等才能换
+                // 4
+                    int value = arr[i];
+                    arr[i] = arr[value-1];
+                    arr[value-1] = value;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]  != i + 1) {
+                list.add(i+1);
             }
         }
         return list.toArray(new Integer[list.size()]);
@@ -156,7 +176,7 @@ public class FindMissNumber {
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};
         FindMissNumber findMissNumber = new FindMissNumber();
-        Integer[] nums = findMissNumber.find05(arr);
+        Integer[] nums = findMissNumber.find06(arr);
         System.out.println(Arrays.toString(nums));
     }
 }

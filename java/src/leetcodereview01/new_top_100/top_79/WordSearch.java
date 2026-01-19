@@ -301,14 +301,57 @@ public class WordSearch {
     }
 
 
+    public boolean findPath07(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        char[] charArray = str.toCharArray();
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking07(matrix, i, j, mark, next, charArray, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking07(char[][] matrix, int i, int j, boolean[][] mark, int[][] next, char[] charArr, int index) {
+        if (index >= charArr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != charArr[index]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking07(matrix, i + ints[0], j + ints[1], mark, next, charArr, index + 1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
+
+
     public static void main(String[] args) {
         char[][] charMatrix = {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEDC";
+        String str = "ABCCEDA";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath06(charMatrix, str);
+        boolean isExit = search.findPath07(charMatrix, str);
         System.out.println(isExit);
     }
 }

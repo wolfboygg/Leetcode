@@ -217,17 +217,65 @@ public class SortLink {
         return merge03(left, right);
     }
 
+    public Node merge06(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        if (node1 == null || node2 == null) {
+            return node1 == null ? node2 : node1;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(node1 != null && node2 != null) {
+            if (node1.value < node2.value) {
+                temp.next = node1;
+                node1 = node1.next;
+            } else {
+                temp.next = node2;
+                node2 = node2.next;
+            }
+            temp = temp.next;
+        }
+        temp.next = node1 == null ? node2 : node1;
+        return pre.next;
+    }
+
+    // 排序列表。通过二分排序然后在merge 通过递归的方式进行排序，需要知道head 和 tail
+    public Node sortLink06(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        System.out.println("head:" + head.value + ",tail:" + (tail == null ? "null" : tail.value));
+        // 找到中心点开始处理
+        Node slow = head;
+        Node fast = head;
+        // 边界条件要对
+        while(fast != tail && fast.next != null) { // 这里要递归，那么就需要判断是否需要等于tail，而不是直接为末尾
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        System.out.println("slow:" + slow.value);
+        Node left = sortLink06(head, slow);
+        Node right = sortLink06(slow, tail);
+        return merge06(left, right);
+    }
+
+
 
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
         Node node3 = new Node(1);
-//        Node node4 = new Node(3);
+        Node node4 = new Node(3);
         node1.next = node2;
         node2.next = node3;
-//        node3.next = node4;
+        node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink05(node1, null);
+        Node node = sortLink.sortLink06(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

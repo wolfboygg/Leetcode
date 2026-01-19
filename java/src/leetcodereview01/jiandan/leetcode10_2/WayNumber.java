@@ -35,9 +35,30 @@ public class WayNumber {
         return value;
     }
 
+    public int getWayNumber03(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int value01 = 1;
+        int value02 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value01 + value02;
+            value01 = value02;
+            value02 = value;
+        }
+        return value;
+    }
+
     public static void main(String[] args) {
         WayNumber wayNumber = new WayNumber();
-        int wayNumber1 = wayNumber.getWayNumber02(7);
+        int wayNumber1 = wayNumber.getWayNumber03(7);
         System.out.println(wayNumber1);
     }
 }

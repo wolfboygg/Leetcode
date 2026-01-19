@@ -61,12 +61,36 @@ public class MergeRange {
         }
     }
 
+    // 主要思想通过排序+ 集合的方式来实现
+    public void merge03(int[][] matrix) {
+        if (matrix == null) {
+            return;
+        }
+        Arrays.sort(matrix, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < matrix.length; i++) {
+            if (list.isEmpty() || list.get(list.size() - 1)[1] < matrix[i][0]) {
+                list.add(matrix[i]);
+            } else {
+                list.get(list.size() - 1)[1] = matrix[i][1];
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i)[0] + "," + list.get(i)[1] + "]");
+        }
+    }
+
     public static void main(String[] args) {
         MergeRange mergeRange = new MergeRange();
         int[][] ints = new int[][]{
                 {1, 2}, {2, 6}, {8, 10}, {15, 18}
         };
-        mergeRange.merge02(ints);
+        mergeRange.merge03(ints);
     }
 
 }

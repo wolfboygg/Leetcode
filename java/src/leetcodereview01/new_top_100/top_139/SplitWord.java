@@ -58,13 +58,29 @@ public class SplitWord {
         return dp[str.length()];
     }
 
+    public boolean valid04(String str, List<String> list) {
+        if (str == null) {
+            return false;
+        }
+        boolean[] dp = new boolean[str.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i < str.length() + 1; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && list.contains(str.substring(j, i))) {
+                    dp[i] = true;
+                }
+            }
+        }
+        return dp[str.length()];
+    }
+
     public static void main(String[] args) {
         String str =  "leetcode3";
         List<String> list = new ArrayList<>();
         list.add("leet");
-        list.add("code3");
+        list.add("code2");
         SplitWord splitWord = new SplitWord();
-        boolean result = splitWord.valid03(str, list);
+        boolean result = splitWord.valid04(str, list);
         System.out.println(result);
     }
 }

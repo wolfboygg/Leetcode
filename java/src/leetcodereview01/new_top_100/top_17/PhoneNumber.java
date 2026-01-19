@@ -252,10 +252,35 @@ public class PhoneNumber {
         }
     }
 
+    public List<String> letterCombinations11(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        char[] charArray = str.toCharArray();
+        traversal11(charArray, 0, new StringBuilder());
+        return ret;
+    }
+
+    public void traversal11(char[] charArr, int index, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(new String(sb));
+        }
+        if (index >= charArr.length) {
+            return;
+        }
+        int currentIndex = charArr[index] - '0';
+        char[] charArray = map[currentIndex].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal11(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations09("234");
+        phoneNumber.letterCombinations11("234");
         System.out.println(ret.toString());
     }
 }

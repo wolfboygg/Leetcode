@@ -87,11 +87,30 @@ public class RotateArray {
     }
 
 
+    public int getMinValueByTX04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            int middle = left + (right - left) /2;
+            System.out.println("middle:" + middle);
+            if (arr[middle] < arr[right]) { // 需要从右边判断
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return arr[left];
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7,  1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTx03(arr);
+        int i = rotateArray.getMinValueByTX04(arr2);
         System.out.println("最小值为:" + i);
     }
 }

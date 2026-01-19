@@ -361,6 +361,53 @@ public class ClockPrintMatrix {
         return list;
     }
 
+    public List<Integer> printMatrix10(int[][] matrix) {
+        if (matrix == null) {
+            return null;
+        }
+        int left = 0;
+        int top = 0;
+        int row = matrix.length - 1;
+        int column = matrix[0].length - 1;
+        int right = column;
+        int bottom = row;
+        List<Integer> list = new ArrayList<>();
+        while(left <= right && top <= bottom) {
+            // 上
+            for (int i = left; i <= right; i++) {
+                System.out.print(matrix[top][i] + " ");
+                list.add(matrix[top][i]);
+            }
+            System.out.println();
+            // 右
+            for (int i = top + 1; i <= bottom; i++) {
+                System.out.print(matrix[i][right] + " ");
+                list.add(matrix[i][right]);
+            }
+            System.out.println();
+            // 下
+            if (top < bottom) {
+                for (int i = right - 1 ; i >= left; i--) {
+                    System.out.print(matrix[bottom][i] + " ");
+                    list.add(matrix[bottom][i]);
+                }
+            }
+            // 左
+            if (left < right) {
+                for (int i = bottom - 1 ; i >= top + 1; i--) {
+                    System.out.print(matrix[i][left] + " ");
+                    list.add(matrix[i][left]);
+                }
+            }
+            left++;
+            top++;
+            right--;
+            bottom--;
+        }
+        return list;
+    }
+
+
 
     public static void main(String[] args) {
         int[][] matrix = {
@@ -369,6 +416,6 @@ public class ClockPrintMatrix {
                 {13, 14, 15, 16},
         };
         ClockPrintMatrix clockPrintMatrix = new ClockPrintMatrix();
-        System.out.println(clockPrintMatrix.printMatrix09(matrix));
+        System.out.println(clockPrintMatrix.printMatrix10(matrix));
     }
 }
