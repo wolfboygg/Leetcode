@@ -166,12 +166,51 @@ public class NextSequence {
         }
     }
 
+    // 注意倒叙的情况
+    public void getNextSequence05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] < arr[i+1]) {
+                P1 = i;
+                break;
+            }
+        }
+        if (P1 > 0) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            swap05(arr, P1, P2);
+        }
+        reverse05(arr, P1 + 1, arr.length - 1);
+    }
+
+    public void swap05(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
+
+    public void reverse05(int[] arr, int start, int end) {
+        while(start < end) {
+            swap05(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
 
 
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
-        int[] arr = new int[]{1, 2, 3};
-        nextSequence.getNextSequence04(arr);
+        int[] arr = new int[]{3, 2, 1};
+        nextSequence.getNextSequence05(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

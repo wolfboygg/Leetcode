@@ -126,11 +126,39 @@ public class SearchRotateArray {
         return -1;
     }
 
+    public int find04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int start = 0;
+        int end = arr.length -1;
+        while(start <= end) {
+            int middle = start + (end - start) /2;
+            if (arr[middle] == target) {
+                return middle;
+            }
+            if (arr[start] <= arr[middle]) {
+                if (arr[start] <= target && target < arr[middle]) {
+                    end = middle -1;
+                } else {
+                    start = middle + 1;
+                }
+            } else {
+                if (arr[middle] < target && target <= arr[end]) {
+                    start = middle + 1;
+                } else {
+                    end = middle - 1;
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2};
         SearchRotateArray searchRotateArray = new SearchRotateArray();
-        int result = searchRotateArray.find03(arr, 0);
+        int result = searchRotateArray.find04(arr, 1);
         System.out.println(result);
     }
 }
