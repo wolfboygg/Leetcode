@@ -78,6 +78,26 @@ public class TailToHeadLink {
         }
     }
 
+
+    public void printLinkByHead02(Node head) {
+        if (head == null) {
+            return;
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(head != null) {
+            Node next = head.next;
+            head.next = temp.next;
+            temp.next = head;
+            head = next;
+        }
+        pre = pre.next;
+        while(pre != null) {
+            System.out.print(pre.value + " ");
+            pre = pre.next;
+        }
+    }
+
     public static void main(String[] args) {
         TailToHeadLink tailToHeadLink = new TailToHeadLink();
         TailToHeadLink.Node node01 = new TailToHeadLink.Node(1);
@@ -89,6 +109,6 @@ public class TailToHeadLink {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        tailToHeadLink.printLinkByHead01(node01);
+        tailToHeadLink.printLinkByHead02(node01);
     }
 }
