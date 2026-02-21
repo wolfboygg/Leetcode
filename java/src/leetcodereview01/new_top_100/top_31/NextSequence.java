@@ -167,11 +167,36 @@ public class NextSequence {
     }
 
 
+    public void getNextSequence05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = arr.length - 2; i >=0 ; i--) {
+            if (arr[i] > arr[i + 1]) {
+                P1 = i;
+                break;
+            }
+        }
+        if (P1 != 0) {
+            int P2 = 0;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            swap04(arr, P1, P2);
+        }
+        swap04(arr, P1, arr.length - 1);
+    }
+
+
 
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
         int[] arr = new int[]{1, 2, 3};
-        nextSequence.getNextSequence04(arr);
+        nextSequence.getNextSequence05(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

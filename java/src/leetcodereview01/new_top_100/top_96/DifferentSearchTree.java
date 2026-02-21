@@ -88,10 +88,24 @@ public class DifferentSearchTree {
         return dp[n];
     }
 
+    public int calculate06(int n) {
+        if (n < 0) {
+            return -1;
+        }
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                dp[i] += dp[j-1] * dp[i - j];
+            }
+        }
+        return dp[n];
+    }
 
     public static void main(String[] args) {
         DifferentSearchTree differentSearchTree = new DifferentSearchTree();
-        int n = 2;
+        int n = 5;
         int value = differentSearchTree.calculate05(n);
         System.out.println(value);
     }
