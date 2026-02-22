@@ -176,10 +176,31 @@ public class JumpStairs {
         return value;
     }
 
+    public int climStairs09(int n) {
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int value01 = 1;
+        int value02 = 2;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value01 + value02;
+            value01 = value02;
+            value02 = value;
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
         JumpStairs jumpStairs = new JumpStairs();
-        int num = jumpStairs.climStairs07(5);
+        int num = jumpStairs.climStairs09(5);
         System.out.println(num);
     }
 }

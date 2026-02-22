@@ -57,6 +57,26 @@ public class GroupLetter {
         System.out.println(map.values());
     }
 
+    public void groupLetter04(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return;
+        }
+        // 通过计算key来进行分组
+        Map<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            char[] charArray = strs[i].toCharArray();
+            Arrays.sort(charArray);
+            String key = new String(charArray);
+            List<String> orDefault = map.getOrDefault(key, new ArrayList<>());
+            orDefault.add(new String(strs[i]));
+            map.put(key, orDefault);
+        }
+        System.out.println(map.values().size());
+        for (List<String> value : map.values()) {
+            System.out.print(value.toString() + " ");
+        }
+    }
+
 
     public static void main(String[] args) {
         String[] strs = new String[] {"eat", "tea", "tan", "ate", "nat", "bat"};

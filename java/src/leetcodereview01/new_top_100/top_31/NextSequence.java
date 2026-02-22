@@ -166,19 +166,19 @@ public class NextSequence {
         }
     }
 
-
-    public void getNextSequence05(int[] arr) {
+    public void getNextSequence06(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
         }
-        int P1 = 0;
-        for (int i = arr.length - 2; i >=0 ; i--) {
-            if (arr[i] > arr[i + 1]) {
+        int P1 = -1;
+        for (int i = arr.length - 2; i >= 0 ; i--) {
+            if (arr[i] < arr[i+1]) {
                 P1 = i;
                 break;
             }
         }
-        if (P1 != 0) {
+        System.out.println(P1);
+        if (P1 > 0) {
             int P2 = 0;
             for (int i = P1 + 1; i < arr.length; i++) {
                 if (arr[i] > arr[P1]) {
@@ -188,15 +188,62 @@ public class NextSequence {
             }
             swap04(arr, P1, P2);
         }
-        swap04(arr, P1, arr.length - 1);
+        reverse04(arr, P1 + 1, arr.length -1);
     }
 
+    public void swap06(int[] arr, int start, int end) {
+        while(start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
 
+    // 记住需要反转的地方要反转，需要交换的时候需要交换
+    public void getNextSequence07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;// 这里必须要保证
+        for (int i = arr.length - 2; i >= 0 ; i--) {
+            if (arr[i] < arr[i + 1]) {
+                P1 = i;
+                break;
+            }
+        }
+        if (P1 > 0) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            swap07(arr, P1, P2);
+        }
+        reverse07(arr, P1 + 1, arr.length -1);
+    }
+
+    public void swap07(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
+
+    public void reverse07(int[] arr, int start, int end) {
+        while(start >=0 && start < arr.length && end >=0 && end < arr.length && start < end) {
+            swap07(arr, start, end);
+            start++;
+            end--;
+        }
+    }
 
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
-        int[] arr = new int[]{1, 2, 3};
-        nextSequence.getNextSequence05(arr);
+        int[] arr = new int[]{1,1,5};
+        nextSequence.getNextSequence07(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

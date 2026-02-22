@@ -114,12 +114,24 @@ public class OnlyOneNumber {
         return value;
     }
 
+    // 通过异或的方式处理
+    public int onlyOne09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int value = 0;
+        for (int i = 0; i < arr.length; i++) {
+            value ^= arr[i];
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
        // 任何数和0异或的任何数
         int[] arr = {4,1,2,1,2, 4, 5};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        int i = onlyOneNumber.onlyOne08(arr);
+        int i = onlyOneNumber.onlyOne09(arr);
         System.out.println(i);
     }
 }

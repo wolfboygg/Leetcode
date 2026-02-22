@@ -223,10 +223,38 @@ public class CombinationSum {
     }
 
 
+    public List<List<Integer>> findAllResult08(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking08(arr, 0, target, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking08(int[] arr, int index, int target, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if (index >= arr.length - 1) {
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break; // 这里要跳出去
+            }
+            target -= arr[i];
+            list.add(arr[i]);
+            backTracking08(arr, i, target, list);
+            target +=list.get(list.size() -1);
+            list.remove(list.size() -1);
+        }
+    }
+
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult07(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult08(arr, 7);
         System.out.println(allResult.toString());
     }
 }

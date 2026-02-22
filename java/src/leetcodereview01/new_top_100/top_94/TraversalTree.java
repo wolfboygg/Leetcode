@@ -250,6 +250,23 @@ public class TraversalTree {
         }
     }
 
+    // 中序遍历
+    public void traversalByStack09(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || node != null) {
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            TreeNode pop = stack.pop();
+            if (pop != null) {
+                System.out.print(pop.value + " ");
+                node = pop.right;
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -261,7 +278,7 @@ public class TraversalTree {
         TraversalTree traversalTree = new TraversalTree();
         traversalTree.traversalByDG05(node1);
         System.out.println();
-        traversalTree.traversalByStack08(node1);
+        traversalTree.traversalByStack09(node1);
 
     }
 }

@@ -127,6 +127,29 @@ public class MergeKNode {
     }
 
 
+    public Node merge05(Node[] nodes) {
+        if (nodes == null || nodes.length == 0) {
+            return null;
+        }
+        Queue<Node> queue = new PriorityQueue<>((o1, o2) -> o1.value - o2.value);
+        for (int i = 0; i < nodes.length; i++) {
+            queue.offer(nodes[i]);
+        }
+        Node pre = new Node(-1);
+        Node temp = pre;
+        while(!queue.isEmpty()) {
+            Node poll = queue.poll();
+            Node next = poll.next;
+            temp.next = poll;
+            temp = temp.next;
+            if (next != null) {
+                queue.offer(next);
+            }
+        }
+        return pre.next;
+    }
+
+
     public static void main(String[] args){
         //1->4->5,
         //1->3->4,
@@ -150,7 +173,7 @@ public class MergeKNode {
 
         Node[] nodes = {node1, node4, node7};
         MergeKNode mergeKNode = new MergeKNode();
-        Node node = mergeKNode.merge04(nodes);
+        Node node = mergeKNode.merge05(nodes);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

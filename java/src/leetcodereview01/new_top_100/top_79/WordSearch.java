@@ -342,6 +342,48 @@ public class WordSearch {
         return false;
     }
 
+    public boolean findPath08(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backtracking08(matrix, i, j, mark, next, 0, str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean backtracking08(char[][] matrix, int i, int j, boolean[][] mark, int[][] next, int index, String str) {
+        if (index >= str.length()) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
+            return false;
+        }
+        System.out.println(matrix[i][j] + "-->" + str.charAt(index));
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backtracking08(matrix, i + ints[0], j + ints[1], mark, next, index + 1, str)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
 
 
     public static void main(String[] args) {
@@ -349,9 +391,9 @@ public class WordSearch {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEDA";
+        String str = "ABCCEDC";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath07(charMatrix, str);
+        boolean isExit = search.findPath08(charMatrix, str);
         System.out.println(isExit);
     }
 }

@@ -435,13 +435,13 @@ public class TwoAddLink {
         return temp.next;
     }
 
-    public ListNode addTwoNumber10(ListNode node1, ListNode node2) {
+   public ListNode addTwoNumber10(ListNode node1, ListNode node2) {
         if (node1 == null && node2 == null) {
             return null;
         }
+        int carry = 0;
         ListNode pre = new ListNode(-1);
         ListNode temp = pre;
-        int carry = 0;
         while(node1 != null && node2 != null) {
             ListNode node = new ListNode(carry);
             node.val += node1.val;
@@ -453,13 +453,8 @@ public class TwoAddLink {
             node1 = node1.next;
             node2 = node2.next;
         }
-
-        if (carry != 0 && node1 == null && node2 == null) {
-            temp.next = new ListNode(carry);
-        } else {
+        if (carry != 0) {
             ListNode node = node1 == null ? node2 : node1;
-            temp.next = node;
-            System.out.println(node.val + "carry:" + carry);
             while(node != null) {
                 node.val += carry;
                 carry = node.val / 10;
@@ -468,22 +463,23 @@ public class TwoAddLink {
                 temp = temp.next;
                 node = node.next;
             }
-            if (carry != 0) {
+            if (carry > 0) {
                 temp.next = new ListNode(carry);
             }
+        } else {
+            temp.next = node1 == null ? node2 : node1;
         }
-        ListNode head = pre.next;
-        pre= new ListNode(-1);
-        temp = pre;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = temp.next;
-            temp.next = head;
-            head = next;
+        // 反转一下
+        ListNode node = pre.next;
+        ListNode nPre = new ListNode(-1);
+        while(node != null) {
+            ListNode next = node.next;
+            node.next = nPre.next;
+            nPre.next = node;
+            node = next;
         }
-        return pre.next;
-    }
-
+        return nPre.next;
+   }
 
     public static void main (String[]args){
         ListNode node1 = new ListNode(2);
@@ -500,7 +496,7 @@ public class TwoAddLink {
         node5.next = node6;
         node6.next = node7;
         TwoAddLink twoAddLink = new TwoAddLink();
-        ListNode node = twoAddLink.addTwoNumber10(node1, node4);
+        ListNode node = twoAddLink.addTwoNumber09(node1, node4);
         while (node != null) {
             System.out.print(node.val);
             node = node.next;
