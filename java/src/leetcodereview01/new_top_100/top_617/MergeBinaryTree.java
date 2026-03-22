@@ -1,5 +1,6 @@
 package leetcodereview01.new_top_100.top_617;
 
+import com.sun.source.tree.Tree;
 import leetcodereview01.top100.top_617.MergeTree;
 import node.TreeNode;
 
@@ -152,6 +153,20 @@ public class MergeBinaryTree {
         return node;
     }
 
+    public TreeNode merge10(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return null;
+        }
+        if (root1 == null || root2 == null) {
+            return root1 == null ? root2 : root1;
+        }
+        TreeNode root = new TreeNode(root1.value);
+        root.value += root2.value;
+        root.left = merge10(root1.left, root2.left);
+        root.right = merge10(root1.right, root2.right);
+        return root;
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -176,7 +191,7 @@ public class MergeBinaryTree {
         node33.right = node55;
 
         MergeBinaryTree mergeBinaryTree = new MergeBinaryTree();
-        TreeNode root = mergeBinaryTree.merge09(node1, node11);
+        TreeNode root = mergeBinaryTree.merge10(node1, node11);
         mergeBinaryTree.traversalTree(root);
     }
 }

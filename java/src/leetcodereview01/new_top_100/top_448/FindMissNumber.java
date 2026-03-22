@@ -172,6 +172,27 @@ public class FindMissNumber {
         return list.toArray(new Integer[list.size()]);
     }
 
+    public Integer[] find07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            // 首先判断是否在当前位置，在判断是否正确位置是否已经放置了相同的原素
+            while (arr[i] != i + 1 && arr[i] != arr[arr[i] - 1]) {
+                int value = arr[i];
+                arr[i] = arr[value-1];
+                arr[value-1] = value;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (i+ 1 != arr[i]) {
+                list.add(i+1);
+            }
+        }
+        return list.toArray(new Integer[list.size()]);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};

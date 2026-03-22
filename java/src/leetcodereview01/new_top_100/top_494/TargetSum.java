@@ -167,12 +167,31 @@ public class TargetSum {
     }
 
 
+    public int count08(int[] value, int target) {
+        if (value == null || value.length == 0) {
+            return -1;
+        }
+        backTracking08(value, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking08(int[] value, int target, int index, int sum) {
+        if (index >= value.length) {
+            if (sum == target) {
+                count++;
+            }
+            return;
+        }
+        backTracking08(value, target, index + 1, sum + value[index]);
+        backTracking08(value, target, index + 1, sum - value[index]);
+    }
+
 
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count06(value, target));
+        System.out.println(targetSum.count08(value, target));
     }
 }

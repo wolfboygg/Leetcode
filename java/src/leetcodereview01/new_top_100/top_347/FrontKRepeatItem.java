@@ -267,11 +267,41 @@ public class FrontKRepeatItem {
     }
 
 
+    public List<Integer> findItem10(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+            } else {
+                map.put(arr[i], 1);
+            }
+        }
+        // 使用的values进行比较
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> map.get(o1) - map.get(o2));
+        Set<Integer> integers = map.keySet();
+        for (Integer integer : integers) {
+            if (queue.size() < k) {
+                queue.offer(integer);
+            } else {
+                if (map.get(queue.peek()) < map.get(integer)) {
+                    queue.poll();
+                    queue.offer(integer);
+                }
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        while(!queue.isEmpty()) {
+            list.add(queue.poll());
+        }
+        return list;
+    }
+
+
     public static void main(String[] args) {
         FrontKRepeatItem repeatItem = new FrontKRepeatItem();
         int[] arr = {1, 1, 1, 2, 2, 3, 3, 3};
         int k = 2;
-        List<Integer> result = repeatItem.findItem09(arr, k);
+        List<Integer> result = repeatItem.findItem10(arr, k);
         System.out.println(result.toString());
     }
 }

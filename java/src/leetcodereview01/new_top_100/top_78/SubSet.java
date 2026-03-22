@@ -29,11 +29,31 @@ public class SubSet {
     }
 
 
+    public List<List<Integer>> calculate02(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        dfs02(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void dfs02(int[] nums, int index, List<Integer> list) {
+        if (index == nums.length) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        list.add(nums[index]);
+        dfs02(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        dfs02(nums, index + 1, list);
+
+    }
+
 
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
         SubSet subSet = new SubSet();
-        List<List<Integer>> list = subSet.calculate01(nums);
+        List<List<Integer>> list = subSet.calculate02(nums);
         System.out.println(list.toString());
     }
 

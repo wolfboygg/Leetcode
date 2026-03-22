@@ -164,10 +164,24 @@ public class BitNumberCount {
         return list;
     }
 
+    public List<Integer> getBitNumber10(int target) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= target; i++) {
+            int value = i;
+            int count = 0;
+            while(value > 0) {
+                count++;
+                value = value & (value - 1);
+            }
+            list.add(count);
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
         BitNumberCount bitNumberCount = new BitNumberCount();
-        List<Integer> bitNumber = bitNumberCount.getBitNumber09(5);
+        List<Integer> bitNumber = bitNumberCount.getBitNumber10(5);
         System.out.println(bitNumber.toString());
     }
 }

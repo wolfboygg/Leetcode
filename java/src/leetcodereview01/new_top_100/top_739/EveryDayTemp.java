@@ -222,11 +222,29 @@ public class EveryDayTemp {
     }
 
 
+    public int[] getEveryDayTempByStack11(int[] temperatures) {
+        if (temperatures == null || temperatures.length == 0) {
+            return null;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[temperatures.length];
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                Integer index = stack.pop();
+                System.out.println(index);
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack09(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack11(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

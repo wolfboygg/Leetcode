@@ -98,9 +98,32 @@ public class HWString {
         }
     }
 
+    public String calculateHwCount04(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            findHw04(charArray, i, i);
+            findHw04(charArray, i-1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void findHw04(char[] charArr, int left, int right) {
+        while(left >=0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (right - left + 1 > len) {
+                this.left = left;
+                len = right - left + 1;
+            }
+            left--;
+            right++;
+        }
+    }
+
     public static void main(String[] args) {
         HWString hw = new HWString();
         String str = "aba";
-        System.out.println(hw.calculateHwCount03(str));
+        System.out.println(hw.calculateHwCount04(str));
     }
 }

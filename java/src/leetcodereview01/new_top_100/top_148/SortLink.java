@@ -303,6 +303,26 @@ public class SortLink {
         return merge06(left, right);
     }
 
+    public Node sortLink09(Node head, Node tail) {
+        // 二分法进行排序
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail && P2.next != null) { // 有尾，需要考虑到没到结尾
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node leftNode = sortLink09(head, P1);
+        Node rightNode = sortLink09(P1, tail);
+        return merge01(leftNode, rightNode);
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
@@ -312,7 +332,7 @@ public class SortLink {
         node2.next = node3;
         node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink08(node1, null);
+        Node node = sortLink.sortLink09(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

@@ -110,6 +110,17 @@ public class HMTRange {
         return count;
     }
 
+    public int getDistance09(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value-1);
+        }
+        return count;
+    }
+
+
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
         int distance = hmtRange.getDistance08(1, 4);
