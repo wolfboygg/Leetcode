@@ -78,9 +78,27 @@ public class GroupLetter {
     }
 
 
+    // 单词分组
+    public void groupLetter05(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return;
+        }
+        Map<String, ArrayList<String>> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            char[] charArray = strs[i].toCharArray();
+            Arrays.sort(charArray);
+            String key = new String(charArray);
+            ArrayList<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(strs[i]);
+            map.put(key, list);
+        }
+        System.out.println(map.values());
+    }
+
+
     public static void main(String[] args) {
         String[] strs = new String[] {"eat", "tea", "tan", "ate", "nat", "bat"};
         GroupLetter groupLetter = new GroupLetter();
-        groupLetter.groupLetter03(strs);
+        groupLetter.groupLetter05(strs);
     }
 }

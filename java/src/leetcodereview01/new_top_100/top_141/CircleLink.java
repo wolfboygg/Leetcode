@@ -200,6 +200,24 @@ public class CircleLink {
         return isHas;
     }
 
+    public boolean isCircle11(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node P1 = head;
+        Node P2 = P1;
+        boolean isHas = false;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        return isHas;
+    }
+
 
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
@@ -215,7 +233,7 @@ public class CircleLink {
         node4.next= node5;
         node5.next = node6;
         node6.next = node3;
-        boolean circle = circleLink.isCircle10(node1);
+        boolean circle = circleLink.isCircle11(node1);
         System.out.println(circle);
     }
 }

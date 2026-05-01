@@ -149,6 +149,17 @@ public class ReverseTree {
         return root;
     }
 
+    public TreeNode reverseTree11(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = reverseTree11(root.left);
+        TreeNode right = reverseTree11(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
     public static void main(String[] args) {
         ReverseTree reverseTree = new ReverseTree();
         TreeNode root0 = new TreeNode(1);

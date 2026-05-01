@@ -118,12 +118,40 @@ public class GenerateParenthesis {
             backTracking04(max, start, end + 1, list);
             list.remove(list.size() - 1);
         }
-
     }
+
+    public List<List<String>> generate05(int n) {
+        if (n <= 0) {
+            return null;
+        }
+        backTracking05(n, 0, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking05(int max, int start, int end, List<String> sb) {
+        if (sb.size() == max * 2) {
+            ret.add(new ArrayList<>(sb));
+            return;
+        }
+        if (start < max) {
+            sb.add("(");
+            backTracking05(max, start + 1, end, sb);
+            sb.remove(sb.size() -1 );
+        }
+
+        if (end < start) {
+            sb.add(")");
+            backTracking05(max, start, end + 1, sb);
+            sb.remove(sb.size() -1 );
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        List<List<String>> list = generateParenthesis.generate04(3);
+        List<List<String>> list = generateParenthesis.generate05(3);
         System.out.println(list.toString());
     }
 }

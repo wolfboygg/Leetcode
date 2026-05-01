@@ -87,10 +87,31 @@ public class WaterContainer {
         return max;
     }
 
+
+    // 接水的最大值
+    public int getWaterMaxValue05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length -1;
+        int max = 0;
+        while(left < right) {
+            int value = (right - left) * Math.min(arr[left], arr[right]);
+            max = Math.max(max, value);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         WaterContainer waterContainer = new WaterContainer();
         int[] arr = new int[] {1,8,6,2,5,4,8,3,7};
-        int value = waterContainer.getWaterMaxValue04(arr);
+        int value = waterContainer.getWaterMaxValue05(arr);
         System.out.println(value);
     }
 

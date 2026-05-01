@@ -239,12 +239,29 @@ public class EveryDayTemp {
         return result;
     }
 
+    public int[] getEveryDayTempByStack12(int[] temperatures) {
+        if (temperatures == null || temperatures.length == 0) {
+            return null;
+        }
+        int[] arr = new int[temperatures.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < temperatures.length; i++) {
+            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                int index = stack.pop();
+                arr[index] = i - index;
+                System.out.println("asdfad");
+            }
+            stack.push(i);
+        }
+        return arr;
+    }
+
 
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack11(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack12(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

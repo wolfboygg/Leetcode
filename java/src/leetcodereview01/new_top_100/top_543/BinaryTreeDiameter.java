@@ -141,6 +141,16 @@ public class BinaryTreeDiameter {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int diameter11(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = diameter11(root.left);
+        int right = diameter11(root.right);
+        res = Math.max(res, left + right);
+        return Math.max(left, right) + 1; // 求的是最大深度
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);

@@ -240,10 +240,55 @@ public class NextSequence {
         }
     }
 
+    public void getNextSequence08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;
+        for (int i = arr.length - 2; i >= 0 ; i--) {
+            if (arr[i] < arr[i+1]) {
+                P1 = i;
+                break;
+            }
+        }
+
+        if (P1 != -1) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[P1] < arr[i]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            if (P2 != -1) {
+                swap08(arr, P1, P2);
+            }
+            System.out.println(P1 + "," +  P2);
+        }
+        reverse08(arr, P1 + 1, arr.length - 1); // 这里要放到最后，是因为始终要找到一个
+    }
+
+    public void swap08(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
+
+    public void reverse08(int[] arr, int start, int end) {
+        while(start < end) {
+            swap08(arr, start, end);
+            start++;
+            end--;
+        }
+    }
+
+
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
-        int[] arr = new int[]{1,1,5};
-        nextSequence.getNextSequence07(arr);
+//        int[] arr = new int[]{1,1,5};
+//        int[] arr = new int[]{1,2,3};
+        int[] arr = new int[]{3,2,1};
+        nextSequence.getNextSequence08(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

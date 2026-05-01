@@ -2,6 +2,8 @@ package leetcodereview01.new_top_100.top_94;
 
 import leetcodereview01.top100.top_94.TreeInorderTraversal;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class TraversalTree {
@@ -266,6 +268,24 @@ public class TraversalTree {
         }
     }
 
+    public void traversalByStack10(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || node != null) {
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            TreeNode poll = stack.pop();
+            if (poll != null) {
+                System.out.print(poll.value + " ");
+                node = poll.right;
+            }
+        }
+    }
+
 
 
     public static void main(String[] args) {
@@ -278,7 +298,7 @@ public class TraversalTree {
         TraversalTree traversalTree = new TraversalTree();
         traversalTree.traversalByDG05(node1);
         System.out.println();
-        traversalTree.traversalByStack09(node1);
+        traversalTree.traversalByStack10(node1);
 
     }
 }

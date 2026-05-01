@@ -156,10 +156,39 @@ public class SearchRotateArray {
     }
 
 
+    public int find05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] == target) {
+                return middle;
+            }
+            if (arr[left] < arr[middle]) {  // 左边是递增区间
+                if (arr[left] <= target && target < arr[middle]) {
+                    right = middle - 1;
+                } else {
+                    left = middle + 1;
+                }
+            } else {
+                if (arr[middle] < target  && target <= arr[right]) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {4, 5, 6, 7, 0, 1, 2};
         SearchRotateArray searchRotateArray = new SearchRotateArray();
-        int result = searchRotateArray.find04(arr, 0);
+        int result = searchRotateArray.find05(arr, 0);
         System.out.println(result);
     }
 }

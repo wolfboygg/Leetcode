@@ -243,6 +243,30 @@ public class TreeNodeTargetSum {
         list.remove(list.size() - 1);
     }
 
+    public boolean findPath10(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath10(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath10(TreeNode root, int target, List<Integer> list) {
+        if (target < 0 || root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (root.left == null && root.right == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath10(root.left, target, list);
+            realFindPath10(root.right, target, list);
+        }
+        list.remove(list.size() - 1); // 确保要移除掉
+    }
+
+
 
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();

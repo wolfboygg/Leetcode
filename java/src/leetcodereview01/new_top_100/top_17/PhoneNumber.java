@@ -300,10 +300,33 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations13(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal13(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal13(char[] charArr, int index, StringBuilder sb) {
+        if (charArr.length == index) {
+            ret.add(sb.toString());
+            return;
+        }
+        char[] charArray = map[charArr[index] - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal13(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations12("234");
+        phoneNumber.letterCombinations13("234");
         System.out.println(ret.toString());
     }
 }
