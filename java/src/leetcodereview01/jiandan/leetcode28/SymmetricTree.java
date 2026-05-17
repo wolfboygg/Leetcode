@@ -239,11 +239,27 @@ public class SymmetricTree {
         return root1.value == root2.value && realIsSymmetric13(root1.left, root2.right) && realIsSymmetric13(root1.right, root2.left);
     }
 
+    public boolean isSymmetric14(TreeNode root) {
+        if (root == null) {
+            return false;
+        }
+        return realIsSymmetric14(root, root);
+    }
+
+    public boolean realIsSymmetric14(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        return root1.value == root2.value && realIsSymmetric14(root1.left, root2.right) && realIsSymmetric14(root1.right, root2.left);
+    }
 
     public static void main(String[] args) {
         SymmetricTree symmetricTree = new SymmetricTree();
         TreeNode tree = symmetricTree.createTree();
-        System.out.println(symmetricTree.isSymmetric13(tree));
+        System.out.println(symmetricTree.isSymmetric14(tree));
     }
 
 }

@@ -366,11 +366,35 @@ public class SearchTreeToLink {
         inOrder15(root.right);
     }
 
+    public TreeNode convert16(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        inOrder16(root);
+        return head;
+    }
+
+    public void inOrder16(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrder16(root.left);
+        if (head == null) {
+            head = root;
+        }
+        if (pre != null) {
+            pre.right = root;
+        }
+        root.left = pre;
+        pre = root;
+        inOrder16(root.right);
+    }
+
 
     public static void main(String[] args) {
         SearchTreeToLink searchTreeToLink = new SearchTreeToLink();
         TreeNode searchTree = searchTreeToLink.createSearchTree();
-        TreeNode convert = searchTreeToLink.convert15(searchTree);
+        TreeNode convert = searchTreeToLink.convert16(searchTree);
         TreeNode right = null;
         // 123321
         while (convert != null) {

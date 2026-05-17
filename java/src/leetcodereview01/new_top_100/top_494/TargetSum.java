@@ -186,6 +186,25 @@ public class TargetSum {
         backTracking08(value, target, index + 1, sum - value[index]);
     }
 
+    public int count09(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        backTrackingt09(arr, target, 0);
+        return count;
+    }
+
+    public void backTrackingt09(int[] arr, int target, int index) {
+        if (target <= 0) {
+            if (target == 0) {
+                count++;
+            }
+            return;
+        }
+        backTrackingt09(arr, target - arr[index], index + 1); // 一次递进就好了
+        backTrackingt09(arr, target + arr[index], index + 1);
+    }
+
 
 
     public static void main(String[] args) {

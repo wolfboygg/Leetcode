@@ -191,13 +191,24 @@ public class MirrorTree {
         return root;
     }
 
+    public TreeNode mirrorTree14(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        TreeNode left = mirrorTree14(root.left);
+        TreeNode right = mirrorTree14(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
 
     public static void main(String[] args) {
         MirrorTree mirrorTree = new MirrorTree();
         TreeNode tree = mirrorTree.createTree();
         mirrorTree.traversalTree(tree);
         System.out.println();
-        mirrorTree.mirrorTree13(tree);
+        mirrorTree.mirrorTree14(tree);
         mirrorTree.traversalTree(tree);
     }
 

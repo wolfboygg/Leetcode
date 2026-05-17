@@ -311,12 +311,32 @@ public class ValidKH {
         return stack.isEmpty();
     }
 
+    public boolean valid13(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        char[] charArr = str.toCharArray();
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < charArr.length; i++) {
+            if (charArr[i] == '(' || charArr[i] == '[' || charArr[i] == '{') {
+                stack.push(charArr[i]);
+            } else if (charArr[i] == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+                return false;
+            } else if (charArr[i] == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+                return false;
+            } else if (charArr[i] == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
 
     public static void main(String[] args){
         String str1 = "([)]";
         String str2 = "{[]}";
         ValidKH validKH = new ValidKH();
-        System.out.println(validKH.valid12(str1));
-        System.out.println(validKH.valid12(str2));
+        System.out.println(validKH.valid13(str1));
+        System.out.println(validKH.valid13(str2));
     }
 }

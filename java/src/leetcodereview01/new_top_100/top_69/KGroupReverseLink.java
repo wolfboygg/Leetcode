@@ -188,10 +188,10 @@ public class KGroupReverseLink {
         }
         Node node = pre.next;
         while(pre != null) {
-            System.out.print(pre.value + " ");
+//            System.out.print(pre.value + " ");
             pre = pre.next;
         }
-        System.out.println();
+//        System.out.println();
         return node;
     }
 
@@ -247,6 +247,33 @@ public class KGroupReverseLink {
         return pre.next;
     }
 
+    public Node kGroupReverse06(Node head, int k) {
+        if (head == null || k == 0) {
+            return head;
+        }
+        Node temp = new Node(-1);
+        temp.next = head;
+        Node P1 = temp;
+        Node P2 = temp;
+        while(P2.next != null) {
+            for (int i = 0; i < k && P2 != null; i++) {
+                P2 = P2.next;
+            }
+            Node next = P2 == null ? null : P2.next;
+            if (P2 != null) {
+                P2.next = null;
+            }
+            P2 = P1.next;
+            P1.next = reverse03(P1.next);
+            if (P2 == null) {
+                break;
+            }
+            P1 = P2;
+            P2.next = next;
+        }
+        return temp.next;
+    }
+
 
     public static void main(String[] args){
         Node node1 = new Node(1);
@@ -267,7 +294,7 @@ public class KGroupReverseLink {
         node7.next = node8;
 
         KGroupReverseLink reverseLink = new KGroupReverseLink();
-        Node node = reverseLink.kGroupReverse05(node1, 3);
+        Node node = reverseLink.kGroupReverse06(node1, 3);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

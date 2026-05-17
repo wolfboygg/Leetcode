@@ -268,9 +268,32 @@ public class DoubleNumPower {
     }
 
 
+    public double power12(int base, int target) {
+        boolean isNegative = target < 0;
+        double value = realPower12(base, Math.abs(target));
+        return isNegative ?  1 / value : value;
+    }
+
+
+    public double realPower12(int base, int target) {
+        if (target == 0) {
+            return 1;
+        }
+        if (target == 1) {
+            return base;
+        }
+        double value = realPower12(base, target / 2);
+        value *= value;
+        if (target % 2 == 1) {
+            value *= base;
+        }
+        return value;
+    }
+
+
     public static void main(String[] args) {
         DoubleNumPower doubleNumPower = new DoubleNumPower();
-        System.out.println(doubleNumPower.power11(2, -3));
+        System.out.println(doubleNumPower.power12(2, -3));
     }
 
 

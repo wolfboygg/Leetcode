@@ -138,10 +138,19 @@ public class TreeDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
+    public int getDepth13(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = getDepth13(root.left);
+        int rightDepth = getDepth13(root.right);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         TreeDepth treeDepth = new TreeDepth();
         TreeNode tree = treeDepth.createTree();
-        int depth = treeDepth.getTreeDepth11(tree);
+        int depth = treeDepth.getDepth13(tree);
         System.out.println(depth);
     }
 

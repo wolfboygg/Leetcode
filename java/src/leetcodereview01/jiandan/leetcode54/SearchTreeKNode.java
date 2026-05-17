@@ -167,11 +167,23 @@ public class SearchTreeKNode {
         dfs10(root.left);
     }
 
+    public void dfs11(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        dfs11(root.right);
+        if (--k == 0) {
+            result = root.value;
+            return;
+        }
+        dfs11(root.left);
+    }
+
     public static void main(String[] args) {
         SearchTreeKNode searchTreeKNode = new SearchTreeKNode();
         TreeNode tree = searchTreeKNode.createTree();
         searchTreeKNode.k = 3;
-        searchTreeKNode.dfs10(tree);
+        searchTreeKNode.dfs11(tree);
         System.out.println(searchTreeKNode.result);
     }
 

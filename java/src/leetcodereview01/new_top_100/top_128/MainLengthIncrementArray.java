@@ -256,11 +256,38 @@ public class MainLengthIncrementArray {
         return max;
     }
 
+    public int getMaxLength10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        Set<Integer> set = new HashSet<>();
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (!set.contains(arr[i] - 1)) {
+                int count = 1;
+                int value = arr[i] + 1;
+                while(set.contains(value)) {
+                    count++;
+                    value = value + 1;
+                }
+                max = Math.max(max, count);
+            }
+
+        }
+        return max;
+    }
+
+
+
+
 
     public static void main(String[] args) {
         int[] arr = {100, 4, 200, 1, 3, 2};
         MainLengthIncrementArray mainLengthIncrementArray = new MainLengthIncrementArray();
-        System.out.println(mainLengthIncrementArray.getMaxLength09(arr));
+        System.out.println(mainLengthIncrementArray.getMaxLength10(arr));
     }
 
 }

@@ -321,12 +321,34 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations14(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal14(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal14(char[] charArray, int index, StringBuilder sb) {
+        if (sb.length() == charArray.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] arr = map[charArray[index] - '0'].toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(arr[i]);
+            traversal14(charArray, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+    }
+
 
 
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations13("234");
+        phoneNumber.letterCombinations14("234");
         System.out.println(ret.toString());
     }
 }

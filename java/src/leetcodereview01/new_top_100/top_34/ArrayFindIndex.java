@@ -272,12 +272,39 @@ public class ArrayFindIndex {
     }
 
 
+    public int[] find11(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int lowIndex = realFind11(arr, target, true);
+        int rightIndex = realFind11(arr, target, false) - 1;
+        return new int[] {lowIndex, rightIndex};
+    }
+
+    public int realFind11(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length -1;
+        int targetIndex = -1;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (arr[middle] >= target && isLow)) { // 必须使用大于进行判断
+                right = middle - 1;
+                System.out.println("targetIndex:" + targetIndex);
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find10(arr, target);
+        int[] result = arrayFindIndex.find11(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }

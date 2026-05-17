@@ -49,11 +49,31 @@ public class SubSet {
 
     }
 
+    public List<List<Integer>> calculate03(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        traversal03(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void traversal03(int[] nums, int index, List<Integer> list) {
+        if (index >= nums.length) {
+            if (index == nums.length) {
+                ret.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        list.add(nums[index]);
+        traversal03(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        traversal03(nums, index + 1, list);
+    }
 
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
         SubSet subSet = new SubSet();
-        List<List<Integer>> list = subSet.calculate02(nums);
+        List<List<Integer>> list = subSet.calculate03(nums);
         System.out.println(list.toString());
     }
 

@@ -1,6 +1,8 @@
 package leetcodereview01.new_top_100.top_287;
 
 
+import java.util.Arrays;
+
 public class FindRepeatNumber {
 
     public int findRepeatNumber(int[] arr) {
@@ -213,11 +215,30 @@ public class FindRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber12(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i + 1) {
+                if (arr[i] != arr[arr[i]]) {
+                    int temp = arr[i];
+                    arr[i] = arr[temp];
+                    arr[temp] = temp;
+                } else {
+                    System.out.println(Arrays.toString(arr));
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 4, 3, 2};
         FindRepeatNumber findRepeatNumber = new FindRepeatNumber();
-        int result = findRepeatNumber.findRepeatNumber11(arr);
+        int result = findRepeatNumber.findRepeatNumber12(arr);
         System.out.println(result);
     }
 }

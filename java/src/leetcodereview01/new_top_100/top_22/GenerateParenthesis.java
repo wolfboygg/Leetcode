@@ -146,12 +146,61 @@ public class GenerateParenthesis {
         }
     }
 
+    public List<List<String>> generate06(int n) {
+        if (n <= 0) {
+            return null;
+        }
+        backTracking06(new ArrayList<>(), 0, 0, n);
+        return ret;
+    }
 
+    public void backTracking06(List<String> list, int open, int close, int max) {
+        if (max * 2 == list.size()) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if (open < max) {
+            list.add("(");
+            backTracking06(list, open + 1, close, max);
+            list.remove(list.size() - 1);
+        }
+        if (close < open) {
+            list.add(")");
+            backTracking06(list, open, close + 1, max);
+            list.remove(list.size() - 1);
+        }
+    }
+
+
+    public List<List<String>> generate07(int n) {
+        if (n <= 0) {
+            return null;
+        }
+        backTracking07(0, 0, n, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking07(int open, int close, int n, List<String> list) {
+        if (list.size() == 2 * n) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        if(open < n) {
+            list.add("(");
+            backTracking07(open + 1, close, n, list);
+            list.remove(list.size() - 1);
+        }
+        if (close < open) {
+            list.add(")");
+            backTracking07(open, close + 1, n, list);
+            list.remove(list.size() - 1);
+        }
+    }
 
 
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        List<List<String>> list = generateParenthesis.generate05(3);
+        List<List<String>> list = generateParenthesis.generate07(3);
         System.out.println(list.toString());
     }
 }

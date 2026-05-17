@@ -137,12 +137,24 @@ public class OnlyOneNumber {
         return value;
     }
 
+    // 亦或求结果
+    public int onlyOne11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int value = 0;
+        for (int i = 0; i < arr.length; i++) {
+            value ^= arr[i];
+        }
+        return value;
+    }
+
 
     public static void main(String[] args) {
        // 任何数和0异或的任何数
         int[] arr = {4,1,2,1,2, 4, 5};
         OnlyOneNumber onlyOneNumber = new OnlyOneNumber();
-        int i = onlyOneNumber.onlyOne10(arr);
+        int i = onlyOneNumber.onlyOne11(arr);
         System.out.println(i);
     }
 }

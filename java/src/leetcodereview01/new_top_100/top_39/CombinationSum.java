@@ -278,6 +278,28 @@ public class CombinationSum {
         }
     }
 
+    public List<List<Integer>> findAllResult10(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking10(arr, 0, target, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking10(int[] arr, int index, int target, List<Integer> list) {
+        if (target == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (target - arr[i] < 0) {
+                break;
+            }
+            list.add(arr[i]);
+            backTracking10(arr, i, target - arr[i], list);
+            list.remove(list.size() - 1);
+        }
+    }
 
 
     public static void main(String[] args) {

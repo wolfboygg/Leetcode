@@ -470,11 +470,53 @@ public class RobotActiveRange {
             backTracking11(matrix, next, marked, i + ints[0], j + ints[1], target);
         }
     }
+    
+    public int findPath12(int m, int n, int target) {
+        row = m;
+        column = n;
+        this.target = target;
+        int[][] matrix = new int[m][n];
+        int max = Math.max(row, column);
+        int[] value = new int[max];
+        for (int i = 0; i < max; i++) {
+            int temp = i;
+            while(temp > 0) {
+                value[i] += temp % 10; 
+                temp /= 10;
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix[i][j] = value[i] + value[j];
+            }
+        }
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        boolean[][] mark = new boolean[m][n];
+        backTracking12(matrix, next, mark, 0, 0);
+        System.out.println(count);
+        return count;
+    }
 
+
+    public void backTracking12(int[][] matrix, int[][] next, boolean[][] mark, int i, int j) {
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] > target || mark[i][j]) {
+            return;
+        }
+        count++;
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            backTracking12(matrix, next, mark, i + ints[0], j + ints[1]);
+        }
+    }
 
     public static void main(String[] args) {
         RobotActiveRange robotActiveRange = new RobotActiveRange();
-        robotActiveRange.findPath11(3, 2, 2);
+        robotActiveRange.findPath12(3, 2, 2);
     }
 }
 

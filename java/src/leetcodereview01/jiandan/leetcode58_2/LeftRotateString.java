@@ -124,10 +124,21 @@ public class LeftRotateString {
     }
 
 
+    public void rotate09(String str, int k) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        reverse08(charArray, 0, k - 1);
+        reverse08(charArray, k, charArray.length - 1);
+        reverse08(charArray, 0, charArray.length - 1);
+        System.out.println(new String(charArray));
+    }
+
 
     public static void main(String[] args) {
         String str = "abcdefg";
         LeftRotateString leftRotateString = new LeftRotateString();
-        leftRotateString.rotate08(str, 2);
+        leftRotateString.rotate09(str, 2);
     }
 }

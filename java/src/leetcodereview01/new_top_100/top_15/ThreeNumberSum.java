@@ -111,12 +111,34 @@ public class ThreeNumberSum {
         }
     }
 
+    public boolean getSumIsZeroList04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return false;
+        }
+        backTracking04(arr, 0, 0, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void backTracking04(int[] arr, int index, int sum, List<Integer> list) {
+        if (list.size() == 3 && sum == 0) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            list.add(arr[i]);
+            sum += arr[i];
+            backTracking04(arr, i + 1, sum, list);
+            sum -= arr[i];
+            list.remove(list.size() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         ThreeNumberSum threeNumberSum = new ThreeNumberSum();
         int[] arr = new int[] {-1,0,1,2,-1,-4};
 //        int[] arr = new int[] {0,1,1};
-        boolean isExit = threeNumberSum.getSumIsZeroList03(arr);
+        boolean isExit = threeNumberSum.getSumIsZeroList04(arr);
         if (isExit) {
             System.out.println(threeNumberSum.ret.toString());
         }

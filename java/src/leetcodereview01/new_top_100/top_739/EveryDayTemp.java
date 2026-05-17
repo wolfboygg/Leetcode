@@ -256,12 +256,28 @@ public class EveryDayTemp {
         return arr;
     }
 
+    public int[] getEveryDayTempByStack13(int[] temperatures) {
+        if (temperatures == null || temperatures.length == 0) {
+            return null;
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[temperatures.length];
+        for (int i = 0; i < temperatures.length; i++) {
+            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                Integer index = stack.pop();
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack12(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack13(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

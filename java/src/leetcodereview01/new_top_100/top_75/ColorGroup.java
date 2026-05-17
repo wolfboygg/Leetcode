@@ -79,9 +79,33 @@ public class ColorGroup {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void group04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[P1];
+                arr[P1] = arr[i];
+                arr[i] = temp;
+                P1++;
+            }
+        }
+        for (int i = P1; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                int temp = arr[P1];
+                arr[P1] = arr[i];
+                arr[i] = temp;
+                P1++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void main(String[] args) {
         ColorGroup colorGroup = new ColorGroup();
         int[] color = new int[] {2,0,2,1,1,0};
-        colorGroup.group03(color);
+        colorGroup.group04(color);
     }
 }

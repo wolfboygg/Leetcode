@@ -323,6 +323,26 @@ public class SortLink {
         return merge01(leftNode, rightNode);
     }
 
+    // 这种排序必须依赖tail为null，否则就拆分不开了 其实就是怎么拆分节点，所以走的快的不能等于tail，否则会空指针
+    public Node sortLink10(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node node1 = sortLink10(head, P1);
+        Node node2 = sortLink10(P1, tail);
+        return merge01(node1, node2);
+    }
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
@@ -332,7 +352,7 @@ public class SortLink {
         node2.next = node3;
         node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink09(node1, null);
+        Node node = sortLink.sortLink10(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

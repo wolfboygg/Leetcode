@@ -70,8 +70,25 @@ public class NumSquare {
         return dp[n];
     }
 
+    public int calculate05(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        int[] dp = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j]);
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
+
+
+
     public static void main(String[] args) {
         NumSquare numSquare = new NumSquare();
-        System.out.println(numSquare.calculate04(2));
+        System.out.println(numSquare.calculate05(4));
     }
 }

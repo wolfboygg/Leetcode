@@ -130,10 +130,20 @@ public class HMTRange {
         return count;
     }
 
+    public int getDistance11(int a, int b) {
+        int value = a ^ b;
+        int count = 0;
+        while(value > 0) {
+            value &= (value - 1);
+            count++;
+        }
+        return count;
+    }
+
 
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();
-        int distance = hmtRange.getDistance10(1, 4);
+        int distance = hmtRange.getDistance11(1, 4);
         System.out.println(distance);
     }
 }

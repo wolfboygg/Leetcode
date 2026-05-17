@@ -123,12 +123,51 @@ public class MaxCommonStr {
         return max;
     }
 
+    public int findMaxCommonStr04(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return -1;
+        }
+        int[][] matrix = new int[str1.length() + 1][str2.length() + 1];
+        int max = 0;
+        for (int i = 1; i < str1.length() + 1; i++) {
+            for (int j = 1; j < str2.length() + 1; j++) {
+                if (str1.charAt(i-1) == str2.charAt(j-1)) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                    max = Math.max(max, matrix[i][j]);
+                } else {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        return max;
+    }
+
+    public int findMaxCommonSequence04(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return -1;
+        }
+        int[][] matrix = new int[str1.length() + 1][str2.length() + 1];
+        int max = 0;
+        for (int i = 1; i < str1.length() + 1; i++) {
+            for (int j = 1; j < str2.length() + 1; j++) {
+                if (str1.charAt(i-1) == str2.charAt(j-1)) {
+                    matrix[i][j] = matrix[i-1][j-1] + 1;
+                    max = Math.max(max, matrix[i][j]);
+                } else {
+                    matrix[i][j] = matrix[i-1][j-1];
+                }
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         String s1 = "ABCDEFG";
         String s2 = "ABADEFKG";
         // 最大公共字串
         MaxCommonStr maxCommonStr = new MaxCommonStr();
-        int maxLength = maxCommonStr.findMaxCommonStr03(s1, s2);
+        int maxLength = maxCommonStr.findMaxCommonStr04(s1, s2);
         System.out.println(maxLength);
         int maxSequence = maxCommonStr.findMaxCommonSequence03(s1, s2);
         System.out.println(maxSequence);

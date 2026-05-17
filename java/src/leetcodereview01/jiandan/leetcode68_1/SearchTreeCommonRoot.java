@@ -190,11 +190,27 @@ public class SearchTreeCommonRoot {
         return null;
     }
 
+    public TreeNode findComRoot11(TreeNode root, TreeNode node1, TreeNode node2) {
+        if (root == null) {
+            return null;
+        }
+        while(root != null) {
+            if (node1.value < root.value && node2.value < root.value) {
+                root = root.left;
+            } else if (node1.value > root.value && node2.value > root.value) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+        return root;
+    }
+
 
     public static void main(String[] args) {
         SearchTreeCommonRoot searchTreeCommonRoot = new SearchTreeCommonRoot();
         TreeNode tree = searchTreeCommonRoot.createTree();
-        TreeNode node = searchTreeCommonRoot.findComRoot10(tree, new TreeNode(2), new TreeNode(8));
+        TreeNode node = searchTreeCommonRoot.findComRoot11(tree, new TreeNode(2), new TreeNode(8));
         if (node != null) {
             System.out.println(node.value);
         }

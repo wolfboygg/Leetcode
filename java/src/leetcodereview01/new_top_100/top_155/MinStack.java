@@ -115,16 +115,35 @@ public class MinStack {
         return minorStack.peek();
     }
 
+    public void push05(int value) {
+        if (minorStack.isEmpty()) {
+            minorStack.push(value);
+        } else {
+            minorStack.push(minorStack.peek() > value ? value : minorStack.peek());
+        }
+        majorStack.push(value);
+    }
+
+    public int pop05() {
+        minorStack.pop();
+        return majorStack.pop();
+    }
+
+    public int minValue05() {
+        return minorStack.peek();
+    }
+
+
 
     public static void main(String[] args) {
         MinStack minStack = new MinStack();
-        minStack.push04(1);
-        minStack.push04(2);
-        minStack.push04(3);
-        minStack.push04(4);
-        minStack.push04(-1);
-        System.out.println(minStack.minValue04());
-        minStack.pop04();
-        System.out.println(minStack.minValue04());
+        minStack.push05(1);
+        minStack.push05(2);
+        minStack.push05(3);
+        minStack.push05(4);
+        minStack.push05(-1);
+        System.out.println(minStack.minValue05());
+        minStack.pop05();
+        System.out.println(minStack.minValue05());
     }
 }
