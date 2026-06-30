@@ -2,6 +2,10 @@ package fibonacci;
 
 class Fibonacci {
 
+    static {
+        System.out.println("fasdfasdfads");
+    }
+
     /**
      * 递归实现
      */

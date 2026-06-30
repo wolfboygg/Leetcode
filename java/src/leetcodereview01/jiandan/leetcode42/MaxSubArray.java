@@ -168,13 +168,25 @@ public class MaxSubArray {
         return max;
     }
 
+    public int findSum16(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int curMax = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            curMax = Math.max(curMax + arr[i], arr[i]);
+            max = Math.max(max, curMax);
+        }
+        return max;
+    }
 
     public static void main(String[] args) {
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         // 使用动态规划求解
         MaxSubArray maxSubArray = new MaxSubArray();
         maxSubArray.findSum(arr);
-        System.out.println(maxSubArray.findSum15(arr));;
+        System.out.println(maxSubArray.findSum16(arr));;
         String str = "abc";
         String str2 = "abc";
 //        System.out.println(str == str2);

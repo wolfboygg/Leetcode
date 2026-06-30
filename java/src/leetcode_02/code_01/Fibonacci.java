@@ -2,6 +2,12 @@ package leetcode_02.code_01;
 
 public class Fibonacci {
 
+    public static String aa = "asdfad";
+
+    static {
+        System.out.println("asdfasdfsd2222");
+    }
+
     public static void main(String[] args) {
 
         System.out.println(fibonacci(10));

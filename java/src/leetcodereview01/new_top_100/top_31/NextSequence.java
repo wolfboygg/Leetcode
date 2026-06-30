@@ -308,13 +308,40 @@ public class NextSequence {
         reverse08(arr, P1 + 1, arr.length -1);
     }
 
+    public void getNextSequence10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = -1;
+        for (int i = arr.length - 2; i > 0; i--) {
+            if (arr[i] < arr[i + 1]) {
+                P1 = i;
+                break;
+            }
+        }
+        if (P1 != -1) {
+            int P2 = -1;
+            for (int i = P1 + 1; i < arr.length; i++) {
+                if (arr[i] > arr[P1]) {
+                    P2 = i;
+                    break;
+                }
+            }
+            System.out.println(P1 + "," + P2);
+            if (P2 != -1) {
+                swap08(arr, P1, P2);
+            }
+        }
+        reverse08(arr, P1 + 1, arr.length - 1);
+    }
+
 
     public static void main(String[] args) {
         NextSequence nextSequence = new NextSequence();
 //        int[] arr = new int[]{1,1,5};
-        int[] arr = new int[]{1,2,3};
-//        int[] arr = new int[]{3,2,1};
-        nextSequence.getNextSequence09(arr);
+//        int[] arr = new int[]{1,2,3};
+        int[] arr = new int[]{3,2,1};
+        nextSequence.getNextSequence10(arr);
         System.out.println(Arrays.toString(arr));
     }
 }

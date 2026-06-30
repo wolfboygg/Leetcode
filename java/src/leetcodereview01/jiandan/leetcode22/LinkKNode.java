@@ -225,6 +225,22 @@ public class LinkKNode {
     }
 
 
+    public Node getTailKNode15(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        while (P1 != null) {
+            P1 = P1.next;
+            P2 = P2.next;
+        }
+        return P2;
+    }
+
     // 1, 2, 3, 4, 5
     public static void main(String[] args) {
         LinkKNode linkKNode = new LinkKNode();
@@ -237,7 +253,7 @@ public class LinkKNode {
         node02.next = node03;
         node03.next = node04;
         node04.next = node05;
-        Node node = linkKNode.getTailKNode14(node01, 1);
+        Node node = linkKNode.getTailKNode15(node01, 1);
         System.out.println(node.value);
     }
 }

@@ -421,10 +421,34 @@ public class TreeFindSumTargetPath {
         list.remove(list.size() - 1);
     }
 
+
+    public boolean findPath16(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        backTracking16(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void backTracking16(TreeNode root, int target, List<Integer> list) {
+        if (root == null || target <= 0) {
+            return;
+        }
+        list.add(root.value);
+        target -= root.value;
+        if (root.left == null && root.right == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            backTracking16(root.left, target, list);
+            backTracking16(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
     public static void main(String[] args) {
         TreeFindSumTargetPath treeFindSumTargetPath = new TreeFindSumTargetPath();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath15(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath16(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

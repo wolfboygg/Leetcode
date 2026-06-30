@@ -222,10 +222,30 @@ public class MaxIncrementZXL {
         return max;
     }
 
+    public int calculate11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int[] dp = new int[arr.length];
+        dp[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{10, 9, 2, 5, 3, 7, 206, 205, 300};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate10(arr));
+        System.out.println(maxIncrementZXL.calculate11(arr));
     }
 }
