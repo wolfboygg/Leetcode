@@ -115,10 +115,31 @@ public class GroupLetter {
         System.out.println(map.values());
     }
 
+    public void groupLetter07(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return;
+        }
+        Map<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            String str = strs[i];
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String key = new String(charArray);
+            if (map.containsKey(key)) {
+                map.get(key).add(str);
+            } else {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(str);
+                map.put(key, list);
+            }
+        }
+        System.out.println(map.values());
+    }
+
 
     public static void main(String[] args) {
         String[] strs = new String[] {"eat", "tea", "tan", "ate", "nat", "bat"};
         GroupLetter groupLetter = new GroupLetter();
-        groupLetter.groupLetter06(strs);
+        groupLetter.groupLetter07(strs);
     }
 }

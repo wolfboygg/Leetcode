@@ -127,10 +127,30 @@ public class WaterContainer {
         return max;
     }
 
+    // 其实就是找到最高槽位置
+    public int getWaterMaxValue07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            max = Math.max(max, (right - left) * Math.min(arr[left], arr[right]));
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         WaterContainer waterContainer = new WaterContainer();
         int[] arr = new int[] {1,8,6,2,5,4,8,3,7};
-        int value = waterContainer.getWaterMaxValue06(arr);
+        int value = waterContainer.getWaterMaxValue05(arr);
         System.out.println(value);
     }
 

@@ -260,6 +260,28 @@ public class BuildTreeNode {
         return root;
     }
 
+    public TreeNode build10(int[] pre, int[] in) {
+        if (pre == null || in == null) {
+            return null;
+        }
+        for (int i = 0; i < in.length; i++) {
+            inOrderIndex.put(in[i], i);
+        }
+        return realBuild10(pre, 0, pre.length - 1, in, 0, in.length - 1);
+    }
+
+    public TreeNode realBuild10(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int rootIndex = inOrderIndex.get(rootValue);
+        int leftChildCount = rootIndex - inLeft;
+        TreeNode root = new TreeNode(rootValue);
+        root.left = realBuild10(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
+        root.right = realBuild10(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
+        return root;
+    }
 
 
 
@@ -267,7 +289,7 @@ public class BuildTreeNode {
         int[] pre = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         BuildTreeNode buildTreeNode = new BuildTreeNode();
-        TreeNode root = buildTreeNode.build09(pre, inOrder);
+        TreeNode root = buildTreeNode.build10(pre, inOrder);
         buildTreeNode.preTraversal(root);
     }
 }

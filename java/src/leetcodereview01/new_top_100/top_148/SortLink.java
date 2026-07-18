@@ -363,6 +363,27 @@ public class SortLink {
         return merge01(left, right);
     }
 
+
+    public Node sortLink12(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node left = sortLink12(head, P1);
+        Node right = sortLink12(P1, tail);
+        return merge(left, right);
+    }
+
+
     public static void main(String[] args) {
         Node node1 = new Node(4);
         Node node2 = new Node(2);
@@ -372,7 +393,7 @@ public class SortLink {
         node2.next = node3;
         node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink11(node1, null);
+        Node node = sortLink.sortLink12(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

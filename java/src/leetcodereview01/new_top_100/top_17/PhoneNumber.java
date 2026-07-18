@@ -344,11 +344,31 @@ public class PhoneNumber {
     }
 
 
+    public void letterCombinations15(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal15(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal15(char[] charArr, int index, StringBuilder sb) {
+        if (charArr.length == sb.length()) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] chars = map[charArr[index] - '0'].toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            sb.append(chars[i]);
+            traversal15(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
 
 
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations14("234");
+        phoneNumber.letterCombinations15("234");
         System.out.println(ret.toString());
     }
 }

@@ -156,11 +156,27 @@ public class MoveZero {
         }
     }
 
+    // 双指针解决问题
+    public void moveToStart08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[i];
+                arr[i] = arr[P1];
+                arr[P1] = temp;
+                P1++;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[] {1,2,0,0,3,12};
         MoveZero moveZero = new MoveZero();
-        moveZero.moveTOStart07(arr);
+        moveZero.moveToStart08(arr);
         System.out.println(Arrays.toString(arr));
     }
 

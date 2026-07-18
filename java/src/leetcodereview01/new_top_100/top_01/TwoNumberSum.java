@@ -346,12 +346,26 @@ public class TwoNumberSum {
         return null;
     }
 
+    public int[] twoSumWx15(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        Set<Integer> set= new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(target - nums[i])) {
+                return new int[] {nums[i], target - nums[i]};
+            }
+            set.add(nums[i]);
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         int[] num = {2, 7, 11, 15};
         int[] num2 = {3, 2, 4};
         TwoNumberSum twoNumberSum = new TwoNumberSum();
-        int[] result = twoNumberSum.twoSumWx14(num2, 6);
+        int[] result = twoNumberSum.twoSumWx15(num2, 6);
         System.out.println(Arrays.toString(result));
     }
 }

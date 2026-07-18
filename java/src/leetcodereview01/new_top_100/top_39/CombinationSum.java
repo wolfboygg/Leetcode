@@ -301,11 +301,39 @@ public class CombinationSum {
         }
     }
 
+    public List<List<Integer>> findAllResult11(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        backTracking11(arr, target, 0, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void backTracking11(int[] arr, int target, int index, int sum, List<Integer> list) {
+        if (sum >= target) {
+            if (sum == target) {
+                System.out.println("list:" + list.toString());
+                ret.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        for (int i = index; i < arr.length; i++) {
+            if (sum + arr[i] > target) {
+                break;
+            }
+            sum += arr[i];
+            list.add(arr[i]);
+            backTracking11(arr, target, i, sum, list);
+            sum -= arr[i];
+            list.remove(list.size() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult09(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult11(arr, 7);
         System.out.println(allResult.toString());
     }
 }

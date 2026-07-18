@@ -140,6 +140,16 @@ public class HMTRange {
         return count;
     }
 
+    public int getDistance12(int value1, int value2) {
+        int value = value1 ^ value2;
+        int count = 0;
+        while(value > 0) {
+            count++;
+            value &= (value - 1);
+        }
+        return count;
+    }
+
 
     public static void main(String[] args) {
         HMTRange hmtRange = new HMTRange();

@@ -70,10 +70,29 @@ public class SubSet {
         traversal03(nums, index + 1, list);
     }
 
+    public List<List<Integer>> calculate04(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        traversal04(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void traversal04(int[] nums, int index, List<Integer> list) {
+        if (index >= nums.length) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        list.add(nums[index]);
+        traversal04(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        traversal04(nums, index + 1, list);
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
         SubSet subSet = new SubSet();
-        List<List<Integer>> list = subSet.calculate03(nums);
+        List<List<Integer>> list = subSet.calculate04(nums);
         System.out.println(list.toString());
     }
 

@@ -186,23 +186,23 @@ public class TargetSum {
         backTracking08(value, target, index + 1, sum - value[index]);
     }
 
-    public int count09(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
+    //加减得到结果
+    public int count09(int[] value, int target) {
+        if (value == null || value.length == 0) {
             return -1;
         }
-        backTrackingt09(arr, target, 0);
+        backTracking09(value, target, 0, 0);
         return count;
     }
-
-    public void backTrackingt09(int[] arr, int target, int index) {
-        if (target <= 0) {
-            if (target == 0) {
+    public void backTracking09(int[] value, int target, int sum, int index) {
+        if (index >= value.length) {
+            if (sum == target) {
                 count++;
             }
             return;
         }
-        backTrackingt09(arr, target - arr[index], index + 1); // 一次递进就好了
-        backTrackingt09(arr, target + arr[index], index + 1);
+        backTracking09(value, target, sum + value[index], index + 1);
+        backTracking09(value, target, sum - value[index], index + 1);
     }
 
 
@@ -211,6 +211,6 @@ public class TargetSum {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count08(value, target));
+        System.out.println(targetSum.count09(value, target));
     }
 }

@@ -161,6 +161,16 @@ public class BinaryTreeDiameter {
         return Math.max(left, right) + 1;
     }
 
+    public int diameter13(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftDepth = diameter13(root.left);
+        int rightDepth = diameter13(root.right);
+        res = Math.max(res, leftDepth + rightDepth);
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);
@@ -173,7 +183,7 @@ public class BinaryTreeDiameter {
         node2.right = node5;
 
         BinaryTreeDiameter binaryTreeDiameter = new BinaryTreeDiameter();
-        int diameter = binaryTreeDiameter.diameter11(node1);
+        int diameter = binaryTreeDiameter.diameter13(node1);
         System.out.println(diameter);
         System.out.println(res);
     }

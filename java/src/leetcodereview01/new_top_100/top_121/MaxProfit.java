@@ -163,6 +163,19 @@ public class MaxProfit {
         return maxValue;
     }
 
+    public int getMaxProfit12(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int minValue = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            minValue = Math.min(minValue, arr[i]);
+            max = Math.max(max, arr[i] -minValue);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] arr = {7, 1, 5, 3, 6, 4};
         // 找到最大的利润
