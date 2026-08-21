@@ -3,7 +3,9 @@ package leetcodereview01.new_top_100.top_22;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 括号的生成 */
+/**
+ * 括号的生成
+ */
 public class GenerateParenthesis {
 
     private List<List<String>> ret = new ArrayList<>();
@@ -22,10 +24,10 @@ public class GenerateParenthesis {
             ret.add(new ArrayList<>(list));
             return;
         }
-        if(open < max) {
+        if (open < max) {
             list.add("(");
             System.out.println("11111---add");
-            backTracking01(list, open + 1, close , max);
+            backTracking01(list, open + 1, close, max);
             list.remove(list.size() - 1);
             System.out.println("111111-remove");
         }
@@ -37,221 +39,35 @@ public class GenerateParenthesis {
         }
     }
 
-
     public List<List<String>> generate02(int n) {
-        if (n == 0) {
+        if (n <= 0) {
             return null;
         }
         backTracking02(n, 0, 0, new ArrayList<>());
         return ret;
     }
 
-    public void backTracking02(int max, int start, int end, List<String> list) {
-        System.out.println(list.size() + "start," + start + ",end" + end);
-        if (list.size() == max * 2) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (start < max) {
-            list.add("(");
-            backTracking02(max, start + 1, end, list);
-            list.remove(list.size() - 1);
-        }
-        if (end < start) {
-            list.add(")");
-            backTracking02(max, start, end + 1, list);
-            list.remove(list.size() - 1);
-        }
-    }
-
-    public List<List<String>> generate03(int n) {
-        if (n == 0) {
-            return null;
-        }
-        backTracking03(n, 0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking03(int max, int start, int end, List<String> list) {
-        if (list.size() == max * 2) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if(start < max) {
-            list.add("(");
-            backTracking03(max, start + 1, end, list);
-            list.remove(list.size() - 1);
-            System.out.println("1111");
-        }
-
-        if(end < start) {
-            list.add(")");
-            backTracking03(max, start, end + 1, list);
-            list.remove(list.size() - 1);
-            System.out.println("2222:" + start + ",end" + end);
-        }
-
-    }
-
-
-    public List<List<String>> generate04(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking04(n, 0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking04(int max, int start, int end, List<String> list) {
-        if (max * 2 == list.size()) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (start < max) {
-            list.add("(");
-            backTracking04(max, start + 1, end, list);
-            list.remove(list.size() - 1);
-        }
-
-        if (end < start) {
-            list.add(")");
-            backTracking04(max, start, end + 1, list);
-            list.remove(list.size() - 1);
-        }
-    }
-
-    public List<List<String>> generate05(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking05(n, 0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking05(int max, int start, int end, List<String> sb) {
-        if (sb.size() == max * 2) {
-            ret.add(new ArrayList<>(sb));
-            return;
-        }
-        if (start < max) {
-            sb.add("(");
-            backTracking05(max, start + 1, end, sb);
-            sb.remove(sb.size() -1 );
-        }
-
-        if (end < start) {
-            sb.add(")");
-            backTracking05(max, start, end + 1, sb);
-            sb.remove(sb.size() -1 );
-        }
-    }
-
-    public List<List<String>> generate06(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking06(new ArrayList<>(), 0, 0, n);
-        return ret;
-    }
-
-    public void backTracking06(List<String> list, int open, int close, int max) {
-        if (max * 2 == list.size()) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (open < max) {
-            list.add("(");
-            backTracking06(list, open + 1, close, max);
-            list.remove(list.size() - 1);
-        }
-        if (close < open) {
-            list.add(")");
-            backTracking06(list, open, close + 1, max);
-            list.remove(list.size() - 1);
-        }
-    }
-
-
-    public List<List<String>> generate07(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking07(0, 0, n, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking07(int open, int close, int n, List<String> list) {
-        if (list.size() == 2 * n) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if(open < n) {
-            list.add("(");
-            backTracking07(open + 1, close, n, list);
-            list.remove(list.size() - 1);
-        }
-        if (close < open) {
-            list.add(")");
-            backTracking07(open, close + 1, n, list);
-            list.remove(list.size() - 1);
-        }
-    }
-
-    public List<List<String>> generate08(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking08(n, 0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking08(int n, int start, int end, List<String> list) {
-        if (list.size() == 2 * n) {
+    public void backTracking02(int n, int start, int end, List<String> list) {
+        if (list.size() == n * 2) {
             ret.add(new ArrayList<>(list));
             return;
         }
         if (start < n) {
             list.add("(");
-            backTracking08(n, start + 1, end, list);
+            backTracking02(n, start + 1, end, list);
             list.remove(list.size() - 1);
         }
         if (end < start) {
             list.add(")");
-            backTracking08(n, start, end + 1, list);
+            backTracking02(n, start, end + 1, list);
             list.remove(list.size() - 1);
         }
     }
-
-    public List<List<String>> generate09(int n) {
-        if (n <= 0) {
-            return null;
-        }
-        backTracking09(n,0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking09(int n, int start, int end, List<String> list) {
-        if (list.size() == 2 * n) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (start < n) {
-            list.add("(");
-            backTracking09(n, start + 1, end, list);
-            list.remove(list.size() - 1);
-        }
-        if (end < start) {
-            list.add(")");
-            backTracking09(n, start, end + 1, list);
-            list.remove(list.size() - 1);
-        }
-    }
-
 
 
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        List<List<String>> list = generateParenthesis.generate09(3);
+        List<List<String>> list = generateParenthesis.generate02(3);
         System.out.println(list.toString());
     }
 }

@@ -52,40 +52,7 @@ public class MergeBinaryTree {
         return root1;
     }
 
-    public TreeNode merge02(TreeNode root1, TreeNode root2) {
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        root1.value += root2.value;
-        root1.left = merge02(root1.left, root2.left);
-        root1.right = merge02(root1.right, root2.right);
-        return root1;
-    }
-
-    // 合并二叉树
-    public TreeNode merge03(TreeNode root1, TreeNode root2) {
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        root1.value += root2.value;
-        root1.left = merge03(root1.left, root2.left);
-        root1.right = merge03(root1.right, root2.right);
-        return root1;
-    }
-
-    public TreeNode merge04(TreeNode node1, TreeNode node2) {
-        // 递归进行合并
-        if (node1 == null || node2 == null) {
-            return node1 == null ? node2 : node1;
-        }
-
-        node1.value += node2.value;
-        node1.left = merge04(node1.left, node2.left);
-        node1.right = merge04(node1.right, node2.right);
-        return node1;
-    }
-
-    public TreeNode merge05(TreeNode node1, TreeNode node2) {
+    public TreeNode merge02(TreeNode node1, TreeNode node2) {
         if (node1 == null && node2 == null) {
             return null;
         }
@@ -93,118 +60,9 @@ public class MergeBinaryTree {
             return node1 == null ? node2 : node1;
         }
         node1.value += node2.value;
-        node1.left = merge05(node1.left, node2.left);
-        node1.right = merge05(node1.right, node2.right);
+        node1.left = merge02(node1.left, node2.left);
+        node1.right = merge02(node1.right, node2.right);
         return node1;
-    }
-
-    public TreeNode merge06(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return null;
-        }
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        root1.value += root2.value;
-        root1.left = merge06(root1.left, root2.left);
-        root1.right = merge06(root1.right, root2.right);
-        return root1;
-    }
-
-    public TreeNode merge07(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return null;
-        }
-        if (node1 == null || node2 == null) {
-            return node1 == null ? node2 : node1;
-        }
-        TreeNode node = new TreeNode(node1.value);
-        node.value += node2.value;
-        node.left = merge07(node1.left, node2.left);
-        node.right = merge07(node1.right, node2.right);
-        return node;
-    }
-
-    public TreeNode merge08(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return null;
-        }
-        if (node1 == null || node2 == null) {
-            return node1 == null ? node2 : node1;
-        }
-        TreeNode node = new TreeNode(node1.value);
-        node.value += node2.value;
-        node.left = merge08(node1.left, node2.left);
-        node.right = merge08(node1.right, node2.right);
-        return node;
-    }
-
-    public TreeNode merge09(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return null;
-        }
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        TreeNode node = new TreeNode(root1.value);
-        node.value += root2.value;
-        node.left = merge09(root1.left, root2.left);
-        node.right = merge09(root1.right, root2.right);
-        return node;
-    }
-
-    public TreeNode merge10(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return null;
-        }
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        TreeNode root = new TreeNode(root1.value);
-        root.value += root2.value;
-        root.left = merge10(root1.left, root2.left);
-        root.right = merge10(root1.right, root2.right);
-        return root;
-    }
-
-    public TreeNode merge11(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return null;
-        }
-        if (root1 == null || root2 == null) {
-            return root1 == null ? root2 : root1;
-        }
-        root1.value += root2.value;
-        root1.left = merge11(root1.left, root2.left);
-        root1.right = merge11(root1.right, root2.right);
-        return root1;
-    }
-
-    public TreeNode merge12(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return null;
-        }
-        if (node1 == null || node2 == null) {
-            return node1 == null ? node2 : node1;
-        }
-        node1.value += node2.value;
-        node1.left = merge12(node1.left, node2.left);
-        node1.right = merge12(node1.right, node2.right);
-        return node1;
-    }
-
-    public TreeNode merge13(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return null;
-        }
-        if (node1 == null || node2 == null) {
-            return node1 == null ? node2 : node1;
-        }
-        node1.value += node2.value;
-        node1.left = merge13(node1.left, node2.left);
-        node1.right = merge13(node1.right, node2.right);
-        return node1;
-
     }
 
     public static void main(String[] args) {
@@ -230,7 +88,7 @@ public class MergeBinaryTree {
         node33.right = node55;
 
         MergeBinaryTree mergeBinaryTree = new MergeBinaryTree();
-        TreeNode root = mergeBinaryTree.merge13(node1, node11);
+        TreeNode root = mergeBinaryTree.merge02(node1, node11);
         mergeBinaryTree.traversalTree(root);
     }
 }

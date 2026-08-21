@@ -51,7 +51,7 @@ public class HWString {
     }
 
     public String calculateHwCount02(String str) {
-        if (str == null) {
+        if (str == null || str.length() == 0) {
             return "";
         }
         char[] charArray = str.toCharArray();
@@ -62,91 +62,21 @@ public class HWString {
         return str.substring(left, len);
     }
 
-
-    public void findHw02(char[] charArr, int left, int right) {
-        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
-            if (len < right - left + 1) {
-                len = right - left + 1;
-                this.left = left;
-            }
-            left--;
-            right++;
-        }
-    }
-
-    public String calculateHwCount03(String str) {
-        if (str == null || str.length() == 0) {
-            return "";
-        }
-        char[] charArray = str.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            findHw03(charArray, i, i);
-            findHw03(charArray, i - 1, i);
-        }
-        return str.substring(left, len);
-    }
-
-    public void findHw03(char[] charArr, int start, int end) {
+    public void findHw02(char[] charArr, int start, int end) {
         while(start >= 0 && end < charArr.length && charArr[start] == charArr[end]) {
             if (end - start + 1 > len) {
                 left = start;
-                len = end - start + 1; // 取最长的那个
+                len = end - start + 1;
             }
-            System.out.println("start:" + left + ",len:" + len);
             start--;
             end++;
         }
     }
 
-    public String calculateHwCount04(String str) {
-        if (str == null || str.length() == 0) {
-            return "";
-        }
-        char[] charArray = str.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            findHw04(charArray, i, i);
-            findHw04(charArray, i-1, i);
-        }
-        return str.substring(left, len);
-    }
-
-    public void findHw04(char[] charArr, int left, int right) {
-        while(left >=0 && right < charArr.length && charArr[left] == charArr[right]) {
-            if (right - left + 1 > len) {
-                this.left = left;
-                len = right - left + 1;
-            }
-            left--;
-            right++;
-        }
-    }
-
-    public String calculateHwCount05(String str) {
-        if (str == null || str.length() == 0) {
-            return "";
-        }
-        char[] charArray = str.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            findHw05(charArray, i, i);
-            findHw05(charArray, i - 1, i);
-        }
-        return str.substring(left, len);
-    }
-
-    public void findHw05(char[] charArr, int left, int right) {
-        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
-            if (right - left + 1 > len) {
-                this.left = left;
-                len = right - left + 1;
-            }
-            left--;
-            right++;
-        }
-    }
 
     public static void main(String[] args) {
         HWString hw = new HWString();
         String str = "aba";
-        System.out.println(hw.calculateHwCount05(str));
+        System.out.println(hw.calculateHwCount02(str));
     }
 }

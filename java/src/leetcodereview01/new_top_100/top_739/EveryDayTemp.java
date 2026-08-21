@@ -70,230 +70,27 @@ public class EveryDayTemp {
         return result;
     }
 
-    public int[] getEveryDayTempByStack02(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return new int[]{};
-        }
-        int[] result = new int[arr.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            int temperature = arr[i];
-            while (!stack.isEmpty() && temperature > arr[stack.peek()]) {
-                int index = stack.pop();
-                result[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return result;
-    }
-
-    // 通过栈的方式进行处理 单调栈 记录当前的index，如果找到大的要while一下
-    public int[] getEveryDayTempByStack03(int[] temperatures) {
+    public int[] getEveryDayTempByStack02(int[] temperatures) {
         if (temperatures == null || temperatures.length == 0) {
             return null;
         }
-        Stack<Integer> stack = new Stack<>();
         int[] result = new int[temperatures.length];
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < temperatures.length; i++) {
             while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                int index = stack.pop();
-                result[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return result;
-    }
-
-    public int[] getEveryDayTempByStack04(int[] arr) {
-        // 使用栈进行处理
-        if (arr == null || arr.length == 0) {
-            return new int[] {};
-        }
-        int[] value = new int[arr.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while(!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                int index = stack.pop();
-                value[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return value;
-    }
-
-    public int[] getEveryDayTempByStack05(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        int[] value = new int[arr.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
-                int index = stack.pop();
-                value[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return value;
-    }
-
-    public int[] getEveryDayTempByStack06(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return new int[]{};
-        }
-        Stack<Integer> stack = new Stack<>();
-        int[] temp = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                int index = stack.pop();
-                temp[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return temp;
-    }
-
-    public int[] getEveryDayTempByStack07(int[] arr) {
-        // {80, 74, 75, 71, 69, 72, 76, 73};
-        int[] temp = new int[arr.length];
-        if (arr.length == 0) {
-            return temp;
-        }
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while(!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
                 Integer pop = stack.pop();
-                temp[pop] = i - pop; // 这里还是要脑子清楚
-            }
-            stack.push(i);
-        }
-        return temp;
-    }
-
-    public int[] getEveryDayTempByStack08(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        int[] temp = new int[arr.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while(!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                Integer index = stack.pop();
-                temp[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return temp;
-    }
-
-
-    public int[] getEveryDayTempByStack09(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        Stack<Integer> stack = new Stack<>();
-        int[] values = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[i] >= arr[stack.peek()]) {
-                int index = stack.pop();
-                values[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return values;
-    }
-
-    // 单调队列来处理
-    // [0, 1, 4, 2, 1, 1, 0, 0]
-    public int[] getEveryDayTempByStack10(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return new int[] {};
-        }
-        int[] temp = new int[arr.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
-                Integer index = stack.pop();
-                temp[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return temp;
-    }
-
-
-    public int[] getEveryDayTempByStack11(int[] temperatures) {
-        if (temperatures == null || temperatures.length == 0) {
-            return null;
-        }
-        Stack<Integer> stack = new Stack<>();
-        int[] result = new int[temperatures.length];
-        for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-                Integer index = stack.pop();
-                System.out.println(index);
-                result[index] = i - index;
+                result[pop] = i - pop;
             }
             stack.push(i);
         }
         return result;
     }
-
-    public int[] getEveryDayTempByStack12(int[] temperatures) {
-        if (temperatures == null || temperatures.length == 0) {
-            return null;
-        }
-        int[] arr = new int[temperatures.length];
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-                int index = stack.pop();
-                arr[index] = i - index;
-                System.out.println("asdfad");
-            }
-            stack.push(i);
-        }
-        return arr;
-    }
-
-    public int[] getEveryDayTempByStack13(int[] temperatures) {
-        if (temperatures == null || temperatures.length == 0) {
-            return null;
-        }
-        Stack<Integer> stack = new Stack<>();
-        int[] result = new int[temperatures.length];
-        for (int i = 0; i < temperatures.length; i++) {
-            while(!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                Integer index = stack.pop();
-                result[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return result;
-    }
-
-    public int[] getEveryDayTempByStack14(int[] temperatures) {
-        if (temperatures == null || temperatures.length == 0) {
-            return new int[] {};
-        }
-        Stack<Integer> stack = new Stack<>();
-        int[] result = new int[temperatures.length];
-        for (int i = 0; i < temperatures.length; i++) {
-            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
-                Integer index = stack.pop();
-                result[index] = i - index;
-            }
-            stack.push(i);
-        }
-        return result;
-    }
-
 
     public static void main(String[] args) {
         // 每日温度 没高度
         int[] temperatures = {80, 74, 75, 71, 69, 72, 76, 73};
         EveryDayTemp everyDayTemp = new EveryDayTemp();
-        int[] tempArr = everyDayTemp.getEveryDayTempByStack14(temperatures);
+        int[] tempArr = everyDayTemp.getEveryDayTempByStack02(temperatures);
         if (tempArr == null) {
             System.out.println("null");
         } else {

@@ -32,181 +32,29 @@ public class MaxIncrementZXL {
         return max;
     }
 
-    // 最大的递增子序列
     public int calculate01(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
         }
         int max = 0;
         int[] dp = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
+        dp[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);// 就是当前的值进行+1
-                    max = Math.max(dp[i], max);
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            max = Math.max(max, dp[i]);
         }
         return max;
     }
-
 
     public int calculate02(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
         }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-
-    // 最大增长子序列
-    // {10, 9, 2, 5, 3, 7, 101, 205, 18}
-    public int calculate03(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                   dp[i] = Math.max(dp[i], dp[j] + 1); // 已经累计到dp[i]了。
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate04(int[] arr) {
-        // 最大增长子序列
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate05(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1; // 最小为1
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[j] + 1, dp[i]);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate06(int[] arr) {
-        // 最长递增子序列，那么可以不用连续
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 1; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max= Math.max(max, dp[i]); // 一定要记忆最大的
-        }
-        return max;
-    }
-
-    public int calculate07(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length + 1];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate08(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate09(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int[] dp = new int[arr.length];
-        dp[0] = 1;
-        int max = 0;
-        for (int i = 1; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        System.out.println(Arrays.toString(dp));
-        return max;
-    }
-
-    public int calculate10(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
         int max = 0;
         int[] dp = new int[arr.length];
         dp[0] = 1;
@@ -221,50 +69,10 @@ public class MaxIncrementZXL {
         }
         return max;
     }
-
-    public int calculate11(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int[] dp = new int[arr.length];
-        dp[0] = 1;
-        for (int i = 1; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-    public int calculate12(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int[] dp = new int[arr.length];
-        dp[0] = 1;
-        for (int i = 1; i < arr.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
-            }
-            max = Math.max(max, dp[i]);
-        }
-        return max;
-    }
-
-
 
     public static void main(String[] args) {
         int[] arr = new int[]{10, 9, 2, 5, 3, 7, 206, 205, 300};
         MaxIncrementZXL maxIncrementZXL = new MaxIncrementZXL();
-        System.out.println(maxIncrementZXL.calculate12(arr));
+        System.out.println(maxIncrementZXL.calculate02(arr));
     }
 }

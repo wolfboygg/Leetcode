@@ -206,11 +206,30 @@ public class TargetSum {
     }
 
 
+    public int count10(int[] value, int target) {
+        if (value == null || value.length == 0) {
+            return -1;
+        }
+        backTracking10(value, target, 0, 0);
+        return count;
+    }
+
+    public void backTracking10(int[] value, int target, int sum, int index) {
+        if (index == value.length) {
+            if (target == sum) {
+                count++;
+            }
+            return;
+        }
+        backTracking10(value, target, sum + value[index], index + 1);
+        backTracking10(value, target, sum - value[index], index + 1);
+    }
+
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};
         int target = 3;
         TargetSum targetSum = new TargetSum();
-        System.out.println(targetSum.count09(value, target));
+        System.out.println(targetSum.count10(value, target));
     }
 }

@@ -77,298 +77,30 @@ public class PhoneNumber {
 
     }
 
-    public List<String> letterCombinations03(String str) {
-        if (str == null || str.length() == 0) {
-            return new ArrayList<>();
-        }
-        traversal03(str, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal03(String str, int index, StringBuilder sb) {
-        if (sb.length() == str.length()) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        String letters = map[str.charAt(index) - '0'];
-        char[] charArray = letters.toCharArray();
-        for (char c : charArray) {
-            sb.append(c);
-            traversal03(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public List<String> letterCombinations04(String str) {
-        // 字符组合
-        if (str == null) {
-            return null;
-        }
-        traversal04(str, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal04(String str, int index, StringBuilder sb) {
-        if (sb.length() == str.length()) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
-        for (char c : charArr) {
-            sb.append(c);
-            traversal04(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);// 遍历完成之后要删除
-        }
-    }
-
-    public List<String> letterCombinations05(String str) {
-        if (str == null || str.length() == 0) {
-            return null;
-        }
-        // 使用递归的方式进行处理
-        traversal05(str, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal05(String str, int index, StringBuilder sb) {
-        if (str.length() == sb.length()) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        // chatAt得到的数字，所以要减去'0'
-        char[] charArray = map[str.charAt(index) - '0'].toCharArray();
-        for (char c : charArray) {
-            sb.append(c);
-            traversal05(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public List<String> letterCombinations06(String str) {
-        if (str == null || str.length() ==0) {
-            return null;
-        }
-        traversal06(str, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal06(String str, int index, StringBuilder sb) {
-        if (index == str.length()) {
-            ret.add(new String(sb));
-            return;
-        }
-        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
-        for (int i = 0; i < charArr.length; i++) {
-            sb.append(charArr[i]);
-            traversal06(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() -1);
-        }
-    }
-
-    public void letterCombinations07(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        traversal07(str, 0, new StringBuilder());
-    }
-
-    public void traversal07(String str, int index, StringBuilder sb) {
-        if (str.length() == sb.length()) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        char[] charArr = map[str.charAt(index) - '0'].toCharArray();
-        for (int i = 0; i < charArr.length; i++) {
-            sb.append(charArr[i]);
-            traversal07(str, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public void letterCombinations08(String str) {
+    public void letterCombinations03(String str) {
         if (str == null || str.length() == 0) {
             return;
         }
         char[] charArray = str.toCharArray();
-        traversal08(charArray, 0, new StringBuilder());
+        traversal03(charArray, 0, new StringBuilder());
     }
 
-    public void traversal08(char[] charArr, int index, StringBuilder sb) {
-        if (index == charArr.length) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        int cIndex = charArr[index] - '0';
-        char[] charArray = map[cIndex].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal08(charArr, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public List<String> letterCombinations09(String str) {
-        if (str == null || str.length() == 0) {
-            return null;
-        }
-        char[] charArray = str.toCharArray();
-        boolean[] mark = new boolean[charArray.length];
-        traversal09(charArray, mark, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal09(char[] charArr, boolean[] mark, int index, StringBuilder sb) {
-        if (index == charArr.length) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        char c = charArr[index];
-        char[] charArray = map[c - '0'].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal09(charArr, mark, index + 1, sb);
-            sb.deleteCharAt(sb.length() -1);
-        }
-    }
-
-    public void letterCombinations10(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        char[] charArray = str.toCharArray();
-        traversal10(charArray, 0, new StringBuilder());
-    }
-
-    public void traversal10(char[] charArr, int index, StringBuilder sb) {
+    public void traversal03(char[] charArr, int index, StringBuilder sb) {
         if (sb.length() == charArr.length) {
             ret.add(new String(sb));
-            return;
-        }
-        char[] charArray = map[charArr[index] - '0'].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal10(charArr, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public List<String> letterCombinations11(String str) {
-        if (str == null || str.length() == 0) {
-            return null;
-        }
-        char[] charArray = str.toCharArray();
-        traversal11(charArray, 0, new StringBuilder());
-        return ret;
-    }
-
-    public void traversal11(char[] charArr, int index, StringBuilder sb) {
-        if (sb.length() == charArr.length) {
-            ret.add(new String(sb));
-        }
-        if (index >= charArr.length) {
-            return;
-        }
-        int currentIndex = charArr[index] - '0';
-        char[] charArray = map[currentIndex].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal11(charArr, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public void letterCombinations12(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        char[] charArray = str.toCharArray();
-        traversal12(charArray, 0, new StringBuilder());
-    }
-
-    public void traversal12(char[] charArr, int index, StringBuilder sb) {
-        if (index >= charArr.length) {
-            if (sb.length() == charArr.length) {
-                ret.add(new String(sb.toString()));
-            }
-            return;
-        }
-        char[] charArray = map[charArr[index] - '0'].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal12(charArr, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public void letterCombinations13(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        char[] charArray = str.toCharArray();
-        traversal13(charArray, 0, new StringBuilder());
-    }
-
-    public void traversal13(char[] charArr, int index, StringBuilder sb) {
-        if (charArr.length == index) {
-            ret.add(sb.toString());
-            return;
-        }
-        char[] charArray = map[charArr[index] - '0'].toCharArray();
-        for (int i = 0; i < charArray.length; i++) {
-            sb.append(charArray[i]);
-            traversal13(charArr, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-    }
-
-    public void letterCombinations14(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        char[] charArray = str.toCharArray();
-        traversal14(charArray, 0, new StringBuilder());
-    }
-
-    public void traversal14(char[] charArray, int index, StringBuilder sb) {
-        if (sb.length() == charArray.length) {
-            ret.add(new String(sb.toString()));
-            return;
-        }
-        char[] arr = map[charArray[index] - '0'].toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            sb.append(arr[i]);
-            traversal14(charArray, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-    }
-
-
-    public void letterCombinations15(String str) {
-        if (str == null || str.length() == 0) {
-            return;
-        }
-        char[] charArray = str.toCharArray();
-        traversal15(charArray, 0, new StringBuilder());
-    }
-
-    public void traversal15(char[] charArr, int index, StringBuilder sb) {
-        if (charArr.length == sb.length()) {
-            ret.add(new String(sb.toString()));
             return;
         }
         char[] chars = map[charArr[index] - '0'].toCharArray();
         for (int i = 0; i < chars.length; i++) {
             sb.append(chars[i]);
-            traversal15(charArr, index + 1, sb);
+            traversal03(charArr, index + 1, sb);
             sb.deleteCharAt(sb.length() - 1);
         }
     }
 
-
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations15("234");
+        phoneNumber.letterCombinations03("234");
         System.out.println(ret.toString());
     }
 }

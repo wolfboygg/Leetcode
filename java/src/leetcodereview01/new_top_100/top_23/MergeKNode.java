@@ -131,12 +131,12 @@ public class MergeKNode {
         if (nodes == null || nodes.length == 0) {
             return null;
         }
-        Queue<Node> queue = new PriorityQueue<>((o1, o2) -> o1.value - o2.value);
+        Node temp = new Node(-1);
+        Node pre = temp;
+        PriorityQueue<Node> queue = new PriorityQueue<Node>((o1, o2) -> o1.value - o2.value);
         for (int i = 0; i < nodes.length; i++) {
             queue.offer(nodes[i]);
         }
-        Node pre = new Node(-1);
-        Node temp = pre;
         while(!queue.isEmpty()) {
             Node poll = queue.poll();
             Node next = poll.next;
@@ -148,72 +148,6 @@ public class MergeKNode {
         }
         return pre.next;
     }
-
-    public Node merge06(Node[] nodes) {
-        if (nodes == null || nodes.length == 0) {
-            return null;
-        }
-        Node pre = new Node(-1);
-        Node temp = pre;
-        Queue<Node> queue = new PriorityQueue<>(((o1, o2) -> o1.value - o2.value));
-        for (int i = 0; i < nodes.length; i++) {
-            queue.offer(nodes[i]);
-        }
-        while(!queue.isEmpty()) {
-            Node node = queue.poll();
-            Node next = node.next;
-            temp.next = node;
-            temp = temp.next;
-            if (next != null) {
-                queue.offer(next);
-            }
-        }
-        return pre.next;
-    }
-
-    public Node merge07(Node[] nodes) {
-        if (nodes == null || nodes.length == 0) {
-            return null;
-        }
-        Node pre = new Node(-1);
-        Node temp = pre;
-        Queue<Node> queue = new PriorityQueue<Node>(((o1, o2) -> o1.value - o2.value));
-        for (int i = 0; i < nodes.length; i++) {
-            queue.offer(nodes[i]);
-        }
-        while(!queue.isEmpty()) {
-            Node poll = queue.poll();
-            if (poll.next != null) {
-                queue.offer(poll.next);
-            }
-            temp.next = poll;
-            temp = temp.next;
-        }
-        return pre.next;
-    }
-
-    public Node merge08(Node[] nodes) {
-        if (nodes == null) {
-            return null;
-        }
-        Queue<Node> queue = new PriorityQueue<>(((o1, o2) -> o1.value - o2.value));
-        for (int i = 0; i < nodes.length; i++) {
-            queue.offer(nodes[i]);
-        }
-        Node pre = new Node(-1);
-        Node temp = pre;
-        while (!queue.isEmpty()) {
-            Node poll = queue.poll();
-            Node next = poll.next;
-            if (next != null) {
-                queue.offer(next);
-            }
-            temp.next = poll;
-            temp = temp.next;
-        }
-        return pre.next;
-    }
-
 
 
     public static void main(String[] args){
@@ -239,7 +173,7 @@ public class MergeKNode {
 
         Node[] nodes = {node1, node4, node7};
         MergeKNode mergeKNode = new MergeKNode();
-        Node node = mergeKNode.merge08(nodes);
+        Node node = mergeKNode.merge05(nodes);
         while (node != null) {
             System.out.print(node.value);
             node = node.next;

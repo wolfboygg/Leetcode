@@ -43,141 +43,12 @@ public class SplitWord {
     }
 
     public boolean valid03(String str, List<String> list) {
-        if (str == null) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid04(String str, List<String> list) {
-        if (str == null) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid05(String str, List<String> list) {
-        if (str == null || str.length() == 0) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid06(String str, List<String> list) {
-        if (str == null || str.length() == 0) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid07(String str, List<String> list) {
-        if (str == null || list == null) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid08(String str, List<String> list) {
-        if (str == null || str.length() == 0 || list.isEmpty()) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i <= str.length(); i++) {
-            for (int j = 0; j <= i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid09(String str, List<String> list) {
-        if (str == null || list.isEmpty()) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j <= i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid10(String str, List<String> list) {
-        if (str == null || str.length() == 0 || list == null || list.size() == 0) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid11(String str, List<String> list) {
         if (str == null || list == null || list.size() == 0) {
             return false;
         }
         boolean[] dp = new boolean[str.length() + 1];
         dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            // i = 5
+        for (int i = 1; i <= str.length(); i++) {
             for (int j = 0; j < i; j++) {
                 if (dp[j] && list.contains(str.substring(j, i))) {
                     dp[i] = true;
@@ -187,14 +58,13 @@ public class SplitWord {
         return dp[str.length()];
     }
 
-
     public static void main(String[] args) {
         String str =  "leetcode3";
         List<String> list = new ArrayList<>();
         list.add("leet");
-        list.add("code3");
+        list.add("code2");
         SplitWord splitWord = new SplitWord();
-        boolean result = splitWord.valid11(str, list);
+        boolean result = splitWord.valid03(str, list);
         System.out.println(result);
     }
 }
