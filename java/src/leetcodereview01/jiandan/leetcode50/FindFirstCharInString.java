@@ -154,13 +154,29 @@ public class FindFirstCharInString {
         }
     }
 
+    public void findFirstChar11(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] arr = new char[128];
+        for (int i = 0; i < str.length(); i++) {
+            arr[str.charAt(i)]++;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (arr[str.charAt(i)] == 1) {
+                System.out.println(str.charAt(i));
+                break;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         String str = "abbvvaccd";
         FindFirstCharInString findFirstCharInString = new FindFirstCharInString();
 //        char c = findFirstCharInString.find(str);
 //        System.out.println(c);
-        findFirstCharInString.findFirstChar10(str);
+        findFirstCharInString.findFirstChar11(str);
     }
 
     private char find(String str) {

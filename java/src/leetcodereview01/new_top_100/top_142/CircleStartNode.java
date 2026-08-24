@@ -284,6 +284,114 @@ public class CircleStartNode {
         return null;
     }
 
+    public Node findCircleStart10(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        boolean isHas = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P1 != null && P1.next != null) {
+            P1 = P1.next.next;
+            P2 = P2.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+
+        if (isHas) {
+            P1 = head;
+            while(P1 != P2) {
+                P1 = P1.next;
+                P2 = P2.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
+    public Node findCircleStart11(Node head) {
+        if (head == null) {
+            return null;
+        }
+        boolean isHas = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P1 != null && P1.next != null) {
+            P1 = P1.next.next;
+            P2 = P2.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+
+        if (isHas) {
+            P1 = head;
+            while(P1 != P2) {
+                P1 = P1.next;
+                P2 = P2.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
+    public Node findCircleStart12(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        boolean isHasCircle = false;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHasCircle = true;
+                break;
+            }
+        }
+        if (isHasCircle) {
+            P1 = head;
+            while(P1 != P2) {
+                P1 = P1.next;
+                P2 = P2.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
+
+    public Node findCircleStart13(Node head) {
+        if (head == null) {
+            return null;
+        }
+        boolean isHas = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        if (isHas) {
+            P2 = head;
+            while(P1 != P2) {
+                P1 = P1.next;
+                P2 = P2.next;
+            }
+            return P1;
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         Node node1 = new Node(1);
@@ -299,7 +407,7 @@ public class CircleStartNode {
         node5.next = node6;
         node6.next = node3;
         CircleStartNode circleStartNode = new CircleStartNode();
-        System.out.println(circleStartNode.findCircleStart09(node1).value);
+        System.out.println(circleStartNode.findCircleStart13(node1).value);
     }
 
 }

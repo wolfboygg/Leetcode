@@ -378,6 +378,24 @@ public class TopToBottomPrintTree {
         }
     }
 
+    public void print17(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            System.out.println(poll.value);
+            if (poll.left != null) {
+                queue.offer(poll.left);
+            }
+            if (poll.right != null) {
+                queue.offer(poll.right);
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         TopToBottomPrintTree topToBottomPrintTree = new TopToBottomPrintTree();

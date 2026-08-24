@@ -213,11 +213,37 @@ public class SortArrayFindNumCount {
         return targetIndex;
     }
 
+    public int count8(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int leftIndex = realFind08(arr, target, true);
+        int rightIndex = realFind08(arr, target, false) - 1;
+        System.out.println(rightIndex - leftIndex + 1);
+        return rightIndex - leftIndex + 1;
+    }
+
+
+    public int realFind08(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = -1;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (arr[middle] >= target && isLow)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10};
         SortArrayFindNumCount sortArrayFindNumCount = new SortArrayFindNumCount();
-        sortArrayFindNumCount.count7(arr, 8);
+        sortArrayFindNumCount.count8(arr, 8);
     }
 
     private void count(int[] arr, int target) {

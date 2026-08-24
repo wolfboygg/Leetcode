@@ -220,11 +220,102 @@ public class TreeNodeTargetSum {
         list.remove(list.size() - 1);
     }
 
+    public boolean findPath08(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath09(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath09(TreeNode root, int target, List<Integer> list) {
+        if (root == null || target < 0) {
+            return;
+        }
+        list.add(root.value);
+        target -= root.value;
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath09(root.left, target, list);
+            realFindPath09(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+    public boolean findPath10(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath10(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath10(TreeNode root, int target, List<Integer> list) {
+        if (target < 0 || root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (root.left == null && root.right == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath10(root.left, target, list);
+            realFindPath10(root.right, target, list);
+        }
+        list.remove(list.size() - 1); // 确保要移除掉
+    }
+
+    public boolean findPath11(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath11(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath11(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (target == 0 && root.left == null && root.right == null) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath11(root.left, target, list);
+            realFindPath11(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
+    public boolean findPath12(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath12(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath12(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        target -= root.value;
+        list.add(root.value);
+        if (root.left == null && root.right == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath12(root.left, target, list);
+            realFindPath12(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
 
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath07(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath12(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

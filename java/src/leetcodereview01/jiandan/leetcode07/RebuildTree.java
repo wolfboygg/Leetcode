@@ -93,13 +93,38 @@ public class RebuildTree {
         return root;
     }
 
+    public TreeNode rebuildTree04(int[] preOrder, int[] inOrder) {
+        if (preOrder == null || inOrder == null) {
+            return null;
+        }
+        for (int i = 0; i < inOrder.length; i++) {
+            indexOrder.put(inOrder[i], i);
+        }
+        TreeNode node = realBuild04(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
+        return node;
+    }
+
+    public TreeNode realBuild04(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preRight) {
+            return null;
+        }
+        int rootValue = preOrder[preLeft];
+        int rootIndex = indexOrder.get(rootValue);
+        int leftChildCount = rootIndex - inLeft;
+        TreeNode root = new TreeNode();
+        root.value = rootValue;
+        root.left = realBuild04(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
+        root.right = realBuild04(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
+        return root;
+    }
+
 
     public static void main(String[] args) {
         int[] preOrder = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         RebuildTree rebuildTree = new RebuildTree();
         // 3920157
-        TreeNode treeNode = rebuildTree.rebuildTree03(preOrder, inOrder);
+        TreeNode treeNode = rebuildTree.rebuildTree04(preOrder, inOrder);
         rebuildTree.preOrderTraversal(treeNode);
     }
 }

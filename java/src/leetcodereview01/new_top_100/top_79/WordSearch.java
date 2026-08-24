@@ -342,6 +342,170 @@ public class WordSearch {
         return false;
     }
 
+    public boolean findPath08(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        this.row = matrix.length;
+        this.column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backtracking08(matrix, i, j, mark, next, 0, str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean backtracking08(char[][] matrix, int i, int j, boolean[][] mark, int[][] next, int index, String str) {
+        if (index >= str.length()) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
+            return false;
+        }
+        System.out.println(matrix[i][j] + "-->" + str.charAt(index));
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backtracking08(matrix, i + ints[0], j + ints[1], mark, next, index + 1, str)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
+
+    public boolean findPath09(char[][] matrix, String str) {
+        if (str == null) {
+            return false;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking09(matrix, mark, next, i, j, 0, str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking09(char[][] matrix, boolean[][] mark, int[][] next, int i, int j, int index, String str) {
+        if (index >= str.length()) {
+            return true;
+        }
+        if (i < 0 || i >= row || j <0 || j >= column || mark[i][j] || matrix[i][j] != str.charAt(index)) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking09(matrix, mark, next, i + ints[0], j +  ints[1], index + 1, str)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
+    public boolean findPath10(char[][] matrix, String str) {
+        if (str == null || matrix == null) {
+            return false;
+        }
+        char[] charArray = str.toCharArray();
+        row = matrix.length;
+        column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking10(matrix, charArray, mark, next, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean backTracking10(char[][] matrix, char[] charArr, boolean[][] mark, int[][] next, int i, int j, int index) {
+        if (index >= charArr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || mark[i][j] || matrix[i][j] != charArr[index]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking10(matrix, charArr, mark, next, i + ints[0], j + ints[1], index+1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
+
+
+    public boolean findPath11(char[][] matrix, String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+        char[] charArr = str.toCharArray();
+        row = matrix.length;
+        column = matrix[0].length;
+        boolean[][] mark = new boolean[row][column];
+        int[][] next = {
+                {1, 0},
+                {-1, 0},
+                {0, 1},
+                {0, -1},
+        };
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTacking11(matrix, charArr, next, mark, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTacking11(char[][] matrix, char[] charArr, int[][] next, boolean[][] mark, int i, int j, int index) {
+        if (index >= charArr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 ||j >= column || mark[i][j] || charArr[index] != matrix[i][j]) {
+            return false;
+        }
+        for (int[] ints : next) {
+            if (backTacking11(matrix, charArr, next, mark, i + ints[0], j + ints[1], index + 1)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) {
@@ -349,9 +513,9 @@ public class WordSearch {
                 {'A', 'B', 'C', 'E'},
                 {'S', 'F', 'C', 'S'},
                 {'A', 'D', 'E', 'V'}};
-        String str = "ABCCEDA";
+        String str = "ABCCEVS";
         WordSearch search = new WordSearch();
-        boolean isExit = search.findPath07(charMatrix, str);
+        boolean isExit = search.findPath11(charMatrix, str);
         System.out.println(isExit);
     }
 }

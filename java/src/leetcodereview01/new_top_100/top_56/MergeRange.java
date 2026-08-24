@@ -85,12 +85,80 @@ public class MergeRange {
         }
     }
 
+    public void merge04(int[][] matrix) {
+        if (matrix == null) {
+            return;
+        }
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < matrix.length; i++) {
+            if (list.size() == 0 || list.get(list.size()-1)[1] < matrix[i][0]) {
+                list.add(matrix[i]);
+            } else {
+                list.get(list.size()-1)[1] = matrix[i][1];
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i)[0] + "," + list.get(i)[1] + "]");
+        }
+    }
+
+    public void merge05(int[][] ints) {
+        if (ints == null || ints.length == 0) {
+            return;
+        }
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < ints.length; i++) {
+            if (list.size() > 0 && ints[i][0] <= list.get(list.size() - 1)[1]) {
+                list.get(list.size() -1)[1] = ints[i][1];
+            } else {
+                list.add(ints[i]);
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i)[0] + "," + list.get(i)[1] + "]");
+        }
+    }
+
+    public void merge06(int[][] ints) {
+        if (ints == null || ints.length == 0) {
+            return;
+        }
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < ints.length; i++) {
+            if (list.isEmpty() || list.get(list.size() - 1)[1] < ints[i][0]) {
+                list.add(ints[i]);
+            } else {
+                list.get(list.size() - 1)[1] = ints[i][1];
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i)[0] + "," + list.get(i)[1] + "]");
+        }
+    }
+
+    public void merge07(int[][] ints) {
+        if (ints == null || ints.length == 0) {
+            return;
+        }
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < ints.length; i++) {
+            if (list.isEmpty() || (list.get(list.size() -1)[1] < ints[i][0])) {
+                list.add(ints[i]);
+            } else {
+                list.get(list.size()-1)[1] = ints[i][1];
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("[" + list.get(i)[0] + "," + list.get(i)[1] + "]");
+        }
+    }
+
     public static void main(String[] args) {
         MergeRange mergeRange = new MergeRange();
         int[][] ints = new int[][]{
                 {1, 2}, {2, 6}, {8, 10}, {15, 18}
         };
-        mergeRange.merge03(ints);
+        mergeRange.merge07(ints);
     }
 
 }

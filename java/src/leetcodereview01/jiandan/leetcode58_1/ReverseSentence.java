@@ -297,10 +297,28 @@ public class ReverseSentence {
         }
     }
 
+    public void reverse11(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        int P1 = 0;
+        int P2 = 0;
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length + 1; i++) {
+            if (P2 == charArray.length || charArray[P2] == ' ') {
+                reverseWork10(charArray, P1, P2 - 1);
+                P1 = P2 + 1;
+            }
+            P2++;
+        }
+        reverseWork10(charArray, 0, charArray.length - 1);
+        System.out.println(new String(charArray));
+    }
+
 
     public static void main(String[] args) {
         String str = "I am a student.";
         ReverseSentence reverseSentence = new ReverseSentence();
-        reverseSentence.reverse10(str);
+        reverseSentence.reverse11(str);
     }
 }

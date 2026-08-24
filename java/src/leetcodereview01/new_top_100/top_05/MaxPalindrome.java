@@ -272,11 +272,80 @@ public class  MaxPalindrome {
         }
     }
 
+    public String findMaxHWString11(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find11(charArray, i, i);
+            find11(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find11(char[] charArr, int left, int right) {
+        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (right - left + 1 > len) {
+                this.left = left;
+                len = right - left + 1;
+            }
+            left--;
+            right++;
+        }
+    }
+
+    public String findMaxHWString12(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find12(charArray, i, i);
+            find12(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find12(char[] charArr, int i, int j) {
+        while(i >= 0 && j < charArr.length && charArr[i] == charArr[j]) {
+            if (j - i  + 1 > len) {
+                this.len = j - i + 1;
+                this.left = i;
+            }
+            i--;
+            j++;
+        }
+    }
+
+    public String findMaxHWString13(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            realFind(charArray, i, i);
+            realFind(charArray, i - 1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void realFind(char[] charArr, int start, int end) {
+        while(start >= 0 && end < charArr.length && charArr[start] == charArr[end]) {
+            if (end - start + 1 > len) {
+                left = start;
+                len = end - start + 1;
+            }
+            start--;
+            end++;
+        }
+    }
+
 
     public static void main(String[] args) {
         String str = "abbac";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWString10(str);
+        String temp = maxPalindrome.findMaxHWString13(str);
         System.out.println(temp);
     }
 }

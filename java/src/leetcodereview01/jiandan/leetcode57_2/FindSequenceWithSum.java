@@ -295,9 +295,39 @@ public class FindSequenceWithSum {
         return result;
     }
 
+    public List<List<Integer>> findSequence11(int target) {
+        if (target <= 0) {
+            return null;
+        }
+        List<List<Integer>> ret = new ArrayList<>();
+        int P1 = 1;
+        int P2 = 2;
+        int curSum = 3;
+        while(P2 <= target) {
+            if (curSum < target) {
+                P2++;
+                curSum += P2;
+            } else if (curSum > target) {
+                curSum -= P1;
+                P1++;
+            } else {
+                List<Integer> list = new ArrayList<>();
+                for (int i = P1; i <= P2; i++) {
+                    list.add(i);
+                }
+                ret.add(list);
+                curSum -=P1;
+                P1++;
+                P2++;
+                curSum += P2;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         FindSequenceWithSum findSequenceWithSum = new FindSequenceWithSum();
-        List<List<Integer>> sequence = findSequenceWithSum.findSequence(100);
+        List<List<Integer>> sequence = findSequenceWithSum.findSequence09(100);
         System.out.println(sequence);
     }
 

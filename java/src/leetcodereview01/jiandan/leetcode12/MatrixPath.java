@@ -82,15 +82,55 @@ public class MatrixPath {
     }
 
 
+    public boolean findPath04(char[][] matrix, String str) {
+        if (matrix == null || str == null) {
+            return false;
+        }
+        row = matrix.length;
+        column = matrix[0].length;
+        char[] charArray = str.toCharArray();
+        int[][] next = new int[][] {
+                {-1, 0},
+                {0, -1},
+                {1, 0},
+                {0, 1},
+        };
+        boolean[][] mark = new boolean[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (backTracking04(matrix, charArray, next, mark, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean backTracking04(char[][] matrix, char[] charArr, int[][] next, boolean[][] mark, int i, int j, int index) {
+        if (index >= charArr.length) {
+            return true;
+        }
+        if (i < 0 || i >= row || j < 0 || j >= column || matrix[i][j] != charArr[index] || mark[i][j]) {
+            return false;
+        }
+        mark[i][j] = true;
+        for (int[] ints : next) {
+            if (backTracking04(matrix, charArr, next, mark, i + ints[0], j+ ints[1], index + 1)) {
+                return true;
+            }
+        }
+        mark[i][j] = false;
+        return false;
+    }
 
     // ABCE
     // SFCS
     // ADEE
     public static void main(String[] args) {
         char[][] charMatrix = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-        String str = "SFCSF";
+        String str = "SFCSE";
         MatrixPath matrixPath = new MatrixPath();
-        boolean isExit = matrixPath.findPath03(charMatrix, str);
+        boolean isExit = matrixPath.findPath04(charMatrix, str);
         System.out.println(isExit);
     }
 

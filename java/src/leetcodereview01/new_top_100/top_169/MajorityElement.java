@@ -199,11 +199,61 @@ public class MajorityElement {
         return value;
     }
 
+    public int majorityElement11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int count = 1;
+        int value = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (value == arr[i]) {
+                count++;
+            } else if (--count == 0) {
+                value = arr[i];
+                count = 1;
+            }
+        }
+        return value;
+    }
+
+    public int majorityElement12(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int value = arr[0];
+        int count = 1;
+        for (int i = 1; i < arr.length; i++) {
+            if (value == arr[i]) {
+                count++;
+            } else if (--count == 0) {
+                count = 1;
+                value = arr[i];
+            }
+        }
+        return value;
+    }
+
+    public int majorityElement13(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int value = arr[0];
+        int count = 1;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == value) {
+                count++;
+            } else if (--count == 0) {
+                value = arr[i];
+                count = 1;
+            }
+        }
+        return value;
+    }
 
     public static void main(String[] args) {
         int[] arr = new int[]{2, 2, 1, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2};
         MajorityElement bean = new MajorityElement();
-        int i = bean.majorityElement10(arr);
+        int i = bean.majorityElement12(arr);
         System.out.println(i);
     }
 

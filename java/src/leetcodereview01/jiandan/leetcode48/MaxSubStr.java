@@ -186,11 +186,28 @@ public class MaxSubStr {
         return max;
     }
 
+    public int findMaxLength10(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(str.charAt(i), -1));
+            }
+            map.put(str.charAt(i), i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         String str = "arabcacfr";
         MaxSubStr maxSubStr = new MaxSubStr();
-        System.out.println(maxSubStr.findMaxLength08(str));
+        System.out.println(maxSubStr.findMaxLength10(str));
 
 
         String str2 = "https://mdp-credit-api-overseas.immomo.com";

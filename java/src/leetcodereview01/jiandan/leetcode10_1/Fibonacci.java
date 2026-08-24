@@ -61,10 +61,28 @@ public class Fibonacci {
         return value;
     }
 
+    public int getFibonacciByGH03(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        if (n <=2) {
+            return 1;
+        }
+        int value1 = 1;
+        int value2 = 1;
+        int value = 0;
+        for (int i = 3; i <= n; i++) {
+            value = value1 + value2;
+            value2 = value1;
+            value1 = value;
+        }
+        return value;
+    }
+
     // 1 1 2 3 5 8
     public static void main(String[] args) {
         Fibonacci fibonacci = new Fibonacci();
-        int fibonacciValue = fibonacci.getFibonacciByGH02(6);
+        int fibonacciValue = fibonacci.getFibonacciByGH03(6);
         System.out.println(fibonacciValue);
     }
 }

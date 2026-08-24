@@ -167,10 +167,80 @@ public class MaxLengthStr {
         return max;
     }
 
+    public int maxLengthStr09(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(str.charAt(i), -1));
+            }
+            map.put(str.charAt(i), i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
+    public int maxLengthStr10(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(str.charAt(i), -1));
+            }
+            map.put(str.charAt(i), i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
+    public int maxLengthStr11(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        char[] charArray = str.toCharArray();
+        int defaultIndex = -1;
+        Map<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(charArray[i], -1));
+            }
+            map.put(charArray[i], i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
+    public int maxLengthStr12(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] charArray = str.toCharArray();
+        int max = 0;
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.get(charArray[i]));
+            }
+            map.put(charArray[i], i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         String str = "abcabcbb";
         MaxLengthStr maxLengthStr = new MaxLengthStr();
-        int value = maxLengthStr.maxLengthStr06(str);
+        int value = maxLengthStr.maxLengthStr12(str);
         System.out.println(value);
     }
 }

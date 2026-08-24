@@ -63,10 +63,42 @@ public class QuickSort {
         return left;
     }
 
+    public void sortByDouble3(int[] arr, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int pivotIndex = partition03(arr, start, end);
+        sortByDouble3(arr, start, pivotIndex - 1);
+        sortByDouble3(arr, pivotIndex + 1, end);
+    }
+
+    public int partition03(int[] arr, int start, int end) {
+        int pivotValue = arr[start];
+        int left = start + 1;
+        int right = end;
+        while(left < right) {
+            while(left < right && arr[right] > pivotValue) {
+                right--;
+            }
+            while(left < right && arr[left] < pivotValue) {
+                left++;
+            }
+            if (left != right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+        }
+        // 交换
+        arr[start]  = arr[left];
+        arr[left] = pivotValue;
+        return left;
+    }
+
     public static void main(String[] args) {
         int[] arr = {5, 5, 6, 3, 9, 2, 1, 7};
         QuickSort quickSort = new QuickSort();
-        quickSort.sortByDouble2(arr, 0, arr.length - 1);
+        quickSort.sortByDouble3(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 }

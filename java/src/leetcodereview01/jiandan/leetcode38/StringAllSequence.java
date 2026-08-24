@@ -310,10 +310,37 @@ public class StringAllSequence {
 
     }
 
+    public void getAllSequence12(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        boolean[] mark = new boolean[str.length()];
+        char[] charArray = str.toCharArray();
+        backTracking12(charArray, mark, 0, new StringBuilder());
+        System.out.println(ret.toString());
+    }
+
+    public void backTracking12(char[] charArr, boolean[] mark, int index, StringBuilder sb) {
+         if (index >= charArr.length) {
+             ret.add(new String(sb.toString()));
+             return;
+         }
+        for (int i = 0; i < charArr.length; i++) {
+            if (mark[i]) {
+                continue;
+            }
+            mark[i] = true;
+            sb.append(charArr[i]);
+            backTracking12(charArr, mark, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+            mark[i] = false;
+        }
+    }
+
     public static void main(String[] args) {
         String str = "abc";
         StringAllSequence stringAllSequence = new StringAllSequence();
-        stringAllSequence.getAllSequence11(str);
+        stringAllSequence.getAllSequence12(str);
     }
 
     ArrayList<String> ret = new ArrayList<String>();

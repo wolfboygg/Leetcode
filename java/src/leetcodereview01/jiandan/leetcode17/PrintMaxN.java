@@ -42,6 +42,13 @@ public class PrintMaxN {
         }
     }
 
+    public void print06(int n) {
+        int value = (int) (Math.pow(10, n) - 1);
+        for (int i = 0; i <= value; i++) {
+            System.out.println(i);
+        }
+    }
+
     public static void main(String[] args) {
         PrintMaxN printMaxN = new PrintMaxN();
         printMaxN.print04(3);

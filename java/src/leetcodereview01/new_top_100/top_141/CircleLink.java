@@ -182,6 +182,78 @@ public class CircleLink {
         return false;
     }
 
+    public boolean isCircle10(Node head) {
+        if (head == null) {
+            return false;
+        }
+        boolean isHas = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P1 != null && P1.next != null) {
+            P1 = P1.next.next;
+            P2 = P2.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        return isHas;
+    }
+
+    public boolean isCircle11(Node head) {
+        if (head == null) {
+            return false;
+        }
+        Node P1 = head;
+        Node P2 = P1;
+        boolean isHas = false;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        return isHas;
+    }
+
+    public boolean isCircle12(Node head) {
+        if (head == null) {
+            return false;
+        }
+        boolean isHasCircle = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHasCircle = true;
+                break;
+            }
+        }
+        return isHasCircle;
+    }
+
+    public boolean isCircle13(Node head) {
+        if (head == null) {
+            return false;
+        }
+        boolean isHas = false;
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != null && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+            if (P1 == P2) {
+                isHas = true;
+                break;
+            }
+        }
+        return isHas;
+    }
+
 
     public static void main(String[] args) {
         CircleLink circleLink = new CircleLink();
@@ -197,7 +269,7 @@ public class CircleLink {
         node4.next= node5;
         node5.next = node6;
         node6.next = node3;
-        boolean circle = circleLink.isCircle09(node1);
+        boolean circle = circleLink.isCircle13(node1);
         System.out.println(circle);
     }
 }

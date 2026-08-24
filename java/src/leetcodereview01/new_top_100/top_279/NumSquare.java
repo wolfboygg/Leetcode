@@ -40,7 +40,7 @@ public class NumSquare {
 
     public int calculate03(int n) {
         // 使用动态规划来处理
-        int[] dp = new int[n+1];
+        int[] dp = new int[n + 1];
         dp[0] = 0;
         for (int i = 1; i < n + 1; i++) {
             int min = Integer.MAX_VALUE;
@@ -52,8 +52,97 @@ public class NumSquare {
         return dp[n];
     }
 
+
+    // 可以有多少个完全平方数组成
+    public int calculate04(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        // 由小到大解决问题
+        int[] dp = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j]);
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
+
+    public int calculate05(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        int[] dp = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j]);
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
+
+    public int calculate06(int n) {
+        if (n <= 0) {
+            return -1;
+        }
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        int min = 0;
+        for (int i = 1; i < n + 1; i++) {
+            min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                min = Math.min(min, dp[i - j * j]);
+            }
+            dp[i] = min + 1;
+        }
+        return dp[n];
+    }
+
+    //   // 可以有多少个完全平方数组成
+    public int calculate07(int num) {
+        if (num <= 0) {
+            return -1;
+        }
+        // 1 2
+        int[] dp = new int[num + 1];
+        dp[0] = 0;
+        for (int i = 1; i < num + 1; i++) {
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                dp[i] = Math.min(dp[i], dp[i - j * j]);
+            }
+            dp[i] += 1;
+        }
+        return dp[num];
+    }
+
+    public int calculate08(int num) {
+        if (num <= 0) {
+            return -1;
+        }
+        if (num == 1) {
+            return 1;
+        }
+        int[] dp = new int[num + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i < num + 1; i++) {
+            dp[i] = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                dp[i] = Math.min(dp[i], dp[i - j * j]);
+            }
+            dp[i] += 1;
+        }
+        return dp[num];
+    }
+
+
     public static void main(String[] args) {
         NumSquare numSquare = new NumSquare();
-        System.out.println(numSquare.calculate03(4));
+        System.out.println(numSquare.calculate08(5));
     }
 }

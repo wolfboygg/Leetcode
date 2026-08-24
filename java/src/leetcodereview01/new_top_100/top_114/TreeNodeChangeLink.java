@@ -227,6 +227,61 @@ public class TreeNodeChangeLink {
         preorderTraversal07(root.right, list);
     }
 
+    public void flatten08(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preOrderTraversal08(head, list);
+        for (int i = 1; i < list.size(); i++) {// 单项
+            TreeNode pre = list.get(i - 1);
+            TreeNode node = list.get(i);
+            pre.right = node;
+            pre.left = null;
+        }
+        while(head != null) {
+            System.out.print(head.value + " ");
+            head = head.right;
+        }
+    }
+
+    public void preOrderTraversal08(TreeNode head, List<TreeNode> list) {
+        if (head == null) {
+            return;
+        }
+        list.add(head);
+        preOrderTraversal08(head.left, list);
+        preOrderTraversal08(head.right, list);
+    }
+
+    public void flatten09(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        preOrderTraversal09(root, list);
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode pre = list.get(i - 1);
+            TreeNode node = list.get(i);
+            pre.left = null;
+            pre.right = node;
+        }
+        while(root != null) {
+            System.out.print(root.value + " ");
+            root = root.right;
+        }
+    }
+
+    public void preOrderTraversal09(TreeNode root, List<TreeNode> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        preOrderTraversal09(root.left, list);
+        preOrderTraversal09(root.right, list);
+    }
+    
+
     public static void main(String[] args) {
 
         TreeNode node1 = new TreeNode(1);
@@ -243,7 +298,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten07(node1);
+        treeNodeChangeLink.flatten09(node1);
         // 直接展开 不需要构建Node
     }
 }

@@ -31,9 +31,106 @@ public class ColorGroup {
         System.out.println(Arrays.toString(arr));
     }
 
+    public void group02(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[i];
+                arr[i] = arr[P1];
+                arr[P1] = temp;
+                P1++;
+            }
+        }
+
+        for (int i = P1; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                int temp = arr[i];
+                arr[i] = arr[P1];
+                arr[P1] = temp;
+                P1++;
+            }
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void group03(int[] arr) {
+        // 就是简单的分组问题
+        int P1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int value = arr[i];
+                arr[i] = arr[P1];
+                arr[P1] = value;
+                P1++;
+            }
+        }
+        for (int i = P1; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                int value = arr[i];
+                arr[i] = arr[P1];
+                arr[P1] = value;
+                P1++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void group04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[P1];
+                arr[P1] = arr[i];
+                arr[i] = temp;
+                P1++;
+            }
+        }
+        for (int i = P1; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                int temp = arr[P1];
+                arr[P1] = arr[i];
+                arr[i] = temp;
+                P1++;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public void group05(int[] colors) {
+        if (colors == null || colors.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < colors.length; i++) {
+            if (colors[i] == 0) {
+                int temp = colors[i];
+                colors[i] = colors[P1];
+                colors[P1] = temp;
+                P1++;
+            }
+        }
+        for (int i = P1; i < colors.length; i++) {
+            if (colors[i] == 1) {
+                int temp = colors[i];
+                colors[i] = colors[P1];
+                colors[P1] = temp;
+                P1++;
+            }
+        }
+        System.out.println(Arrays.toString(colors));
+    }
+
+
     public static void main(String[] args) {
         ColorGroup colorGroup = new ColorGroup();
         int[] color = new int[] {2,0,2,1,1,0};
-        colorGroup.group01(color);
+        colorGroup.group05(color);
     }
 }

@@ -2,6 +2,8 @@ package leetcodereview01.new_top_100.top_94;
 
 import leetcodereview01.top100.top_94.TreeInorderTraversal;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class TraversalTree {
@@ -250,6 +252,76 @@ public class TraversalTree {
         }
     }
 
+    // 中序遍历
+    public void traversalByStack09(TreeNode node) {
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || node != null) {
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            TreeNode pop = stack.pop();
+            if (pop != null) {
+                System.out.print(pop.value + " ");
+                node = pop.right;
+            }
+        }
+    }
+
+    public void traversalByStack10(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || node != null) {
+            while(node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            TreeNode poll = stack.pop();
+            if (poll != null) {
+                System.out.print(poll.value + " ");
+                node = poll.right;
+            }
+        }
+    }
+
+
+    public void traversalByStack11(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(!stack.isEmpty() || root != null) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            System.out.print(pop.value + " ");
+            if (pop.right != null) {
+                root = pop.right;
+            }
+        }
+    }
+
+    public void traversalByStack12(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> queue = new Stack();
+        while(!queue.isEmpty() || root != null) {
+            while(root != null) {
+                queue.add(root);
+                root = root.left;
+            }
+            TreeNode pop = queue.pop();
+            if (pop != null) {
+                System.out.print(pop.value + " ");
+            }
+            root = pop.right;
+        }
+    }
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(1);
@@ -261,7 +333,7 @@ public class TraversalTree {
         TraversalTree traversalTree = new TraversalTree();
         traversalTree.traversalByDG05(node1);
         System.out.println();
-        traversalTree.traversalByStack08(node1);
+        traversalTree.traversalByStack12(node1);
 
     }
 }

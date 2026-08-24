@@ -76,9 +76,33 @@ public class ReplaceSpace {
         System.out.println(sb.toString());
     }
 
+    public void replaceSpace03(StringBuilder str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        int P1 = str.length() - 1;
+        for (int i = 0; i <= P1; i++) {
+            if (str.charAt(i) == ' ') {
+                str.append("  ");
+            }
+        }
+        int P2 = str.length() - 1;
+        while(P1 >= 0) {
+            if (str.charAt(P1) == ' ') {
+                str.setCharAt(P2--, '0');
+                str.setCharAt(P2--, '2');
+                str.setCharAt(P2--, '%');
+            } else {
+                str.setCharAt(P2--, str.charAt(P1));
+            }
+            P1--;
+        }
+        System.out.println(str.toString());
+    }
+
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder("We are happy.");
         ReplaceSpace replaceSpace = new ReplaceSpace();
-        replaceSpace.replaceSpace02(sb);
+        replaceSpace.replaceSpace03(sb);
     }
 }

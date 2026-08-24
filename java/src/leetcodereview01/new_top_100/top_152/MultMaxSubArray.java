@@ -69,32 +69,77 @@ public class MultMaxSubArray {
         return max;
     }
 
+
     public int calculate08(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
         }
-        int max = arr[0];
-        int min = arr[0];
-        int maxValue = 0;
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        int max = 0;
+
         for (int i = 1; i < arr.length; i++) {
-            int tempMax = max;
-            int tempMin = min;
-            max = Math.max(tempMax * arr[i], Math.max(arr[i], tempMin * arr[i]));
-            min = Math.min(tempMin * arr[i], Math.min(arr[i], tempMax * arr[i]));
-            if (min < -1 << 22) {
-                min = arr[i];
+            int tempMinValue = minValue;
+            int tempMaxValue = maxValue;
+            maxValue = Math.max(tempMaxValue * arr[i], Math.max(tempMinValue * arr[i], arr[i]));
+            minValue = Math.max(tempMaxValue * arr[i], Math.max(tempMaxValue * arr[i], arr[i]));
+            max = Math.max(maxValue, max);
+            if (minValue <-1 << 22) {
+                minValue = arr[i];
             }
-            maxValue = Math.max(maxValue, max);
-            System.out.println("max:" + max + ",min:" + min);
         }
-        return maxValue;
+        return max;
+
     }
 
 
+    public int calculate09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            int tempMinValue = minValue;
+            int tempMaxValue = maxValue;
+            System.out.println(tempMinValue + "," + tempMaxValue + "," + arr[i] + "," + arr[i] * tempMaxValue);
+            minValue = Math.min(Math.min(tempMinValue * arr[i], arr[i]), arr[i] * tempMaxValue);
+            maxValue = Math.max(Math.max(tempMaxValue * arr[i], arr[i]), arr[i] * tempMinValue);
+
+            if (minValue < (-1 << 31)) {
+                minValue = arr[i];
+            }
+            max = Math.max(max, maxValue);
+        }
+        return max;
+    }
+
+    public int calculate10(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            int tempMinValue = minValue;
+            int tempMaxValue = maxValue;
+//            System.out.println(tempMinValue + "," + tempMaxValue + "," + arr[i] + "," + arr[i] * tempMaxValue);
+            minValue = Math.min(Math.min(tempMinValue * arr[i], arr[i]), tempMaxValue * arr[i]);
+            maxValue = Math.max(Math.max(tempMaxValue * arr[i], arr[i]), tempMinValue * arr[i]);
+            if (minValue < (-1 << 31)) {
+                minValue = arr[i];
+            }
+            max = Math.max(max, maxValue);
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = new int[]{5, 6, -1, 2, 3, -1};
+        int[] arr = new int[]{5, 6, -1, 2, -3};
         MultMaxSubArray multMaxSubArray = new MultMaxSubArray();
-        System.out.println(multMaxSubArray.calculate08(arr));
+        System.out.println(multMaxSubArray.calculate10(arr));
     }
 }

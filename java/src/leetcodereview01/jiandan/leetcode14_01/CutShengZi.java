@@ -256,11 +256,27 @@ public class CutShengZi {
         return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
     }
 
+    public int cut14(int target) {
+        if (target <= 2) {
+            return -1;
+        }
+        if (target == 3) {
+            return 1;
+        }
+        int threeCount = target / 3;
+        int twoCount = 0;
+        if (target - threeCount * 3 == 1) {
+            threeCount--;
+        }
+        twoCount = (target - threeCount * 3) / 2;
+        return (int) (Math.pow(3, threeCount) * Math.pow(2, twoCount));
+    }
+
 
     public static void main(String[] args) {
         CutShengZi cutShengZi = new CutShengZi();
-        System.out.println(cutShengZi.cut13(8));
-        System.out.println(cutShengZi.cut13(7));
+        System.out.println(cutShengZi.cut14(8));
+        System.out.println(cutShengZi.cut14(7));
     }
 
     private int cut(int target) {

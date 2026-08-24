@@ -43,28 +43,12 @@ public class SplitWord {
     }
 
     public boolean valid03(String str, List<String> list) {
-        if (str == null) {
+        if (str == null || list == null || list.size() == 0) {
             return false;
         }
         boolean[] dp = new boolean[str.length() + 1];
         dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
-            for (int j = 0; j < i; j++) {
-                if (dp[j] && list.contains(str.substring(j, i))) {
-                    dp[i] = true;
-                }
-            }
-        }
-        return dp[str.length()];
-    }
-
-    public boolean valid04(String str, List<String> list) {
-        if (str == null) {
-            return false;
-        }
-        boolean[] dp = new boolean[str.length() + 1];
-        dp[0] = true;
-        for (int i = 1; i < str.length() + 1; i++) {
+        for (int i = 1; i <= str.length(); i++) {
             for (int j = 0; j < i; j++) {
                 if (dp[j] && list.contains(str.substring(j, i))) {
                     dp[i] = true;
@@ -80,7 +64,7 @@ public class SplitWord {
         list.add("leet");
         list.add("code2");
         SplitWord splitWord = new SplitWord();
-        boolean result = splitWord.valid04(str, list);
+        boolean result = splitWord.valid03(str, list);
         System.out.println(result);
     }
 }

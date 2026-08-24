@@ -29,11 +29,70 @@ public class SubSet {
     }
 
 
+    public List<List<Integer>> calculate02(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        dfs02(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void dfs02(int[] nums, int index, List<Integer> list) {
+        if (index == nums.length) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        list.add(nums[index]);
+        dfs02(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        dfs02(nums, index + 1, list);
+
+    }
+
+    public List<List<Integer>> calculate03(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        traversal03(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void traversal03(int[] nums, int index, List<Integer> list) {
+        if (index >= nums.length) {
+            if (index == nums.length) {
+                ret.add(new ArrayList<>(list));
+            }
+            return;
+        }
+        list.add(nums[index]);
+        traversal03(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        traversal03(nums, index + 1, list);
+    }
+
+    public List<List<Integer>> calculate04(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        traversal04(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void traversal04(int[] nums, int index, List<Integer> list) {
+        if (index >= nums.length) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        list.add(nums[index]);
+        traversal04(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        traversal04(nums, index + 1, list);
+    }
 
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
         SubSet subSet = new SubSet();
-        List<List<Integer>> list = subSet.calculate01(nums);
+        List<List<Integer>> list = subSet.calculate04(nums);
         System.out.println(list.toString());
     }
 

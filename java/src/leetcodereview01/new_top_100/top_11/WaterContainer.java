@@ -67,10 +67,109 @@ public class WaterContainer {
         return max;
     }
 
+
+    public int getWaterMaxValue04(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        int max = 0;
+        while(left < right) {
+            int value = Math.min(arr[left], arr[right]) * (right - left);
+            max = Math.max(max, value);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+
+    // 接水的最大值
+    public int getWaterMaxValue05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length -1;
+        int max = 0;
+        while(left < right) {
+            int value = (right - left) * Math.min(arr[left], arr[right]);
+            max = Math.max(max, value);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+    public int getWaterMaxValue06(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int left = 0;
+        int right = arr.length -1 ;
+        while(left < right) {
+            int tempValue = Math.min(arr[left], arr[right]) * (right - left);
+            max = Math.max(max, tempValue);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+    // 其实就是找到最高槽位置
+    public int getWaterMaxValue07(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            max = Math.max(max, (right - left) * Math.min(arr[left], arr[right]));
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+    public int getWaterMaxValue08(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            int value = Math.min(arr[left], arr[right]) * (right - left);
+            max = Math.max(max, value);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         WaterContainer waterContainer = new WaterContainer();
         int[] arr = new int[] {1,8,6,2,5,4,8,3,7};
-        int value = waterContainer.getWaterMaxValue03(arr);
+        int value = waterContainer.getWaterMaxValue08(arr);
         System.out.println(value);
     }
 

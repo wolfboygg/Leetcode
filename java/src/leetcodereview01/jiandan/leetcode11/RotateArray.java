@@ -105,12 +105,29 @@ public class RotateArray {
         return arr[left];
     }
 
+    public int getMinValueByTx05(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = arr.length - 1;
+        while(left < right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > arr[right]) {
+                left = middle + 1;
+            } else {
+                right = middle;
+            }
+        }
+        return arr[left];
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = {4, 5, 6, 7,  1, 2, 3};
+        int[] arr = {4, 5, 6, 7, 1, 2, 3};
         int[] arr2 = { 4, 5, 0, 1, 2, 3};
         RotateArray rotateArray = new RotateArray();
-        int i = rotateArray.getMinValueByTX04(arr2);
+        int i = rotateArray.getMinValueByTx05(arr2);
         System.out.println("最小值为:" + i);
     }
 }

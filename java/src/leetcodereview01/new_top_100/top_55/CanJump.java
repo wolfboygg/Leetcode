@@ -56,7 +56,6 @@ public class CanJump {
         return false;
     }
 
-    // 贪心算法
     public boolean canJump04(int[] arr) {
         if (arr == null || arr.length == 0) {
             return false;
@@ -64,25 +63,8 @@ public class CanJump {
         int max = 0;
         for (int i = 0; i < arr.length; i++) {
             if (i <= max) {
-                max = Math.max(arr[i] + i, max);
-                if (max >= arr.length) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    // 贪心算法
-    public boolean canJump05(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return false;
-        }
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (i <= max) {
-                max = Math.max(i + arr[i], max);
-                if (max >= arr.length) {
+                max = Math.max(max, arr[i] + i);
+                if (max >= arr.length - 1) {
                     return true;
                 }
             }
@@ -93,8 +75,8 @@ public class CanJump {
     public static void main(String[] args) {
         CanJump canJump = new CanJump();
         int[] arr = new int[] {2,3,1,1,4};
-//        int[] arr = new int[] {3,2,1,0,4};
-        boolean can = canJump.canJump05(arr);
+        int[] arr02 = new int[] {3,2,1,0,4};
+        boolean can = canJump.canJump04(arr02);
         System.out.println(can);
     }
 }
