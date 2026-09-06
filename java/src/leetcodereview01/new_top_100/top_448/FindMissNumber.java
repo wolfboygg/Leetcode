@@ -256,6 +256,26 @@ public class FindMissNumber {
         return list.toArray(new Integer[list.size()]);
     }
 
+    public Integer[] find11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while (arr[i] != i + 1 && arr[i] != arr[arr[i] -1]) {
+                int temp = arr[i];
+                arr[i] = arr[temp - 1];
+                arr[temp - 1] = temp;
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != i +1 ) {
+                list.add(i + 1);
+            }
+        }
+        return list.toArray(new Integer[list.size()]);
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};

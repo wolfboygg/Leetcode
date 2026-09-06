@@ -98,9 +98,30 @@ public class PhoneNumber {
         }
     }
 
+    public void letterCombinations04(String str) {
+        if (str == null || str.length() == 0) {
+            return;
+        }
+        char[] charArray = str.toCharArray();
+        traversal04(charArray, 0, new StringBuilder());
+    }
+
+    public void traversal04(char[] charArr, int index, StringBuilder sb) {
+        if (sb.length() == charArr.length) {
+            ret.add(new String(sb.toString()));
+            return;
+        }
+        char[] charArray = map[charArr[index] - '0'].toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            sb.append(charArray[i]);
+            traversal04(charArr, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+
     public static void main(String[] args) {
         PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.letterCombinations03("234");
+        phoneNumber.letterCombinations04("234");
         System.out.println(ret.toString());
     }
 }

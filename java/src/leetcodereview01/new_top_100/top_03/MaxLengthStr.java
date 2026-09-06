@@ -1,5 +1,6 @@
 package leetcodereview01.new_top_100.top_03;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -236,6 +237,25 @@ public class MaxLengthStr {
         }
         return max;
     }
+
+    public int maxLengthStr13(String str) {
+        if (str == null || str.length() == 0) {
+            return -1;
+        }
+        int defaultIndex = -1;
+        Map<Character, Integer> map = new HashMap<>();
+        char[] charArray = str.toCharArray();
+        int max = 0;
+        for (int i = 0; i < charArray.length; i++) {
+            if (map.containsKey(charArray[i])) {
+                defaultIndex = Math.max(defaultIndex, map.getOrDefault(charArray[i], -1));
+            }
+            map.put(charArray[i], i);
+            max = Math.max(max, i - defaultIndex);
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         String str = "abcabcbb";

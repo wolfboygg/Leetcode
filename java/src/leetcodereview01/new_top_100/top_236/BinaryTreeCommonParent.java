@@ -279,6 +279,27 @@ public class BinaryTreeCommonParent {
         return left != null ? left : right;
     }
 
+    public TreeNode findCommonParent15(TreeNode root, TreeNode node1, TreeNode node2) {
+        if (root == null) {
+            return null;
+        }
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        if (root == node1 || root == node2) {
+            return root;
+        }
+        TreeNode left = findCommonParent15(root.left, node1, node2);
+        TreeNode right = findCommonParent15(root.right, node1, node2);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left == null && right == null) {
+            return null;
+        }
+        return left == null ? right : left;
+    }
+
 
     public static void main(String[] args) {
         TreeNode node1 = new TreeNode(4);
@@ -297,7 +318,7 @@ public class BinaryTreeCommonParent {
         node3.right = node7;
 
         BinaryTreeCommonParent binaryTreeCommonParent = new BinaryTreeCommonParent();
-        TreeNode commonParent = binaryTreeCommonParent.findCommonParent14(node1, node4, node7);
+        TreeNode commonParent = binaryTreeCommonParent.findCommonParent15(node1, node4, node7);
         if (commonParent == null) {
             System.out.println("找不到");
         } else {

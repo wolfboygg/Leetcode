@@ -44,132 +44,13 @@ public class MaxProfit {
         return maxValue;
     }
 
-    public int maxProfit03(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int min = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            min = Math.min(min, arr[i]);
-            max = Math.max(arr[i] - min , max);
-        }
-        return max;
-    }
-
-    public int maxProfit04(int[] arr) {
-        if (arr == null) {
-            return -1;
-        }
-        int max = 0;
-        int min = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            min = Math.min(min, arr[i]);
-            max = Math.max(max, arr[i] - min);
-        }
-        return max;
-    }
-
-    public int maxProfit05(int[] arr) {
-        if (arr == null || arr.length == 0){
-            return -1;
-        }
-        int min = arr[0];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            min = Math.min(min, arr[i]);
-            max = Math.max(max, arr[i] - min);
-        }
-        return max;
-    }
-
-    public int maxProfit06(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int min = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            min = Math.min(arr[i], min);
-            max = Math.max(arr[i] - min, max);
-        }
-        return max;
-    }
-
-    public int maxProfit07(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int min = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-            min = Math.min(arr[i], min);
-            max = Math.max(arr[i] - min, max);
-        }
-        return max;
-    }
-
-    public int getMaxProfit08(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int min = arr[0];
-        int maxProfit = 0;
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < min) {
-                min = arr[i];
-            }
-            maxProfit = Math.max(maxProfit, arr[i] - min);
-        }
-        return maxProfit;
-    }
-
-    public int getMaxProfit09(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int min = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            min = Math.min(min, arr[i]);
-            max = Math.max(max, arr[i] - min);
-        }
-        return max;
-    }
-
-    public int getMaxProfit10(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int minValue = arr[0];
-        int maxValue = 0;
-        for (int i = 1; i < arr.length; i++) {
-            minValue = Math.min(arr[i], minValue);
-            maxValue = Math.max(maxValue, arr[i] - minValue);
-        }
-        return maxValue;
-    }
-
-    public int getMaxProfit11(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int minValue = arr[0];
-        int maxValue = 0;
-        for (int i = 1; i < arr.length; i++) {
-            minValue = Math.min(minValue, arr[i]);
-            maxValue = Math.max(maxValue, arr[i] - minValue);
-        }
-        return maxValue;
-    }
-
-    public int getMaxProfit12(int[] arr) {
+    public int getMaxProfit03(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
         }
         int max = 0;
         int minValue = arr[0];
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             minValue = Math.min(minValue, arr[i]);
             max = Math.max(max, arr[i] -minValue);
         }
@@ -180,7 +61,7 @@ public class MaxProfit {
         int[] arr = {7, 1, 5, 3, 6, 4};
         // 找到最大的利润
         MaxProfit bean = new MaxProfit();
-        int i = bean.getMaxProfit11(arr);
+        int i = bean.getMaxProfit03(arr);
         System.out.println(i);
     }
 

@@ -49,129 +49,10 @@ public class MaxSubArraySum {
             return -1;
         }
         int max = 0;
-        int curSum = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            curSum = Math.max(arr[i], curSum + arr[i]);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-    public int calculate04(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int curSum = 0;
-        int max = 0;
+        int curMax = 0;
         for (int i = 0; i < arr.length; i++) {
-            curSum = Math.max(arr[i], curSum + arr[i]);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-
-    public int calculate05(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int curSum = 0;
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            curSum = Math.max(arr[i], curSum + arr[i]);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-    public int calculate06(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int curSum = 0;
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            curSum = Math.max(arr[i], arr[i] + curSum);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-    public int calculate07(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int currentValue = arr[0];
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            currentValue = Math.max(arr[i], currentValue + arr[i]);
-            max = Math.max(currentValue, max);
-        }
-        return max;
-    }
-
-    public int calculate08(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int currentMax = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            currentMax = Math.max(currentMax + arr[i], arr[i]);
-            max = Math.max(max, currentMax);
-        }
-        return max;
-    }
-
-    public int calculate09(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int curMax = arr[0];
-        for (int i = 1; i < arr.length; i++) {
             curMax = Math.max(curMax + arr[i], arr[i]);
             max = Math.max(max, curMax);
-        }
-        return max;
-    }
-
-    public int calculate10(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int curSum = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            curSum = Math.max(curSum + arr[i], arr[i]);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-
-    public int calculate11(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int curSum = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            curSum = Math.max(curSum + arr[i], arr[i]);
-            max = Math.max(max, curSum);
-        }
-        return max;
-    }
-
-    public int calculate12(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return -1;
-        }
-        int max = 0;
-        int curMax = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            curMax = Math.max(curMax + arr[i], arr[i]);
-            max = Math.max(curMax, max);
         }
         return max;
     }
@@ -180,6 +61,6 @@ public class MaxSubArraySum {
         int[] arr = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         MaxSubArraySum maxSubArraySum = new MaxSubArraySum();
         // 6
-        System.out.println(maxSubArraySum.calculate11(arr));
+        System.out.println(maxSubArraySum.calculate02(arr));
     }
 }

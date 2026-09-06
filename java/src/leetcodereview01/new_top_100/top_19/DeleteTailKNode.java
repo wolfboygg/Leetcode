@@ -454,6 +454,39 @@ public class DeleteTailKNode {
     }
 
 
+    public Node deleteTailKNode14(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node P1 = head;
+        for (int i = 0; i < k; i++) {
+            P1 = P1.next;
+        }
+        Node P2 = head;
+        while(P1 != null) {
+            P2 = P2.next;
+            P1 = P1.next;
+        }
+        // 删除P2
+        if (P2.next != null) {
+            Node next = P2.next;
+            P2.value = next.value;
+            P2.next = next.next;
+        } else {
+            if (P2 == head) {
+                head = null;
+            } else {
+                P1 = head;
+                while(P1.next != P2) {
+                    P1 = P1.next;
+                }
+                P1.next = null;
+            }
+        }
+        return head;
+    }
+
+
     public static void main(String[] args){
         // 给定一个链表: 1->2->3->4->5, 和 n = 2.
         Node node1 = new Node(1);
@@ -467,7 +500,7 @@ public class DeleteTailKNode {
         node3.next = node4;
         node4.next = node5;
         DeleteTailKNode deleteTailKNode = new DeleteTailKNode();
-        Node node = deleteTailKNode.deleteTailKNode13(node1, 5);
+        Node node = deleteTailKNode.deleteTailKNode14(node1, 1);
         while(node != null) {
             System.out.print(node.value);
             node = node.next;

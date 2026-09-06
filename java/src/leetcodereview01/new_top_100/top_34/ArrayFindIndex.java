@@ -110,13 +110,38 @@ public class ArrayFindIndex {
         return targetIndex;
     }
 
+    public int[] find04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int leftIndex = realFind04(arr, target, true);
+        int rightIndex = realFind04(arr, target, false) - 1;
+        return new int[] {leftIndex, rightIndex};
+    }
+
+    public int realFind04(int[] arr, int target, boolean isLow) {
+        int left = 0;
+        int right = arr.length - 1;
+        int targetIndex = -1;
+        while(left <= right) {
+            int middle = left + (right - left) / 2;
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                right = middle - 1;
+                targetIndex = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
 
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find03(arr, target);
+        int[] result = arrayFindIndex.find04(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }

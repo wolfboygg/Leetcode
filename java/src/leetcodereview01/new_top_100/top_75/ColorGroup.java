@@ -127,10 +127,34 @@ public class ColorGroup {
         System.out.println(Arrays.toString(colors));
     }
 
+    public void group06(int[] colors) {
+        if (colors == null || colors.length == 0) {
+            return;
+        }
+        int P1 = 0;
+        for (int i = 0; i < colors.length; i++) {
+            if (colors[i] == 0) {
+                int value = colors[i];
+                colors[i] = colors[P1];
+                colors[P1] = value;
+                P1++;
+            }
+        }
+        for (int i = 0; i < colors.length; i++) {
+            if (colors[i] == 1) {
+                int value = colors[i];
+                colors[i] = colors[P1];
+                colors[P1] = value;
+                P1++;
+            }
+        }
+        System.out.println(Arrays.toString(colors));
+    }
+
 
     public static void main(String[] args) {
         ColorGroup colorGroup = new ColorGroup();
         int[] color = new int[] {2,0,2,1,1,0};
-        colorGroup.group05(color);
+        colorGroup.group06(color);
     }
 }

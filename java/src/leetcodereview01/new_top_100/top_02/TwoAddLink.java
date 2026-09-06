@@ -537,6 +537,50 @@ public class TwoAddLink {
        return temp.next;
    }
 
+   // 主要是进位问题
+    public ListNode addTwoNumber12(ListNode node1, ListNode node2) {
+        if (node1 == null && node2 == null) {
+            return null;
+        }
+        ListNode pre = new ListNode(-1);
+        ListNode temp = pre;
+        int carry = 0;
+        while(node1 != null && node2 != null) {
+            ListNode node = new ListNode(carry);
+            node.val += node1.val;
+            node.val += node2.val;
+            carry = node.val / 10;
+            node.val %= 10;
+            temp.next = node;
+            temp = temp.next;
+            node1 = node1.next;
+            node2 = node2.next;
+        }
+        ListNode next = node1 == null ? node2 : node1;
+        while(next != null) {
+            ListNode node = new ListNode(carry);
+            node.val += next.val;
+            carry = node.val / 10;
+            node.val %= 10;
+            temp.next = node;
+            temp = temp.next;
+            next = next.next;
+        }
+        if (carry > 0) {
+            temp.next = new ListNode(carry);
+        }
+        ListNode P1 = new ListNode(-1);
+        temp = P1;
+        pre = pre.next;
+        while(pre != null) {
+            next = pre.next;
+            pre.next = temp.next;
+            temp.next = pre;
+            pre = next;
+        }
+        return P1.next;
+    }
+
 
     public static void main (String[]args){
         ListNode node1 = new ListNode(2);
@@ -553,7 +597,7 @@ public class TwoAddLink {
         node5.next = node6;
         node6.next = node7;
         TwoAddLink twoAddLink = new TwoAddLink();
-        ListNode node = twoAddLink.addTowNumber11(node1, node4);
+        ListNode node = twoAddLink.addTwoNumber12(node1, node4);
         while (node != null) {
             System.out.print(node.val);
             node = node.next;
