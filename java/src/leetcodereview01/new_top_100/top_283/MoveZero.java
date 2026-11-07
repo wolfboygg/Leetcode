@@ -33,7 +33,7 @@ public class MoveZero {
             if (arr[i] != 0) {
                 int temp = arr[i];
                 arr[i] = arr[slow];
-                arr[slow]  = temp;
+                arr[slow] = temp;
                 slow++;
             }
         }
@@ -64,7 +64,7 @@ public class MoveZero {
         int low = 0;
         // 只需要动一下就ok了
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] != 0) {
+            if (arr[i] != 0) {
                 int temp = arr[i];
                 arr[i] = arr[low];
                 arr[low] = temp;
@@ -80,7 +80,7 @@ public class MoveZero {
         }
         int P1 = 0;
         int P2 = arr.length - 1;
-        while(P1 < P2) {
+        while (P1 < P2) {
             if (arr[P1] != 0) {
                 P1++;
             } else {
@@ -114,7 +114,7 @@ public class MoveZero {
         }
         int limit = arr.length - 1;
         int P1 = limit;
-        for (int i = limit; i >=0 ; i--) {
+        for (int i = limit; i >= 0; i--) {
             if (arr[i] != 0) {
                 int temp = arr[i];
                 arr[i] = arr[P1];
@@ -172,11 +172,25 @@ public class MoveZero {
         }
     }
 
+    public void moveToStart09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        int P0 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) {
+                int temp = arr[i];
+                arr[i] = arr[P0];
+                arr[P0] = temp;
+                P0++;
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        int[] arr = new int[] {1,2,0,0,3,12};
+        int[] arr = new int[]{1, 2, 0, 0, 3, 12};
         MoveZero moveZero = new MoveZero();
-        moveZero.moveToStart08(arr);
+        moveZero.moveToStart09(arr);
         System.out.println(Arrays.toString(arr));
     }
 

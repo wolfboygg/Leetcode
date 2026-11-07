@@ -65,87 +65,6 @@ public class BinaryDepth {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
-    public int getDepth05(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth05(root.left);
-        int rightDepth = getDepth05(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth06(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth06(root.left);
-        int rightDepth = getDepth06(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth07(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth07(root.left);
-        int rightDepth = getDepth07(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth08(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth08(root.left);
-        int rightDepth = getDepth08(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth09(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth09(root.left);
-        int rightDepth = getDepth09(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth10(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth10(root.left);
-        int rightDepth = getDepth10(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth11(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth11(root.left);
-        int rightDepth = getDepth11(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth12(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth12(root.left);
-        int rightDepth = getDepth12(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getDepth13(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftDepth = getDepth13(root.left);
-        int rightDepth = getDepth13(root.right);
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
     public static void main(String[] args) {
         TreeNode node11 = new TreeNode(2);
         TreeNode node22 = new TreeNode(1);
@@ -159,7 +78,7 @@ public class BinaryDepth {
         node33.right = node55;
 
         BinaryDepth binaryDepth = new BinaryDepth();
-        int depth = binaryDepth.getDepth13(node11);
+        int depth = binaryDepth.getDepth03(node11);
         System.out.println(depth);
 
     }

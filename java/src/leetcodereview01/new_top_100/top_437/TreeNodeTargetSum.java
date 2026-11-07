@@ -312,10 +312,33 @@ public class TreeNodeTargetSum {
         list.remove(list.size() - 1);
     }
 
+    public boolean findPath13(TreeNode root, int target) {
+        if (root == null) {
+            return false;
+        }
+        realFindPath13(root, target, new ArrayList<>());
+        return !ret.isEmpty();
+    }
+
+    public void realFindPath13(TreeNode root, int target, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.value);
+        target -= root.value;
+        if (root.left == null && root.right == null && target == 0) {
+            ret.add(new ArrayList<>(list));
+        } else {
+            realFindPath13(root.left, target, list);
+            realFindPath13(root.right, target, list);
+        }
+        list.remove(list.size() - 1);
+    }
+
     public static void main(String[] args) {
         TreeNodeTargetSum treeFindSumTargetPath = new TreeNodeTargetSum();
         TreeNode tree = treeFindSumTargetPath.createTree();
-        boolean isExit = treeFindSumTargetPath.findPath12(tree, 22);
+        boolean isExit = treeFindSumTargetPath.findPath13(tree, 22);
         if (isExit) {
             System.out.println(treeFindSumTargetPath.ret.toString());
         }

@@ -81,45 +81,16 @@ public class TreeNodeChangeLink {
         preTraversal01(root.right, list);
     }
 
-    // 二叉树转换为链表
     public void flatten03(TreeNode root) {
         if (root == null) {
             return;
         }
         List<TreeNode> list = new ArrayList<>();
-        preTraversal02(root, list);
+        preOrderTraversal03(root, list);
         for (int i = 1; i < list.size(); i++) {
-            TreeNode pre = list.get(i-1);
-            TreeNode cur = list.get(i);
-            pre.right = cur;
-            pre.left = null;
-        }
-        while(root != null) {
-            System.out.print(root.value + " ");
-            root = root.right;
-        }
-    }
-
-    public void preTraversal02(TreeNode root, List<TreeNode> list) {
-        if (root == null) {
-            return;
-        }
-        list.add(root);
-        preTraversal02(root.left, list);
-        preTraversal02(root.right, list);
-    }
-
-    // 通过前序遍历排好序之后在进行连接
-    public void flatten04(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preOrderTraversal04(root, list);
-        // 开始处理
-        for (int i = 1; i < list.size(); i++) {
-            TreeNode pre = list.get(i-1);
+            TreeNode pre = list.get(i -1);
             TreeNode node = list.get(i);
+            System.out.println(pre.value + "--->" + node.value);
             pre.left = null;
             pre.right = node;
         }
@@ -129,156 +100,14 @@ public class TreeNodeChangeLink {
         }
     }
 
-    public void preOrderTraversal04(TreeNode root, List<TreeNode> list) {
+    public void preOrderTraversal03(TreeNode root, List<TreeNode> list) {
         if (root == null) {
             return;
         }
         list.add(root);
-        preOrderTraversal04(root.left, list);
-        preOrderTraversal04(root.right, list);
-    }
+        preOrderTraversal03(root.left, list);
+        preOrderTraversal03(root.right, list);
 
-    // 二叉树转换为链表，需要通过List来进行转换
-    public void flatten05(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preOrderTraversal05(root, list);
-        for (int i = 1; i < list.size(); i++) {
-            TreeNode pre = list.get(i - 1);
-            TreeNode node = list.get(i);
-            pre.left = null;
-            pre.right = node;
-        }
-        while(root != null) {
-            System.out.print(root.value + " ");
-            root = root.right;
-        }
-    }
-
-    public void preOrderTraversal05(TreeNode root, List<TreeNode> list) {
-        if (root == null) {
-            return;
-        }
-        list.add(root);
-        preOrderTraversal05(root.left, list);
-        preOrderTraversal05(root.right, list);
-    }
-
-
-    public void flatten06(TreeNode root) {
-        // 借助list来实现
-        if (root == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preOrderTraversal06(root, list);
-        for (int i = 1; i < list.size(); i++) {
-            TreeNode pre = list.get(i-1);
-            TreeNode cur = list.get(i);
-            pre.left = null;
-            pre.right = cur;
-        }
-        TreeNode treeNode = list.get(0);
-        while (treeNode != null) {
-            System.out.print(treeNode.value + " ");
-            treeNode = treeNode.right;
-        }
-    }
-
-    public void preOrderTraversal06(TreeNode root, List<TreeNode>  list) {
-        if (root == null) {
-            return;
-        }
-        list.add(root);
-        preOrderTraversal06(root.left, list);
-        preOrderTraversal06(root.right, list);
-    }
-
-
-    // 二叉树转换为列表。其实不用考虑递归直接转换，可以使用list存储，根据前序列进行遍历就好了
-    public void flatten07(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preorderTraversal07(root, list);
-
-        for (int i = 1; i < list.size(); i++) {
-            TreeNode node = list.get(i);
-            TreeNode pre = list.get(i-1);
-            pre.right = node;
-            pre.left = null;
-        }
-        while(root != null) {
-            System.out.print(root.value + " ");
-            root = root.right;
-        }
-
-    }
-
-    public void preorderTraversal07(TreeNode root, List<TreeNode> list) {
-        if (root == null) {
-            return;
-        }
-        list.add(root);
-        preorderTraversal07(root.left, list);
-        preorderTraversal07(root.right, list);
-    }
-
-    public void flatten08(TreeNode head) {
-        if (head == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preOrderTraversal08(head, list);
-        for (int i = 1; i < list.size(); i++) {// 单项
-            TreeNode pre = list.get(i - 1);
-            TreeNode node = list.get(i);
-            pre.right = node;
-            pre.left = null;
-        }
-        while(head != null) {
-            System.out.print(head.value + " ");
-            head = head.right;
-        }
-    }
-
-    public void preOrderTraversal08(TreeNode head, List<TreeNode> list) {
-        if (head == null) {
-            return;
-        }
-        list.add(head);
-        preOrderTraversal08(head.left, list);
-        preOrderTraversal08(head.right, list);
-    }
-
-    public void flatten09(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        List<TreeNode> list = new ArrayList<>();
-        preOrderTraversal09(root, list);
-        for (int i = 1; i < list.size(); i++) {
-            TreeNode pre = list.get(i - 1);
-            TreeNode node = list.get(i);
-            pre.left = null;
-            pre.right = node;
-        }
-        while(root != null) {
-            System.out.print(root.value + " ");
-            root = root.right;
-        }
-    }
-
-    public void preOrderTraversal09(TreeNode root, List<TreeNode> list) {
-        if (root == null) {
-            return;
-        }
-        list.add(root);
-        preOrderTraversal09(root.left, list);
-        preOrderTraversal09(root.right, list);
     }
     
 
@@ -298,7 +127,7 @@ public class TreeNodeChangeLink {
         node5.right = node6;
 
         TreeNodeChangeLink treeNodeChangeLink = new TreeNodeChangeLink();
-        treeNodeChangeLink.flatten09(node1);
+        treeNodeChangeLink.flatten03(node1);
         // 直接展开 不需要构建Node
     }
 }

@@ -21,7 +21,7 @@ public class TraversalTreeNode {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             System.out.print(poll.value + " ");
             if (poll.left != null) {
@@ -40,10 +40,10 @@ public class TraversalTreeNode {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
             System.out.print(node.value + " ");
-            if (node.left != null){
+            if (node.left != null) {
                 queue.offer(node.left);
             }
             if (node.right != null) {
@@ -59,7 +59,7 @@ public class TraversalTreeNode {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             System.out.print(poll.value + " ");
             if (poll.left != null) {
@@ -77,7 +77,7 @@ public class TraversalTreeNode {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             TreeNode poll = queue.poll();
             System.out.print(poll.value + " ");
             if (poll.left != null) {
@@ -89,6 +89,7 @@ public class TraversalTreeNode {
         }
     }
 
+    // 层序遍历
     public void traversal04(TreeNode root) {
         if (root == null) {
             return;
@@ -103,135 +104,6 @@ public class TraversalTreeNode {
             }
             if (poll.right != null) {
                 queue.offer(poll.right);
-            }
-        }
-    }
-
-
-    public void traversal05(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    public void traversal06(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    public void traversal07(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    public void traversal08(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    public void traversal09(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-
-    public void traversal10(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode poll = queue.poll();
-            System.out.print(poll.value + " ");
-            if (poll.left != null) {
-                queue.offer(poll.left);
-            }
-            if (poll.right != null) {
-                queue.offer(poll.right);
-            }
-        }
-    }
-
-    // 广度优先遍历二叉树
-    public void traversal11(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            System.out.print(node.value + " ");
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            if (node.right != null) {
-                queue.offer(node.right);
             }
         }
     }
@@ -254,6 +126,6 @@ public class TraversalTreeNode {
         node2.right = node8;
 
         TraversalTreeNode traversalTreeNode = new TraversalTreeNode();
-        traversalTreeNode.traversal11(node1);
+        traversalTreeNode.traversal04(node1);
     }
 }

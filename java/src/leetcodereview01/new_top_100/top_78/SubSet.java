@@ -89,10 +89,30 @@ public class SubSet {
         traversal04(nums, index + 1, list);
     }
 
+    // 子集问题
+    public List<List<Integer>> calculate05(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        traversal05(nums, 0, new ArrayList<>());
+        return ret;
+    }
+
+    public void traversal05(int[] nums, int index, List<Integer> list) {
+        if (index == nums.length) {
+            ret.add(new ArrayList<>(list));
+            return;
+        }
+        list.add(nums[index]);
+        traversal05(nums, index + 1, list);
+        list.remove(list.size() - 1);
+        traversal05(nums, index + 1, list);
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[] {1,2,3};
         SubSet subSet = new SubSet();
-        List<List<Integer>> list = subSet.calculate04(nums);
+        List<List<Integer>> list = subSet.calculate05(nums);
         System.out.println(list.toString());
     }
 

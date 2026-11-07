@@ -100,8 +100,7 @@ public class BuildTreeNode {
     }
 
     public TreeNode build03(int[] preOrder, int[] inOrder) {
-        // 构建二叉树
-        if (preOrder == null || preOrder.length == 0 || inOrder == null || inOrder.length == 0) {
+        if (preOrder == null || inOrder == null) {
             return null;
         }
         for (int i = 0; i < inOrder.length; i++) {
@@ -110,186 +109,24 @@ public class BuildTreeNode {
         return realBuild03(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
     }
 
-    public TreeNode realBuild03(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
+    public TreeNode realBuild03(int[] preOrder, int preLeft, int preEnd, int[] inOrder, int inLeft, int inRight) {
+        if (preLeft > preEnd) {
             return null;
         }
         int rootValue = preOrder[preLeft];
         int rootIndex = inOrderIndex.get(rootValue);
         int leftChildCount = rootIndex - inLeft;
         TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild02(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild02(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
+        root.left = realBuild03(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
+        root.right = realBuild03(preOrder, preLeft + leftChildCount + 1, preEnd, inOrder, rootIndex + 1, inRight);
         return root;
     }
-
-    public TreeNode build04(int[] pre, int[] inOrder) {
-        if (pre == null || inOrder == null) {
-            return null;
-        }
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild04(pre, 0, pre.length - 1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild04(int[] pre, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = pre[preLeft];
-        TreeNode root = new TreeNode(rootValue);
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        root.left = realBuild04(pre, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild04(pre, preLeft + leftChildCount + 1 , preRight, inOrder, rootIndex + 1, inRight);
-        return root;
-    }
-
-    public TreeNode build05(int[] preOrder, int[] inOrder) {
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild05(preOrder, 0, preOrder.length -1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild05(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild05(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild05(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
-        return root;
-
-    }
-
-    public TreeNode build06(int[] preOrder, int [] inOrder) {
-        if (preOrder == null || inOrder == null) {
-            return null;
-        }
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild06(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild06(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild06(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex -1);
-        root.right = realBuild06(preOrder,  preLeft + leftChildCount + 1, preRight, inOrder,  rootIndex + 1, inRight);
-        return root;
-    }
-
-    public TreeNode build07(int[] preOrder, int[] inOrder) {
-        if (preOrder == null || inOrder == null) {
-            return null;
-        }
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild07(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild07(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int childCount = rootIndex - inLeft;
-        TreeNode node = new TreeNode(rootValue);
-        node.left = realBuild07(preOrder, preLeft + 1, preLeft + childCount, inOrder, inLeft, rootIndex - 1);
-        node.right = realBuild07(preOrder, preLeft + childCount + 1, preRight, inOrder, rootIndex + 1, inRight);
-        return node;
-    }
-
-
-    public TreeNode build08(int[] preOrder, int[] inOrder) {
-        if (preOrder == null || inOrder == null) {
-            return null;
-        }
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild08(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild08(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild08(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild08(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
-        return root;
-    }
-
-    public TreeNode build09(int[] preOrder, int[] inOrder) {
-        if (preOrder == null || inOrder == null) {
-            return null;
-        }
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndex.put(inOrder[i], i);
-        }
-        return realBuild09(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1);
-    }
-
-    public TreeNode realBuild09(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild09(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild09(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
-        return root;
-    }
-
-    public TreeNode build10(int[] pre, int[] in) {
-        if (pre == null || in == null) {
-            return null;
-        }
-        for (int i = 0; i < in.length; i++) {
-            inOrderIndex.put(in[i], i);
-        }
-        return realBuild10(pre, 0, pre.length - 1, in, 0, in.length - 1);
-    }
-
-    public TreeNode realBuild10(int[] preOrder, int preLeft, int preRight, int[] inOrder, int inLeft, int inRight) {
-        if (preLeft > preRight) {
-            return null;
-        }
-        int rootValue = preOrder[preLeft];
-        int rootIndex = inOrderIndex.get(rootValue);
-        int leftChildCount = rootIndex - inLeft;
-        TreeNode root = new TreeNode(rootValue);
-        root.left = realBuild10(preOrder, preLeft + 1, preLeft + leftChildCount, inOrder, inLeft, rootIndex - 1);
-        root.right = realBuild10(preOrder, preLeft + leftChildCount + 1, preRight, inOrder, rootIndex + 1, inRight);
-        return root;
-    }
-
-
 
     public static void main(String[] args) {
         int[] pre = {3, 9, 20, 15, 7};
         int[] inOrder = {9, 3, 15, 20, 7};
         BuildTreeNode buildTreeNode = new BuildTreeNode();
-        TreeNode root = buildTreeNode.build10(pre, inOrder);
+        TreeNode root = buildTreeNode.build03(pre, inOrder);
         buildTreeNode.preTraversal(root);
     }
 }

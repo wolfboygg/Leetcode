@@ -225,6 +225,25 @@ public class TargetSum {
         backTracking10(value, target, sum - value[index], index + 1);
     }
 
+    public int count11(int[] value, int target) {
+        if (value == null || value.length == 0) {
+            return - 1;
+        }
+        backtracking11(value, target, 0, 0);
+        return count;
+    }
+
+    public void backtracking11(int[] value, int target, int n, int index) {
+        if (index >= value.length) {
+            if (index == value.length && n == target) {
+                count++;
+            }
+            return;
+        }
+        backtracking11(value, target, n + value[index], index + 1);
+        backtracking11(value, target, n - value[index], index + 1);
+    }
+
 
     public static void main(String[] args) {
         int[] value = {1,1,1,1,1};

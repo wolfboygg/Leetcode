@@ -136,10 +136,28 @@ public class MultMaxSubArray {
         return max;
     }
 
+    public int calculate11(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int maxValue = arr[0];
+        int minValue = arr[0];
+        int max = 0;
+        for (int i = 1; i < arr.length; i++) {
+            int tempMaxValue = maxValue;
+            int tempMinValue = minValue;
+            maxValue = Math.max(Math.max(tempMaxValue * arr[i], arr[i]), tempMinValue * arr[i]);
+            minValue = Math.min(Math.min(tempMinValue * arr[i], arr[i]), tempMaxValue * arr[i]);
+            System.out.println(maxValue + "--->" + minValue);
+            max = Math.max(max, maxValue); // 必须使用max记录最大值
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{5, 6, -1, 2, -3};
         MultMaxSubArray multMaxSubArray = new MultMaxSubArray();
-        System.out.println(multMaxSubArray.calculate10(arr));
+        System.out.println(multMaxSubArray.calculate11(arr));
     }
 }

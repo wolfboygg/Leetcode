@@ -165,11 +165,30 @@ public class WaterContainer {
         return max;
     }
 
+    public int getWaterMaxValue09(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int max = 0;
+        int left = 0;
+        int right = arr.length - 1;
+        while(left <= right) {
+            int value = Math.min(arr[left], arr[right]) * (right - left);
+            max = Math.max(max, value);
+            if (arr[left] <= arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         WaterContainer waterContainer = new WaterContainer();
         int[] arr = new int[] {1,8,6,2,5,4,8,3,7};
-        int value = waterContainer.getWaterMaxValue08(arr);
+        int value = waterContainer.getWaterMaxValue09(arr);
         System.out.println(value);
     }
 

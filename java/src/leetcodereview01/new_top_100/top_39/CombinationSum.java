@@ -171,7 +171,7 @@ public class CombinationSum {
     }
 
     public List<List<Integer>> findAllResult06(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
+        if (arr== null || arr.length == 0) {
             return null;
         }
         backTracking06(arr, target, 0,  new ArrayList<>());
@@ -179,161 +179,24 @@ public class CombinationSum {
     }
 
     public void backTracking06(int[] arr, int target, int index, List<Integer> list) {
-        if (target == 0) {
+        if (0 == target) {
             ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (index >= arr.length) {
-            return;
-        }
-        for (int i = index; i < arr.length; i++) {
-            if (target - arr[i] < 0) {
-                break;
-            }
-            list.add(arr[i]);
-            backTracking06(arr, target - arr[i], i, list);
-            list.remove(list.size() - 1);
-        }
-    }
-
-
-    public List<List<Integer>> findAllResult07(int[] arr, int target) {
-        // 还是通过回溯的方法来进行处理
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        backTracking07(arr, 0, target, new ArrayList<>(), 0);
-        return ret;
-    }
-
-    public void backTracking07(int[] arr, int index, int target, List<Integer> list, int sum) {
-        if (sum >= target) {
-            if (sum == target) {
-                ret.add(new ArrayList<>(list));
-            }
-            return;
-        }
-        for (int i = index; i < arr.length; i++) {
-            list.add(arr[i]);
-            sum += arr[i];
-            backTracking07(arr, i, target, list, sum);
-            sum -= arr[i];
-            list.remove(list.size() - 1);
-        }
-    }
-
-
-    public List<List<Integer>> findAllResult08(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        backTracking08(arr, 0, target, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking08(int[] arr, int index, int target, List<Integer> list) {
-        if (target == 0) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        if (index >= arr.length - 1) {
-            return;
-        }
-        for (int i = index; i < arr.length; i++) {
-            if (target - arr[i] < 0) {
-                break; // 这里要跳出去
-            }
-            target -= arr[i];
-            list.add(arr[i]);
-            backTracking08(arr, i, target, list);
-            target +=list.get(list.size() -1);
-            list.remove(list.size() -1);
-        }
-    }
-
-    public List<List<Integer>> findAllResult09(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        backTracking09(arr, 0, target, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking09(int[] arr, int index, int target, List<Integer> list) {
-        if (target == 0) {
-            ret.add(new ArrayList(list));
             return;
         }
         for (int i = index; i < arr.length; i++) {
             if (target - arr[i] < 0) {
                 continue;
             }
-            target -= arr[i];
             list.add(arr[i]);
-            System.out.println(list.toString());
-            backTracking09(arr, i, target, list);
-            int value = list.remove(list.size() - 1);
-            target += value; // 这里要加回来
-            System.out.println("---" + list.toString());
+            backTracking06(arr, target - arr[i], i, list);
+            list.remove(list.size() -1);
         }
     }
-
-    public List<List<Integer>> findAllResult10(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        backTracking10(arr, 0, target, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking10(int[] arr, int index, int target, List<Integer> list) {
-        if (target == 0) {
-            ret.add(new ArrayList<>(list));
-            return;
-        }
-        for (int i = index; i < arr.length; i++) {
-            if (target - arr[i] < 0) {
-                break;
-            }
-            list.add(arr[i]);
-            backTracking10(arr, i, target - arr[i], list);
-            list.remove(list.size() - 1);
-        }
-    }
-
-    public List<List<Integer>> findAllResult11(int[] arr, int target) {
-        if (arr == null || arr.length == 0) {
-            return null;
-        }
-        backTracking11(arr, target, 0, 0, new ArrayList<>());
-        return ret;
-    }
-
-    public void backTracking11(int[] arr, int target, int index, int sum, List<Integer> list) {
-        if (sum >= target) {
-            if (sum == target) {
-                System.out.println("list:" + list.toString());
-                ret.add(new ArrayList<>(list));
-            }
-            return;
-        }
-        for (int i = index; i < arr.length; i++) {
-            if (sum + arr[i] > target) {
-                break;
-            }
-            sum += arr[i];
-            list.add(arr[i]);
-            backTracking11(arr, target, i, sum, list);
-            sum -= arr[i];
-            list.remove(list.size() - 1);
-        }
-    }
-
 
     public static void main(String[] args) {
         CombinationSum combinationSum = new CombinationSum();
         int[] arr = new int[]{2, 3, 6, 7};
-        List<List<Integer>> allResult = combinationSum.findAllResult11(arr, 7);
+        List<List<Integer>> allResult = combinationSum.findAllResult06(arr, 7);
         System.out.println(allResult.toString());
     }
 }

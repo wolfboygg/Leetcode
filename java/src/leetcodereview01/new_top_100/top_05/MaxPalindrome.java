@@ -341,11 +341,34 @@ public class  MaxPalindrome {
         }
     }
 
+    public String findMaxHwString14(String str) {
+        if (str == null || str.length() == 0) {
+            return "";
+        }
+        char[] charArray = str.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            find14(charArray, i, i);
+            find14(charArray, i-1, i);
+        }
+        return str.substring(left, len);
+    }
+
+    public void find14(char[] charArr, int left, int right) {
+        while(left >= 0 && right < charArr.length && charArr[left] == charArr[right]) {
+            if (right - left + 1 > len) {
+                len = right - left + 1;
+                this.left = left;
+            }
+            left--;
+            right++;
+        }
+    }
+
 
     public static void main(String[] args) {
         String str = "abbac";
         MaxPalindrome maxPalindrome = new MaxPalindrome();
-        String temp = maxPalindrome.findMaxHWString13(str);
+        String temp = maxPalindrome.findMaxHwString14(str);
         System.out.println(temp);
     }
 }

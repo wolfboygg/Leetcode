@@ -49,24 +49,6 @@ public class SymmetricTree {
         return root1.value == root2.value && realIsSymmetric01(root1.left, root2.right) && realIsSymmetric01(root1.right, root2.left);
     }
 
-    public boolean isSymmetric02(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric02(root, root);
-    }
-
-    public boolean realIsSymmetric02(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
-        if (root1 == null || root2 == null) {
-            return false;
-        }
-        return root1.value == root2.value && realIsSymmetric02(root1.left, root2.right) && realIsSymmetric02(root1.right, root2.left);
-    }
-
-    // 递归进行判断是否是对称的
     public boolean isSymmetric03(TreeNode root) {
         if (root == null) {
             return false;
@@ -74,136 +56,14 @@ public class SymmetricTree {
         return realIsSymmetric03(root, root);
     }
 
-    public boolean realIsSymmetric03(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
+    public boolean realIsSymmetric03(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
             return true;
         }
-        if (root1 == null || root2 == null) {
+        if (left == null || right == null) {
             return false;
         }
-        return root1.value == root2.value && realIsSymmetric03(root1.left, root2.right) && realIsSymmetric03(root1.right, root2.left);
-    }
-
-    public boolean isSymmetric04(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric04(root, root);
-    }
-
-    public boolean realIsSymmetric04(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return true;
-        }
-        if (node1 == null || node2 == null) {
-            return false;
-        }
-        return node1.value == node2.value && realIsSymmetric04(node1.left, node2.right) && realIsSymmetric04(node1.right, node2.left);
-    }
-
-    public boolean isSymmetric05(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric05(root, root);
-    }
-
-    public boolean realIsSymmetric05(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
-        if (root1 == null || root2 == null) {
-            return false;
-        }
-        return root1.value == root2.value && realIsSymmetric05(root1.left, root2.right) && realIsSymmetric05(root1.right, root2.left);
-    }
-
-    public boolean isSymmetric06(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric06(root, root);
-    }
-
-    public boolean realIsSymmetric06(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
-        if (root1 == null || root2 == null) {
-            return false;
-        }
-        return root1.value == root2.value && realIsSymmetric06(root1.left, root2.right) && realIsSymmetric06(root1.right, root2.left);
-    }
-
-
-    public boolean isSymmetric07(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric07(root, root);
-    }
-
-    public boolean realIsSymmetric07(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return true;
-        }
-        if (node1 == null || node2 == null) {
-            return false;
-        }
-        return node1.value == node2.value && realIsSymmetric07(node1.left, node2.right) && realIsSymmetric07(node1.right, node2.left);
-    }
-
-    public boolean isSymmetric08(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric08(root, root);
-    }
-
-
-    public boolean realIsSymmetric08(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return true;
-        }
-        if (node1 == null || node2 == null) {
-            return false;
-        }
-        return node1.value == node2.value && realIsSymmetric08(node1.left, node2.right) && realIsSymmetric08(node1.right, node2.left);
-    }
-
-    public boolean isSymmetric09(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric09(root, root);
-    }
-
-    public boolean realIsSymmetric09(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
-            return true;
-        }
-        if (root1 == null || root2 == null) {
-            return false;
-        }
-        return root1.value == root2.value && realIsSymmetric09(root1.left, root2.right) && realIsSymmetric09(root1.right, root2.left);
-    }
-
-
-    public boolean isSymmetric10(TreeNode root) {
-        if (root == null) {
-            return false;
-        }
-        return realIsSymmetric10(root, root);
-    }
-
-    public boolean realIsSymmetric10(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null) {
-            return true;
-        }
-        if (node1 == null || node2 == null) {
-            return false;
-        }
-        return node1.value == node2.value && realIsSymmetric10(node1.left, node2.right) && realIsSymmetric10(node1.right, node2.left);
+        return left.value == right.value && realIsSymmetric03(left.left, right.right) && realIsSymmetric03(left.right, right.left);
     }
 
     public static void main(String[] args) {
@@ -212,13 +72,13 @@ public class SymmetricTree {
         TreeNode node2 = new TreeNode(2);
         TreeNode node3 = new TreeNode(2);
         TreeNode node4 = new TreeNode(3);
-        TreeNode node5 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(3);
         node1.left = node2;
         node1.right = node3;
         node2.left = node4;
         node3.right = node5;
         SymmetricTree symmetricTree = new SymmetricTree();
-        boolean symmetric = symmetricTree.isSymmetric10(node1);
+        boolean symmetric = symmetricTree.isSymmetric03(node1);
         System.out.println(symmetric);
     }
 }

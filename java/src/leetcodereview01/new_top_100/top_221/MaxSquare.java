@@ -370,6 +370,31 @@ public class MaxSquare {
         return max * max;
     }
 
+    public int getMaxSquare15(char[][] matrix) {
+        if (matrix == null) {
+            return -1;
+        }
+        int max = 0;
+        int row = matrix.length;
+        int column = matrix[0].length;
+        int[][] dp = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i > 0 && j > 0) {
+                        dp[i][j] = Math.min(dp[i-1][j], Math.min(dp[i][j-1], dp[i-1][j-1])) + 1;
+                    } else {
+                        dp[i][j] = 1;
+                    }
+                } else {
+                    dp[i][j] = 0;
+                }
+                max = Math.max(max, dp[i][j]);
+            }
+        }
+        return max * max;
+    }
+
     public static void main(String[] args) {
         char[][] matrix = {
                 {'1', '1', '1', '0', '0'},
@@ -378,7 +403,7 @@ public class MaxSquare {
                 {'1', '0', '0', '1', '0'}
         };
         MaxSquare maxSquare = new MaxSquare();
-        int area = maxSquare.getMaxSquare14(matrix);
+        int area = maxSquare.getMaxSquare15(matrix);
         System.out.println(area);
     }
 }

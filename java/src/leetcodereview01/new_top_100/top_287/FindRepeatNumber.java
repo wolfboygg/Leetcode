@@ -252,11 +252,29 @@ public class FindRepeatNumber {
         return -1;
     }
 
+    public int findRepeatNumber14(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            while(arr[i] != i + 1) {
+                if (arr[arr[i] - 1] != arr[i]) {
+                    int temp = arr[i];
+                    arr[i] = arr[temp-1];
+                    arr[temp-1] = temp;
+                } else {
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 4, 3, 2};
         FindRepeatNumber findRepeatNumber = new FindRepeatNumber();
-        int result = findRepeatNumber.findRepeatNumber13(arr);
+        int result = findRepeatNumber.findRepeatNumber14(arr);
         System.out.println(result);
     }
 }
