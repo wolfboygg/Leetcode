@@ -158,6 +158,43 @@ public class SortLink {
         return merge(left, right);
     }
 
+    public Node sortLink06(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node left = sortLink06(head, P1);
+        Node right = sortLink06(P1, tail);
+        return merge02(left, right);
+    }
+
+    public Node sortLink07(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node P1 = head;
+        Node P2 = head;
+        while(P2 != tail && P2.next != null) {
+            P1 = P1.next;
+            P2 = P2.next.next;
+        }
+        Node left = sortLink07(head, P1);
+        Node right = sortLink07(P1, tail);
+        return merge02(left, right);
+    }
 
 
     public static void main(String[] args) {
@@ -169,7 +206,7 @@ public class SortLink {
         node2.next = node3;
         node3.next = node4;
         SortLink sortLink = new SortLink();
-        Node node = sortLink.sortLink05(node1, null);
+        Node node = sortLink.sortLink07(node1, null);
         while(node != null) {
             System.out.print(node.value + " ");
             node = node.next;

@@ -111,12 +111,64 @@ public class ArrayFindIndex {
     }
 
 
+    public int[] find04(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int leftIndex = realFind04(arr, target, true);
+        int rightIndex = realFind04(arr, target, false) - 1;
+        return new int[] {leftIndex, rightIndex};
+    }
+
+    public int realFind04(int[] arr, int target, boolean isLow) {
+        int start = 0;
+        int end = arr.length - 1;
+        int targetIndex = -1;
+        while(start <= end) {
+            int middle = start + (end - start) / 2;
+            System.out.println(start + "--->" + end + "--->" + middle);
+            if (arr[middle] > target || (isLow && (target <= arr[middle]))) {
+                end = middle - 1;
+                targetIndex = middle;
+            } else {
+                start = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
+    public int[] find05(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int leftIndex = realFind05(arr, target, true);
+        int rightIndex = realFind05(arr, target, false) - 1;
+        return new int[] {leftIndex, rightIndex};
+    }
+
+    public int realFind05(int[] arr, int target, boolean isLow) {
+        int start = 0;
+        int end = arr.length - 1;
+        int targetIndex = -1;
+        while(start <= end) {
+            int middle = start + (end - start) / 2;
+            System.out.println(start + "-->" + end + "--->" + middle);
+            if (arr[middle] > target || (isLow && arr[middle] >= target)) {
+                end = middle - 1;
+                targetIndex = middle;
+            } else {
+                start = middle + 1;
+            }
+        }
+        return targetIndex;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {5, 7, 7, 8, 8, 10}; // 6
         int target = 8;
         ArrayFindIndex arrayFindIndex = new ArrayFindIndex();
-        int[] result = arrayFindIndex.find03(arr, target);
+        int[] result = arrayFindIndex.find05(arr, target);
         System.out.println(Arrays.toString(result));
     }
 }
